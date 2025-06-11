@@ -5,85 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Etienne Lescot – CV Retro 90s</title>
-    <style>
-        /* Color variables */
-        :root {
-            --bg: #000000;
-            --text: #00ff00;
-            --accent: #ff00ff;
-            --link: #ffff00;
-        }
-
-        /* Light theme */
-        [data-theme="light"] {
-            --bg: #ffffff;
-            --text: #000000;
-            --accent: #ff00ff;
-            --link: #0000ff;
-        }
-
-        html,
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Courier New', monospace;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        h1 {
-            color: var(--accent);
-            text-align: center;
-            text-shadow: 0 0 4px var(--accent);
-            position: relative;
-        }
-
-        #toggle {
-            position: absolute;
-            right: 0;
-            top: 0;
-            background: var(--bg);
-            color: var(--text);
-            border: 2px solid var(--accent);
-            padding: 4px 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        h2 {
-            color: #00ffff;
-            border-bottom: 2px dashed #00ffff;
-        }
-
-        .section {
-            margin-bottom: 30px;
-        }
-
-        ul {
-            list-style: '* ';
-            margin-left: 20px;
-        }
-
-        a {
-            color: var(--link);
-        }
-
-        .neonbox {
-            border: 2px solid var(--accent);
-            padding: 10px;
-            box-shadow: 0 0 8px var(--accent);
-        }
-    </style>
+<meta name="description" content="CV retro 90s d'Etienne Lescot">
+<meta name="author" content="Etienne Lescot">
+<meta name="keywords" content="Etienne Lescot, CV, CTO, Full Stack, Cloud, IA">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>💾 Etienne Lescot <button id="toggle">🌞 / 🌜</button></h1>
+        <h1>💾 Etienne Lescot <button id='toggle' aria-label='Changer de thème'>🌞 / 🌜</button></h1>
         <p style="text-align:center;">CTO • Full Stack • Cloud & IA</p>
 
         <div class="section neonbox">
