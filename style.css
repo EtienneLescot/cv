@@ -82,3 +82,25 @@ a {
     padding: 10px;
     /* box-shadow: 0 0 8px var(--accent); */
 }
+
+@media (max-width: 600px) {
+    h1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: static;
+        gap: 8px;
+    }
+    #lang-toggle, #toggle {
+        position: static;
+        margin: 0 4px;
+        width: auto;
+        display: inline-block;
+    }
+    .h1-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        margin-top: 4px;
+    }
+}
