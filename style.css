@@ -31,7 +31,7 @@ body {
 h1 {
     color: var(--accent);
     text-align: center;
-    text-shadow: 0 0 4px var(--accent);
+    /* text-shadow: 0 0 4px var(--accent); */
     position: relative;
 }
 
@@ -68,5 +68,5 @@ a {
 .neonbox {
     border: 2px solid var(--accent);
     padding: 10px;
-    box-shadow: 0 0 8px var(--accent);
+    /* box-shadow: 0 0 8px var(--accent); */
 }
