@@ -4,6 +4,7 @@ Cette page présente mon curriculum vitæ dans un style rétro des années 90. E
 
 ## Aperçu
 - Basculer entre mode sombre et clair avec le bouton en haut à droite.
+- Langue détectée automatiquement (fr/en) avec un bouton pour changer.
 - CSS séparée dans `style.css` pour faciliter les modifications.
 
 ## Utilisation
