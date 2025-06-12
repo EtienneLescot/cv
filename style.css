@@ -47,6 +47,18 @@ h1 {
     font-weight: bold;
 }
 
+#lang-toggle {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: var(--bg);
+    color: var(--text);
+    border: 2px solid var(--accent);
+    padding: 4px 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 h2 {
     color: #00ffff;
     border-bottom: 2px dashed #00ffff;
