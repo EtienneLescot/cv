@@ -4,6 +4,8 @@
     --text: #00ff00;
     --accent: #ff00ff;
     --link: #ffff00;
+    --contrast-high: #000000;
+    --contrast-low: #ffffff;
 }
 
 /* Light theme */
@@ -12,6 +14,8 @@
     --text: #000000;
     --accent: #ff00ff;
     --link: #0000ff;
+    --contrast-high: #000000;
+    --contrast-low: #ffffff;
 }
 
 html,
@@ -83,6 +87,24 @@ a {
     /* box-shadow: 0 0 8px var(--accent); */
 }
 
+/* Prevent block breaking when exporting to PDF */
+h1, h2, h3, h4, h5, h6 {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+li {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+.section, .neonbox {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+tr, td, th {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
 @media (max-width: 600px) {
     h1 {
         display: flex;
@@ -104,3 +126,26 @@ a {
         margin-top: 4px;
     }
 }
+
+@media print {
+  html, body {
+    background: var(--bg) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* Hide theme and language toggle buttons in PDF/print */
+  #toggle, #lang-toggle, #print-btn {
+    display: none !important;
+  }
+}
+
+@page {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: 20mm;
+  margin-right: 20mm;
+  /* Set background color for PDF export according to theme */
+  background: var(--bg);
+}
+
+
