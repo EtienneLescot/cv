@@ -41,17 +41,9 @@
   "languages-title": "Languages 🗣️",
   "lang-fr": "French (native)",
   "lang-en": "English (professional)",
-  "education-title": "Education & Certifications 🎓",
-  "education-1": "Master in Computer Science - Université Paris-Sud (2005-2007)",
-  "education-2": "AWS Certified Solutions Architect (2020)",
-  "education-3": "Certified Kubernetes Administrator (CKA) - Linux Foundation (2021)",
   "skills-levels-title": "Skill Levels 📊",
-  "skill-level-1": "Cloud Architecture: Expert (AWS, Kubernetes, CI/CD)",
-  "skill-level-2": "Full-Stack Development: Advanced (Node.js, React, Python)",
-  "skill-level-3": "AI Integration: Expert (LLM, AWS Bedrock, Langchain)",
-  "skill-level-4": "Technical Leadership: Expert (team management, product strategy)",
-  "interests-title": "Interests 🎯",
-  "interest-1": "Emerging technologies and innovation",
-  "interest-2": "Sustainable development and social impact",
-  "interest-3": "Travel and cultural discovery"
+  "skill-level-1": "Cloud Architecture: AWS, Kubernetes, CI/CD",
+  "skill-level-2": "Full-Stack Development: Node.js, React, Python",
+  "skill-level-3": "AI Integration: LLM, AWS Bedrock, Langchain",
+  "skill-level-4": "Technical Leadership: team management, product strategy"
 }
