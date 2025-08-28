@@ -19,6 +19,15 @@ open index.html # ou double‑cliquez sur le fichier
 
 Vous pouvez aussi héberger les fichiers sur GitHub Pages afin d'accéder au CV en ligne.
 
+## Serveur de développement local
+Pour tester le CV avec un serveur local, utilisez le script `server.js` :
+
+```bash
+node server.js
+```
+
+Cela démarrera un serveur sur `http://localhost:3000` qui servira tous les fichiers du projet.
+
 ## Conversion HTML vers PDF
 Pour générer un PDF à partir du CV, utilisez le script `html-to-pdf.js` :
 
