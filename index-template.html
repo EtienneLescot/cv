@@ -42,8 +42,13 @@
       <h1>
         💾 <span data-i18n="name">Etienne Lescot</span>
         <span class="h1-buttons">
-          <button id="lang-toggle" aria-label="Changer de langue" onclick="toggleLanguage()">🌐</button>
           <button id="toggle" aria-label="Changer de thème">🌞 / 🌜</button>
+          <div class="lang-dropdown">
+            <button id="lang-button" class="lang-button" aria-label="Sélectionner la langue">🌐</button>
+            <ul id="lang-menu" class="lang-menu">
+              <!-- Language options will be injected by build process -->
+            </ul>
+          </div>
           <button
             id="print-btn"
             aria-label="Imprimer le CV"
@@ -150,10 +155,29 @@
     </div>
   </body>
   <script>
-    function toggleLanguage() {
-      const currentLang = document.documentElement.lang;
-      const nextLang = currentLang === 'fr' ? 'en' : 'fr';
-      window.location.href = nextLang === 'fr' ? './index.html' : './index-en.html';
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+      const langButton = document.getElementById('lang-button');
+      const langMenu = document.getElementById('lang-menu');
+
+      if (langButton && langMenu) {
+        // Toggle dropdown visibility
+        langButton.addEventListener('click', function(e) {
+          e.stopPropagation();
+          langMenu.style.display = langMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+          langMenu.style.display = 'none';
+        });
+
+        // Handle language selection
+        langMenu.addEventListener('click', function(e) {
+          if (e.target.tagName === 'LI' && e.target.dataset.href) {
+            window.location.href = e.target.dataset.href;
+          }
+        });
+      }
+    });
   </script>
 </html>

@@ -70,6 +70,30 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
     }
   });
 
+  // Add language selection dropdown
+  const langMenu = document.getElementById('lang-menu');
+  const langButton = document.getElementById('lang-button');
+  if (langMenu && langButton) {
+    // Clear existing options
+    langMenu.innerHTML = '';
+
+    // Add language options
+    CONFIG.supportedLocales.forEach(locale => {
+      const li = document.createElement('li');
+      li.textContent = locale.toUpperCase();
+      li.dataset.href = locale === CONFIG.defaultLocale ? './index.html' : `./index-${locale}.html`;
+
+      // Disable current language
+      if (locale === localeName) {
+        li.classList.add('disabled');
+        // Set the button text to the current language
+        langButton.textContent = locale.toUpperCase();
+      }
+
+      langMenu.appendChild(li);
+    });
+  }
+
   // Serialize the document back to HTML
   return dom.serialize();
 }
