@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = 3000;
+const PORT = 3001;
 const CONTENT_TYPES = {
   '.html': 'text/html',
   '.css': 'text/css',
@@ -17,10 +17,25 @@ const CONTENT_TYPES = {
   '.txt': 'text/plain'
 };
 
+const getPreferredLanguage = (acceptLanguage) => {
+  if (!acceptLanguage) return 'fr';
+  if (acceptLanguage.includes('fr')) return 'fr';
+  if (acceptLanguage.includes('en')) return 'en';
+  return 'fr'; // default fallback
+};
+
 const server = http.createServer((req, res) => {
   let filePath = '.' + req.url;
   if (filePath === './') {
-    filePath = './index.html';
+    // Handle root request with language redirection
+    const acceptLanguage = req.headers['accept-language'];
+    const lang = getPreferredLanguage(acceptLanguage);
+
+    if (lang === 'fr') {
+      filePath = './index.html'; // French default
+    } else {
+      filePath = `./index-${lang}.html`;
+    }
   }
 
   const ext = path.extname(filePath);
