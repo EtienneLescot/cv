@@ -22,9 +22,9 @@
   "skill-7": "Product strategy, technical documentation, agile methods",
   "projects-title": "Notable projects",
   "project-1": "<strong><a href=\"https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/\">AppKiosk</a></strong> — Multi-event kiosk app (Leni, 2019–2022)<br>Mobile/web kiosk platform deployed as custom apps for multiple clients.<br>Full architecture (front, back, CI/CD), fullstack development, UX, offline mode, scaling, multi-instance deployment via backoffice. Managed a team of 10 developers, supporting 500+ simultaneous events.",
-  "project-2": "<strong>SARAE — Customer Platform and CRM</strong> (2024–...)<br>Cloud-native customer management system integrating CRM, call center and AI.<br>AWS (Amplify, Lambda, Connect, Bedrock), HubSpot, journey automation, call analytics AI (sentiment, performance)<br>1000+ active users, 30% reduction in call processing time",
+  "project-2": "<strong><a href=\"https://www.sarae.eco/\">SARAE</a> — Customer Platform and CRM</strong> (2024–...)<br>Cloud-native customer management system integrating CRM, call center and AI.<br>AWS (Amplify, Lambda, Connect, Bedrock), HubSpot, journey automation, call analytics AI (sentiment, performance)<br>1000+ active users, 30% reduction in call processing time",
   "project-3": "<a href=\"https://digitecpharma.fr/landing-page-site-et-appli/\">DigitecPharma</a>&nbsp;– Consumer mobile app for multiple pharmacies - ",
-  "project-4": "<strong>SARAE — Booking Platform</strong> (2024–...)<br>Online booking platform developed with React and AWS Amplify.<br>Integration with CRM system, intuitive user interface",
+  "project-4": "<strong><a href=\"https://www.sarae.eco/\">SARAE</a> — Booking Platform</strong> (2024–...)<br>Online booking platform developed with React and AWS Amplify.<br>Integration with CRM system, intuitive user interface",
   "experiences-title": "Experience",
   "exp1-title": "DSI — SARAE (2024–present)",
   "exp1-point1": "Design of the customer information system (AWS, HubSpot, Connect, Bedrock AI)",
@@ -45,10 +45,5 @@
   "exp4-point4": "Bespoke projects from client brief to production",
   "languages-title": "Languages",
   "lang-fr": "French (native)",
-  "lang-en": "English (professional)",
-  "skills-levels-title": "Skills",
-  "skill-level-1": "Cloud Architecture: AWS, Kubernetes, CI/CD",
-  "skill-level-2": "Full-Stack Development: Node.js, React, Python",
-  "skill-level-3": "AI Integration: LLM, AWS Bedrock, Langchain",
-  "skill-level-4": "Technical Leadership: team management, product strategy"
+  "lang-en": "English (professional)"
 }
