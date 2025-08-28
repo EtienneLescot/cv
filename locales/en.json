@@ -1,5 +1,9 @@
 {
   "title": "Etienne Lescot – Resume",
+  "keywords": "Etienne Lescot, CV, CTO, Full Stack, Cloud, IA, AWS, Kubernetes, Node.js, React, Python",
+  "lang-label" : "Select language",
+  "theme-label": "Change mode",
+  "download-label": "Download CV",
   "tagline": "CTO • Full Stack • Cloud & AI",
   "name": "Etienne Lescot",
   "contact-title": "Contact",
