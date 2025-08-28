@@ -18,7 +18,7 @@
 
 /* Light theme */
 [data-theme="light"] {
-    --bg: #ffffff;
+    --bg: #d1ffff;
     --text: #000000;
     --accent: #ff00ff;
     --link: #0000ff;
@@ -104,6 +104,11 @@ h1 {
 h2 {
     color: #00ffff;
     border-bottom: 2px dashed #00ffff;
+}
+
+[data-theme="light"] h2 {
+    color: #ff00ff;
+    border-bottom: 2px dashed #ff00ff;
 }
 
 .section {
