@@ -158,6 +158,8 @@
     document.addEventListener('DOMContentLoaded', function() {
       const langButton = document.getElementById('lang-button');
       const langMenu = document.getElementById('lang-menu');
+      const themeToggle = document.getElementById('toggle');
+      const htmlElement = document.documentElement;
 
       if (langButton && langMenu) {
         // Toggle dropdown visibility
@@ -176,6 +178,18 @@
           if (e.target.tagName === 'LI' && e.target.dataset.href) {
             window.location.href = e.target.dataset.href;
           }
+        });
+      }
+
+      // Theme toggle functionality
+      if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+          const currentTheme = htmlElement.getAttribute('data-theme');
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          htmlElement.setAttribute('data-theme', newTheme);
+
+          // Update button text
+          themeToggle.textContent = newTheme === 'dark' ? '🌞 / 🌜' : '🌜 / 🌞';
         });
       }
     });
