@@ -39,25 +39,26 @@
 
   <body>
     <div class="container">
+      <div class="top-right-buttons">
+        <div class="lang-dropdown">
+          <button id="lang-button" class="lang-button" aria-label="Sélectionner la langue">🌐</button>
+          <ul id="lang-menu" class="lang-menu">
+            <!-- Language options will be injected by build process -->
+          </ul>
+        </div>
+         <button id="toggle" aria-label="Changer de thème">🌞 / 🌜</button>
+        <button
+          id="print-btn"
+          aria-label="Imprimer le CV"
+          onclick="window.print()"
+        >
+          PDF
+        </button>
+      </div>
       <h1>
         💾 <span data-i18n="name">Etienne Lescot</span>
-        <span class="h1-buttons">
-          <button id="toggle" aria-label="Changer de thème">🌞 / 🌜</button>
-          <div class="lang-dropdown">
-            <button id="lang-button" class="lang-button" aria-label="Sélectionner la langue">🌐</button>
-            <ul id="lang-menu" class="lang-menu">
-              <!-- Language options will be injected by build process -->
-            </ul>
-          </div>
-          <button
-            id="print-btn"
-            aria-label="Imprimer le CV"
-            onclick="window.print()"
-          >
-            🖨️
-          </button>
-        </span>
       </h1>
+      
       <p data-i18n="tagline">CTO • Full Stack • Cloud & IA</p>
 
       <div class="section neonbox">

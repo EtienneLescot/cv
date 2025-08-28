@@ -47,31 +47,24 @@ h1 {
     position: relative;
 }
 
-#toggle {
+#toggle, .lang-button, #print-btn {
     background: var(--bg);
     color: var(--text);
     border: var(--button-border);
     padding: 4px 8px;
     cursor: pointer;
     font-weight: bold;
+    height: 30px;
 }
 
-#lang-toggle {
-    background: var(--bg);
-    color: var(--text);
-    border: var(--button-border);
-    padding: 4px 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
+
 
 .lang-dropdown {
     position: relative;
     display: inline-block;
-    margin-right: 8px;
 }
 
-.lang-button {
+{
     background: var(--bg);
     color: var(--text);
     border: var(--button-border);
@@ -164,11 +157,12 @@ tr, td, th {
         width: auto;
         display: inline-block;
     }
-    .h1-buttons {
+    .top-right-buttons {
         display: flex;
         flex-direction: row;
         gap: 8px;
         margin-top: 4px;
+        justify-content: flex-end;
     }
 }
 
@@ -191,6 +185,12 @@ tr, td, th {
   margin-right: 20mm;
   /* Set background color for PDF export according to theme */
   background: var(--bg);
+}
+.top-right-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-bottom: 10px;
 }
 
 
