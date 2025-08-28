@@ -23,6 +23,10 @@ function injectFallbackData(html, data) {
     const fallbackContent = data[key] || '';
 
     // Return the element with fallback content
+    // Check if the content already contains anchor tags to avoid duplication
+    if (content.includes('<a') && fallbackContent.includes('<a')) {
+        return `<${p1} data-i18n="${key}">${content}</${p4}>`;
+    }
     return `<${p1} data-i18n="${key}">${fallbackContent}</${p4}>`;
   });
 }
