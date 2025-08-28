@@ -56,6 +56,60 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
     document.title = localeData.title;
   }
 
+  // Update meta tags
+  const metaDescription = document.querySelector('meta[name="description"]');
+  const metaKeywords = document.querySelector('meta[name="keywords"]');
+  const metaAuthor = document.querySelector('meta[name="author"]');
+  const metaOgTitle = document.querySelector('meta[property="og:title"]');
+  const metaOgDescription = document.querySelector('meta[property="og:description"]');
+  const metaTwitterTitle = document.querySelector('meta[name="twitter:title"]');
+  const metaTwitterDescription = document.querySelector('meta[name="twitter:description"]');
+
+  if (metaDescription && localeData['profile-desc']) {
+    metaDescription.setAttribute('content', localeData['profile-desc']);
+  }
+
+  if (metaKeywords && localeData.keywords) {
+    metaKeywords.setAttribute('content', localeData.keywords);
+  }
+
+  if (metaAuthor && localeData.name) {
+    metaAuthor.setAttribute('content', localeData.name);
+  }
+
+  if (metaOgTitle && localeData.title) {
+    metaOgTitle.setAttribute('content', localeData.title);
+  }
+
+  if (metaOgDescription && localeData['profile-desc']) {
+    metaOgDescription.setAttribute('content', localeData['profile-desc']);
+  }
+
+  if (metaTwitterTitle && localeData.title) {
+    metaTwitterTitle.setAttribute('content', localeData.title);
+  }
+
+  if (metaTwitterDescription && localeData['profile-desc']) {
+    metaTwitterDescription.setAttribute('content', localeData['profile-desc']);
+  }
+
+  // Apply aria-labels
+  const langButton = document.getElementById('lang-button');
+  const themeToggle = document.getElementById('toggle');
+  const printBtn = document.getElementById('print-btn');
+
+  if (langButton && localeData['lang-label']) {
+    langButton.setAttribute('aria-label', localeData['lang-label']);
+  }
+
+  if (themeToggle && localeData['theme-label']) {
+    themeToggle.setAttribute('aria-label', localeData['theme-label']);
+  }
+
+  if (printBtn && localeData['download-label']) {
+    printBtn.setAttribute('aria-label', localeData['download-label']);
+  }
+
   // Process all elements with data-i18n attributes
   const i18nElements = document.querySelectorAll('[data-i18n]');
   i18nElements.forEach(element => {
@@ -72,8 +126,8 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
 
   // Add language selection dropdown
   const langMenu = document.getElementById('lang-menu');
-  const langButton = document.getElementById('lang-button');
-  if (langMenu && langButton) {
+  const langButtonRef = document.getElementById('lang-button');
+  if (langMenu && langButtonRef) {
     // Clear existing options
     langMenu.innerHTML = '';
 
@@ -87,7 +141,7 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
       if (locale === localeName) {
         li.classList.add('disabled');
         // Set the button text to the current language
-        langButton.textContent = locale.toUpperCase();
+        langButtonRef.textContent = locale.toUpperCase();
       }
 
       langMenu.appendChild(li);
