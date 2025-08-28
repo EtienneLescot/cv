@@ -42,7 +42,7 @@
   "languages-title": "Langues",
   "lang-fr": "Français (natif)",
   "lang-en": "Anglais (professionnel)",
-  "skills-levels-title": "Niveaux de compétences",
+  "skills-levels-title": "Compétences",
   "skill-level-1": "Architecture cloud : AWS, Kubernetes, CI/CD",
   "skill-level-2": "Développement Full-Stack : Node.js, React, Python",
   "skill-level-3": "Intégration d'IA : LLM, AWS Bedrock, Langchain",
