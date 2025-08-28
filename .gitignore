@@ -1,2 +1,6 @@
 node_modules
 exports
+# Generated static locale files
+index-*.html
+index.html
+!index-template.html

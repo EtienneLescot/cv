@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Etienne Lescot – CV</title>
+    <meta
+      name="description"
+      content="CV d'Etienne Lescot - CTO avec plus de 15 ans d'expérience dans la conception de plateformes SaaS, la direction technique et le pilotage d'architectures cloud & IA."
+    />
+    <meta name="author" content="Etienne Lescot" />
+    <meta
+      name="keywords"
+      content="Etienne Lescot, CV, CTO, Full Stack, Cloud, IA, AWS, Kubernetes, Node.js, React, Python"
+    />
+    <meta property="og:title" content="Etienne Lescot – CV" />
+    <meta
+      property="og:description"
+      content="CTO avec plus de 15 ans d'expérience dans la conception de plateformes SaaS, la direction technique et le pilotage d'architectures cloud & IA."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://etiennelescot.com/cv" />
+    <meta
+      property="og:image"
+      content="https://etiennelescot.com/images/profile.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Etienne Lescot – CV" />
+    <meta
+      name="twitter:description"
+      content="CTO avec plus de 15 ans d'expérience dans la conception de plateformes SaaS, la direction technique et le pilotage d'architectures cloud & IA."
+    />
+    <meta
+      name="twitter:image"
+      content="https://etiennelescot.com/images/profile.jpg"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>
+        💾 <span data-i18n="name">Etienne Lescot</span>
+        <span class="h1-buttons">
+          <button id="lang-toggle" aria-label="Changer de langue" onclick="toggleLanguage()">🌐</button>
+          <button id="toggle" aria-label="Changer de thème">🌞 / 🌜</button>
+          <button
+            id="print-btn"
+            aria-label="Imprimer le CV"
+            onclick="window.print()"
+          >
+            🖨️
+          </button>
+        </span>
+      </h1>
+      <p data-i18n="tagline">CTO • Full Stack • Cloud & IA</p>
+
+      <div class="section neonbox">
+        <h2 data-i18n="contact-title">Contact 📞</h2>
+        <ul>
+          <li data-i18n="contact-phone"></li>
+          <li data-i18n="contact-email"></li>
+          <li data-i18n="contact-linkedin"></li>
+        </ul>
+      </div>
+
+      <div class="section neonbox">
+        <h2 data-i18n="profile-title">Profil 🖥️</h2>
+        <p data-i18n="profile-desc"></p>
+      </div>
+
+      <div class="section neonbox">
+        <h2 data-i18n="skills-title">Compétences 💡</h2>
+        <ul>
+          <li data-i18n="skill-1"></li>
+          <li data-i18n="skill-2"></li>
+          <li data-i18n="skill-3"></li>
+          <li data-i18n="skill-4"></li>
+          <li data-i18n="skill-5"></li>
+          <li data-i18n="skill-6"></li>
+          <li data-i18n="skill-7"></li>
+        </ul>
+      </div>
+
+      <div class="section neonbox">
+        <h2 data-i18n="projects-title">Réalisations notables 🏆</h2>
+        <ul>
+          <li data-i18n="project-1"></li>
+          <li data-i18n="project-2"></li>
+          <li data-i18n="project-3"></li>
+          <li data-i18n="project-4"></li>
+        </ul>
+      </div>
+
+      <div class="section neonbox">
+        <h2 data-i18n="experiences-title">Expériences 📟</h2>
+        <ul>
+          <li>
+            <span data-i18n="exp1-title"></span>
+            <ul>
+              <li data-i18n="exp1-point1"></li>
+              <li data-i18n="exp1-point2"></li>
+              <li data-i18n="exp1-point3"></li>
+            </ul>
+          </li>
+          <li>
+            <span data-i18n="exp2-title"></span>
+            <ul>
+              <li data-i18n="exp2-point1"></li>
+              <li data-i18n="exp2-point2"></li>
+              <li data-i18n="exp2-point3"></li>
+            </ul>
+          </li>
+          <li>
+            <span data-i18n="exp3-title"></span>
+            <ul>
+              <li data-i18n="exp3-point1"></li>
+              <li data-i18n="exp3-point2"></li>
+              <li data-i18n="exp3-point3"></li>
+            </ul>
+          </li>
+          <li>
+            <span data-i18n="exp4-title"></span>
+            <ul>
+              <li data-i18n="exp4-point1"></li>
+              <li data-i18n="exp4-point2"></li>
+              <li data-i18n="exp4-point3"></li>
+              <li data-i18n="exp4-point4"></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="section neonbox">
+        <h2 data-i18n="skills-levels-title">Niveaux de compétences 📊</h2>
+        <ul>
+          <li data-i18n="skill-level-1"></li>
+          <li data-i18n="skill-level-2"></li>
+          <li data-i18n="skill-level-3"></li>
+          <li data-i18n="skill-level-4"></li>
+        </ul>
+      </div>
+
+      <div class="section neonbox">
+        <h2 data-i18n="languages-title">Langues 🗣️</h2>
+        <ul>
+          <li data-i18n="lang-fr"></li>
+          <li data-i18n="lang-en"></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script>
+    function toggleLanguage() {
+      const currentLang = document.documentElement.lang;
+      const nextLang = currentLang === 'fr' ? 'en' : 'fr';
+      window.location.href = nextLang === 'fr' ? './index.html' : './index-en.html';
+    }
+  </script>
+</html>

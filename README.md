@@ -50,11 +50,38 @@ Pour ajouter une nouvelle langue :
 2. Copiez le contenu de `locales/en.json` et traduisez les valeurs
 3. La langue sera automatiquement détectée et disponible via le bouton de changement de langue
 
-## Injection de données de secours
-Pour garantir que le CV reste fonctionnel même si les fichiers de traduction sont manquants, utilisez le script `inject-fallback.js` :
+## Génération de fichiers statiques multilingues
 
+### Build Process (Nouvelle Architecture SSG)
+Le projet utilise maintenant une architecture de Static Site Generation (SSG) pour générer des fichiers HTML statiques pour chaque langue.
+
+#### Commandes de build
 ```bash
-node inject-fallback.js
+# Générer tous les fichiers statiques pour chaque locale
+npm run build
+
+# Ou utiliser directement le script de build
+npm run build:locales
 ```
 
-Ce script injecte les traductions françaises directement dans le HTML comme contenu de secours pour tous les éléments avec des attributs `data-i18n`.
+#### Fichiers générés
+- `index-fr.html` - Version française statique
+- `index-en.html` - Version anglaise statique
+- Les fichiers générés sont exclus du git via `.gitignore`
+
+#### Déploiement
+Les fichiers statiques peuvent être déployés directement sur n'importe quel serveur web ou CDN. Pour le déploiement, vous pouvez :
+1. Utiliser GitHub Pages avec les fichiers générés
+2. Déployer sur Netlify, Vercel ou tout autre service de static hosting
+3. Servir les fichiers directement depuis un serveur web
+
+#### Avantages
+- ✅ Chargement instantané (pas de traitement client)
+- ✅ SEO-friendly (contenu pré-rendu)
+- ✅ Robuste (pas de corruption HTML)
+- ✅ Facile à déployer
+
+## Injection de données de secours (Déprécié)
+L'ancien script `inject-fallback.js` est maintenant déprécié. Utilisez plutôt la nouvelle architecture SSG décrite ci-dessus.
+
+Pour plus de détails sur l'architecture SSG, consultez [SSG_ARCHITECTURE.md](SSG_ARCHITECTURE.md).

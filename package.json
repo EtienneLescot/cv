@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build:locales": "node build-static-locales.js",
+    "build": "npm run build:locales"
   },
   "repository": {
     "type": "git",
@@ -16,6 +18,9 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "puppeteer": "^24.10.0"
+    "puppeteer": "^24.10.0",
+    "jsdom": "^25.0.1",
+    "prettier": "^3.3.3",
+    "glob": "^11.0.0"
   }
 }
