@@ -84,4 +84,4 @@ Les fichiers statiques peuvent être déployés directement sur n'importe quel s
 ## Injection de données de secours (Déprécié)
 L'ancien script `inject-fallback.js` est maintenant déprécié. Utilisez plutôt la nouvelle architecture SSG décrite ci-dessus.
 
-Pour plus de détails sur l'architecture SSG, consultez [SSG_ARCHITECTURE.md](SSG_ARCHITECTURE.md)
+Pour plus de détails sur l'architecture SSG, consultez [SSG_ARCHITECTURE.md](SSG_ARCHITECTURE.md).
