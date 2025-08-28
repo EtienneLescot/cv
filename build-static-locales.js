@@ -163,7 +163,7 @@ function buildStaticLocales() {
   });
 
   console.log('--------------------------------------------------------');
-  console.log(`🎉 Build completed: ${successCount}/${CONFIG.supportedLocales.length} files generated`);
+  console.log(`🎉 Build completed: ${successCount}/${CONFIG.supportedLocales.length+1} files generated`);
 
   if (successCount === 0) {
     console.error('✗ No files were generated successfully');
