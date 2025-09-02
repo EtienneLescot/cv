@@ -556,6 +556,7 @@ th {
 
     /* Tablet: 2-column grid */
     [data-theme="light"] .container,
+    [data-theme="dark"] .container,
     .container {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
@@ -563,25 +564,74 @@ th {
     }
 
     /* Adjust grid spans for tablet */
-    [data-theme="light"] .contact-section {
+    [data-theme="light"] .contact-section,
+    [data-theme="dark"] .contact-section {
         grid-column: span 1;
     }
 
-    [data-theme="light"] .profile-section {
+    [data-theme="light"] .profile-section,
+    [data-theme="dark"] .profile-section {
         grid-column: span 1;
     }
 
-    [data-theme="light"] .skills-section {
+    [data-theme="light"] .skills-section,
+    [data-theme="dark"] .skills-section {
         grid-column: span 1;
     }
 
-    [data-theme="light"] .languages-section {
+    [data-theme="light"] .languages-section,
+    [data-theme="dark"] .languages-section {
         grid-column: span 1;
     }
 
-    [data-theme="light"] .projects-highlight {
+    [data-theme="light"] .projects-highlight,
+    [data-theme="dark"] .projects-highlight {
         margin: 1rem -0.5rem;
         padding: 2rem;
+    }
+}
+
+@media (max-width: 800px) {
+    /* Single column for narrower screens */
+    [data-theme="light"] .container,
+    [data-theme="dark"] .container,
+    .container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    /* All sections span full width */
+    [data-theme="light"] .contact-section,
+    [data-theme="dark"] .contact-section,
+    [data-theme="light"] .profile-section,
+    [data-theme="dark"] .profile-section,
+    [data-theme="light"] .skills-section,
+    [data-theme="dark"] .skills-section,
+    [data-theme="light"] .languages-section,
+    [data-theme="dark"] .languages-section,
+    [data-theme="light"] .experiences-section,
+    [data-theme="dark"] .experiences-section {
+        grid-column: span 1;
+        min-height: auto;
+    }
+
+    [data-theme="light"] .projects-highlight,
+    [data-theme="dark"] .projects-highlight {
+        margin: 1rem 0;
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    [data-theme="light"] .projects-highlight h2,
+    [data-theme="dark"] .projects-highlight h2 {
+        font-size: 2rem;
+    }
+
+    [data-theme="light"] .languages-section,
+    [data-theme="dark"] .languages-section {
+        border-radius: 12px;
     }
 }
 
@@ -626,7 +676,8 @@ th {
 @media (max-width: 600px) {
 
     /* Dark theme mobile adjustments */
-    h1 {
+    h1,
+    [data-theme="dark"] h1 {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -642,7 +693,15 @@ th {
         line-height: 1.2;
     }
 
-    [data-theme="light"] h2 {
+    [data-theme="dark"] h1 {
+        font-size: 2.2rem;
+        text-align: center;
+        margin: 1rem 0;
+        line-height: 1.2;
+    }
+
+    [data-theme="light"] h2,
+    [data-theme="dark"] h2 {
         font-size: 1.4rem;
         margin: 1.5rem 0 1rem 0;
         padding-left: 1rem;
@@ -665,7 +724,8 @@ th {
         justify-content: flex-end;
     }
 
-    [data-theme="light"] .top-right-buttons {
+    [data-theme="light"] .top-right-buttons,
+    [data-theme="dark"] .top-right-buttons {
         justify-content: center;
         margin: 1rem 0 1.5rem 0;
         gap: 10px;
@@ -675,19 +735,22 @@ th {
         padding: 15px;
     }
 
-    [data-theme="light"] .container {
+    [data-theme="light"] .container,
+    [data-theme="dark"] .container {
         padding: 1rem;
         gap: 1.2rem;
     }
 
     /* Mobile typography adjustments */
-    [data-theme="light"] ul li {
+    [data-theme="light"] ul li,
+    [data-theme="dark"] ul li {
         margin-bottom: 0.6rem;
         padding-left: 0.8rem;
         font-size: 0.95rem;
     }
 
-    [data-theme="light"] .neonbox {
+    [data-theme="light"] .neonbox,
+    [data-theme="dark"] .neonbox {
         padding: 1.2rem;
     }
 }
@@ -695,24 +758,29 @@ th {
 @media (max-width: 400px) {
 
     /* Extra small screens */
-    [data-theme="light"] h1 {
+    [data-theme="light"] h1,
+    [data-theme="dark"] h1 {
         font-size: 1.8rem;
     }
 
-    [data-theme="light"] h2 {
+    [data-theme="light"] h2,
+    [data-theme="dark"] h2 {
         font-size: 1.2rem;
     }
 
-    [data-theme="light"] .projects-highlight h2 {
+    [data-theme="light"] .projects-highlight h2,
+    [data-theme="dark"] .projects-highlight h2 {
         font-size: 1.6rem;
     }
 
-    [data-theme="light"] .container {
+    [data-theme="light"] .container,
+    [data-theme="dark"] .container {
         padding: 0.8rem;
         gap: 1rem;
     }
 
-    [data-theme="light"] .neonbox {
+    [data-theme="light"] .neonbox,
+    [data-theme="dark"] .neonbox {
         padding: 1rem;
     }
 }
