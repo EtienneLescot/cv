@@ -273,6 +273,7 @@ h2 {
 [data-theme="light"] .section {
     margin-bottom: 2.5rem;
     position: relative;
+    color: #6d6d6d;
 }
 
 /* Dark theme lists */
