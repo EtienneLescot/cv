@@ -671,8 +671,8 @@ tr, td, th {
     background: white !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-    font-size: 11pt !important;
-    line-height: 1.4 !important;
+    font-size: 10pt !important;
+    line-height: 1.3 !important;
   }
   
   /* Dark theme print adjustments */
@@ -709,39 +709,126 @@ tr, td, th {
     color: #2c3e50 !important;
   }
   
-  /* Force single-column layout for both themes */
+  /* True two-column layout: Left (Contact+Skills) / Right (Profile+Languages) */
   .container,
   [data-theme="light"] .container,
   [data-theme="dark"] .container {
-    display: block !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto auto auto auto auto !important;
+    gap: 1rem 1.5rem !important;
     max-width: none !important;
-    grid-template-columns: none !important;
-    gap: 1.2rem !important;
+    padding: 0 !important;
   }
   
+  /* Header section - spans both columns */
+  .header-section {
+    grid-column: 1 / -1 !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Left column positioning: Contact at row 2, Skills at row 3 */
+  .contact-section {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    align-self: start !important;
+  }
+  
+  .skills-section {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    align-self: start !important;
+  }
+  
+  /* Right column positioning: Profile at row 2, Languages at row 3 */
+  .profile-section {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    align-self: start !important;
+  }
+  
+  .languages-section {
+    grid-column: 2 !important;
+    grid-row: 3 !important;
+    align-self: start !important;
+  }
+  
+  /* Full-width sections at bottom */
+  .projects-highlight {
+    grid-column: 1 / -1 !important;
+    grid-row: 4 !important;
+    margin: 1rem 0 !important;
+    page-break-inside: avoid !important;
+  }
+  
+  .experiences-section {
+    grid-column: 1 / -1 !important;
+    grid-row: 5 !important;
+    page-break-inside: avoid !important;
+  }
+  
+  /* Ensure all sections are properly styled */
+  .contact-section,
+  .profile-section,
+  .skills-section,
+  .languages-section {
+    display: flex !important;
+    flex-direction: column !important;
+    margin-bottom: 0 !important;
+    page-break-inside: avoid !important;
+  }
+  
+  /* Force same height for Skills and Languages sections */
+  .skills-section,
+  .languages-section {
+    min-height: 220px !important;
+  }
+  
+  /* Ensure neonbox fills available space */
+  .skills-section .section,
+  .languages-section .section {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Contact and Profile sections alignment */
+  .contact-section,
+  .profile-section {
+    min-height: 160px !important;
+  }
+  
+  .contact-section .section,
+  .profile-section .section {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  /* Grid items optimization */
   .grid-item,
   [data-theme="light"] .grid-item,
   [data-theme="dark"] .grid-item {
     display: block !important;
-    margin-bottom: 1.5rem !important;
-    page-break-inside: avoid;
+    margin-bottom: 0.8rem !important;
+    page-break-inside: avoid !important;
   }
   
   /* Optimize section spacing */
   .section,
   [data-theme="light"] .section,
   [data-theme="dark"] .section {
-    margin-bottom: 1.2rem !important;
+    margin-bottom: 0.8rem !important;
   }
   
-  /* Typography optimization for print */
+  /* Typography optimization for print - Two-column friendly */
   h1,
   [data-theme="light"] h1,
   [data-theme="dark"] h1 {
-    font-size: 2.2rem !important;
-    margin: 1rem 0 !important;
+    font-size: 1.8rem !important;
+    margin: 0.5rem 0 1rem 0 !important;
     text-align: center !important;
-    page-break-after: avoid;
+    page-break-after: avoid !important;
     background: none !important;
     -webkit-text-fill-color: inherit !important;
   }
@@ -749,9 +836,15 @@ tr, td, th {
   h2,
   [data-theme="light"] h2,
   [data-theme="dark"] h2 {
-    font-size: 1.4rem !important;
-    margin: 1.5rem 0 0.8rem 0 !important;
-    page-break-after: avoid;
+    font-size: 1.1rem !important;
+    margin: 0 0 0.5rem 0 !important;
+    page-break-after: avoid !important;
+  }
+  
+  /* Compact typography for two-column layout */
+  p {
+    margin: 0.3rem 0 !important;
+    font-size: 9pt !important;
   }
   
   /* Optimize contact section for print */
@@ -802,12 +895,19 @@ tr, td, th {
     display: none !important;
   }
   
-  /* Optimize typography for print */
+  /* Optimize typography for print - Two-column friendly */
   ul li,
   [data-theme="light"] ul li,
   [data-theme="dark"] ul li {
-    margin-bottom: 0.4rem !important;
-    font-size: 10pt !important;
+    margin-bottom: 0.3rem !important;
+    font-size: 9pt !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Nested lists optimization */
+  ul ul li {
+    margin-bottom: 0.2rem !important;
+    font-size: 8.5pt !important;
   }
   
   /* Ensure proper page breaks */
@@ -827,11 +927,34 @@ tr, td, th {
 }
 
 @page {
-  margin-top: 40px;
-  margin-bottom: 40px;
-  margin-left: 20mm;
-  margin-right: 20mm;
-  background: var(--bg);
+  margin-top: 15mm;
+  margin-bottom: 15mm;
+  margin-left: 15mm;
+  margin-right: 15mm;
+  background: white;
+  size: A4;
 }
+
+/* Alternative: Single-column print layout (comment out two-column rules above and uncomment below) */
+/*
+@media print {
+  .container,
+  [data-theme="light"] .container,
+  [data-theme="dark"] .container {
+    display: block !important;
+    max-width: none !important;
+    grid-template-columns: none !important;
+    gap: 1.2rem !important;
+  }
+  
+  .grid-item,
+  [data-theme="light"] .grid-item,
+  [data-theme="dark"] .grid-item {
+    display: block !important;
+    margin-bottom: 1.5rem !important;
+    page-break-inside: avoid;
+  }
+}
+*/
 
 /* Note: @page rules cannot be scoped to data-theme selectors */
