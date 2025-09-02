@@ -220,6 +220,23 @@
 
           // Update button text
           themeToggle.textContent = newTheme === 'dark' ? '🌞 / 🌜' : '🌜 / 🌞';
+
+          // Update print background color based on theme
+          const style = document.createElement('style');
+          style.id = 'print-theme-style';
+          style.innerHTML = `
+            @media print {
+              @page {
+                background: ${newTheme === 'dark' ? '#1A1A1A' : '#ffffff'} !important;
+              }
+            }
+          `;
+          // Remove any existing print theme style
+          const existingStyle = document.getElementById('print-theme-style');
+          if (existingStyle) {
+            document.head.removeChild(existingStyle);
+          }
+          document.head.appendChild(style);
         });
       }
     });
