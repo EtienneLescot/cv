@@ -224,7 +224,7 @@ h2 {
     color: #00ffff;
     border-bottom: 2px dashed #00ffff;
     font-size: 1.5rem;
-    margin: 2rem 0 1rem 0;
+    margin: 1rem 0 1rem 0;
 }
 
 /* Light theme headings - Creative asymmetric style */
@@ -234,7 +234,7 @@ h2 {
     font-weight: 600;
     color: var(--accent);
     border: none;
-    margin: 3rem 0 1.5rem 0;
+    margin: 1rem 0 1.5rem 0;
     position: relative;
     padding-left: 1.5rem;
 }
@@ -412,7 +412,7 @@ th {
 [data-theme="light"] .header-section,
 .header-section {
     grid-column: 1 / -1;
-    margin-bottom: 0;
+    margin-bottom: -40px;
 }
 
 /* Row 1: Contact (1×1) + Profil (2×1) */
@@ -451,6 +451,13 @@ th {
 }
 
 [data-theme="light"] .languages-section ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+[data-theme="dark"] .languages-section ul {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -537,7 +544,7 @@ th {
 
 [data-theme="light"] .grid-item .neonbox>*:last-child,
 .grid-item .neonbox>*:last-child {
-    margin-top: auto;
+    
 }
 
 /* =================================================================
@@ -848,4 +855,5 @@ th {
 @page {
   margin: 15mm;
   size: A4;
+  background: #1A1A1A;
 }
