@@ -421,6 +421,16 @@ tr, td, th {
     grid-row: span 1;
     height: fit-content;
     align-self: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+[data-theme="light"] .languages-section ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
 }
 
 /* Projects - Full Width Highlight */
