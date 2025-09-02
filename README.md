@@ -32,16 +32,20 @@ Cela démarrera un serveur sur `http://localhost:3000` qui servira tous les fich
 Pour générer un PDF à partir du CV, utilisez le script `html-to-pdf.js` :
 
 ```bash
-node html-to-pdf.js [html_file] [css_file] [output_pdf]
+node html-to-pdf.js [html_file] [css_file] [output_pdf] [safe_mode]
 ```
 
-Par défaut, il utilise `index.html`, `style.css` et génère `output.pdf`. Par exemple :
+Par défaut, il utilise `index.html`, `style.css` et génère `output.pdf`. Le quatrième paramètre optionnel `safe_mode` permet d'activer le mode sécurisé pour les caractères spéciaux (true/false). Par exemple :
 
 ```bash
+# Génération normale
 node html-to-pdf.js index.html style.css cv.pdf
+
+# Génération avec mode sécurisé pour les caractères spéciaux
+node html-to-pdf.js index.html style.css cv-safe.pdf true
 ```
 
-Cela générera un fichier PDF nommé `cv.pdf` avec le style appliqué.
+Cela générera un fichier PDF nommé `cv.pdf` ou `cv-safe.pdf` avec le style appliqué. Le mode sécurisé escape les caractères spéciaux dans le CSS pour éviter les problèmes d'affichage sur certaines plateformes.
 
 ## Ajout de nouvelles langues
 Pour ajouter une nouvelle langue :
