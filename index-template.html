@@ -4,6 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title data-i18n="title"></title>
+    <script>
+      // Apply stored theme immediately to prevent flash of wrong theme
+      (function() {
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+          document.documentElement.setAttribute('data-theme', storedTheme);
+        }
+      })();
+    </script>
     <meta
       name="description"
       content=""
@@ -194,10 +203,20 @@
 
       // Theme toggle functionality
       if (themeToggle) {
+        // Apply stored theme on page load
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+          htmlElement.setAttribute('data-theme', storedTheme);
+          themeToggle.textContent = storedTheme === 'dark' ? '🌞 / 🌜' : '🌜 / 🌞';
+        }
+
         themeToggle.addEventListener('click', function() {
           const currentTheme = htmlElement.getAttribute('data-theme');
           const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
           htmlElement.setAttribute('data-theme', newTheme);
+
+          // Store theme preference
+          localStorage.setItem('theme', newTheme);
 
           // Update button text
           themeToggle.textContent = newTheme === 'dark' ? '🌞 / 🌜' : '🌜 / 🌞';
