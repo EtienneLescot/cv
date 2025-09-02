@@ -1,4 +1,6 @@
-/* Color variables */
+/* =================================================================
+   DARK THEME - Retro Terminal/Hacker Style
+   ================================================================= */
 :root {
     --bg: #000000;
     --text: #00ff00;
@@ -9,6 +11,29 @@
     --button-border: 2px solid var(--accent);
 }
 
+/* =================================================================
+   LIGHT THEME - Creative/Asymmetric Professional Style
+   ================================================================= */
+[data-theme="light"] {
+    --bg: #ffffff;
+    --text: #2c3e50;
+    --accent: #3498db;
+    --secondary: #e74c3c;
+    --highlight: #f39c12;
+    --muted: #95a5a6;
+    --light-bg: #ecf0f1;
+    --contact-bg: #3498db;
+    --link: #2980b9;
+    --contrast-high: #ffffff;
+    --contrast-low: #2c3e50;
+    --button-border: 2px solid var(--accent);
+    
+    /* Typography variables */
+    --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+}
+
 /* Button container for alignment */
 .button-container {
     display: flex;
@@ -16,15 +41,9 @@
     align-items: center;
 }
 
-/* Light theme */
-[data-theme="light"] {
-    --bg: #d1ffff;
-    --text: #000000;
-    --accent: #ff00ff;
-    --link: #0000ff;
-    --contrast-high: #000000;
-    --contrast-low: #ffffff;
-}
+/* =================================================================
+   TYPOGRAPHY AND BASE STYLES
+   ================================================================= */
 
 html,
 body {
@@ -32,6 +51,14 @@ body {
     background: var(--bg);
     color: var(--text);
     font-family: 'Courier New', monospace;
+    line-height: 1.6;
+}
+
+/* Light theme typography override */
+[data-theme="light"] html,
+[data-theme="light"] body {
+    font-family: var(--font-primary);
+    line-height: 1.7;
 }
 
 .container {
@@ -40,13 +67,44 @@ body {
     padding: 20px;
 }
 
+/* Dark theme styling (default) */
 h1 {
     color: var(--accent);
     text-align: center;
-    /* text-shadow: 0 0 4px var(--accent); */
     position: relative;
+    font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
+/* Light theme - Creative header styling */
+[data-theme="light"] h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-align: left;
+    color: var(--text);
+    margin: 2rem 0 1rem 0;
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.02em;
+}
+
+[data-theme="light"] h1 span {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    -webkit-text-fill-color: var(--muted);
+}
+
+/* =================================================================
+   BUTTONS AND NAVIGATION
+   ================================================================= */
+
+/* Dark theme buttons */
 #toggle, .lang-button, #print-btn {
     background: var(--bg);
     color: var(--text);
@@ -55,22 +113,50 @@ h1 {
     cursor: pointer;
     font-weight: bold;
     height: 30px;
+    font-family: inherit;
+    transition: all 0.2s ease;
 }
 
+/* Light theme buttons - Modern professional style */
+[data-theme="light"] #toggle,
+[data-theme="light"] .lang-button,
+[data-theme="light"] #print-btn {
+    background: var(--contrast-high);
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    height: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+[data-theme="light"] #toggle:hover,
+[data-theme="light"] .lang-button:hover,
+[data-theme="light"] #print-btn:hover {
+    background: var(--accent);
+    color: var(--contrast-high);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.top-right-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+[data-theme="light"] .top-right-buttons {
+    gap: 12px;
+    margin-bottom: 2rem;
+}
 
 .lang-dropdown {
     position: relative;
     display: inline-block;
-}
-
-{
-    background: var(--bg);
-    color: var(--text);
-    border: var(--button-border);
-    padding: 4px 8px;
-    cursor: pointer;
-    font-weight: bold;
 }
 
 .lang-menu {
@@ -86,12 +172,33 @@ h1 {
     z-index: 1000;
 }
 
+/* Light theme language menu */
+[data-theme="light"] .lang-menu {
+    background: var(--contrast-high);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
 .lang-menu li {
     padding: 4px 8px;
     cursor: pointer;
 }
 
+[data-theme="light"] .lang-menu li {
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: var(--font-primary);
+    font-weight: 500;
+}
+
 .lang-menu li:hover {
+    background: var(--accent);
+    color: var(--contrast-high);
+}
+
+[data-theme="light"] .lang-menu li:hover {
     background: var(--accent);
     color: var(--contrast-high);
 }
@@ -101,33 +208,157 @@ h1 {
     cursor: not-allowed;
 }
 
+[data-theme="light"] .lang-menu li.disabled {
+    color: var(--muted);
+    background: var(--light-bg);
+}
+
+/* =================================================================
+   HEADINGS AND SECTIONS
+   ================================================================= */
+
+/* Dark theme headings */
 h2 {
     color: #00ffff;
     border-bottom: 2px dashed #00ffff;
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem 0;
 }
 
+/* Light theme headings - Creative asymmetric style */
 [data-theme="light"] h2 {
-    color: #ff00ff;
-    border-bottom: 2px dashed #ff00ff;
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    border: none;
+    margin: 3rem 0 1.5rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+[data-theme="light"] h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--accent), var(--secondary));
+    border-radius: 2px;
+}
+
+/* Special styling for contact section */
+[data-theme="light"] .contact-section h2 {
+    color: var(--contrast-high);
+    font-size: 1.4rem;
+    padding-left: 0;
+}
+
+[data-theme="light"] .contact-section h2::before {
+    display: none;
 }
 
 .section {
     margin-bottom: 30px;
 }
 
+/* Light theme - Asymmetric section layouts */
+[data-theme="light"] .section {
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+/* Dark theme lists */
 ul {
     list-style: '* ';
     margin-left: 20px;
 }
 
-a {
-    color: var(--link);
+/* Light theme lists - Modern bullet points */
+[data-theme="light"] ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 1.5rem;
 }
 
+[data-theme="light"] ul li {
+    position: relative;
+    margin-bottom: 0.8rem;
+    padding-left: 1rem;
+}
+
+[data-theme="light"] ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* Nested lists in light theme */
+[data-theme="light"] ul ul {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+}
+
+[data-theme="light"] ul ul li::before {
+    content: '•';
+    color: var(--muted);
+}
+
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Dark theme neon boxes */
 .neonbox {
     border: 2px solid var(--accent);
     padding: 10px;
-    /* box-shadow: 0 0 8px var(--accent); */
+}
+
+/* Light theme - Creative section styling */
+[data-theme="light"] .neonbox {
+    border: none;
+    padding: 1.5rem;
+    background: var(--light-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="light"] .neonbox::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--secondary), var(--highlight));
+}
+
+/* Special contact section styling */
+[data-theme="light"] .contact-section {
+    background: var(--contact-bg);
+    color: var(--contrast-high);
+    border-radius: 0 25px 25px 0;
+    margin-right: -20px;
+    padding-right: 2rem;
+}
+
+[data-theme="light"] .contact-section::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="light"] .contact-section a {
+    color: var(--contrast-high);
+    font-weight: 500;
 }
 
 /* Prevent block breaking when exporting to PDF */
@@ -148,7 +379,208 @@ tr, td, th {
   break-inside: avoid;
 }
 
+/* =================================================================
+   DYNAMIC ALTERNATING GRID LAYOUT FOR LIGHT THEME
+   ================================================================= */
+
+[data-theme="light"] .container {
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(auto, auto);
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Header - Full Width */
+[data-theme="light"] .header-section {
+    grid-column: 1 / -1;
+    margin-bottom: 1rem;
+}
+
+/* Row 1: Contact (1×1) + Profil (2×1) */
+[data-theme="light"] .contact-section {
+    grid-column: span 1;
+    grid-row: span 1;
+    height: fit-content;
+    align-self: start;
+}
+
+[data-theme="light"] .profile-section {
+    grid-column: span 2;
+    grid-row: span 1;
+    align-self: start;
+}
+
+/* Row 2: Compétences (2×1) + Langues (1×1) */
+[data-theme="light"] .skills-section {
+    grid-column: span 2;
+    grid-row: span 1;
+    align-self: start;
+}
+
+[data-theme="light"] .languages-section {
+    grid-column: span 1;
+    grid-row: span 1;
+    height: fit-content;
+    align-self: start;
+}
+
+/* Projects - Full Width Highlight */
+[data-theme="light"] .projects-highlight {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--light-bg) 0%, rgba(255,255,255,0.9) 100%);
+    margin: 1rem -1rem;
+    padding: 2.5rem;
+    border-radius: 8px 35px 8px 35px;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="light"] .projects-highlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--secondary) 50%, var(--highlight) 100%);
+}
+
+[data-theme="light"] .projects-highlight h2 {
+    color: var(--accent);
+    font-size: 2.4rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-left: 0;
+}
+
+[data-theme="light"] .projects-highlight h2::before {
+    display: none;
+}
+
+/* Experiences - Full Width */
+[data-theme="light"] .experiences-section {
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+}
+
+/* Alignment optimization for sidebar elements */
+[data-theme="light"] .contact-section,
+[data-theme="light"] .languages-section {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Enhanced visual hierarchy */
+[data-theme="light"] .contact-section {
+    background: linear-gradient(135deg, var(--contact-bg) 0%, rgba(52, 152, 219, 0.8) 100%);
+    border-radius: 8px 25px 8px 8px;
+    box-shadow: 0 8px 16px rgba(52, 152, 219, 0.15);
+}
+
+[data-theme="light"] .languages-section {
+    border-radius: 8px 8px 25px 8px;
+    border: 2px solid var(--accent);
+    background: linear-gradient(135deg, var(--contrast-high) 0%, var(--light-bg) 100%);
+}
+
+/* Grid flow optimization to eliminate white space */
+[data-theme="light"] .grid-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+[data-theme="light"] .grid-item .neonbox {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+[data-theme="light"] .grid-item .neonbox > *:last-child {
+    margin-top: auto;
+}
+
+/* =================================================================
+   RESPONSIVE DESIGN - OPTIMIZED FOR ALTERNATING GRID
+   ================================================================= */
+
+@media (max-width: 1100px) {
+    /* Tablet: 2-column grid */
+    [data-theme="light"] .container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        max-width: 900px;
+    }
+    
+    /* Adjust grid spans for tablet */
+    [data-theme="light"] .contact-section {
+        grid-column: span 1;
+    }
+    
+    [data-theme="light"] .profile-section {
+        grid-column: span 1;
+    }
+    
+    [data-theme="light"] .skills-section {
+        grid-column: span 1;
+    }
+    
+    [data-theme="light"] .languages-section {
+        grid-column: span 1;
+    }
+    
+    [data-theme="light"] .projects-highlight {
+        margin: 1rem -0.5rem;
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Mobile: Single column */
+    [data-theme="light"] .container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 100%;
+        padding: 1rem;
+    }
+    
+    /* All sections span full width on mobile */
+    [data-theme="light"] .contact-section,
+    [data-theme="light"] .profile-section,
+    [data-theme="light"] .skills-section,
+    [data-theme="light"] .languages-section,
+    [data-theme="light"] .experiences-section {
+        grid-column: span 1;
+        min-height: auto;
+    }
+    
+    [data-theme="light"] .projects-highlight {
+        margin: 1rem 0;
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+    
+    [data-theme="light"] .projects-highlight h2 {
+        font-size: 2rem;
+    }
+    
+    /* Optimize sidebar sections for mobile */
+    [data-theme="light"] .contact-section {
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--contact-bg) 0%, rgba(52, 152, 219, 0.9) 100%);
+    }
+    
+    [data-theme="light"] .languages-section {
+        border-radius: 12px;
+    }
+}
+
 @media (max-width: 600px) {
+    /* Dark theme mobile adjustments */
     h1 {
         display: flex;
         flex-direction: column;
@@ -156,12 +588,28 @@ tr, td, th {
         position: static;
         gap: 8px;
     }
+    
+    /* Light theme mobile adjustments */
+    [data-theme="light"] h1 {
+        font-size: 2.2rem;
+        text-align: center;
+        margin: 1rem 0;
+        line-height: 1.2;
+    }
+    
+    [data-theme="light"] h2 {
+        font-size: 1.4rem;
+        margin: 1.5rem 0 1rem 0;
+        padding-left: 1rem;
+    }
+    
     #lang-toggle, #toggle, #print-btn {
         position: static;
         margin: 0 4px;
         width: auto;
         display: inline-block;
     }
+    
     .top-right-buttons {
         display: flex;
         flex-direction: row;
@@ -169,16 +617,112 @@ tr, td, th {
         margin-top: 4px;
         justify-content: flex-end;
     }
+    
+    [data-theme="light"] .top-right-buttons {
+        justify-content: center;
+        margin: 1rem 0 1.5rem 0;
+        gap: 10px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    [data-theme="light"] .container {
+        padding: 1rem;
+        gap: 1.2rem;
+    }
+    
+    /* Mobile typography adjustments */
+    [data-theme="light"] ul li {
+        margin-bottom: 0.6rem;
+        padding-left: 0.8rem;
+        font-size: 0.95rem;
+    }
+    
+    [data-theme="light"] .neonbox {
+        padding: 1.2rem;
+    }
 }
+
+@media (max-width: 400px) {
+    /* Extra small screens */
+    [data-theme="light"] h1 {
+        font-size: 1.8rem;
+    }
+    
+    [data-theme="light"] h2 {
+        font-size: 1.2rem;
+    }
+    
+    [data-theme="light"] .projects-highlight h2 {
+        font-size: 1.6rem;
+    }
+    
+    [data-theme="light"] .container {
+        padding: 0.8rem;
+        gap: 1rem;
+    }
+    
+    [data-theme="light"] .neonbox {
+        padding: 1rem;
+    }
+}
+
+/* =================================================================
+   PRINT STYLES
+   ================================================================= */
 
 @media print {
   html, body {
     background: var(--bg) !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    font-size: 12pt;
   }
+  
+  /* Light theme print adjustments */
+  [data-theme="light"] html,
+  [data-theme="light"] body {
+    background: white !important;
+    color: #2c3e50 !important;
+  }
+  
+  [data-theme="light"] .container {
+    grid-template-columns: 1fr;
+    max-width: none;
+    grid-gap: 1rem;
+  }
+  
+  [data-theme="light"] h1 {
+    font-size: 2rem;
+    page-break-after: avoid;
+  }
+  
+  [data-theme="light"] h2 {
+    font-size: 1.2rem;
+    page-break-after: avoid;
+  }
+  
+  [data-theme="light"] .section.projects-highlight {
+    background: #f8f9fa !important;
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+  }
+  
+  [data-theme="light"] .contact-section {
+    background: #e3f2fd !important;
+    color: #1565c0 !important;
+  }
+  
   /* Hide theme and language toggle buttons in PDF/print */
   #toggle, #lang-button, #print-btn {
+    display: none !important;
+  }
+  
+  .top-right-buttons {
     display: none !important;
   }
 }
@@ -188,14 +732,7 @@ tr, td, th {
   margin-bottom: 40px;
   margin-left: 20mm;
   margin-right: 20mm;
-  /* Set background color for PDF export according to theme */
   background: var(--bg);
 }
-.top-right-buttons {
-    display: flex;
-    gap: 8px;
-    justify-content: flex-end;
-    margin-bottom: 10px;
-}
 
-
+/* Note: @page rules cannot be scoped to data-theme selectors */

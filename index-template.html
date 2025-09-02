@@ -40,110 +40,128 @@
 
   <body>
     <div class="container">
-      <div class="top-right-buttons">
-        <div class="lang-dropdown">
-          <button id="lang-button" class="lang-button" aria-label="">🌐</button>
-          <ul id="lang-menu" class="lang-menu">
-            <!-- Language options will be injected by build process -->
+      <!-- Header Section - Full Width -->
+      <div class="header-section">
+        <div class="top-right-buttons">
+          <div class="lang-dropdown">
+            <button id="lang-button" class="lang-button" aria-label="">🌐</button>
+            <ul id="lang-menu" class="lang-menu">
+              <!-- Language options will be injected by build process -->
+            </ul>
+          </div>
+           <button id="toggle" aria-label="">🌞 / 🌜</button>
+          <button
+            id="print-btn"
+            aria-label=""
+            onclick="window.print()"
+          >
+            PDF
+          </button>
+        </div>
+        <h1>
+          🌟 <span data-i18n="name"></span>
+        </h1>
+        
+        <p data-i18n="tagline"></p>
+      </div>
+
+      <!-- Row 1: Contact (1×1) - Grid Position 1 -->
+      <div class="grid-item contact-section">
+        <div class="section neonbox">
+          <h2>📱 <span data-i18n="contact-title"></span></h2>
+          <ul>
+            <li data-i18n="contact-phone"></li>
+            <li data-i18n="contact-email"></li>
+            <li data-i18n="contact-linkedin"></li>
           </ul>
         </div>
-         <button id="toggle" aria-label="">🌞 / 🌜</button>
-        <button
-          id="print-btn"
-          aria-label=""
-          onclick="window.print()"
-        >
-          PDF
-        </button>
-      </div>
-      <h1>
-        🌟 <span data-i18n="name"></span>
-      </h1>
-      
-      <p data-i18n="tagline"></p>
-
-      <div class="section neonbox">
-        <h2>📱 <span data-i18n="contact-title"></span></h2>
-        <ul>
-          <li data-i18n="contact-phone"></li>
-          <li data-i18n="contact-email"></li>
-          <li data-i18n="contact-linkedin"></li>
-        </ul>
       </div>
 
-      <div class="section neonbox">
-        <h2>🐙 <span data-i18n="profile-title"></span></h2>
-        <p data-i18n="profile-desc"></p>
+      <!-- Row 1: Profil (2×1) - Grid Position 2-3 -->
+      <div class="grid-item profile-section">
+        <div class="section neonbox">
+          <h2>🐙 <span data-i18n="profile-title"></span></h2>
+          <p data-i18n="profile-desc"></p>
+        </div>
       </div>
 
-      <div class="section neonbox">
-        <h2>💪 <span data-i18n="skills-title"></span></h2>
-        <ul>
-          <li data-i18n="skill-1"></li>
-          <li data-i18n="skill-2"></li>
-          <li data-i18n="skill-3"></li>
-          <li data-i18n="skill-4"></li>
-          <li data-i18n="skill-5"></li>
-          <li data-i18n="skill-6"></li>
-          <li data-i18n="skill-7"></li>
-        </ul>
+      <!-- Row 2: Compétences (2×1) - Grid Position 1-2 -->
+      <div class="grid-item skills-section">
+        <div class="section neonbox">
+          <h2>💪 <span data-i18n="skills-title"></span></h2>
+          <ul>
+            <li data-i18n="skill-1"></li>
+            <li data-i18n="skill-2"></li>
+            <li data-i18n="skill-3"></li>
+            <li data-i18n="skill-4"></li>
+            <li data-i18n="skill-5"></li>
+            <li data-i18n="skill-6"></li>
+            <li data-i18n="skill-7"></li>
+          </ul>
+        </div>
       </div>
 
-      <div class="section neonbox">
+      <!-- Row 2: Langues (1×1) - Grid Position 3 -->
+      <div class="grid-item languages-section">
+        <div class="section neonbox">
+          <h2>🌐 <span data-i18n="languages-title"></span></h2>
+          <ul>
+            <li data-i18n="lang-fr"></li>
+            <li data-i18n="lang-en"></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Highlighted Projects Section - Full Width -->
+      <div class="section neonbox projects-highlight">
         <h2>🚀 <span data-i18n="projects-title"></span></h2>
         <ul>
           <li data-i18n="project-1"></li>
           <li data-i18n="project-2"></li>
           <li data-i18n="project-3"></li>
-        
         </ul>
       </div>
 
-      <div class="section neonbox">
-        <h2>🎒 <span data-i18n="experiences-title"></span></h2>
-        <ul>
-          <li>
-            <span data-i18n="exp1-title"></span>
-            <ul>
-              <li data-i18n="exp1-point1"></li>
-              <li data-i18n="exp1-point2"></li>
-              <li data-i18n="exp1-point3"></li>
-            </ul>
-          </li>
-          <li>
-            <span data-i18n="exp2-title"></span>
-            <ul>
-              <li data-i18n="exp2-point1"></li>
-              <li data-i18n="exp2-point2"></li>
-              <li data-i18n="exp2-point3"></li>
-            </ul>
-          </li>
-          <li>
-            <span data-i18n="exp3-title"></span>
-            <ul>
-              <li data-i18n="exp3-point1"></li>
-              <li data-i18n="exp3-point2"></li>
-              <li data-i18n="exp3-point3"></li>
-            </ul>
-          </li>
-          <li>
-            <span data-i18n="exp4-title"></span>
-            <ul>
-              <li data-i18n="exp4-point1"></li>
-              <li data-i18n="exp4-point2"></li>
-              <li data-i18n="exp4-point3"></li>
-              <li data-i18n="exp4-point4"></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-      <div class="section neonbox">
-        <h2>🌐 <span data-i18n="languages-title"></span></h2>
-        <ul>
-          <li data-i18n="lang-fr"></li>
-          <li data-i18n="lang-en"></li>
-        </ul>
+      <!-- Experiences Section - Full Width -->
+      <div class="grid-item experiences-section">
+        <div class="section neonbox">
+          <h2>🎒 <span data-i18n="experiences-title"></span></h2>
+          <ul>
+            <li>
+              <span data-i18n="exp1-title"></span>
+              <ul>
+                <li data-i18n="exp1-point1"></li>
+                <li data-i18n="exp1-point2"></li>
+                <li data-i18n="exp1-point3"></li>
+              </ul>
+            </li>
+            <li>
+              <span data-i18n="exp2-title"></span>
+              <ul>
+                <li data-i18n="exp2-point1"></li>
+                <li data-i18n="exp2-point2"></li>
+                <li data-i18n="exp2-point3"></li>
+              </ul>
+            </li>
+            <li>
+              <span data-i18n="exp3-title"></span>
+              <ul>
+                <li data-i18n="exp3-point1"></li>
+                <li data-i18n="exp3-point2"></li>
+                <li data-i18n="exp3-point3"></li>
+              </ul>
+            </li>
+            <li>
+              <span data-i18n="exp4-title"></span>
+              <ul>
+                <li data-i18n="exp4-point1"></li>
+                <li data-i18n="exp4-point2"></li>
+                <li data-i18n="exp4-point3"></li>
+                <li data-i18n="exp4-point4"></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </body>
