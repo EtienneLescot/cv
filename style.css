@@ -668,10 +668,38 @@ tr, td, th {
 
 @media print {
   html, body {
-    background: var(--bg) !important;
+    background: white !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-    font-size: 12pt;
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* Dark theme print adjustments */
+  [data-theme="dark"] html,
+  [data-theme="dark"] body {
+    background: white !important;
+    color: #2c3e50 !important;
+  }
+  
+  [data-theme="dark"] {
+    --bg: white !important;
+    --text: #2c3e50 !important;
+    --accent: #00d4aa !important;
+  }
+  
+  [data-theme="dark"] .neonbox {
+    border: 1px solid #00d4aa !important;
+    background: white !important;
+  }
+  
+  [data-theme="dark"] h1 {
+    color: #2c3e50 !important;
+  }
+  
+  [data-theme="dark"] h2 {
+    color: #00d4aa !important;
+    border-bottom: 1px solid #00d4aa !important;
   }
   
   /* Light theme print adjustments */
@@ -681,39 +709,120 @@ tr, td, th {
     color: #2c3e50 !important;
   }
   
-  [data-theme="light"] .container {
-    grid-template-columns: 1fr;
-    max-width: none;
-    grid-gap: 1rem;
+  /* Force single-column layout for both themes */
+  .container,
+  [data-theme="light"] .container,
+  [data-theme="dark"] .container {
+    display: block !important;
+    max-width: none !important;
+    grid-template-columns: none !important;
+    gap: 1.2rem !important;
   }
   
-  [data-theme="light"] h1 {
-    font-size: 2rem;
+  .grid-item,
+  [data-theme="light"] .grid-item,
+  [data-theme="dark"] .grid-item {
+    display: block !important;
+    margin-bottom: 1.5rem !important;
+    page-break-inside: avoid;
+  }
+  
+  /* Optimize section spacing */
+  .section,
+  [data-theme="light"] .section,
+  [data-theme="dark"] .section {
+    margin-bottom: 1.2rem !important;
+  }
+  
+  /* Typography optimization for print */
+  h1,
+  [data-theme="light"] h1,
+  [data-theme="dark"] h1 {
+    font-size: 2.2rem !important;
+    margin: 1rem 0 !important;
+    text-align: center !important;
+    page-break-after: avoid;
+    background: none !important;
+    -webkit-text-fill-color: inherit !important;
+  }
+  
+  h2,
+  [data-theme="light"] h2,
+  [data-theme="dark"] h2 {
+    font-size: 1.4rem !important;
+    margin: 1.5rem 0 0.8rem 0 !important;
     page-break-after: avoid;
   }
   
-  [data-theme="light"] h2 {
-    font-size: 1.2rem;
-    page-break-after: avoid;
-  }
-  
-  [data-theme="light"] .section.projects-highlight {
+  /* Optimize contact section for print */
+  [data-theme="light"] .contact-section .neonbox {
     background: #f8f9fa !important;
-    margin: 1rem 0;
-    padding: 1rem;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
+    color: #2c3e50 !important;
+    border: 1px solid #dee2e6 !important;
   }
   
-
+  [data-theme="light"] .contact-section a {
+    color: #2980b9 !important;
+  }
   
-  /* Hide theme and language toggle buttons in PDF/print */
-  #toggle, #lang-button, #print-btn {
+  /* Optimize projects highlight for print */
+  .projects-highlight,
+  [data-theme="light"] .projects-highlight,
+  [data-theme="dark"] .projects-highlight {
+    background: #f8f9fa !important;
+    margin: 1rem 0 !important;
+    padding: 1.2rem !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 8px !important;
+  }
+  
+  [data-theme="light"] .projects-highlight::before,
+  [data-theme="dark"] .projects-highlight::before {
     display: none !important;
   }
   
-  .top-right-buttons {
+  /* Optimize neonbox styling for print */
+  .neonbox,
+  [data-theme="light"] .neonbox {
+    box-shadow: none !important;
+    border: 1px solid #dee2e6 !important;
+    background: #f8f9fa !important;
+  }
+  
+  [data-theme="light"] .neonbox::before {
     display: none !important;
+  }
+  
+  /* Remove interactive elements */
+  .top-right-buttons,
+  #toggle,
+  #lang-button,
+  #print-btn,
+  .lang-dropdown {
+    display: none !important;
+  }
+  
+  /* Optimize typography for print */
+  ul li,
+  [data-theme="light"] ul li,
+  [data-theme="dark"] ul li {
+    margin-bottom: 0.4rem !important;
+    font-size: 10pt !important;
+  }
+  
+  /* Ensure proper page breaks */
+  .header-section,
+  .contact-section,
+  .profile-section,
+  .skills-section,
+  .languages-section,
+  .experiences-section {
+    page-break-inside: avoid;
+  }
+  
+  /* Optimize header section */
+  .header-section {
+    margin-bottom: 1.5rem !important;
   }
 }
 
