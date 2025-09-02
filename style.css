@@ -2,7 +2,7 @@
    DARK THEME - Retro Terminal/Hacker Style
    ================================================================= */
 :root {
-    --bg: #000000;
+    --bg: #1A1A1A;
     --text: #00ff00;
     --accent: #ff00ff;
     --link: #ffff00;
@@ -263,6 +263,10 @@ h2 {
 
 .section {
     margin-bottom: 30px;
+    background-color: #2C2C2C;
+    color: #B0B0B1;
+    border: 1px solid #404040;
+    border-radius: 0;
 }
 
 /* Light theme - Asymmetric section layouts */
@@ -320,8 +324,9 @@ a:hover {
 
 /* Dark theme neon boxes */
 .neonbox {
-    border: 2px solid var(--accent);
+    border: 2px solid #404040;
     padding: 10px;
+    border-radius: 0;
 }
 
 /* Light theme - Creative section styling */
@@ -393,7 +398,8 @@ th {
    DYNAMIC ALTERNATING GRID LAYOUT FOR LIGHT THEME
    ================================================================= */
 
-[data-theme="light"] .container {
+[data-theme="light"] .container,
+.container {
     max-width: 1200px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -403,33 +409,38 @@ th {
 }
 
 /* Header - Full Width */
-[data-theme="light"] .header-section {
+[data-theme="light"] .header-section,
+.header-section {
     grid-column: 1 / -1;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
 }
 
 /* Row 1: Contact (1×1) + Profil (2×1) */
-[data-theme="light"] .contact-section {
+[data-theme="light"] .contact-section,
+.contact-section {
     grid-column: span 1;
     grid-row: span 1;
     height: fit-content;
     align-self: start;
 }
 
-[data-theme="light"] .profile-section {
+[data-theme="light"] .profile-section,
+.profile-section {
     grid-column: span 2;
     grid-row: span 1;
     align-self: start;
 }
 
 /* Row 2: Compétences (2×1) + Langues (1×1) */
-[data-theme="light"] .skills-section {
+[data-theme="light"] .skills-section,
+.skills-section {
     grid-column: span 2;
     grid-row: span 1;
     align-self: start;
 }
 
-[data-theme="light"] .languages-section {
+[data-theme="light"] .languages-section,
+.languages-section {
     grid-column: span 1;
     grid-row: span 1;
     height: fit-content;
@@ -450,9 +461,20 @@ th {
 [data-theme="light"] .projects-highlight {
     grid-column: 1 / -1;
     background: linear-gradient(135deg, var(--light-bg) 0%, rgba(255, 255, 255, 0.9) 100%);
-    margin: 1rem -1rem;
+    margin: 1rem 0;
     padding: 2.5rem;
     border-radius: 8px 35px 8px 35px;
+    position: relative;
+    overflow: hidden;
+}
+
+.projects-highlight {
+    grid-column: 1 / -1;
+    background: #2C2C2C;
+    margin: 1rem 0;
+    padding: 2.5rem;
+    border: 1px solid #404040;
+    border-radius: 0;
     position: relative;
     overflow: hidden;
 }
@@ -480,7 +502,8 @@ th {
 }
 
 /* Experiences - Full Width */
-[data-theme="light"] .experiences-section {
+[data-theme="light"] .experiences-section,
+.experiences-section {
     grid-column: 1 / -1;
     margin-top: 1rem;
 }
@@ -498,19 +521,22 @@ th {
 
 
 /* Grid flow optimization to eliminate white space */
-[data-theme="light"] .grid-item {
+[data-theme="light"] .grid-item,
+.grid-item {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
-[data-theme="light"] .grid-item .neonbox {
+[data-theme="light"] .grid-item .neonbox,
+.grid-item .neonbox {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
-[data-theme="light"] .grid-item .neonbox>*:last-child {
+[data-theme="light"] .grid-item .neonbox>*:last-child,
+.grid-item .neonbox>*:last-child {
     margin-top: auto;
 }
 
@@ -521,7 +547,8 @@ th {
 @media (max-width: 1100px) {
 
     /* Tablet: 2-column grid */
-    [data-theme="light"] .container {
+    [data-theme="light"] .container,
+    .container {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
         max-width: 900px;
@@ -553,7 +580,8 @@ th {
 @media (max-width: 768px) {
 
     /* Mobile: Single column */
-    [data-theme="light"] .container {
+    [data-theme="light"] .container,
+    .container {
         grid-template-columns: 1fr;
         gap: 1.5rem;
         max-width: 100%;
@@ -804,7 +832,7 @@ th {
   }
   [data-theme="dark"] .neonbox {
     background: #2c2c2c !important;
-    border: 1px solid #444 !important;
+    border: 2px solid #444 !important;
     box-shadow: none !important;
   }
   [data-theme="dark"] .contact-section .neonbox {
