@@ -27,7 +27,7 @@
     --contrast-high: #ffffff;
     --contrast-low: #2c3e50;
     --button-border: 2px solid var(--accent);
-    
+
     /* Typography variables */
     --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
     --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -105,7 +105,9 @@ h1 {
    ================================================================= */
 
 /* Dark theme buttons */
-#toggle, .lang-button, #print-btn {
+#toggle,
+.lang-button,
+#print-btn {
     background: var(--bg);
     color: var(--text);
     border: var(--button-border);
@@ -359,21 +361,32 @@ a:hover {
 }
 
 /* Prevent block breaking when exporting to PDF */
-h1, h2, h3, h4, h5, h6 {
-  page-break-after: avoid;
-  break-after: avoid;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    page-break-after: avoid;
+    break-after: avoid;
 }
+
 li {
-  page-break-inside: avoid;
-  break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
-.section, .neonbox {
-  page-break-inside: avoid;
-  break-inside: avoid;
+
+.section,
+.neonbox {
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
-tr, td, th {
-  page-break-inside: avoid;
-  break-inside: avoid;
+
+tr,
+td,
+th {
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 /* =================================================================
@@ -436,7 +449,7 @@ tr, td, th {
 /* Projects - Full Width Highlight */
 [data-theme="light"] .projects-highlight {
     grid-column: 1 / -1;
-    background: linear-gradient(135deg, var(--light-bg) 0%, rgba(255,255,255,0.9) 100%);
+    background: linear-gradient(135deg, var(--light-bg) 0%, rgba(255, 255, 255, 0.9) 100%);
     margin: 1rem -1rem;
     padding: 2.5rem;
     border-radius: 8px 35px 8px 35px;
@@ -497,7 +510,7 @@ tr, td, th {
     flex-direction: column;
 }
 
-[data-theme="light"] .grid-item .neonbox > *:last-child {
+[data-theme="light"] .grid-item .neonbox>*:last-child {
     margin-top: auto;
 }
 
@@ -506,30 +519,31 @@ tr, td, th {
    ================================================================= */
 
 @media (max-width: 1100px) {
+
     /* Tablet: 2-column grid */
     [data-theme="light"] .container {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
         max-width: 900px;
     }
-    
+
     /* Adjust grid spans for tablet */
     [data-theme="light"] .contact-section {
         grid-column: span 1;
     }
-    
+
     [data-theme="light"] .profile-section {
         grid-column: span 1;
     }
-    
+
     [data-theme="light"] .skills-section {
         grid-column: span 1;
     }
-    
+
     [data-theme="light"] .languages-section {
         grid-column: span 1;
     }
-    
+
     [data-theme="light"] .projects-highlight {
         margin: 1rem -0.5rem;
         padding: 2rem;
@@ -537,6 +551,7 @@ tr, td, th {
 }
 
 @media (max-width: 768px) {
+
     /* Mobile: Single column */
     [data-theme="light"] .container {
         grid-template-columns: 1fr;
@@ -544,7 +559,7 @@ tr, td, th {
         max-width: 100%;
         padding: 1rem;
     }
-    
+
     /* All sections span full width on mobile */
     [data-theme="light"] .contact-section,
     [data-theme="light"] .profile-section,
@@ -554,25 +569,26 @@ tr, td, th {
         grid-column: span 1;
         min-height: auto;
     }
-    
+
     [data-theme="light"] .projects-highlight {
         margin: 1rem 0;
         padding: 1.5rem;
         border-radius: 12px;
     }
-    
+
     [data-theme="light"] .projects-highlight h2 {
         font-size: 2rem;
     }
-    
-    
-    
+
+
+
     [data-theme="light"] .languages-section {
         border-radius: 12px;
     }
 }
 
 @media (max-width: 600px) {
+
     /* Dark theme mobile adjustments */
     h1 {
         display: flex;
@@ -581,7 +597,7 @@ tr, td, th {
         position: static;
         gap: 8px;
     }
-    
+
     /* Light theme mobile adjustments */
     [data-theme="light"] h1 {
         font-size: 2.2rem;
@@ -589,20 +605,22 @@ tr, td, th {
         margin: 1rem 0;
         line-height: 1.2;
     }
-    
+
     [data-theme="light"] h2 {
         font-size: 1.4rem;
         margin: 1.5rem 0 1rem 0;
         padding-left: 1rem;
     }
-    
-    #lang-toggle, #toggle, #print-btn {
+
+    #lang-toggle,
+    #toggle,
+    #print-btn {
         position: static;
         margin: 0 4px;
         width: auto;
         display: inline-block;
     }
-    
+
     .top-right-buttons {
         display: flex;
         flex-direction: row;
@@ -610,351 +628,233 @@ tr, td, th {
         margin-top: 4px;
         justify-content: flex-end;
     }
-    
+
     [data-theme="light"] .top-right-buttons {
         justify-content: center;
         margin: 1rem 0 1.5rem 0;
         gap: 10px;
     }
-    
+
     .container {
         padding: 15px;
     }
-    
+
     [data-theme="light"] .container {
         padding: 1rem;
         gap: 1.2rem;
     }
-    
+
     /* Mobile typography adjustments */
     [data-theme="light"] ul li {
         margin-bottom: 0.6rem;
         padding-left: 0.8rem;
         font-size: 0.95rem;
     }
-    
+
     [data-theme="light"] .neonbox {
         padding: 1.2rem;
     }
 }
 
 @media (max-width: 400px) {
+
     /* Extra small screens */
     [data-theme="light"] h1 {
         font-size: 1.8rem;
     }
-    
+
     [data-theme="light"] h2 {
         font-size: 1.2rem;
     }
-    
+
     [data-theme="light"] .projects-highlight h2 {
         font-size: 1.6rem;
     }
-    
+
     [data-theme="light"] .container {
         padding: 0.8rem;
         gap: 1rem;
     }
-    
+
     [data-theme="light"] .neonbox {
         padding: 1rem;
     }
 }
 
 /* =================================================================
-   PRINT STYLES
+   PRINT STYLES — grille 2x1,2x1 puis 1x1,1x1 avec hauteurs appairées
    ================================================================= */
-
 @media print {
-  html, body {
-    background: white !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-    font-size: 10pt !important;
-    line-height: 1.3 !important;
-  }
-  
-  /* Dark theme print adjustments */
-  [data-theme="dark"] html,
-  [data-theme="dark"] body {
-    background: white !important;
-    color: #2c3e50 !important;
-  }
-  
-  [data-theme="dark"] {
-    --bg: white !important;
-    --text: #2c3e50 !important;
-    --accent: #00d4aa !important;
-  }
-  
-  [data-theme="dark"] .neonbox {
-    border: 1px solid #00d4aa !important;
-    background: white !important;
-  }
-  
-  [data-theme="dark"] h1 {
-    color: #2c3e50 !important;
-  }
-  
-  [data-theme="dark"] h2 {
-    color: #00d4aa !important;
-    border-bottom: 1px solid #00d4aa !important;
-  }
-  
-  /* Light theme print adjustments */
-  [data-theme="light"] html,
-  [data-theme="light"] body {
-    background: white !important;
-    color: #2c3e50 !important;
-  }
-  
-  /* True two-column layout: Left (Contact+Skills) / Right (Profile+Languages) */
-  .container,
-  [data-theme="light"] .container,
-  [data-theme="dark"] .container {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    grid-template-rows: auto auto auto auto auto !important;
-    gap: 1rem 1.5rem !important;
-    max-width: none !important;
-    padding: 0 !important;
-  }
-  
-  /* Header section - spans both columns */
-  .header-section {
-    grid-column: 1 / -1 !important;
-    margin-bottom: 1rem !important;
-  }
-  
-  /* Left column positioning: Contact at row 2, Skills at row 3 */
-  .contact-section {
-    grid-column: 1 !important;
-    grid-row: 2 !important;
-    align-self: start !important;
-  }
-  
-  .skills-section {
-    grid-column: 1 !important;
-    grid-row: 3 !important;
-    align-self: start !important;
-  }
-  
-  /* Right column positioning: Profile at row 2, Languages at row 3 */
-  .profile-section {
-    grid-column: 2 !important;
-    grid-row: 2 !important;
-    align-self: start !important;
-  }
-  
-  .languages-section {
-    grid-column: 2 !important;
-    grid-row: 3 !important;
-    align-self: start !important;
-  }
-  
-  /* Full-width sections at bottom */
-  .projects-highlight {
-    grid-column: 1 / -1 !important;
-    grid-row: 4 !important;
-    margin: 1rem 0 !important;
-    page-break-inside: avoid !important;
-  }
-  
-  .experiences-section {
-    grid-column: 1 / -1 !important;
-    grid-row: 5 !important;
-    page-break-inside: avoid !important;
-  }
-  
-  /* Ensure all sections are properly styled */
-  .contact-section,
-  .profile-section,
-  .skills-section,
-  .languages-section {
-    display: flex !important;
-    flex-direction: column !important;
-    margin-bottom: 0 !important;
-    page-break-inside: avoid !important;
-  }
-  
-  /* Force same height for Skills and Languages sections */
-  .skills-section,
-  .languages-section {
-    min-height: 220px !important;
-  }
-  
-  /* Ensure neonbox fills available space */
-  .skills-section .section,
-  .languages-section .section {
-    flex: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-  }
-  
-  /* Contact and Profile sections alignment */
-  .contact-section,
-  .profile-section {
-    min-height: 160px !important;
-  }
-  
-  .contact-section .section,
-  .profile-section .section {
-    flex: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-  }
-  
-  /* Grid items optimization */
-  .grid-item,
-  [data-theme="light"] .grid-item,
-  [data-theme="dark"] .grid-item {
-    display: block !important;
-    margin-bottom: 0.8rem !important;
-    page-break-inside: avoid !important;
-  }
-  
-  /* Optimize section spacing */
-  .section,
-  [data-theme="light"] .section,
-  [data-theme="dark"] .section {
-    margin-bottom: 0.8rem !important;
-  }
-  
-  /* Typography optimization for print - Two-column friendly */
-  h1,
-  [data-theme="light"] h1,
-  [data-theme="dark"] h1 {
-    font-size: 1.8rem !important;
-    margin: 0.5rem 0 1rem 0 !important;
-    text-align: center !important;
-    page-break-after: avoid !important;
-    background: none !important;
-    -webkit-text-fill-color: inherit !important;
-  }
-  
-  h2,
-  [data-theme="light"] h2,
-  [data-theme="dark"] h2 {
-    font-size: 1.1rem !important;
-    margin: 0 0 0.5rem 0 !important;
-    page-break-after: avoid !important;
-  }
-  
-  /* Compact typography for two-column layout */
-  p {
-    margin: 0.3rem 0 !important;
-    font-size: 9pt !important;
-  }
-  
-  /* Optimize contact section for print */
-  [data-theme="light"] .contact-section .neonbox {
-    background: #f8f9fa !important;
-    color: #2c3e50 !important;
-    border: 1px solid #dee2e6 !important;
-  }
-  
-  [data-theme="light"] .contact-section a {
-    color: #2980b9 !important;
-  }
-  
-  /* Optimize projects highlight for print */
-  .projects-highlight,
-  [data-theme="light"] .projects-highlight,
-  [data-theme="dark"] .projects-highlight {
-    background: #f8f9fa !important;
-    margin: 1rem 0 !important;
-    padding: 1.2rem !important;
-    border: 1px solid #dee2e6 !important;
-    border-radius: 8px !important;
-  }
-  
-  [data-theme="light"] .projects-highlight::before,
-  [data-theme="dark"] .projects-highlight::before {
-    display: none !important;
-  }
-  
-  /* Optimize neonbox styling for print */
-  .neonbox,
-  [data-theme="light"] .neonbox {
-    box-shadow: none !important;
-    border: 1px solid #dee2e6 !important;
-    background: #f8f9fa !important;
-  }
-  
-  [data-theme="light"] .neonbox::before {
-    display: none !important;
-  }
-  
-  /* Remove interactive elements */
-  .top-right-buttons,
-  #toggle,
-  #lang-button,
-  #print-btn,
-  .lang-dropdown {
-    display: none !important;
-  }
-  
-  /* Optimize typography for print - Two-column friendly */
-  ul li,
-  [data-theme="light"] ul li,
-  [data-theme="dark"] ul li {
-    margin-bottom: 0.3rem !important;
-    font-size: 9pt !important;
-    line-height: 1.2 !important;
-  }
-  
-  /* Nested lists optimization */
-  ul ul li {
-    margin-bottom: 0.2rem !important;
-    font-size: 8.5pt !important;
-  }
-  
-  /* Ensure proper page breaks */
-  .header-section,
-  .contact-section,
-  .profile-section,
-  .skills-section,
-  .languages-section,
-  .experiences-section {
-    page-break-inside: avoid;
-  }
-  
-  /* Optimize header section */
-  .header-section {
-    margin-bottom: 1.5rem !important;
-  }
+
+    html,
+    body {
+        background: #fff !important;
+        color: #2c3e50 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-size: 10pt !important;
+        line-height: 1.35 !important;
+    }
+
+    /* Grille d’impression : 
+     R1: header (full)
+     R2: contact (col1) + profil (col2)
+     R3: skills (col1) + languages (col2)
+     R4: projects (full)
+     R5: experiences (full)
+  */
+    .container {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto auto auto auto auto !important;
+        gap: 10pt 14pt !important;
+        align-items: stretch !important;
+        /* étire les items pour remplir la hauteur de piste */
+        max-width: none !important;
+        padding: 0 !important;
+    }
+
+    .header-section {
+        grid-column: 1 / -1 !important;
+        grid-row: 1 !important;
+    }
+
+    .contact-section {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        align-self: stretch !important;
+    }
+
+    .profile-section {
+        grid-column: 2 !important;
+        grid-row: 2 !important;
+        align-self: stretch !important;
+    }
+
+    .skills-section {
+        grid-column: 1 !important;
+        grid-row: 3 !important;
+        align-self: stretch !important;
+    }
+
+    .languages-section {
+        grid-column: 2 !important;
+        grid-row: 3 !important;
+        align-self: stretch !important;
+    }
+
+    .projects-highlight {
+        grid-column: 1 / -1 !important;
+        grid-row: 4 !important;
+    }
+
+    .experiences-section {
+        grid-column: 1 / -1 !important;
+        grid-row: 5 !important;
+    }
+
+    /* IMPORTANT : supprimer les min-heights qui empêchent l’égalisation */
+    .contact-section,
+    .profile-section,
+    .skills-section,
+    .languages-section {
+        min-height: unset !important;
+    }
+
+    /* Faire “remplir la cellule” aux boîtes internes pour obtenir des hauteurs égales */
+    .contact-section .neonbox,
+    .profile-section .neonbox,
+    .skills-section .neonbox,
+    .languages-section .neonbox {
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .contact-section .section,
+    .profile-section .section,
+    .skills-section .section,
+    .languages-section .section {
+        flex: 1 1 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* Empêcher les coupures “moches” */
+    .header-section,
+    .contact-section,
+    .profile-section,
+    .skills-section,
+    .languages-section,
+    .projects-highlight,
+    .experiences-section,
+    .grid-item,
+    .section,
+    .neonbox {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* Typo compacte & éviter les sauts après titres */
+    h1,
+    h2 {
+        page-break-after: avoid !important;
+        margin: 0 0 0.5rem 0 !important;
+        background: none !important;
+        -webkit-text-fill-color: inherit !important;
+    }
+
+    /* Nettoyage : éléments interactifs */
+    .top-right-buttons,
+    #toggle,
+    #lang-button,
+    #print-btn,
+    .lang-dropdown {
+        display: none !important;
+    }
+
+    /* Palette “light” homogène à l’impression (sécurité) */
+    [data-theme="dark"] html,
+    [data-theme="dark"] body,
+    [data-theme="light"] html,
+    [data-theme="light"] body {
+        background: #fff !important;
+        color: #2c3e50 !important;
+    }
+
+    /* Aspect des “cards” en print pour contraste propre */
+    .neonbox {
+        box-shadow: none !important;
+        border: 1px solid #dee2e6 !important;
+        background: #f8f9fa !important;
+    }
+
+    .projects-highlight::before {
+        display: none !important;
+    }
+
+    .contact-section .neonbox {
+        background: #007BFF !important;
+        /* ou ton bleu personnalisé */
+        color: #fff !important;
+        /* texte lisible */
+        border: none !important;
+        /* optionnel : retirer la bordure grise */
+    }
+
 }
 
 @page {
-  margin-top: 15mm;
-  margin-bottom: 15mm;
-  margin-left: 15mm;
-  margin-right: 15mm;
-  background: white;
-  size: A4;
+    margin: 15mm;
+    size: A4;
 }
 
-/* Alternative: Single-column print layout (comment out two-column rules above and uncomment below) */
-/*
-@media print {
-  .container,
-  [data-theme="light"] .container,
-  [data-theme="dark"] .container {
-    display: block !important;
-    max-width: none !important;
-    grid-template-columns: none !important;
-    gap: 1.2rem !important;
-  }
-  
-  .grid-item,
-  [data-theme="light"] .grid-item,
-  [data-theme="dark"] .grid-item {
-    display: block !important;
-    margin-bottom: 1.5rem !important;
-    page-break-inside: avoid;
-  }
-}
-*/
 
-/* Note: @page rules cannot be scoped to data-theme selectors */
+@page {
+    margin-top: 15mm;
+    margin-bottom: 15mm;
+    margin-left: 15mm;
+    margin-right: 15mm;
+    background: white;
+    size: A4;
+}
