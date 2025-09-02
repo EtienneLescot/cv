@@ -121,62 +121,92 @@ function optimizeCssForPdf(css, themeName) {
   // Add PDF-specific styles
   const pdfOptimizations = `
 /* =================================================================
-   PDF-SPECIFIC OPTIMIZATIONS
+   PDF-SPECIFIC OPTIMIZATIONS - Using same print media queries
    ================================================================= */
+@media print {
+  html, body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    font-size: 10pt !important;
+    line-height: 1.35 !important;
+  }
 
-/* PDF Layout Optimization */
-@media print, screen {
-  /* Force single-column layout for light theme in PDF */
-  [data-theme="light"] .container {
-    display: block !important;
+  /* Grille d’impression :
+     R1: header (full)
+     R2: contact (col1) + profil (col2)
+     R3: skills (col1) + languages (col2)
+     R4: projects (full)
+     R5: experiences (full)
+  */
+  .container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto auto auto auto auto !important;
+    gap: 10pt 14pt !important;
+    align-items: stretch !important;
     max-width: none !important;
+    padding: 0 !important;
   }
-  
-  [data-theme="light"] .grid-item {
-    display: block !important;
-    margin-bottom: 1.5rem !important;
-    page-break-inside: avoid;
+
+  .header-section     { grid-column: 1 / -1 !important; grid-row: 1 !important; }
+  .contact-section    { grid-column: 1 !important; grid-row: 2 !important; align-self: stretch !important; }
+  .profile-section    { grid-column: 2 !important; grid-row: 2 !important; align-self: stretch !important; }
+  .skills-section     { grid-column: 1 !important; grid-row: 3 !important; align-self: stretch !important; }
+  .languages-section  { grid-column: 2 !important; grid-row: 3 !important; align-self: stretch !important; }
+  .projects-highlight { grid-column: 1 / -1 !important; grid-row: 4 !important; }
+  .experiences-section{ grid-column: 1 / -1 !important; grid-row: 5 !important; }
+
+  /* IMPORTANT : supprimer les min-heights qui empêchent l’égalisation */
+  .contact-section,
+  .profile-section,
+  .skills-section,
+  .languages-section {
+    min-height: unset !important;
   }
-  
-  /* PDF-optimized spacing */
-  [data-theme="light"] .section {
-    margin-bottom: 1.2rem !important;
+
+  /* Faire “remplir la cellule” aux boîtes internes */
+  .contact-section .neonbox,
+  .profile-section .neonbox,
+  .skills-section .neonbox,
+  .languages-section .neonbox {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
-  
-  [data-theme="light"] h1 {
-    font-size: 2.2rem !important;
-    margin: 1rem 0 !important;
-    text-align: center !important;
-    page-break-after: avoid;
+
+  .contact-section .section,
+  .profile-section .section,
+  .skills-section .section,
+  .languages-section .section {
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
-  
-  [data-theme="light"] h2 {
-    font-size: 1.4rem !important;
-    margin: 1.5rem 0 0.8rem 0 !important;
-    page-break-after: avoid;
+
+  /* Empêcher les coupures moches */
+  .header-section,
+  .contact-section,
+  .profile-section,
+  .skills-section,
+  .languages-section,
+  .projects-highlight,
+  .experiences-section,
+  .grid-item,
+  .section,
+  .neonbox {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
-  
-  /* Optimize contact section for PDF */
-  [data-theme="light"] .contact-section .neonbox {
-    background: #f8f9fa !important;
-    color: #2c3e50 !important;
-    border: 1px solid #dee2e6 !important;
+
+  /* Typo compacte & éviter les sauts après titres */
+  h1, h2 {
+    page-break-after: avoid !important;
+    margin: 0 0 0.5rem 0 !important;
+    background: none !important;
+    -webkit-text-fill-color: inherit !important;
   }
-  
-  [data-theme="light"] .contact-section a {
-    color: #2980b9 !important;
-  }
-  
-  /* Optimize projects highlight for PDF */
-  [data-theme="light"] .projects-highlight {
-    background: #f8f9fa !important;
-    margin: 1rem 0 !important;
-    padding: 1.2rem !important;
-    border: 1px solid #dee2e6 !important;
-    border-radius: 8px !important;
-  }
-  
-  /* Remove interactive elements */
+
+  /* Nettoyage : éléments interactifs */
   .top-right-buttons,
   #toggle,
   #lang-button,
@@ -184,29 +214,48 @@ function optimizeCssForPdf(css, themeName) {
   .lang-dropdown {
     display: none !important;
   }
-  
-  /* Optimize typography for print */
-  body {
-    font-size: 11pt !important;
-    line-height: 1.4 !important;
+
+  /* -------- PALETTES LIGHT & DARK -------- */
+
+  /* Thème clair */
+  [data-theme="light"] body {
+    background: #fff !important;
+    color: #2c3e50 !important;
   }
-  
-  [data-theme="light"] ul li {
-    margin-bottom: 0.4rem !important;
-    font-size: 10pt !important;
+  [data-theme="light"] .neonbox {
+    background: #f8f9fa !important;
+    border: 1px solid #dee2e6 !important;
+    box-shadow: none !important;
   }
-  
-  /* Dark theme PDF optimizations */
-  [data-theme="dark"] {
-    --bg: #1a1a1a !important;
-    --text: #e0e0e0 !important;
-    --accent: #00d4aa !important;
+  [data-theme="light"] .contact-section .neonbox {
+    background: #007BFF !important;
+    color: #fff !important;
+    border: none !important;
   }
-  
+
+  /* Thème sombre */
+  [data-theme="dark"] body {
+    background: #1a1a1a !important;
+    color: #f8f9fa !important;
+  }
   [data-theme="dark"] .neonbox {
-    border: 1px solid #00d4aa !important;
-    background: #2a2a2a !important;
+    background: #2c2c2c !important;
+    border: 2px solid #444 !important;
+    box-shadow: none !important;
   }
+  [data-theme="dark"] .contact-section .neonbox {
+    background: #007BFF !important;
+    color: #fff !important;
+    border: none !important;
+  }
+
+  /* Projects highlight (barre décorative off en print) */
+  .projects-highlight::before { display: none !important; }
+}
+
+@page {
+  margin: 15mm;
+  size: A4;
 }
 `;
 
@@ -231,47 +280,80 @@ function escapeSpecialChars(str) {
 }
 
 // Main PDF generation function
+// Function to clean HTML content for safe mode
+function cleanHtmlForSafeMode(htmlContent) {
+  // Remove emojis and special characters that might cause issues with CV importers
+  // This regex matches emojis, special symbols, and some unicode characters
+  const safeModeRegex = /[\u{1F600}-\u{1F6FF}]|[\u{1F300}-\u{1F5FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{1F900}-\u{1F9FF}]|[\u{1FA70}-\u{1FAFF}]|[^\x00-\x7F]/gu;
+
+  return htmlContent.replace(safeModeRegex, '');
+}
+
 async function generatePdf() {
-  console.log('🚀 PDF Generator with Language and Theme Selection');
-  console.log('================================================');
+  console.log('PDF Generator with Language, Theme Selection, and Safe Mode');
+  console.log('========================================================');
 
   try {
     // Language selection
-    console.log('\n📋 Available languages:');
+    console.log('\nAvailable languages:');
     CONFIG.supportedLocales.forEach((locale, index) => {
       console.log(`  ${index + 1}. ${locale.toUpperCase()} (${locale === 'fr' ? 'Français' : 'English'})`);
     });
 
-    const langChoice = await askQuestion('\n🌐 Select language (1-2): ');
+    const langChoice = await askQuestion('\nSelect language (1-2): ');
     const selectedLocaleIndex = parseInt(langChoice) - 1;
-    
+
     if (selectedLocaleIndex < 0 || selectedLocaleIndex >= CONFIG.supportedLocales.length) {
-      console.log('❌ Invalid language selection. Using default (fr).');
+      console.log('Invalid language selection. Using default (fr).');
       var selectedLocale = CONFIG.defaultLocale;
     } else {
       var selectedLocale = CONFIG.supportedLocales[selectedLocaleIndex];
     }
 
     // Theme selection
-    console.log('\n🎨 Available themes:');
+    console.log('\nAvailable themes:');
     CONFIG.supportedThemes.forEach((theme, index) => {
       console.log(`  ${index + 1}. ${theme.charAt(0).toUpperCase() + theme.slice(1)}`);
     });
 
-    const themeChoice = await askQuestion('\n🌙 Select theme (1-2): ');
+    const themeChoice = await askQuestion('\nSelect theme (1-2): ');
     const selectedThemeIndex = parseInt(themeChoice) - 1;
-    
+
     if (selectedThemeIndex < 0 || selectedThemeIndex >= CONFIG.supportedThemes.length) {
-      console.log('❌ Invalid theme selection. Using default (dark).');
+      console.log('Invalid theme selection. Using default (dark).');
       var selectedTheme = CONFIG.defaultTheme;
     } else {
       var selectedTheme = CONFIG.supportedThemes[selectedThemeIndex];
     }
 
-    // Output filename
-    const defaultOutput = `cv-${selectedLocale}-${selectedTheme}.pdf`;
-    const outputChoice = await askQuestion(`\n📄 Output filename (default: ${defaultOutput}): `);
-    const outputFile = outputChoice.trim() || defaultOutput;
+    // Safe mode selection
+    const safeModeChoice = await askQuestion('\nEnable safe mode? (Removes emojis/special chars for CV importers) (y/n): ');
+    const isSafeMode = safeModeChoice.trim().toLowerCase() === 'y';
+
+    // Output path and filename
+    const defaultOutputDir = './exports';
+    let defaultOutputFile = `cv-${selectedLocale}-${selectedTheme}.pdf`;
+
+    // Modify filename for safe mode
+    if (isSafeMode) {
+      defaultOutputFile = `cv-${selectedLocale}-${selectedTheme}-safe.pdf`;
+    }
+
+    const defaultOutputPath = path.join(defaultOutputDir, defaultOutputFile);
+
+    // Ensure the exports directory exists
+    if (!fs.existsSync(defaultOutputDir)){
+      fs.mkdirSync(defaultOutputDir, { recursive: true });
+    }
+
+    const outputChoice = await askQuestion(`\nOutput path and filename (default: ${defaultOutputPath}): `);
+    let outputFile = outputChoice.trim() || defaultOutputPath;
+
+    // Create directories if they don't exist
+    const outputDir = path.dirname(outputFile);
+    if (!fs.existsSync(outputDir)){
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
 
     console.log(`\n⚙️  Generating PDF with:`);
     console.log(`   Language: ${selectedLocale.toUpperCase()}`);
@@ -295,10 +377,16 @@ async function generatePdf() {
     const optimizedCss = optimizeCssForPdf(css, selectedTheme);
 
     // Inject optimized CSS into HTML
-    const finalHtml = localizedHtml.replace(
+    let finalHtml = localizedHtml.replace(
       /<link rel="stylesheet" href=".*?">/,
       `<style>${optimizedCss}</style>`
     );
+
+    // Apply safe mode cleaning if enabled
+    if (isSafeMode) {
+      console.log('🛡️  Applying safe mode - removing emojis and special characters');
+      finalHtml = cleanHtmlForSafeMode(finalHtml);
+    }
 
     // Generate PDF
     console.log('\n🔄 Generating PDF...');
