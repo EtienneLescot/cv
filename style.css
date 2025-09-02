@@ -344,12 +344,9 @@ a:hover {
 }
 
 /* Special contact section styling */
-[data-theme="light"] .contact-section {
+[data-theme="light"] .contact-section .neonbox {
     background: var(--contact-bg);
     color: var(--contrast-high);
-    border-radius: 0 25px 25px 0;
-    margin-right: -20px;
-    padding-right: 2rem;
 }
 
 [data-theme="light"] .contact-section::before {
@@ -474,18 +471,8 @@ tr, td, th {
     justify-content: space-between;
 }
 
-/* Enhanced visual hierarchy */
-[data-theme="light"] .contact-section {
-    background: linear-gradient(135deg, var(--contact-bg) 0%, rgba(52, 152, 219, 0.8) 100%);
-    border-radius: 8px 25px 8px 8px;
-    box-shadow: 0 8px 16px rgba(52, 152, 219, 0.15);
-}
 
-[data-theme="light"] .languages-section {
-    border-radius: 8px 8px 25px 8px;
-    border: 2px solid var(--accent);
-    background: linear-gradient(135deg, var(--contrast-high) 0%, var(--light-bg) 100%);
-}
+
 
 /* Grid flow optimization to eliminate white space */
 [data-theme="light"] .grid-item {
@@ -568,11 +555,7 @@ tr, td, th {
         font-size: 2rem;
     }
     
-    /* Optimize sidebar sections for mobile */
-    [data-theme="light"] .contact-section {
-        border-radius: 12px;
-        background: linear-gradient(135deg, var(--contact-bg) 0%, rgba(52, 152, 219, 0.9) 100%);
-    }
+    
     
     [data-theme="light"] .languages-section {
         border-radius: 12px;
@@ -712,10 +695,7 @@ tr, td, th {
     border-radius: 8px;
   }
   
-  [data-theme="light"] .contact-section {
-    background: #e3f2fd !important;
-    color: #1565c0 !important;
-  }
+
   
   /* Hide theme and language toggle buttons in PDF/print */
   #toggle, #lang-button, #print-btn {
