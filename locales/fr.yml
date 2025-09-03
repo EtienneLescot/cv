@@ -42,58 +42,59 @@ skill-7: |
   Stratégie produit, documentation technique, méthode agile
 projects-title: |
   Réalisations notables
-project-3: |
-  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Application kiosque multi‑événements<br>
-  👉 Plateforme SaaS mobile/web en mode kiosque, déployée sous forme d’apps personnalisées multi-instances pour de multiples clients.<br>
-  👉 Architecture complète (front, back, CI/CD), développement fullstack, montée en charge, déploiement, monitoring.<br>
-  👉 Pilotage produit (roadmap, UX/UI, stratégie)
 project-1: |
   <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Plateforme client, call center et IA<br>
-  👉 AWS (Amplify, Lambda, Connect, Bedrock), HubSpot, automatisation de parcours, IA d’analyse des appels (sentiment, performance)<br>
-  👉 Plateforme de réservation en ligne. (Amplify, React)
+  👉 Architecture et développement de la plateforme cloud-native.<br>
+  👉 Mise en place de l’automatisation des parcours clients et intégration IA pour l’analyse des appels.<br>
   👉 Pilotage produit (roadmap, UX/UI, stratégie)
-project-4: |
-  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma  (2017–2019)</a></strong><br/>
-  👉 Plateforme SaaS– Application mobile grand publique multi-pharmacies<br>
-  👉 Pilotage produit (UX/UI)
 project-2: |
-  <strong>Exalbot</strong> (2022–2023) — Plateforme SaaS de chatbot IA cloud-native avec Python et Langchain.<br>
-  👉 Kubernetes, déploiement via ArgoCD, infrastructure Scaleway<br>
-  👉 Pilotage produit (roadmap, UX/UI, stratégie)
+  <strong>Exalbot</strong> (2022–2023) — Plateforme SaaS de chatbot IA cloud-native<br>
+  👉 Conception et développement du chatbot IA avec Python et Langchain.<br>
+  👉 Architecture et Mise en place de l’infrastructure cloud (Kubernetes, ArgoCD, Scaleway) et déploiement multi-environnements.<br>
+  👉 Supervision du projet, optimisation des performances et pilotage produit.
+project-3: |
+  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Application kiosque multi‑événements<br>
+  👉 Conception, Architecture et direction du développement de la plateforme SaaS et des applications mobile et web.<br>
+  👉 Déploiement multi-clients, mise en place CI/CD et monitoring.<br>
+  👉 Pilotage produit, UX/UI et stratégie.
+project-4: |
+  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS mobile grand public<br>
+  👉 Conception, Architecture et développement de la plateforme SaaS et des applications mobile et web.<br>
+  👉 Pilotage produit et coordination des équipes UX/UI.
 experiences-title: |
   Expériences
 exp1-title: |
   DSI — Saraé (2024‑présent)
 exp1-point1: |
-  Architecture du SI client (AWS, HubSpot, Connect, IA Bedrock)
+  Pilotage stratégique de l’architecture du SI et intégration des outils cloud & IA.
 exp1-point2: |
-  Automatisation des processus et plateforme de réservation
+  Supervision de l’automatisation des parcours clients et de la plateforme de réservation.
 exp1-point3: |
-  Développement du système d'analyse IA des appels
+  Gestion de la roadmap technique
 exp2-title: |
   CTO — Exalgo (2022‑2023)
 exp2-point1: |
-  Développement d’un chatbot IA cloud-native (Langchain, Kubernetes)
+  Direction technique d’une plateforme SaaS de chatbot IA cloud-native.
 exp2-point2: |
-  Conception de la chaîne LLM, intégration cloud (Scaleway, ArgoCD)
+  Conception du déploiement, de l’architecture cloud et des bonnes pratiques DevOps.
 exp2-point3: |
-  Optimisation des performances et de la latence
+  Optimisation des performances et de la scalabilité des services.
 exp3-title: |
   CTO — Leni (2019‑2022)
 exp3-point1: |
-  Direction de la R&D sur plusieurs produits SaaS (Mobile-Spot, Youslide, EasyPPT)
+  Leadership R&D sur plusieurs produits SaaS innovants.
 exp3-point2: |
-  Management d'équipe (10 devs), stratégie produit, méthodes agiles
+  Management d’une équipe de 10 développeurs, définition de la stratégie produit.
 exp3-point3: |
-  Architecture logicielle, CI/CD, qualité, documentation
+  Supervision de l’architecture logicielle, CI/CD et qualité technique globale.
 exp4-title: |
   Lead dev & Directeur de projet — Freelance (2007‑2019)
 exp4-point1: |
-  Conception et développement d’apps web & mobiles, serious games et plateformes interactives
+  Conception et réalisation d’applications web & mobiles sur mesure.
 exp4-point2: |
-  Coordination d’équipes pluridisciplinaires (UX/UI, dev, motion design)
+  Coordination d’équipes pluridisciplinaires (dev, UX/UI, motion design).
 exp4-point3: |
-  Réalisation de vidéos, animations et campagnes web
+  Gestion de projets de bout en bout, du brief client à la livraison.
 exp4-point4: |
   Projet sur mesure du brief client à la mise en production
 languages-title: |
