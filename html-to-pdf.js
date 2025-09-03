@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
 const readline = require('readline');
+const yaml = require('yaml');
 
 // Configuration
 const CONFIG = {
@@ -30,8 +31,9 @@ function askQuestion(question) {
 // Load locale data
 function loadLocale(localeName) {
   try {
-    const localePath = path.join(CONFIG.localesPath, `${localeName}.json`);
-    return JSON.parse(fs.readFileSync(localePath, 'utf8'));
+    const yamlPath = path.join(CONFIG.localesPath, `${localeName}.yml`);
+    const yamlContent = fs.readFileSync(yamlPath, 'utf8');
+    return yaml.parse(yamlContent);
   } catch (error) {
     console.error(`Error loading locale ${localeName}:`, error.message);
     return null;
