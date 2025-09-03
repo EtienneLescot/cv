@@ -24,7 +24,7 @@
   "project-3": "<strong><a href=\"https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/\">AppKiosk (2019–2022)</a></strong> — SaaS Multi-event kiosk app <br>👉 Mobile/web kiosk platform deployed as custom apps for multiple clients.<br>👉 Full architecture (front, back, CI/CD), fullstack development, UX, offline mode, scaling, multi-instance deployment via backoffice.<br>👉 Managed a team of 10 developers, supporting 500+ simultaneous events.",
   "project-1": "<strong><a href=\"https://www.sarae.eco/\">Saraé</a> (2024–...) — Cloud native customer Platform and CRM</strong><br>👉 Cloud-native customer management system integrating CRM, call center and AI.<br>👉 AWS (Amplify, Lambda, Connect, Bedrock), HubSpot, journey automation, call analytics AI (sentiment, performance)",
   "project-4": "<strong><a href=\"https://digitecpharma.fr/landing-page-site-et-appli/\">DigitecPharma (2017–2019)</a></strong>&nbsp;SaaS platform– Consumer mobile app for multiple pharmacies - ",
-  "project-2": "<strong>Exalbot (2022–2023)</srtong><br>👉 SaaS cloud-native AI chatbot platform using Python and Langchain.<br>👉 Kubernetes, deployment via ArgoCD, Scaleway infrastructure",
+  "project-2": "<strong>Exalbot (2022–2023)</strong><br>👉 SaaS cloud-native AI chatbot platform using Python and Langchain.<br>👉 Kubernetes, deployment via ArgoCD, Scaleway infrastructure",
   "experiences-title": "Experience",
   "exp1-title": "DSI — Saraé (2024–present)",
   "exp1-point1": "Design of the customer information system (AWS, HubSpot, Connect, Bedrock AI)",
