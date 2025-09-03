@@ -27,9 +27,9 @@ profile-desc: |
 skills-title: |
   Compétences
 skill-1: |
-  Architecture cloud (AWS, Kubernetes, CI/CD, Scaleway)
-skill-2: |
   Leadership technique & pilotage d'équipe
+skill-2: |
+  Architecture cloud (AWS, Kubernetes, CI/CD, Scaleway)
 skill-3: |
   Développement Full‑Stack&nbsp;: Node.js, React, Python
 skill-4: |
@@ -82,7 +82,7 @@ exp2-point3: |
 exp3-title: |
   CTO — Leni (2019‑2022)
 exp3-point1: |
-  Leadership R&D sur plusieurs produits SaaS innovants.
+  Leadership R&D sur plusieurs produits SaaS innovants (MobileSpot, Youslide, EasyPPT).
 exp3-point2: |
   Management d’une équipe de 10 développeurs, définition de la stratégie produit.
 exp3-point3: |
@@ -100,6 +100,6 @@ exp4-point4: |
 languages-title: |
   Langues
 lang-fr: |
-  Français (natif)
+  Français - Natif
 lang-en: |
-  Anglais (professionnel)
+  Anglais - B2 Niveau avancé 

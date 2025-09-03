@@ -1,0 +1,101 @@
+title: |
+  Etienne Lescot – CV
+keywords: |
+  Etienne Lescot, CV, CTO, Full Stack, Cloud, AI, AWS, Kubernetes, Node.js, React, Python
+lang-label: |
+  Select language
+theme-label: |
+  Change theme
+download-label: |
+  Download CV
+tagline: |
+  CTO • Full Stack • Cloud & AI
+name: |
+  Etienne Lescot
+contact-title: |
+  Contact
+contact-phone: |
+  Phone: +33 6 80 51 21 20
+contact-email: |
+  Email: <a href="mailto:etiennelescot@gmail.com">etiennelescot@gmail.com</a>
+contact-linkedin: |
+  LinkedIn: <a href="https://www.linkedin.com/in/etienne-lescot-69402019">linkedin.com/in/etienne-lescot-69402019</a>
+profile-title: |
+  Profile
+profile-desc: |
+  CTO with over 15 years of experience in designing SaaS platforms, technical leadership, and managing cloud & AI architectures. I work at the intersection of product strategy, technical performance, and user experience.
+skills-title: |
+  Skills
+skill-1: |
+  Technical leadership & team management
+skill-2: |
+  Cloud architecture (AWS, Kubernetes, CI/CD, Scaleway)
+skill-3: |
+  Full-Stack development: Node.js, React, Python
+skill-4: |
+  AI integration (LLM, AWS Bedrock, Langchain)
+skill-5: |
+  User experience (UX/UI, mobile, responsive)
+skill-6: |
+  CI/CD, DevOps, monitoring, multi-instance environment
+skill-7: |
+  Product strategy, technical documentation, agile methodology
+projects-title: |
+  Notable Achievements
+project-1: |
+  <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Client platform, call center and AI<br>
+  👉 Architecture and development of the cloud-native platform.<br>
+  👉 Implementation of client journey automation and AI integration for call analysis.<br>
+  👉 Product management (roadmap, UX/UI, strategy)
+project-2: |
+  <strong>Exalbot</strong> (2022–2023) — Cloud-native SaaS AI chatbot platform<br>
+  👉 Design and development of the AI chatbot with Python and Langchain.<br>
+  👉 Architecture and implementation of cloud infrastructure (Kubernetes, ArgoCD, Scaleway) and multi-environment deployment.<br>
+  👉 Project supervision, performance optimization and product management.
+project-3: |
+  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Multi-event kiosk application<br>
+  👉 Design, architecture and leadership of the SaaS platform and mobile and web applications.<br>
+  👉 Multi-client deployment, CI/CD setup and monitoring.<br>
+  👉 Product management, UX/UI and strategy.
+project-4: |
+  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Public SaaS mobile platform<br>
+  👉 Design, architecture and development of the SaaS platform and mobile and web applications.<br>
+  👉 Product management and coordination of UX/UI teams.
+experiences-title: |
+  Experiences
+exp1-title: |
+  CIO — Saraé (2024-present)
+exp1-point1: |
+  Strategic management of IT architecture and integration of cloud & AI tools.
+exp1-point2: |
+  Supervision of client journey automation and booking platform.
+exp1-point3: |
+  Management of the technical roadmap
+exp2-title: |
+  CTO — Exalgo (2022-2023)
+exp2-point1: |
+  Technical leadership of a cloud-native SaaS AI chatbot platform.
+exp2-point2: |
+  Design of deployment, cloud architecture and DevOps best practices.
+exp2-point3: |
+  Optimization of service performance and scalability.
+exp3-title: |
+  CTO — Leni (2019-2022)
+exp3-point1: |
+  R&D leadership on several innovative SaaS products (MobileSpot, Youslide, EasyPPT).
+exp3-point2: |
+  Management of a team of 10 developers, definition of product strategy.
+exp3-point3: |
+  Supervision of software architecture, CI/CD and overall technical quality.
+exp4-title: |
+  Lead dev & Project Manager — Freelance (2007-2019)
+exp4-point1: |
+  Design and implementation of custom web & mobile applications.
+exp4-point2: |
+  Coordination of multidisciplinary teams (dev, UX/UI, motion design).
+exp4-point3: |
+  End-to-end project management, from client brief to delivery.
+exp4-point4: |
+  Custom project from client brief to production
+languages-title: |
+  Languages
