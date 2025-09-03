@@ -311,7 +311,13 @@ ul li {
     color: var(--accent);
     font-weight: bold;
 }
-
+[data-theme="light"] .contact-section ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #ffffff;
+    font-weight: bold;
+}
 /* Nested lists in light theme */
 ul ul {
     margin-top: 0.5rem;
