@@ -1,0 +1,105 @@
+title: |
+  Etienne Lescot – Resume
+keywords: |
+  Etienne Lescot, CV, CTO, Full Stack, Cloud, IA, AWS, Kubernetes, Node.js, React, Python
+lang-label: |
+  Select language
+theme-label: |
+  Change mode
+download-label: |
+  Download CV
+tagline: |
+  CTO • Full Stack • Cloud & AI
+name: |
+  Etienne Lescot
+contact-title: |
+  Contact
+contact-phone: |
+  Phone: +33 6 80 51 21 20
+contact-email: |
+  Email: <a href="mailto:etiennelescot@gmail.com">etiennelescot@gmail.com</a>
+contact-linkedin: |
+  LinkedIn: <a href="https://www.linkedin.com/in/etienne-lescot-69402019">linkedin.com/in/etienne-lescot-69402019</a>
+profile-title: |
+  Profile
+profile-desc: |
+  CTO with over 15 years of experience designing SaaS platforms, leading technical teams and steering cloud & AI architectures. I operate at the crossroads of product strategy, technical performance and user experience, managing teams of 10+ developers and architectures.
+skills-title: |
+  Skills
+skill-1: |
+  Cloud architecture (AWS, Kubernetes, CI/CD, Scaleway)
+skill-2: |
+  Technical leadership & team management
+skill-3: |
+  Full-Stack development: Node.js, React, Python
+skill-4: |
+  AI integration (LLM, AWS Bedrock, Langchain)
+skill-5: |
+  User experience (UX/UI, mobile, responsive)
+skill-6: |
+  CI/CD, DevOps, monitoring, multi-instance environments
+skill-7: |
+  Product strategy, technical documentation, agile methods
+projects-title: |
+  Notable projects
+project-3: |
+  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk (2019–2022)</a></strong> — SaaS Multi-event kiosk app <br>
+  👉 Mobile/web kiosk platform deployed as custom apps multi-instance for multiple clients.<br>
+  👉 Full architecture (front, back, CI/CD), fullstack development, scaling, deployment, monitoring<br>
+  👉 Product leadership (roadmap, UX/UI, strategy)
+project-1: |
+  <strong><a href="https://www.sarae.eco/">Saraé</a> (2024–...) — Cloud native customer Platform and CRM</strong><br>
+  👉 Cloud-native customer management system integrating CRM, call center and AI.<br>
+  👉 AWS (Amplify, Lambda, Connect, Bedrock), HubSpot, journey automation, call analytics AI (sentiment, performance)<br>
+  👉 Product leadership (roadmap, UX/UI, strategy)
+project-4: |
+  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma (2017–2019)</a></strong><br>
+  👉 SaaS platform– Consumer mobile app for multiple pharmacies -<br>
+  👉 Product leadership (UX/UI)
+project-2: |
+  <strong>Exalbot (2022–2023)</strong><br>
+  👉 SaaS cloud-native AI chatbot platform using Python and Langchain.<br>
+  👉 Kubernetes, deployment via ArgoCD, Scaleway infrastructure<br>
+  👉 Product leadership (roadmap, UX/UI, strategy)
+experiences-title: |
+  Experience
+exp1-title: |
+  DSI — Saraé (2024–present)
+exp1-point1: |
+  Design of the customer information system (AWS, HubSpot, Connect, Bedrock AI)
+exp1-point2: |
+  Process automation and booking platform
+exp1-point3: |
+  Development of call analysis AI system
+exp2-title: |
+  CTO — Exalgo (2022–2023)
+exp2-point1: |
+  Development of a cloud-native AI chatbot (Langchain, Kubernetes)
+exp2-point2: |
+  Design of the LLM chain, cloud integration (Scaleway, ArgoCD)
+exp2-point3: |
+  Performance and latency optimization
+exp3-title: |
+  CTO — Leni (2019–2022)
+exp3-point1: |
+  Led R&D on several SaaS products (Mobile-Spot, Youslide, EasyPPT) - 3 successful product launches
+exp3-point2: |
+  Team management (10 devs), product strategy, agile methods
+exp3-point3: |
+  Software architecture, CI/CD, quality, documentation
+exp4-title: |
+  Lead dev & Project director — Freelance (2007–2019)
+exp4-point1: |
+  Design and development of web & mobile apps, serious games and interactive platforms
+exp4-point2: |
+  Coordination of multidisciplinary teams (UX/UI, dev, motion design)
+exp4-point3: |
+  Creation of videos, animations and web campaigns
+exp4-point4: |
+  Bespoke projects from client brief to production
+languages-title: |
+  Languages
+lang-fr: |
+  French (native)
+lang-en: |
+  English (professional)

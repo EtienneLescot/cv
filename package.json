@@ -18,9 +18,10 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "puppeteer": "^24.10.0",
+    "glob": "^11.0.0",
     "jsdom": "^25.0.1",
     "prettier": "^3.3.3",
-    "glob": "^11.0.0"
+    "puppeteer": "^24.10.0",
+    "yaml": "^2.8.1"
   }
 }

@@ -6,7 +6,7 @@ Cette page présente mon curriculum vitæ dans un style rétro des années 90. E
 - Basculer entre mode sombre et clair avec le bouton en haut à droite.
 - Langue détectée automatiquement (fr/en) avec un bouton pour changer.
 - CSS séparée dans `style.css` pour faciliter les modifications.
-- Support multilingue avec fichiers de traduction dans `locales/` (français et anglais).
+- Support multilingue avec fichiers de traduction dans `locales/` (français et anglais) au format YAML pour une meilleure lisibilité.
 
 ## Utilisation
 Clonez le dépôt puis ouvrez la page :
@@ -50,9 +50,11 @@ Cela générera un fichier PDF nommé `cv.pdf` ou `cv-safe.pdf` avec le style ap
 ## Ajout de nouvelles langues
 Pour ajouter une nouvelle langue :
 
-1. Créez un fichier JSON dans le dossier `locales/` (par exemple `es.json` pour l'espagnol)
-2. Copiez le contenu de `locales/en.json` et traduisez les valeurs
+1. Créez un fichier YAML dans le dossier `locales/` (par exemple `es.yml` pour l'espagnol)
+2. Copiez le contenu de `locales/en.yml` et traduisez les valeurs
 3. La langue sera automatiquement détectée et disponible via le bouton de changement de langue
+
+Le format YAML permet une meilleure lisibilité et la possibilité d'ajouter des commentaires dans les fichiers de traduction.
 
 ## Génération de fichiers statiques multilingues
 

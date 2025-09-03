@@ -3,12 +3,14 @@
  * Static Site Generator for Multi-Locale Support
  * Uses proper DOM parsing to handle complex HTML content with nested tags
  * Generates static HTML files for each locale
+ * Supports both JSON and YAML localization files
  */
 
 const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
 const glob = require('glob');
+const yaml = require('yaml');
 
 // Configuration
 const CONFIG = {
@@ -21,23 +23,60 @@ const CONFIG = {
 
 /**
  * Load and validate locale files
+ * Supports both JSON and YAML formats
+ * YAML files take precedence over JSON files
  */
 function loadLocales() {
-  const localeFiles = glob.sync(`${CONFIG.localesPath}/*.json`);
   const locales = {};
 
-  localeFiles.forEach(filePath => {
+  // First, load all YAML files
+  const yamlPatterns = [
+    `${CONFIG.localesPath}/*.yml`,
+    `${CONFIG.localesPath}/*.yaml`
+  ];
+
+  yamlPatterns.forEach(pattern => {
+    const localeFiles = glob.sync(pattern);
+    console.log(`Searching YAML files with pattern ${pattern}: ${localeFiles.length} files found`);
+
+    localeFiles.forEach(filePath => {
+      try {
+        const ext = path.extname(filePath);
+        const localeName = path.basename(filePath, ext);
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const localeData = yaml.parse(fileContent);
+
+        locales[localeName] = localeData;
+        console.log(`✓ Loaded locale: ${localeName} (${Object.keys(localeData).length} keys) from ${path.basename(filePath)}`);
+      } catch (error) {
+        console.error(`✗ Error loading locale file ${filePath}:`, error.message);
+        process.exit(1);
+      }
+    });
+  });
+
+  // Then, load JSON files only if no YAML file exists for that locale
+  const jsonPattern = `${CONFIG.localesPath}/*.json`;
+  const jsonFiles = glob.sync(jsonPattern);
+  console.log(`Searching JSON files with pattern ${jsonPattern}: ${jsonFiles.length} files found`);
+
+  jsonFiles.forEach(filePath => {
     try {
       const localeName = path.basename(filePath, '.json');
-      const localeData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-      locales[localeName] = localeData;
-      console.log(`✓ Loaded locale: ${localeName} (${Object.keys(localeData).length} keys)`);
+
+      // Only load JSON if no YAML file was already loaded for this locale
+      if (!locales[localeName]) {
+        const localeData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        locales[localeName] = localeData;
+        console.log(`✓ Loaded locale: ${localeName} (${Object.keys(localeData).length} keys) from ${path.basename(filePath)}`);
+      }
     } catch (error) {
       console.error(`✗ Error loading locale file ${filePath}:`, error.message);
       process.exit(1);
     }
   });
 
+  console.log(`Available locales: ${Object.keys(locales).join(', ')}`);
   return locales;
 }
 
