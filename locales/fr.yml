@@ -64,7 +64,8 @@ project-4: |
 experiences-title: |
   Expériences
 exp1-title: |
-  DSI — Saraé (2024‑présent)
+  DSI — Saraé (2024‑présent)<br>
+  Secteur : Architecture
 exp1-point1: |
   Pilotage stratégique de l’architecture du SI et intégration des outils cloud & IA.
 exp1-point2: |
@@ -72,7 +73,8 @@ exp1-point2: |
 exp1-point3: |
   Gestion de la roadmap technique
 exp2-title: |
-  CTO — Exalgo (2022‑2023)
+  CTO — Exalgo (2022‑2023)<br>
+  Secteur : Développement logiciel & Intelligence artificielle
 exp2-point1: |
   Direction technique d’une plateforme SaaS de chatbot IA cloud-native.
 exp2-point2: |
@@ -80,7 +82,8 @@ exp2-point2: |
 exp2-point3: |
   Optimisation des performances et de la scalabilité des services.
 exp3-title: |
-  CTO — Leni (2019‑2022)
+  CTO — Leni (2019‑2022)<br>
+  Secteur : Technologies pour l’événementiel
 exp3-point1: |
   Leadership R&D sur plusieurs produits SaaS innovants (MobileSpot, Youslide, EasyPPT).
 exp3-point2: |
@@ -88,7 +91,8 @@ exp3-point2: |
 exp3-point3: |
   Supervision de l’architecture logicielle, CI/CD et qualité technique globale.
 exp4-title: |
-  Lead dev & Directeur de projet — Freelance (2007‑2019)
+  Lead dev & Directeur de projet — Freelance (2007‑2019)<br>
+  Secteurs : Assurance, Luxe, Automobile, Transport, Agences, Architecture, …
 exp4-point1: |
   Conception et réalisation d’applications web & mobiles sur mesure.
 exp4-point2: |

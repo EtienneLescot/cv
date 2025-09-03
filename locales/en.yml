@@ -65,6 +65,8 @@ experiences-title: |
   Experiences
 exp1-title: |
   CIO — Saraé (2024-present)
+exp1-sector: |
+  Sector: Architecture
 exp1-point1: |
   Strategic management of IT architecture and integration of cloud & AI tools.
 exp1-point2: |
@@ -73,6 +75,8 @@ exp1-point3: |
   Management of the technical roadmap
 exp2-title: |
   CTO — Exalgo (2022-2023)
+exp2-sector: |
+  Sector: Software Development & Artificial Intelligence
 exp2-point1: |
   Technical leadership of a cloud-native SaaS AI chatbot platform.
 exp2-point2: |
@@ -81,6 +85,8 @@ exp2-point3: |
   Optimization of service performance and scalability.
 exp3-title: |
   CTO — Leni (2019-2022)
+exp3-sector: |
+  Sector: Event Technology
 exp3-point1: |
   R&D leadership on several innovative SaaS products (MobileSpot, Youslide, EasyPPT).
 exp3-point2: |
@@ -89,6 +95,8 @@ exp3-point3: |
   Supervision of software architecture, CI/CD and overall technical quality.
 exp4-title: |
   Lead dev & Project Manager — Freelance (2007-2019)
+exp4-sector: |
+  Sectors: Insurance, Luxury, Automotive, Transport, Agencies, Architecture, …
 exp4-point1: |
   Design and implementation of custom web & mobile applications.
 exp4-point2: |
