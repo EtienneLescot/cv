@@ -436,25 +436,22 @@ th {
     align-self: start;
 }
 
-/* Row 2: Combined Languages & Interests (1×1) - Grid Position 3 */
-.languages-interests-section,
+/* Colonne de droite (Langues + Intérêts) : utiliser grid */
 .languages-interests-section {
-    grid-column: span 1;
-    grid-row: span 1;
+    display: grid;
+    grid-template-rows: 1fr 1fr; /* Langues en haut, Intérêts en bas */
+    gap: 1rem;
+    height: 100%; /* occupe toute la cellule grid */
+}
+
+/* Chaque sous-section remplit sa cellule */
+.languages-interests-section .languages-section,
+.languages-interests-section .interests-section {
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    align-self: start;
-    display: flex;
-    flex-direction: column;
 }
 
-
-
-.languages-interests-section .languages-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
 
 
 .languages-section ul {
@@ -850,17 +847,14 @@ th {
     }
 
     .languages-interests-section {
-        grid-column: 2 !important;
-        grid-row: 3 !important;
-        align-self: stretch !important;
+        display: grid !important;
+        grid-template-rows: 1fr 1fr !important;
+        height: 100% !important;
     }
 
-    .languages-interests-section .languages-section {
-        align-self: stretch !important;
-    }
-
+    .languages-interests-section .languages-section,
     .languages-interests-section .interests-section {
-        align-self: stretch !important;
+        height: 100% !important;
     }
 
     .projects-highlight {
