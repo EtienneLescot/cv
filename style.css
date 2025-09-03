@@ -451,6 +451,15 @@ th {
     flex-direction: column;
 }
 
+.languages-section li, .interests-section li {
+    margin-bottom: 0 !important;
+}
+.languages-section h2, .interests-section h2{
+    margin-bottom: 0 !important;;
+}
+.languages-section .section {
+    margin-bottom: 0 !important;
+}
 [data-theme="light"] .languages-interests-section .languages-section,
 .languages-interests-section .languages-section {
     flex: 1;
