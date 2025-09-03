@@ -448,6 +448,7 @@ th {
 }
 
 
+
 .languages-interests-section .languages-section {
     flex: 1;
     display: flex;
@@ -476,7 +477,7 @@ th {
 .projects-highlight {
     grid-column: 1 / -1;
     background: #2C2C2C;
-    margin: 1rem 0;
+   
     padding: 2.5rem;
     border: 1px solid #404040;
     border-radius: 0;
@@ -584,7 +585,7 @@ th {
     }
 
     .projects-highlight {
-        margin: 1rem -0.5rem;
+
         padding: 2rem;
     }
 
@@ -625,18 +626,23 @@ th {
         min-height: auto;
     }
 
+    /* Reorder sections for mobile - languages and interests go last */
+    .contact-section { order: 1; }
+    .profile-section { order: 2; }
+    .skills-section { order: 3; }
+    .projects-highlight { order: 4; }
+    .experiences-section { order: 5; }
+    .languages-interests-section { order: 6; }
+
+
     .projects-highlight {
-        margin: 1rem 0;
+
         padding: 1.5rem;
-        border-radius: 12px;
+
     }
 
     .projects-highlight h2 {
         font-size: 2rem;
-    }
-
-    .languages-interests-section {
-        border-radius: 12px;
     }
 
 }
