@@ -70,7 +70,7 @@ body {
 /* Dark theme styling (default) */
 h1 {
     color: var(--accent);
-    text-align: center;
+    text-align: left;
     position: relative;
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -79,26 +79,12 @@ h1 {
 /* Light theme - Creative header styling */
 [data-theme="light"] h1 {
     font-family: var(--font-heading);
-    font-size: 3.5rem;
-    font-weight: 700;
-    text-align: left;
+
     color: var(--text);
-    margin: 2rem 0 1rem 0;
-    background: linear-gradient(135deg, var(--accent), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.02em;
+   
 }
 
-[data-theme="light"] h1 span {
-    display: block;
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: var(--muted);
-    margin-top: 0.5rem;
-    -webkit-text-fill-color: var(--muted);
-}
+
 
 /* =================================================================
    BUTTONS AND NAVIGATION
@@ -492,13 +478,7 @@ th {
     background: linear-gradient(90deg, var(--accent) 0%, var(--secondary) 50%, var(--highlight) 100%);
 }
 
-[data-theme="light"] .projects-highlight h2 {
-    color: var(--accent);
-    font-size: 2.4rem;
-    text-align: center;
-    margin-bottom: 2rem;
-    padding-left: 0;
-}
+
 
 [data-theme="light"] .projects-highlight h2::before {
     display: none;
@@ -803,7 +783,9 @@ th {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
         font-size: 10pt !important;
-        line-height: 1.35 !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     /* Grille d’impression : 
@@ -913,11 +895,30 @@ th {
     h1,
     h2 {
         page-break-after: avoid !important;
-        margin: 0 0 0.5rem 0 !important;
+        margin: 0 !important;
         background: none !important;
         -webkit-text-fill-color: inherit !important;
     }
-
+    h2 {
+        font-size: 1.5rem !important;
+    }
+    .container {
+        gap: 1rem !important;
+    }
+    .section{
+        margin: 0 !important;
+        padding: 1rem !important;
+    }
+    .skills-section, .languages-interests-section{
+        margin-top: 30px;
+    }
+    .header-section{
+        margin-top: 100px;
+        margin-bottom: 0;
+    }
+    .header-section h1{
+        margin-bottom: 50px !important;
+    }
     /* Nettoyage : éléments interactifs */
     .top-right-buttons,
     #toggle,
