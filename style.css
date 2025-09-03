@@ -440,8 +440,20 @@ th {
     align-self: start;
 }
 
+/* Row 2: Languages (1×1) + Interests (1×1) side by side */
 [data-theme="light"] .languages-section,
 .languages-section {
+    grid-column: span 1;
+    grid-row: span 1;
+    height: fit-content;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+[data-theme="light"] .interests-section,
+.interests-section {
     grid-column: span 1;
     grid-row: span 1;
     height: fit-content;
@@ -820,6 +832,7 @@ th {
 
   .skills-section     { grid-column: 1 !important; grid-row: 3 !important; align-self: stretch !important; }
   .languages-section  { grid-column: 2 !important; grid-row: 3 !important; align-self: stretch !important; }
+  .interests-section  { grid-column: 2 !important; grid-row: 4 !important; align-self: stretch !important; }
 
   .projects-highlight { grid-column: 1 / -1 !important; grid-row: 4 !important; }
   .experiences-section{ grid-column: 1 / -1 !important; grid-row: 5 !important; }
