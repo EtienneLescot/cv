@@ -33,6 +33,25 @@
     --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
 }
+/* Header styling */
+.header-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.header-emoji {
+    margin-right: 8px;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-text .tagline {
+    font-size: 0.8rem;
+    font-weight: normal;
+}
 
 /* Button container for alignment */
 .button-container {
@@ -250,16 +269,19 @@ h2 {
 .section {
     margin-bottom: 30px;
     background-color: #2C2C2C;
-    color: #B0B0B1;
+    color: #6d6d6d;
     border: 1px solid #404040;
     border-radius: 0;
     margin-bottom: 2.5rem;
     position: relative;
 }
 
+[data-theme="dark"] .section {
+    color: #B0B0B1;
+}
+
 /* Light theme - Asymmetric section layouts */
 [data-theme="light"] .section {
-
     color: #6d6d6d;
 }
 
@@ -398,7 +420,6 @@ th {
 /* Header - Full Width */
 .header-section {
     grid-column: 1 / -1;
-    margin-bottom: -40px;
 }
 
 /* Row 1: Contact (1×1) + Profil (2×1) */
@@ -665,32 +686,14 @@ th {
 @media (max-width: 600px) {
 
     /* Dark theme mobile adjustments */
-    h1,
-    [data-theme="dark"] h1 {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: static;
-        gap: 8px;
-    }
-
-    /* Light theme mobile adjustments */
-    [data-theme="light"] h1 {
+    h1 {
         font-size: 2.2rem;
-        text-align: center;
+        text-align: left;
         margin: 1rem 0;
         line-height: 1.2;
     }
 
-    [data-theme="dark"] h1 {
-        font-size: 2.2rem;
-        text-align: center;
-        margin: 1rem 0;
-        line-height: 1.2;
-    }
-
-    [data-theme="light"] h2,
-    [data-theme="dark"] h2 {
+    h2 {
         font-size: 1.4rem;
         margin: 1.5rem 0 1rem 0;
         padding-left: 1rem;
