@@ -440,24 +440,28 @@ th {
     align-self: start;
 }
 
-/* Row 2: Languages (1×1) + Interests (1×1) side by side */
-[data-theme="light"] .languages-section,
-.languages-section {
+/* Row 2: Combined Languages & Interests (1×1) - Grid Position 3 */
+[data-theme="light"] .languages-interests-section,
+.languages-interests-section {
     grid-column: span 1;
     grid-row: span 1;
-    height: fit-content;
+    height: 100%;
     align-self: start;
+    display: flex;
+    flex-direction: column;
+}
+
+[data-theme="light"] .languages-interests-section .languages-section,
+.languages-interests-section .languages-section {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-[data-theme="light"] .interests-section,
-.interests-section {
-    grid-column: span 1;
-    grid-row: span 1;
-    height: fit-content;
-    align-self: start;
+[data-theme="light"] .languages-interests-section .interests-section,
+.languages-interests-section .interests-section {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -591,8 +595,8 @@ th {
         grid-column: span 1;
     }
 
-    [data-theme="light"] .languages-section,
-    [data-theme="dark"] .languages-section {
+    [data-theme="light"] .languages-interests-section,
+    [data-theme="dark"] .languages-interests-section {
         grid-column: span 1;
     }
 
@@ -621,8 +625,8 @@ th {
     [data-theme="dark"] .profile-section,
     [data-theme="light"] .skills-section,
     [data-theme="dark"] .skills-section,
-    [data-theme="light"] .languages-section,
-    [data-theme="dark"] .languages-section,
+    [data-theme="light"] .languages-interests-section,
+    [data-theme="dark"] .languages-interests-section,
     [data-theme="light"] .experiences-section,
     [data-theme="dark"] .experiences-section {
         grid-column: span 1;
@@ -641,8 +645,8 @@ th {
         font-size: 2rem;
     }
 
-    [data-theme="light"] .languages-section,
-    [data-theme="dark"] .languages-section {
+    [data-theme="light"] .languages-interests-section,
+    [data-theme="dark"] .languages-interests-section {
         border-radius: 12px;
     }
 }
@@ -662,7 +666,7 @@ th {
     [data-theme="light"] .contact-section,
     [data-theme="light"] .profile-section,
     [data-theme="light"] .skills-section,
-    [data-theme="light"] .languages-section,
+    [data-theme="light"] .languages-interests-section,
     [data-theme="light"] .experiences-section {
         grid-column: span 1;
         min-height: auto;
@@ -680,7 +684,7 @@ th {
 
 
 
-    [data-theme="light"] .languages-section {
+    [data-theme="light"] .languages-interests-section {
         border-radius: 12px;
     }
 }
@@ -831,8 +835,9 @@ th {
   .profile-section    { grid-column: 2 !important; grid-row: 2 !important; align-self: stretch !important; }
 
   .skills-section     { grid-column: 1 !important; grid-row: 3 !important; align-self: stretch !important; }
-  .languages-section  { grid-column: 2 !important; grid-row: 3 !important; align-self: stretch !important; }
-  .interests-section  { grid-column: 2 !important; grid-row: 4 !important; align-self: stretch !important; }
+  .languages-interests-section  { grid-column: 2 !important; grid-row: 3 !important; align-self: stretch !important; }
+  .languages-interests-section .languages-section  { align-self: stretch !important; }
+  .languages-interests-section .interests-section  { align-self: stretch !important; }
 
   .projects-highlight { grid-column: 1 / -1 !important; grid-row: 4 !important; }
   .experiences-section{ grid-column: 1 / -1 !important; grid-row: 5 !important; }
@@ -841,7 +846,7 @@ th {
   .contact-section,
   .profile-section,
   .skills-section,
-  .languages-section {
+  .languages-interests-section {
     min-height: unset !important;
   }
 
@@ -849,7 +854,7 @@ th {
   .contact-section .neonbox,
   .profile-section .neonbox,
   .skills-section .neonbox,
-  .languages-section .neonbox {
+  .languages-interests-section .neonbox {
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
@@ -858,7 +863,7 @@ th {
   .contact-section .section,
   .profile-section .section,
   .skills-section .section,
-  .languages-section .section {
+  .languages-interests-section .section {
     flex: 1 1 auto !important;
     display: flex !important;
     flex-direction: column !important;
@@ -869,7 +874,7 @@ th {
   .contact-section,
   .profile-section,
   .skills-section,
-  .languages-section,
+  .languages-interests-section,
   .projects-highlight,
   .experiences-section,
   .grid-item,
