@@ -267,12 +267,13 @@ h2 {
     color: #B0B0B1;
     border: 1px solid #404040;
     border-radius: 0;
+    margin-bottom: 2.5rem;
+    position: relative;
 }
 
 /* Light theme - Asymmetric section layouts */
 [data-theme="light"] .section {
-    margin-bottom: 2.5rem;
-    position: relative;
+
     color: #6d6d6d;
 }
 
@@ -283,13 +284,13 @@ ul {
 }
 
 /* Light theme lists - Modern bullet points */
-[data-theme="light"] ul {
+ul {
     list-style: none;
     margin-left: 0;
     padding-left: 1.5rem;
 }
 
-[data-theme="light"] ul li {
+ul li {
     position: relative;
     margin-bottom: 0.8rem;
     padding-left: 1rem;
@@ -304,7 +305,7 @@ ul {
 }
 
 /* Nested lists in light theme */
-[data-theme="light"] ul ul {
+ul ul {
     margin-top: 0.5rem;
     padding-left: 1rem;
 }
@@ -399,7 +400,6 @@ th {
    DYNAMIC ALTERNATING GRID LAYOUT FOR LIGHT THEME
    ================================================================= */
 
-[data-theme="light"] .container,
 .container {
     max-width: 1200px;
     display: grid;
@@ -410,14 +410,12 @@ th {
 }
 
 /* Header - Full Width */
-[data-theme="light"] .header-section,
 .header-section {
     grid-column: 1 / -1;
     margin-bottom: -40px;
 }
 
 /* Row 1: Contact (1×1) + Profil (2×1) */
-[data-theme="light"] .contact-section,
 .contact-section {
     grid-column: span 1;
     grid-row: span 1;
@@ -425,7 +423,6 @@ th {
     align-self: start;
 }
 
-[data-theme="light"] .profile-section,
 .profile-section {
     grid-column: span 2;
     grid-row: span 1;
@@ -433,7 +430,6 @@ th {
 }
 
 /* Row 2: Compétences (2×1) + Langues (1×1) */
-[data-theme="light"] .skills-section,
 .skills-section {
     grid-column: span 2;
     grid-row: span 1;
@@ -441,7 +437,7 @@ th {
 }
 
 /* Row 2: Combined Languages & Interests (1×1) - Grid Position 3 */
-[data-theme="light"] .languages-interests-section,
+.languages-interests-section,
 .languages-interests-section {
     grid-column: span 1;
     grid-row: span 1;
@@ -451,16 +447,7 @@ th {
     flex-direction: column;
 }
 
-.languages-section li, .interests-section li {
-    margin-bottom: 0 !important;
-}
-.languages-section h2, .interests-section h2{
-    margin-bottom: 0 !important;;
-}
-.languages-section .section {
-    margin-bottom: 0 !important;
-}
-[data-theme="light"] .languages-interests-section .languages-section,
+
 .languages-interests-section .languages-section {
     flex: 1;
     display: flex;
@@ -468,25 +455,10 @@ th {
     justify-content: space-between;
 }
 
-[data-theme="light"] .languages-interests-section .interests-section,
-.languages-interests-section .interests-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
 
-[data-theme="light"] .languages-section ul {
+.languages-section ul {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    height: 100%;
-}
-
-[data-theme="dark"] .languages-section ul {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
     height: 100%;
 }
 
@@ -535,15 +507,14 @@ th {
 }
 
 /* Experiences - Full Width */
-[data-theme="light"] .experiences-section,
 .experiences-section {
     grid-column: 1 / -1;
     margin-top: 1rem;
 }
 
 /* Alignment optimization for sidebar elements */
-[data-theme="light"] .contact-section,
-[data-theme="light"] .languages-section {
+.contact-section,
+.languages-section {
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -568,9 +539,18 @@ th {
     flex-direction: column;
 }
 
-[data-theme="light"] .grid-item .neonbox>*:last-child,
-.grid-item .neonbox>*:last-child {
-    
+.languages-section ul li,
+.interests-section ul li {
+    margin-bottom: 0;
+}
+
+.languages-section h2,
+.interests-section h2 {
+    margin-bottom: 0;
+}
+
+.languages-section .section {
+    margin-bottom: 20px;
 }
 
 /* =================================================================
@@ -609,14 +589,29 @@ th {
         grid-column: span 1;
     }
 
-    [data-theme="light"] .projects-highlight,
-    [data-theme="dark"] .projects-highlight {
+    .projects-highlight {
         margin: 1rem -0.5rem;
         padding: 2rem;
+    }
+
+    ul li {
+        margin-bottom: 0.8rem;
+    }
+    .languages-section ul li,
+    .interests-section ul li{
+        margin-bottom: 0.8rem;
+    }
+    .languages-section h2,
+    .interests-section h2 {
+        margin-bottom: 2rem;
+    }
+    .languages-section .section {
+        margin-bottom: 30px;
     }
 }
 
 @media (max-width: 800px) {
+
     /* Single column for narrower screens */
     [data-theme="light"] .container,
     [data-theme="dark"] .container,
@@ -658,6 +653,7 @@ th {
     [data-theme="dark"] .languages-interests-section {
         border-radius: 12px;
     }
+
 }
 
 @media (max-width: 768px) {
@@ -767,9 +763,8 @@ th {
     }
 
     /* Mobile typography adjustments */
-    [data-theme="light"] ul li,
-    [data-theme="dark"] ul li {
-        margin-bottom: 0.6rem;
+    ul li {
+        margin-bottom: 0.6rem !important;
         padding-left: 0.8rem;
         font-size: 0.95rem;
     }
@@ -814,141 +809,184 @@ th {
    PRINT STYLES — grille 2x1,2x1 puis 1x1,1x1 avec hauteurs appairées
    ================================================================= */
 @media print {
-  html, body {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-    font-size: 10pt !important;
-    line-height: 1.35 !important;
-  }
 
-  /* Grille d’impression : 
+    html,
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-size: 10pt !important;
+        line-height: 1.35 !important;
+    }
+
+    /* Grille d’impression : 
      R1: header (full)
      R2: contact (col1) + profil (col2)
      R3: skills (col1) + languages (col2)
      R4: projects (full)
      R5: experiences (full)
   */
-  .container {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    grid-template-rows: auto auto auto auto auto !important;
-    gap: 10pt 14pt !important;
-    align-items: stretch !important;
-    max-width: none !important;
-    padding: 0 !important;
-  }
+    .container {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto auto auto auto auto !important;
+        gap: 10pt 14pt !important;
+        align-items: stretch !important;
+        max-width: none !important;
+        padding: 0 !important;
+    }
 
-  .header-section     { grid-column: 1 / -1 !important; grid-row: 1 !important; }
+    .header-section {
+        grid-column: 1 / -1 !important;
+        grid-row: 1 !important;
+    }
 
-  .contact-section    { grid-column: 1 !important; grid-row: 2 !important; align-self: stretch !important; }
-  .profile-section    { grid-column: 2 !important; grid-row: 2 !important; align-self: stretch !important; }
+    .contact-section {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        align-self: stretch !important;
+    }
 
-  .skills-section     { grid-column: 1 !important; grid-row: 3 !important; align-self: stretch !important; }
-  .languages-interests-section  { grid-column: 2 !important; grid-row: 3 !important; align-self: stretch !important; }
-  .languages-interests-section .languages-section  { align-self: stretch !important; }
-  .languages-interests-section .interests-section  { align-self: stretch !important; }
+    .profile-section {
+        grid-column: 2 !important;
+        grid-row: 2 !important;
+        align-self: stretch !important;
+    }
 
-  .projects-highlight { grid-column: 1 / -1 !important; grid-row: 4 !important; }
-  .experiences-section{ grid-column: 1 / -1 !important; grid-row: 5 !important; }
+    .skills-section {
+        grid-column: 1 !important;
+        grid-row: 3 !important;
+        align-self: stretch !important;
+    }
 
-  /* IMPORTANT : supprimer les min-heights qui empêchent l’égalisation */
-  .contact-section,
-  .profile-section,
-  .skills-section,
-  .languages-interests-section {
-    min-height: unset !important;
-  }
+    .languages-interests-section {
+        grid-column: 2 !important;
+        grid-row: 3 !important;
+        align-self: stretch !important;
+    }
 
-  /* Faire “remplir la cellule” aux boîtes internes */
-  .contact-section .neonbox,
-  .profile-section .neonbox,
-  .skills-section .neonbox,
-  .languages-interests-section .neonbox {
-    height: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-  }
+    .languages-interests-section .languages-section {
+        align-self: stretch !important;
+    }
 
-  .contact-section .section,
-  .profile-section .section,
-  .skills-section .section,
-  .languages-interests-section .section {
-    flex: 1 1 auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-  }
+    .languages-interests-section .interests-section {
+        align-self: stretch !important;
+    }
 
-  /* Empêcher les coupures moches */
-  .header-section,
-  .contact-section,
-  .profile-section,
-  .skills-section,
-  .languages-interests-section,
-  .projects-highlight,
-  .experiences-section,
-  .grid-item,
-  .section,
-  .neonbox {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-  }
+    .projects-highlight {
+        grid-column: 1 / -1 !important;
+        grid-row: 4 !important;
+    }
 
-  /* Typo compacte & éviter les sauts après titres */
-  h1, h2 {
-    page-break-after: avoid !important;
-    margin: 0 0 0.5rem 0 !important;
-    background: none !important;
-    -webkit-text-fill-color: inherit !important;
-  }
+    .experiences-section {
+        grid-column: 1 / -1 !important;
+        grid-row: 5 !important;
+    }
 
-  /* Nettoyage : éléments interactifs */
-  .top-right-buttons,
-  #toggle,
-  #lang-button,
-  #print-btn,
-  .lang-dropdown {
-    display: none !important;
-  }
+    /* IMPORTANT : supprimer les min-heights qui empêchent l’égalisation */
+    .contact-section,
+    .profile-section,
+    .skills-section,
+    .languages-interests-section {
+        min-height: unset !important;
+    }
 
-  /* -------- PALETTES LIGHT & DARK -------- */
+    /* Faire “remplir la cellule” aux boîtes internes */
+    .contact-section .neonbox,
+    .profile-section .neonbox,
+    .skills-section .neonbox,
+    .languages-interests-section .neonbox {
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
 
-  /* Thème clair */
-  [data-theme="light"] body {
-    background: #fff !important;
-    color: #2c3e50 !important;
-  }
-  [data-theme="light"] .neonbox {
-    background: #f8f9fa !important;
-    border: 1px solid #dee2e6 !important;
-    box-shadow: none !important;
-  }
-  [data-theme="light"] .contact-section .neonbox {
-    background: #007BFF !important;
-    color: #fff !important;
-    border: none !important;
-  }
+    .contact-section .section,
+    .profile-section .section,
+    .skills-section .section,
+    .languages-interests-section .section {
+        flex: 1 1 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
 
-  /* Thème sombre */
-  [data-theme="dark"] body {
-    background: #1a1a1a !important;
-    color: #f8f9fa !important;
-  }
-  [data-theme="dark"] .neonbox {
-    background: #2c2c2c !important;
-    border: 2px solid #444 !important;
-    box-shadow: none !important;
-  }
-  [data-theme="dark"] .contact-section .neonbox {
-    background: #007BFF !important;
-    color: #fff !important;
-    border: none !important;
-  }
+    /* Empêcher les coupures moches */
+    .header-section,
+    .contact-section,
+    .profile-section,
+    .skills-section,
+    .languages-interests-section,
+    .projects-highlight,
+    .experiences-section,
+    .grid-item,
+    .section,
+    .neonbox {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
 
-  /* Projects highlight (barre décorative off en print) */
-  .projects-highlight::before { display: none !important; }
+    /* Typo compacte & éviter les sauts après titres */
+    h1,
+    h2 {
+        page-break-after: avoid !important;
+        margin: 0 0 0.5rem 0 !important;
+        background: none !important;
+        -webkit-text-fill-color: inherit !important;
+    }
+
+    /* Nettoyage : éléments interactifs */
+    .top-right-buttons,
+    #toggle,
+    #lang-button,
+    #print-btn,
+    .lang-dropdown {
+        display: none !important;
+    }
+
+    /* -------- PALETTES LIGHT & DARK -------- */
+
+    /* Thème clair */
+    [data-theme="light"] body {
+        background: #fff !important;
+        color: #2c3e50 !important;
+    }
+
+    [data-theme="light"] .neonbox {
+        background: #f8f9fa !important;
+        border: 1px solid #dee2e6 !important;
+        box-shadow: none !important;
+    }
+
+    [data-theme="light"] .contact-section .neonbox {
+        background: #007BFF !important;
+        color: #fff !important;
+        border: none !important;
+    }
+
+    /* Thème sombre */
+    [data-theme="dark"] body {
+        background: #1a1a1a !important;
+        color: #f8f9fa !important;
+    }
+
+    [data-theme="dark"] .neonbox {
+        background: #2c2c2c !important;
+        border: 2px solid #444 !important;
+        box-shadow: none !important;
+    }
+
+    [data-theme="dark"] .contact-section .neonbox {
+        background: #007BFF !important;
+        color: #fff !important;
+        border: none !important;
+    }
+
+    /* Projects highlight (barre décorative off en print) */
+    .projects-highlight::before {
+        display: none !important;
+    }
 }
 
 @page {
-  margin: 15mm;
-  size: A4;
+    margin: 15mm;
+    size: A4;
 }
