@@ -560,8 +560,6 @@ th {
 @media (max-width: 1100px) {
 
     /* Tablet: 2-column grid */
-    [data-theme="light"] .container,
-    [data-theme="dark"] .container,
     .container {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
@@ -569,23 +567,19 @@ th {
     }
 
     /* Adjust grid spans for tablet */
-    [data-theme="light"] .contact-section,
-    [data-theme="dark"] .contact-section {
+    .contact-section {
         grid-column: span 1;
     }
 
-    [data-theme="light"] .profile-section,
-    [data-theme="dark"] .profile-section {
+    .profile-section {
         grid-column: span 1;
     }
 
-    [data-theme="light"] .skills-section,
-    [data-theme="dark"] .skills-section {
+    .skills-section {
         grid-column: span 1;
     }
 
-    [data-theme="light"] .languages-interests-section,
-    [data-theme="dark"] .languages-interests-section {
+    .languages-interests-section {
         grid-column: span 1;
     }
 
@@ -613,8 +607,7 @@ th {
 @media (max-width: 800px) {
 
     /* Single column for narrower screens */
-    [data-theme="light"] .container,
-    [data-theme="dark"] .container,
+    .container,
     .container {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -623,34 +616,26 @@ th {
     }
 
     /* All sections span full width */
-    [data-theme="light"] .contact-section,
-    [data-theme="dark"] .contact-section,
-    [data-theme="light"] .profile-section,
-    [data-theme="dark"] .profile-section,
-    [data-theme="light"] .skills-section,
-    [data-theme="dark"] .skills-section,
-    [data-theme="light"] .languages-interests-section,
-    [data-theme="dark"] .languages-interests-section,
-    [data-theme="light"] .experiences-section,
-    [data-theme="dark"] .experiences-section {
+    .contact-section,
+    .profile-section,
+    .skills-section,
+    .languages-interests-section,
+    .experiences-section {
         grid-column: span 1;
         min-height: auto;
     }
 
-    [data-theme="light"] .projects-highlight,
-    [data-theme="dark"] .projects-highlight {
+    .projects-highlight {
         margin: 1rem 0;
         padding: 1.5rem;
         border-radius: 12px;
     }
 
-    [data-theme="light"] .projects-highlight h2,
-    [data-theme="dark"] .projects-highlight h2 {
+    .projects-highlight h2 {
         font-size: 2rem;
     }
 
-    [data-theme="light"] .languages-interests-section,
-    [data-theme="dark"] .languages-interests-section {
+    .languages-interests-section {
         border-radius: 12px;
     }
 
