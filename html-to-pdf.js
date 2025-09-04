@@ -216,7 +216,7 @@ function optimizeCssForPdf(css, themeName) {
     }
 
     .container {
-        gap: 1rem !important;
+        gap: 5pt 14pt !important;
     }
 
     .section {
@@ -245,6 +245,15 @@ function optimizeCssForPdf(css, themeName) {
     .header-section h1 {
         margin-bottom: 50px !important;
     }
+
+   
+    [data-theme=dark] .experiences-section .neonbox {
+        padding-bottom: 0 !important
+    }
+    [data-theme=dark] .experiences-section ul li {
+        margin-bottom: .4rem !important;
+    }
+   
 
     /* Nettoyage : éléments interactifs */
     .top-right-buttons,

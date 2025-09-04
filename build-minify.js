@@ -18,10 +18,6 @@ const CONFIG = {
   cssOutput: path.join(__dirname, 'style.min.css'),
   jsFiles: [
     {
-      input: path.join(__dirname, 'html-to-pdf.js'),
-      output: path.join(__dirname, 'html-to-pdf.min.js')
-    },
-    {
       input: path.join(__dirname, 'build-static-locales.js'),
       output: path.join(__dirname, 'build-static-locales.min.js')
     },
