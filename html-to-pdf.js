@@ -86,233 +86,26 @@ function generateLocalizedHtml(templateHtml, localeData, localeName, themeName) 
 
 // Apply PDF-specific optimizations to CSS
 function optimizeCssForPdf(css, themeName) {
+  // Extract @media print and @page rules from the main CSS
+  const printMediaRegex = /@media print\s*{[^}]*}/gs;
+  const pageRuleRegex = /@page\s*{[^}]*}/gs;
+
+  const printMediaRules = css.match(printMediaRegex)?.join('\n') || '';
+  const pageRules = css.match(pageRuleRegex)?.join('\n') || '';
+
+  // Replace the background in @page rule with theme-aware value
+  const themeAwarePageRule = pageRules.replace(
+    /(background\s*:)[^;!]*/,
+    `$1 ${themeName === 'dark' ? '#1A1A1A' : '#ffffff'} !important`
+  );
+
+  // Combine the extracted rules with our theme-aware page rule
   const pdfOptimizations = `
-@media print {
+${printMediaRules}
 
-    html,
-    body {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-        font-size: 10pt !important;
-        line-height: 1.2 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    /* Grille d’impression : 
-     R1: header (full)
-     R2: contact (col1) + profil (col2)
-     R3: skills (col1) + languages (col2)
-     R4: projects (full)
-     R5: experiences (full)
-  */
-    .container {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        grid-template-rows: auto auto auto auto auto !important;
-        gap: 10pt 14pt !important;
-        align-items: stretch !important;
-        max-width: none !important;
-        padding: 0 !important;
-    }
-
-    .header-section {
-        grid-column: 1 / -1 !important;
-        grid-row: 1 !important;
-    }
-
-    .contact-section {
-        grid-column: 1 !important;
-        grid-row: 2 !important;
-        align-self: stretch !important;
-    }
-
-    .profile-section {
-        grid-column: 2 !important;
-        grid-row: 2 !important;
-        align-self: stretch !important;
-    }
-
-    .skills-section {
-        grid-column: 1 !important;
-        grid-row: 3 !important;
-        align-self: stretch !important;
-    }
-
-    .languages-interests-section {
-        display: grid !important;
-        grid-template-rows: 1fr 1fr !important;
-        height: 100% !important;
-    }
-
-    .languages-interests-section .languages-section,
-    .languages-interests-section .interests-section {
-        height: 100% !important;
-    }
-
-    .projects-highlight {
-        grid-column: 1 / -1 !important;
-        grid-row: 4 !important;
-    }
-
-    .experiences-section {
-        grid-column: 1 / -1 !important;
-        grid-row: 5 !important;
-    }
-
-    /* IMPORTANT : supprimer les min-heights qui empêchent l’égalisation */
-    .contact-section,
-    .profile-section,
-    .skills-section,
-    .languages-interests-section {
-        min-height: unset !important;
-    }
-
-    /* Faire “remplir la cellule” aux boîtes internes */
-    .contact-section .neonbox,
-    .profile-section .neonbox,
-    .skills-section .neonbox,
-    .languages-interests-section .neonbox {
-        height: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
-    }
-
-    .contact-section .section,
-    .profile-section .section,
-    .skills-section .section,
-    .languages-interests-section .section {
-        flex: 1 1 auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-    }
-
-    /* Empêcher les coupures moches */
-    .header-section,
-    .contact-section,
-    .profile-section,
-    .skills-section,
-    .languages-interests-section,
-    .projects-highlight,
-    .experiences-section,
-    .grid-item,
-    .section,
-    .neonbox {
-        break-inside: avoid !important;
-        page-break-inside: avoid !important;
-    }
-
-    /* Typo compacte & éviter les sauts après titres */
-    h1,
-    h2 {
-        page-break-after: avoid !important;
-        margin: 0 !important;
-        background: none !important;
-        -webkit-text-fill-color: inherit !important;
-    }
-
-    h2 {
-        font-size: 1.5rem !important;
-    }
-
-    .container {
-        gap: 5pt 14pt !important;
-    }
-
-    .section {
-        margin: 0 !important;
-    }
-     [data-theme="light"] .section {
-        padding: 1rem !important;
-    }
-    [data-theme="dark"] .section {
-        padding: 0.9rem !important;
-    }
-    [data-theme="dark"] .section ul {
-        margin-bottom: 0 !important;
-       
-    }
-    .skills-section,
-    .languages-interests-section {
-        margin-top: 30px;
-    }
-
-    .header-section {
-        margin-top: 100px;
-        margin-bottom: 0;
-    }
-
-    .header-section h1 {
-        margin-bottom: 50px !important;
-    }
-
-   
-    [data-theme=dark] .experiences-section .neonbox {
-        padding-bottom: 0 !important
-    }
-    [data-theme=dark] .experiences-section ul li {
-        margin-bottom: .4rem !important;
-    }
-   
-
-    /* Nettoyage : éléments interactifs */
-    .top-right-buttons,
-    #toggle,
-    #lang-button,
-    #print-btn,
-    .lang-dropdown {
-        display: none !important;
-    }
-
-    /* -------- PALETTES LIGHT & DARK -------- */
-
-    /* Thème clair */
-    [data-theme="light"] body {
-        background: #fff !important;
-        color: #2c3e50 !important;
-    }
-
-    [data-theme="light"] .neonbox {
-        background: #f8f9fa !important;
-        border: 1px solid #dee2e6 !important;
-        box-shadow: none !important;
-    }
-
-    [data-theme="light"] .contact-section .neonbox {
-        background: #007BFF !important;
-        color: #fff !important;
-        border: none !important;
-    }
-
-    /* Thème sombre */
-    [data-theme="dark"] body {
-        background: #1a1a1a !important;
-        color: #f8f9fa !important;
-    }
-
-    [data-theme="dark"] .neonbox {
-        background: #2c2c2c !important;
-        border: 2px solid #444 !important;
-        box-shadow: none !important;
-    }
-
-    [data-theme="dark"] .contact-section .neonbox {
-        background: #007BFF !important;
-        color: #fff !important;
-        border: none !important;
-    }
-
-    /* Projects highlight (barre décorative off en print) */
-    .projects-highlight::before {
-        display: none !important;
-    }
-}
-
-@page {
-    margin: 15mm;
-    size: A4;
-}
+${themeAwarePageRule}
 `;
+
   return css + pdfOptimizations;
 }
 

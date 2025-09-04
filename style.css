@@ -837,6 +837,9 @@ th {
    PRINT STYLES — grille 2x1,2x1 puis 1x1,1x1 avec hauteurs appairées
    ================================================================= */
 @media print {
+    @page {
+        background: var(--bg) !important;
+    }
 
     html,
     body {
