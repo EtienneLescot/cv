@@ -18,10 +18,6 @@ const CONFIG = {
   cssOutput: path.join(__dirname, 'style.min.css'),
   jsFiles: [
     {
-      input: path.join(__dirname, 'build-static-locales.js'),
-      output: path.join(__dirname, 'build-static-locales.min.js')
-    },
-    {
       input: path.join(__dirname, 'server.js'),
       output: path.join(__dirname, 'server.min.js')
     }
