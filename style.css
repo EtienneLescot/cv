@@ -288,13 +288,12 @@ h2 {
 
 .section {
     margin-bottom: 30px;
-
-    border-radius: 0;
     margin-bottom: 2.5rem;
     position: relative;
 }
 
 [data-theme="dark"] .section {
+    border-radius: 0;
     background-color: #2C2C2C;
     border: 2px solid #404040;
     color: #B0B0B1;
@@ -360,14 +359,9 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Dark theme neon boxes */
-.neonbox {
-    border: 2px solid #404040;
-    padding: 10px;
-    border-radius: 0;
-}
 
-/* Light theme - Creative section styling */
+
+
 .neonbox {
     padding: 1.5rem;
     background: var(--light-bg);
@@ -375,6 +369,14 @@ a:hover {
     overflow: hidden;
 }
 
+/* Dark theme neon boxes */
+[data-theme="dark"] .neonbox {
+    border: 2px solid #404040;
+    padding: 10px;
+    border-radius: 0;
+}
+
+/* Light theme - Creative section styling */
 [data-theme="light"] .neonbox {
     border: none;
     background: var(--light-bg);
@@ -512,12 +514,6 @@ th {
     overflow: hidden;
 }
 
-/* Projects - Full Width Highlight */
-[data-theme="light"] .projects-highlight {
-    background: linear-gradient(135deg, var(--light-bg) 0%, rgba(255, 255, 255, 0.9) 100%);
-    border-radius: 8px 35px 8px 35px;
-}
-
 .projects-highlight {
     grid-column: 1 / -1;
     background: #2C2C2C;
@@ -528,6 +524,18 @@ th {
     position: relative;
     overflow: hidden;
 }
+
+/* Projects - Full Width Highlight */
+[data-theme="light"] .projects-highlight {
+    background: linear-gradient(135deg, var(--light-bg) 0%, rgba(255, 255, 255, 0.9) 100%);
+    border-radius: 8px 35px 8px 35px;
+}
+
+/* Projects - Full Width Highlight */
+[data-theme="dark"] .projects-highlight {
+    border-radius: 0;
+}
+
 
 [data-theme="light"] .projects-highlight::before {
     content: '';
@@ -962,9 +970,17 @@ th {
 
     .section {
         margin: 0 !important;
+    }
+     [data-theme="light"] .section {
         padding: 1rem !important;
     }
-
+    [data-theme="dark"] .section {
+        padding: 0.9rem !important;
+    }
+    [data-theme="dark"] .section ul {
+        margin-bottom: 0 !important;
+       
+    }
     .skills-section,
     .languages-interests-section {
         margin-top: 30px;
