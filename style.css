@@ -2,13 +2,18 @@
    DARK THEME - Retro Terminal/Hacker Style
    ================================================================= */
 :root {
-    --bg: #1A1A1A;
-    --text: #00ff00;
-    --accent: #ff00ff;
-    --link: #ffff00;
+
     --contrast-high: #000000;
     --contrast-low: #ffffff;
     --button-border: 2px solid var(--accent);
+}
+
+[data-theme="dark"] {
+    --bg: #1A1A1A;
+    --text: #00ffaa;
+    --h2color: #00ff00;
+    --accent: #bebebe;
+    --link: #ffff00;
 }
 
 /* =================================================================
@@ -33,6 +38,7 @@
     --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
 }
+
 /* Header styling */
 .header-content {
     display: flex;
@@ -98,9 +104,7 @@ h1 {
 /* Light theme - Creative header styling */
 [data-theme="light"] h1 {
     font-family: var(--font-heading);
-
     color: var(--text);
-   
 }
 
 
@@ -145,8 +149,13 @@ h1 {
 [data-theme="light"] #print-btn:hover {
     background: var(--accent);
     color: var(--contrast-high);
-    transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#toggle:hover,
+.lang-button:hover,
+#print-btn:hover {
+    transform: translateY(-1px);
 }
 
 .top-right-buttons {
@@ -156,7 +165,7 @@ h1 {
     margin-bottom: 10px;
 }
 
-[data-theme="light"] .top-right-buttons {
+.top-right-buttons {
     gap: 12px;
     margin-bottom: 2rem;
 }
@@ -225,23 +234,34 @@ h1 {
    ================================================================= */
 
 /* Dark theme headings */
+
+
+/* Light theme headings - Creative asymmetric style */
+
 h2 {
-    color: #00ffff;
-    border-bottom: 2px dashed #00ffff;
-    font-size: 1.5rem;
+    border: none;
+    position: relative;
+
     margin: 1rem 0 1rem 0;
 }
 
-/* Light theme headings - Creative asymmetric style */
+[data-theme="dark"] h2 {
+    color: var(--text);
+    border-bottom: 2px dashed var(--text);
+    font-size: 1.5rem;
+}
+
 [data-theme="light"] h2 {
     font-family: var(--font-heading);
     font-size: 1.8rem;
     font-weight: 600;
     color: var(--accent);
-    border: none;
-    margin: 1rem 0 1.5rem 0;
-    position: relative;
     padding-left: 1.5rem;
+}
+
+.profile-section p {
+    font-size: 1.2rem;
+
 }
 
 [data-theme="light"] h2::before {
@@ -268,15 +288,15 @@ h2 {
 
 .section {
     margin-bottom: 30px;
-    background-color: #2C2C2C;
-    color: #6d6d6d;
-    border: 1px solid #404040;
+
     border-radius: 0;
     margin-bottom: 2.5rem;
     position: relative;
 }
 
 [data-theme="dark"] .section {
+    background-color: #2C2C2C;
+    border: 2px solid #404040;
     color: #B0B0B1;
 }
 
@@ -311,6 +331,7 @@ ul li {
     color: var(--accent);
     font-weight: bold;
 }
+
 [data-theme="light"] .contact-section ul li::before {
     content: '→';
     position: absolute;
@@ -318,13 +339,14 @@ ul li {
     color: #ffffff;
     font-weight: bold;
 }
+
 /* Nested lists in light theme */
 ul ul {
     margin-top: 0.5rem;
     padding-left: 1rem;
 }
 
-[data-theme="light"] ul ul li::before {
+ul ul li::before {
     content: '•';
     color: var(--muted);
 }
@@ -346,14 +368,18 @@ a:hover {
 }
 
 /* Light theme - Creative section styling */
+.neonbox {
+    padding: 1.5rem;
+    background: var(--light-bg);
+    position: relative;
+    overflow: hidden;
+}
+
 [data-theme="light"] .neonbox {
     border: none;
-    padding: 1.5rem;
     background: var(--light-bg);
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    position: relative;
-    overflow: hidden;
 }
 
 [data-theme="light"] .neonbox::before {
@@ -376,9 +402,12 @@ a:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
+.contact-section a {
+    font-weight: 500;
+}
+
 [data-theme="light"] .contact-section a {
     color: var(--contrast-high);
-    font-weight: 500;
 }
 
 /* Prevent block breaking when exporting to PDF */
@@ -452,9 +481,11 @@ th {
 /* Colonne de droite (Langues + Intérêts) : utiliser grid */
 .languages-interests-section {
     display: grid;
-    grid-template-rows: 1fr 1fr; /* Langues en haut, Intérêts en bas */
+    grid-template-rows: 1fr 1fr;
+    /* Langues en haut, Intérêts en bas */
     gap: 1rem;
-    height: 100%; /* occupe toute la cellule grid */
+    height: 100%;
+    /* occupe toute la cellule grid */
 }
 
 /* Chaque sous-section remplit sa cellule */
@@ -473,21 +504,24 @@ th {
     height: 100%;
 }
 
-/* Projects - Full Width Highlight */
-[data-theme="light"] .projects-highlight {
+.projects-highlight {
     grid-column: 1 / -1;
-    background: linear-gradient(135deg, var(--light-bg) 0%, rgba(255, 255, 255, 0.9) 100%);
     margin: 1rem 0;
     padding: 2.5rem;
-    border-radius: 8px 35px 8px 35px;
     position: relative;
     overflow: hidden;
+}
+
+/* Projects - Full Width Highlight */
+[data-theme="light"] .projects-highlight {
+    background: linear-gradient(135deg, var(--light-bg) 0%, rgba(255, 255, 255, 0.9) 100%);
+    border-radius: 8px 35px 8px 35px;
 }
 
 .projects-highlight {
     grid-column: 1 / -1;
     background: #2C2C2C;
-   
+
     padding: 2.5rem;
     border: 1px solid #404040;
     border-radius: 0;
@@ -530,14 +564,13 @@ th {
 
 
 /* Grid flow optimization to eliminate white space */
-[data-theme="light"] .grid-item,
 .grid-item {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
-[data-theme="light"] .grid-item .neonbox,
+.grid-item .neonbox,
 .grid-item .neonbox {
     flex: 1;
     display: flex;
@@ -596,14 +629,17 @@ th {
     ul li {
         margin-bottom: 0.8rem;
     }
+
     .languages-section ul li,
-    .interests-section ul li{
+    .interests-section ul li {
         margin-bottom: 0.8rem;
     }
+
     .languages-section h2,
     .interests-section h2 {
         margin-bottom: 2rem;
     }
+
     .languages-section .section {
         margin-bottom: 30px;
     }
@@ -631,12 +667,29 @@ th {
     }
 
     /* Reorder sections for mobile - languages and interests go last */
-    .contact-section { order: 1; }
-    .profile-section { order: 2; }
-    .skills-section { order: 3; }
-    .projects-highlight { order: 4; }
-    .experiences-section { order: 5; }
-    .languages-interests-section { order: 6; }
+    .contact-section {
+        order: 1;
+    }
+
+    .profile-section {
+        order: 2;
+    }
+
+    .skills-section {
+        order: 3;
+    }
+
+    .projects-highlight {
+        order: 4;
+    }
+
+    .experiences-section {
+        order: 5;
+    }
+
+    .languages-interests-section {
+        order: 6;
+    }
 
 
     .projects-highlight {
@@ -654,7 +707,7 @@ th {
 @media (max-width: 768px) {
 
     /* Mobile: Single column */
-    [data-theme="light"] .container,
+    .container,
     .container {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -663,26 +716,24 @@ th {
     }
 
     /* All sections span full width on mobile */
-    [data-theme="light"] .contact-section,
-    [data-theme="light"] .profile-section,
-    [data-theme="light"] .skills-section,
-    [data-theme="light"] .languages-interests-section,
-    [data-theme="light"] .experiences-section {
+    .contact-section,
+    .profile-section,
+    .skills-section,
+    .languages-interests-section,
+    .experiences-section {
         grid-column: span 1;
         min-height: auto;
     }
 
-    [data-theme="light"] .projects-highlight {
+    .projects-highlight {
         margin: 1rem 0;
         padding: 1.5rem;
         border-radius: 12px;
     }
 
-    [data-theme="light"] .projects-highlight h2 {
+    .projects-highlight h2 {
         font-size: 2rem;
     }
-
-
 
     [data-theme="light"] .languages-interests-section {
         border-radius: 12px;
@@ -722,8 +773,7 @@ th {
         justify-content: flex-end;
     }
 
-    [data-theme="light"] .top-right-buttons,
-    [data-theme="dark"] .top-right-buttons {
+    .top-right-buttons {
         justify-content: center;
         margin: 1rem 0 1.5rem 0;
         gap: 10px;
@@ -733,8 +783,7 @@ th {
         padding: 15px;
     }
 
-    [data-theme="light"] .container,
-    [data-theme="dark"] .container {
+    .container {
         padding: 1rem;
         gap: 1.2rem;
     }
@@ -746,8 +795,7 @@ th {
         font-size: 0.95rem;
     }
 
-    [data-theme="light"] .neonbox,
-    [data-theme="dark"] .neonbox {
+    .neonbox {
         padding: 1.2rem;
     }
 }
@@ -755,29 +803,24 @@ th {
 @media (max-width: 400px) {
 
     /* Extra small screens */
-    [data-theme="light"] h1,
-    [data-theme="dark"] h1 {
+    h1 {
         font-size: 1.8rem;
     }
 
-    [data-theme="light"] h2,
-    [data-theme="dark"] h2 {
+    h2 {
         font-size: 1.2rem;
     }
 
-    [data-theme="light"] .projects-highlight h2,
-    [data-theme="dark"] .projects-highlight h2 {
+    .projects-highlight h2 {
         font-size: 1.6rem;
     }
 
-    [data-theme="light"] .container,
-    [data-theme="dark"] .container {
+    .container {
         padding: 0.8rem;
         gap: 1rem;
     }
 
-    [data-theme="light"] .neonbox,
-    [data-theme="dark"] .neonbox {
+    .neonbox {
         padding: 1rem;
     }
 }
@@ -908,26 +951,34 @@ th {
         background: none !important;
         -webkit-text-fill-color: inherit !important;
     }
+
     h2 {
         font-size: 1.5rem !important;
     }
+
     .container {
         gap: 1rem !important;
     }
-    .section{
+
+    .section {
         margin: 0 !important;
         padding: 1rem !important;
     }
-    .skills-section, .languages-interests-section{
+
+    .skills-section,
+    .languages-interests-section {
         margin-top: 30px;
     }
-    .header-section{
+
+    .header-section {
         margin-top: 100px;
         margin-bottom: 0;
     }
-    .header-section h1{
+
+    .header-section h1 {
         margin-bottom: 50px !important;
     }
+
     /* Nettoyage : éléments interactifs */
     .top-right-buttons,
     #toggle,
