@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -226,12 +226,35 @@
 
       // Theme toggle functionality
       if (themeToggle) {
-        // Apply stored theme on page load
+        // Apply stored theme on page load, default to light if none stored
         const storedTheme = localStorage.getItem('theme');
-        if (storedTheme) {
-          htmlElement.setAttribute('data-theme', storedTheme);
-          themeToggle.textContent = storedTheme === 'dark' ? '🌞 / 🌜' : '🌜 / 🌞';
+        const defaultTheme = 'light';
+        const themeToApply = storedTheme || defaultTheme;
+
+        htmlElement.setAttribute('data-theme', themeToApply);
+        themeToggle.textContent = themeToApply === 'dark' ? '🌞 / 🌜' : '🌜 / 🌞';
+
+        // Function to update print theme style
+        function updatePrintThemeStyle(theme) {
+          const style = document.createElement('style');
+          style.id = 'print-theme-style';
+          style.innerHTML = `
+            @media print {
+              @page {
+                background: ${theme === 'dark' ? '#1A1A1A' : '#ffffff'} !important;
+              }
+            }
+          `;
+          // Remove any existing print theme style
+          const existingStyle = document.getElementById('print-theme-style');
+          if (existingStyle) {
+            document.head.removeChild(existingStyle);
+          }
+          document.head.appendChild(style);
         }
+
+        // Set initial print theme style
+        updatePrintThemeStyle(themeToApply);
 
         themeToggle.addEventListener('click', function() {
           const currentTheme = htmlElement.getAttribute('data-theme');
@@ -244,22 +267,8 @@
           // Update button text
           themeToggle.textContent = newTheme === 'dark' ? '🌞 / 🌜' : '🌜 / 🌞';
 
-          // Update print background color based on theme
-          const style = document.createElement('style');
-          style.id = 'print-theme-style';
-          style.innerHTML = `
-            @media print {
-              @page {
-                background: ${newTheme === 'dark' ? '#1A1A1A' : '#ffffff'} !important;
-              }
-            }
-          `;
-          // Remove any existing print theme style
-          const existingStyle = document.getElementById('print-theme-style');
-          if (existingStyle) {
-            document.head.removeChild(existingStyle);
-          }
-          document.head.appendChild(style);
+          // Update print theme style
+          updatePrintThemeStyle(newTheme);
         });
       }
     });
