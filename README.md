@@ -59,20 +59,22 @@ Le format YAML permet une meilleure lisibilité et la possibilité d'ajouter des
 ## Génération de fichiers statiques multilingues
 
 ### Build Process (Nouvelle Architecture SSG)
-Le projet utilise maintenant une architecture de Static Site Generation (SSG) pour générer des fichiers HTML statiques pour chaque langue.
+Le projet utilise maintenant une architecture de Static Site Generation (SSG) pour générer des fichiers HTML statiques pour chaque langue avec optimisation des performances.
 
 #### Commandes de build
 ```bash
-# Générer tous les fichiers statiques pour chaque locale
-npm run build
+# Générer tous les fichiers statiques pour chaque locale avec optimisation
+npm run build:full
 
-# Ou utiliser directement le script de build
-npm run build:locales
+# Ou utiliser les étapes séparées
+npm run build:minify  # Minifie CSS et JS
+npm run build:locales # Génère les fichiers HTML statiques
 ```
 
 #### Fichiers générés
-- `index-fr.html` - Version française statique
-- `index-en.html` - Version anglaise statique
+- `index-fr.html` - Version française statique avec JS minifié
+- `index-en.html` - Version anglaise statique avec JS minifié
+- `style.min.css` - CSS minifiée (10 KiB de gains)
 - Les fichiers générés sont exclus du git via `.gitignore`
 
 #### Déploiement
@@ -86,6 +88,10 @@ Les fichiers statiques peuvent être déployés directement sur n'importe quel s
 - ✅ SEO-friendly (contenu pré-rendu)
 - ✅ Robuste (pas de corruption HTML)
 - ✅ Facile à déployer
+- ✅ Performances optimisées :
+  - CSS minifiée (10 KiB de gains)
+  - JavaScript inline minifié (1.7 KiB de gains)
+  - Cache efficace pour les assets statiques
 
 ## Injection de données de secours (Déprécié)
 L'ancien script `inject-fallback.js` est maintenant déprécié. Utilisez plutôt la nouvelle architecture SSG décrite ci-dessus.

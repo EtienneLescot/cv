@@ -51,7 +51,13 @@ const server = http.createServer((req, res) => {
         res.end('Server error: ' + err.code);
       }
     } else {
-      res.writeHead(200, { 'Content-Type': contentType });
+      // Set efficient cache policy for static assets
+      const cacheHeaders = {
+        'Content-Type': contentType,
+        'Cache-Control': 'public, max-age=31536000, immutable'
+      };
+
+      res.writeHead(200, cacheHeaders);
       res.end(content, 'utf-8');
     }
   });

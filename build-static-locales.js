@@ -11,6 +11,7 @@ const path = require('path');
 const { JSDOM } = require('jsdom');
 const glob = require('glob');
 const yaml = require('yaml');
+const { minify: minifyJs } = require('terser');
 
 // Configuration
 const CONFIG = {
@@ -192,6 +193,40 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
 }
 
 /**
+ * Minify inline JavaScript in HTML
+ */
+async function minifyInlineScripts(html) {
+  const dom = new JSDOM(html);
+  const { document } = dom.window;
+
+  // Find all script tags
+  const scriptTags = document.querySelectorAll('script');
+
+  for (const script of scriptTags) {
+    if (!script.src) { // Only process inline scripts
+      const scriptContent = script.textContent;
+
+      try {
+        const minified = await minifyJs(scriptContent, {
+          sourceMap: false,
+          compress: {
+            passes: 2
+          },
+          mangle: true
+        });
+
+        script.textContent = minified.code;
+        console.log(`✅ Minified inline script (${(scriptContent.length - minified.code.length)} bytes saved)`);
+      } catch (error) {
+        console.warn(`⚠ Failed to minify inline script:`, error.message);
+      }
+    }
+  }
+
+  return dom.serialize();
+}
+
+/**
  * Save generated HTML to file
  */
 function saveOutputFile(outputHtml, localeName) {
@@ -210,7 +245,7 @@ function saveOutputFile(outputHtml, localeName) {
 /**
  * Main build process
  */
-function buildStaticLocales() {
+async function buildStaticLocales() {
   console.log('🚀 Starting Static Site Generation for Multi-Locale Support');
   console.log('--------------------------------------------------------');
 
@@ -229,10 +264,13 @@ function buildStaticLocales() {
 
   // Generate files for each locale
   let successCount = 0;
-  CONFIG.supportedLocales.forEach(localeName => {
+  for (const localeName of CONFIG.supportedLocales) {
     if (locales[localeName]) {
       console.log(`\n🌐 Processing locale: ${localeName}`);
-      const outputHtml = generateStaticHtml(templateHtml, locales[localeName], localeName);
+      let outputHtml = generateStaticHtml(templateHtml, locales[localeName], localeName);
+
+      // Minify inline JavaScript
+      outputHtml = await minifyInlineScripts(outputHtml);
 
       // For default locale, also generate index.html
       if (localeName === CONFIG.defaultLocale) {
@@ -253,7 +291,7 @@ function buildStaticLocales() {
     } else {
       console.warn(`⚠ Locale ${localeName} not found in locale files`);
     }
-  });
+  }
 
   console.log('--------------------------------------------------------');
   console.log(`🎉 Build completed: ${successCount}/${CONFIG.supportedLocales.length+1} files generated`);
@@ -269,4 +307,7 @@ function buildStaticLocales() {
 }
 
 // Run the build
-buildStaticLocales();
+buildStaticLocales().catch(error => {
+  console.error('❌ Build failed:', error);
+  process.exit(1);
+});

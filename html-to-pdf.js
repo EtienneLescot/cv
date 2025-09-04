@@ -210,26 +210,42 @@ function optimizeCssForPdf(css, themeName) {
         background: none !important;
         -webkit-text-fill-color: inherit !important;
     }
+
     h2 {
         font-size: 1.5rem !important;
     }
+
     .container {
         gap: 1rem !important;
     }
-    .section{
+
+    .section {
         margin: 0 !important;
+    }
+     [data-theme="light"] .section {
         padding: 1rem !important;
     }
-    .skills-section, .languages-interests-section{
+    [data-theme="dark"] .section {
+        padding: 0.9rem !important;
+    }
+    [data-theme="dark"] .section ul {
+        margin-bottom: 0 !important;
+       
+    }
+    .skills-section,
+    .languages-interests-section {
         margin-top: 30px;
     }
-    .header-section{
+
+    .header-section {
         margin-top: 100px;
         margin-bottom: 0;
     }
-    .header-section h1{
+
+    .header-section h1 {
         margin-bottom: 50px !important;
     }
+
     /* Nettoyage : éléments interactifs */
     .top-right-buttons,
     #toggle,

@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "build:locales": "node build-static-locales.js",
-    "build": "npm run build:locales"
+    "build:minify": "node build-minify.js",
+    "build": "npm run build:minify && npm run build:locales",
+    "build:full": "npm run build:minify && npm run build:locales"
   },
   "repository": {
     "type": "git",
@@ -18,10 +20,13 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "cssnano": "^7.0.0",
     "glob": "^11.0.0",
     "jsdom": "^25.0.1",
+    "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "puppeteer": "^24.10.0",
+    "terser": "^5.31.3",
     "yaml": "^2.8.1"
   }
 }
