@@ -23,88 +23,89 @@ contact-linkedin: |
 profile-title: |
   Profile
 profile-desc: |
-  CTO with over 15 years of experience in designing SaaS platforms, technical leadership, and managing cloud & AI architectures. I work at the intersection of product strategy, technical performance, and user experience.
+  Product Director with over 15 years of experience, specializing in transforming strategic visions into profitable SaaS platforms (B2B/B2B2C). I operate across a 360° scope, driving product strategy, profitability (ROI), and technical direction (Cloud & AI). My expertise lies at the intersection of User Experience and data exploitation (IoT, Smart Context), with proven success in designing and deploying Smart Office and Smart Campus solutions including indoor geolocation (Polestar SDK) and occupancy management for complex environments.
 skills-title: |
-  Skills
+  Key Skills
 skill-1: |
-  Technical leadership & team management
+  Product Strategy & 360° Roadmap Management
 skill-2: |
-  Cloud architecture (AWS, Kubernetes, CI/CD, Scaleway)
+  Business Performance & ROI Analysis
 skill-3: |
-  Full-Stack development: Node.js, React, Python
+  IoT & Smart Context Architecture (BLE, Indoor Positioning)
 skill-4: |
-  AI integration (LLM, AWS Bedrock, Langchain)
+  Cloud Platform Leadership (AWS, Kubernetes, CI/CD)
 skill-5: |
-  User experience (UX/UI, mobile, responsive)
+  AI Integration & Smart Services (LLM, Langchain)
 skill-6: |
-  CI/CD, DevOps, monitoring, multi-instance environment
+  User Experience & Customer Journey Optimization
 skill-7: |
-  Product strategy, technical documentation, agile methodology
+  Ecosystem Management & Technical Partnerships
 projects-title: |
-  Notable Achievements
+  Strategic Projects & Results (360° Focus)
 project-1: |
-  <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Client platform, call center and AI<br>
-  👉 Architecture and development of the cloud-native platform.<br>
-  👉 Implementation of client journey automation and AI integration for call analysis.<br>
-  👉 Product management (roadmap, UX/UI, strategy)
+  <strong>IoT Smart Office & Indoor Geolocation (Mobilespot)</strong><br>
+  👉 360° leadership in designing and deploying Smart Office solutions with indoor mapping and occupancy management<br>
+  👉 Strategic partnership management with Polestar, leading SDK integration (BLE) for Smart Context services<br>
+  👉 Successful deployments at complex sites: Paris Air Show, Printemps Haussmann, major banking campus
 project-2: |
-  <strong>Exalbot</strong> (2022–2023) — Cloud-native SaaS AI chatbot platform<br>
-  👉 Design and development of the AI chatbot with Python and Langchain.<br>
-  👉 Architecture and implementation of cloud infrastructure (Kubernetes, ArgoCD, Scaleway) and multi-environment deployment.<br>
-  👉 Project supervision, performance optimization and product management.
+  <strong>Scalability & ROI Transformation (AppKiosk)</strong><br>
+  👉 Product-led transformation from manual service to industrial no-code SaaS platform<br>
+  👉 ROI Impact: 90% cost reduction (5 days → 0.5 day per application)<br>
+  👉 Scalability: 10x growth from 10 to 100+ events, supporting 50,000 users per app
 project-3: |
-  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Multi-event kiosk application<br>
-  👉 Design, architecture and leadership of the SaaS platform and mobile and web applications.<br>
-  👉 Multi-client deployment, CI/CD setup and monitoring.<br>
-  👉 Product management, UX/UI and strategy.
+  <strong>Ecosystem Management & Partnerships (Digitec-Pharma)</strong><br>
+  👉 B2B2C product strategy for complex healthcare platform<br>
+  👉 Ecosystem Growth: 1,000+ pharmacies, 30+ partner groups, 300,000+ patient accounts<br>
+  👉 Stakeholder management across pharmacies, patients, and partner organizations
 project-4: |
-  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Public SaaS mobile platform<br>
-  👉 Design, architecture and development of the SaaS platform and mobile and web applications.<br>
-  👉 Product management and coordination of UX/UI teams.
+  <strong>AI Integration & Smart Services (Exalbot)</strong><br>
+  👉 Product vision for AI-powered chatbot platform with Python and Langchain<br>
+  👉 Cloud-native architecture enabling multi-environment deployment and scalability<br>
+  👉 Business alignment of AI capabilities with customer service optimization
 experiences-title: |
-  Experiences
+  Professional Experience
 exp1-title: |
   <strong>CIO - Saraé</strong> (2024-present)
 exp1-sector: |
   Sector: Architecture
 exp1-point1: |
-  Strategic management of IT architecture and integration of cloud & AI tools.
+  360° leadership of IT strategy, cloud & AI integration, and digital transformation.
 exp1-point2: |
-  Supervision of client journey automation and booking platform.
+  Product ownership of client journey automation and booking platform with focus on ROI.
 exp1-point3: |
-  Management of the technical roadmap
+  Strategic roadmap management aligning business objectives with technical capabilities.
 exp2-title: |
   <strong>CTO - Exalgo</strong> (2022-2023)
 exp2-sector: |
   Sector: Software Development & Artificial Intelligence
 exp2-point1: |
-  Technical leadership of a cloud-native SaaS AI chatbot platform.
+  Product & Technical leadership of cloud-native SaaS AI platform with business alignment.
 exp2-point2: |
-  Design of deployment, cloud architecture and DevOps best practices.
+  Strategic architecture decisions balancing technical excellence with market requirements.
 exp2-point3: |
-  Optimization of service performance and scalability.
+  Performance and scalability optimization driving customer satisfaction and retention.
 exp3-title: |
   <strong>CTO - Leni</strong> (2019-2022)
 exp3-sector: |
   Sector: Event Technology
 exp3-point1: |
-  R&D leadership on several innovative SaaS products (MobileSpot, Youslide, EasyPPT).
+  360° product leadership across SaaS portfolio (MobileSpot, AppKiosk, Youslide).
 exp3-point2: |
-  Management of a team of 10 developers, definition of product strategy.
+  Management of cross-functional teams (10+), driving product strategy and business outcomes.
 exp3-point3: |
-  Supervision of software architecture, CI/CD and overall technical quality.
+  Technical architecture oversight ensuring scalability, reliability, and cost efficiency.
 exp4-title: |
   <strong>Lead dev & Project Manager - Freelance</strong> (2007-2019)
 exp4-sector: |
   Sectors: Luxury, Automotive, Insurance, Transport, Agencies, Architecture, …
 exp4-point1: |
-  Design and implementation of custom web & mobile applications.
+  End-to-end project leadership from client requirements to production and ROI tracking.
 exp4-point2: |
-  Coordination of multidisciplinary teams (dev, UX/UI, motion design).
+  Coordination of multidisciplinary teams ensuring product-market fit and user satisfaction.
 exp4-point3: |
-  End-to-end project management, from client brief to delivery.
+  Business-focused project delivery with emphasis on client value and technical excellence.
 exp4-point4: |
-  Custom project from client brief to production
+  Strategic project execution aligning technical solutions with business objectives
 languages-title: |
   Languages
 lang-fr: |
