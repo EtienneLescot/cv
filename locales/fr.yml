@@ -23,84 +23,85 @@ contact-linkedin: |
 profile-title: |
   Profil
 profile-desc: |
-  CTO avec plus de 15 ans d'expérience dans la conception de plateformes SaaS, la direction technique et le pilotage d'architectures cloud & IA. J'interviens à la croisée de la stratégie produit, de la performance technique et de l'expérience utilisateur.
+  Directeur Produit avec plus de 15 ans d'expérience, spécialisé dans la transformation de visions stratégiques en plateformes SaaS rentables (B2B/B2B2C). J'interviens sur un périmètre 360°, pilotant la stratégie produit, la rentabilité (ROI) et la direction technique (Cloud & IA). Mon expertise se situe à la croisée de l'Expérience Utilisateur et de l'exploitation de la donnée (IoT, Smart Context), avec des succès prouvés dans la conception et le déploiement de solutions Smart Office et Smart Campus incluant la géolocalisation indoor (SDK Polestar) et la gestion de l'occupation pour des environnements complexes.
 skills-title: |
-  Compétences
+  Compétences Clés
 skill-1: |
-  Leadership technique & pilotage d'équipe
+  Stratégie Produit & Pilotage de Roadmap 360°
 skill-2: |
-  Architecture cloud (AWS, Kubernetes, CI/CD, Scaleway)
+  Performance Business & Analyse ROI
 skill-3: |
-  Développement Full‑Stack&nbsp;: Node.js, React, Python
+  Architecture IoT & Smart Context (BLE, Géolocalisation Indoor)
 skill-4: |
-  Intégration IA (LLM, AWS Bedrock, Langchain)
+  Direction de Plateformes Cloud (AWS, Kubernetes, CI/CD)
 skill-5: |
-  Expérience utilisateur (UX/UI, mobile, responsive)
+  Intégration IA & Services Intelligents (LLM, Langchain)
 skill-6: |
-  CI/CD, DevOps, monitoring, environnement multi-instances
+  Expérience Utilisateur & Optimisation des Parcours Clients
 skill-7: |
-  Stratégie produit, documentation technique, méthode agile
+  Gestion d'Écosystème & Partenariats Techniques
 projects-title: |
-  Réalisations notables
+  Projets Stratégiques & Résultats (Focus 360°)
 project-1: |
-  <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Plateforme client, call center et IA<br>
-  👉 Architecture et développement de la plateforme cloud-native.<br>
-  👉 Mise en place de l’automatisation des parcours clients et intégration IA pour l’analyse des appels.<br>
-  👉 Pilotage produit (roadmap, UX/UI, stratégie)
+  <strong>IoT Smart Office & Géolocalisation Indoor (Mobilespot)</strong><br>
+  👉 Leadership 360° dans la conception et le déploiement de solutions Smart Office avec cartographie indoor et gestion de l'occupation<br>
+  👉 Gestion stratégique du partenariat avec Polestar, pilotage de l'intégration SDK (BLE) pour les services Smart Context<br>
+  👉 Déploiements réussis sur sites complexes : Salon du Bourget, Printemps Haussmann, campus bancaire majeur
 project-2: |
-  <strong>Exalbot</strong> (2022–2023) — Plateforme SaaS de chatbot IA cloud-native<br>
-  👉 Conception et développement du chatbot IA avec Python et Langchain.<br>
-  👉 Architecture et Mise en place de l’infrastructure cloud (Kubernetes, ArgoCD, Scaleway) et déploiement multi-environnements.<br>
-  👉 Supervision du projet, optimisation des performances et pilotage produit.
+  <strong>Scalabilité & Transformation ROI (AppKiosk)</strong><br>
+  👉 Transformation produit d'un service manuel vers une plateforme SaaS no-code industrialisée<br>
+  👉 Impact ROI : réduction de 90% des coûts (5 jours → 0.5 jour par application)<br>
+  👉 Scalabilité : croissance 10x de 10 à 100+ événements, supportant 50 000 utilisateurs par app
 project-3: |
-  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Application kiosque multi‑événements<br>
-  👉 Conception, Architecture et direction du développement de la plateforme SaaS et des applications mobile et web.<br>
-  👉 Déploiement multi-clients, mise en place CI/CD et monitoring.<br>
-  👉 Pilotage produit, UX/UI et stratégie.
+  <strong>Gestion d'Écosystème & Partenariats (Digitec-Pharma)</strong><br>
+  👉 Stratégie produit B2B2C pour plateforme santé complexe<br>
+  👉 Croissance Écosystème : 1 000+ pharmacies, 30+ groupements partenaires, 300 000+ comptes patients<br>
+  👉 Gestion des parties prenantes entre pharmacies, patients et organisations partenaires
 project-4: |
-  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS mobile grand public<br>
-  👉 Conception, Architecture et développement de la plateforme SaaS et des applications mobile et web.<br>
-  👉 Pilotage produit et coordination des équipes UX/UI.
+  <strong>Intégration IA & Services Intelligents (Exalbot)</strong><br>
+  👉 Vision produit pour plateforme de chatbot IA avec Python et Langchain<br>
+  👉 Architecture cloud-native permettant déploiement multi-environnements et scalabilité<br>
+  👉 Alignement business des capacités IA avec optimisation du service client
 experiences-title: |
-  Expériences
+  Expérience Professionnelle
 exp1-title: |
   <strong>DSI - Saraé</strong> (2024‑présent)<br>
   Secteur : Architecture
 exp1-point1: |
-  Pilotage stratégique de l’architecture du SI et intégration des outils cloud & IA.
+  Leadership 360° de la stratégie SI, intégration cloud & IA et transformation digitale.
 exp1-point2: |
-  Supervision de l’automatisation des parcours clients et de la plateforme de réservation.
+  Propriété produit de l'automatisation des parcours clients et de la plateforme de réservation avec focus ROI.
 exp1-point3: |
-  Gestion de la roadmap technique
+  Gestion stratégique de la roadmap alignant objectifs business et capacités techniques.
 exp2-title: |
   <strong>CTO - Exalgo</strong> (2022‑2023)<br>
   Secteur : Développement logiciel & Intelligence artificielle
 exp2-point1: |
-  Direction technique d’une plateforme SaaS de chatbot IA cloud-native.
+  Leadership Produit & Technique de plateforme SaaS IA cloud-native avec alignement business.
 exp2-point2: |
-  Conception du déploiement, de l’architecture cloud et des bonnes pratiques DevOps.
+  Décisions d'architecture stratégique équilibrant excellence technique et exigences marché.
 exp2-point3: |
-  Optimisation des performances et de la scalabilité des services.
+  Optimisation performance et scalabilité pour satisfaction client et rétention.
 exp3-title: |
   <strong>CTO - Leni</strong> (2019‑2022)<br>
   Secteur : Technologies pour l’événementiel
 exp3-point1: |
-  Leadership R&D sur plusieurs produits SaaS innovants (MobileSpot, Youslide, EasyPPT).
+  Leadership produit 360° sur portefeuille SaaS (MobileSpot, AppKiosk, Youslide).
 exp3-point2: |
-  Management d’une équipe de 10 développeurs, définition de la stratégie produit.
+  Management d'équipes pluridisciplinaires (10+), pilotage stratégie produit et résultats business.
 exp3-point3: |
-  Supervision de l’architecture logicielle, CI/CD et qualité technique globale.
+  Supervision architecture technique assurant scalabilité, fiabilité et efficacité coûts.
 exp4-title: |
   <strong>Lead dev & Directeur de projet - Freelance</strong> (2007‑2019)<br>
   Secteurs : Luxe, Automobile, Assurance, Transport, Agences, Architecture, …
 exp4-point1: |
-  Conception et réalisation d’applications web & mobiles sur mesure.
+  Leadership de bout en bout des besoins clients à la production et suivi ROI.
 exp4-point2: |
-  Coordination d’équipes pluridisciplinaires (dev, UX/UI, motion design).
+  Coordination d'équipes pluridisciplinaires garantissant adéquation marché et satisfaction utilisateur.
 exp4-point3: |
-  Gestion de projets de bout en bout, du brief client à la livraison.
+  Livraison de projets orientée business avec accent sur valeur client et excellence technique.
 exp4-point4: |
-  Projet sur mesure du brief client à la mise en production
+  Exécution stratégique de projets alignant solutions techniques et objectifs business
 languages-title: |
   Langues
 lang-fr: |
