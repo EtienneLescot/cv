@@ -19,7 +19,9 @@ const CONFIG = {
   localesPath: path.join(__dirname, 'locales'),
   outputPattern: 'index-{locale}.html',
   defaultLocale: 'fr',
-  supportedLocales: ['fr', 'en']
+  supportedLocales: ['fr', 'en'],
+  // Base path for resources (empty for root, '/360' for subfolder)
+  basePath: process.env.BASE_PATH || ''
 };
 
 /**
@@ -90,6 +92,12 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
 
   // Update document language
   document.documentElement.lang = localeName;
+
+  // Update CSS path to include base path
+  const cssLink = document.querySelector('link[rel="stylesheet"]');
+  if (cssLink && CONFIG.basePath) {
+    cssLink.href = `${CONFIG.basePath}/style.min.css`;
+  }
 
   // Update title
   if (localeData.title) {
@@ -175,7 +183,13 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
     CONFIG.supportedLocales.forEach(locale => {
       const li = document.createElement('li');
       li.textContent = locale.toUpperCase();
-      li.dataset.href = locale === CONFIG.defaultLocale ? './index.html' : `./index-${locale}.html`;
+      
+      // Build correct href based on base path
+      let href = locale === CONFIG.defaultLocale ? './index.html' : `./index-${locale}.html`;
+      if (CONFIG.basePath) {
+        href = `${CONFIG.basePath}/${href}`;
+      }
+      li.dataset.href = href;
 
       // Disable current language
       if (locale === localeName) {

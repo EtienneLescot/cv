@@ -2,9 +2,9 @@
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
+  # Runs on pushes targeting the main and cvclaude branches
   push:
-    branches: ["main"]
+    branches: ["main", "cvclaude"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -31,6 +31,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Determine deployment path
+        id: deployment-path
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/cvclaude" ]]; then
+            echo "DEPLOYMENT_PATH=360" >> $GITHUB_OUTPUT
+            echo "BASE_PATH=/cv/360" >> $GITHUB_OUTPUT
+          else
+            echo "DEPLOYMENT_PATH=." >> $GITHUB_OUTPUT
+            echo "BASE_PATH=/cv" >> $GITHUB_OUTPUT
+          fi
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -39,13 +49,21 @@ jobs:
         run: npm install
       - name: Build project
         run: npm run build
+        env:
+          BASE_PATH: ${{ steps.deployment-path.outputs.BASE_PATH }}
+      - name: Prepare deployment directory
+        run: |
+          if [[ "${{ steps.deployment-path.outputs.DEPLOYMENT_PATH }}" != "." ]]; then
+            mkdir -p ${{ steps.deployment-path.outputs.DEPLOYMENT_PATH }}
+            mv *.html *.css *.js ${{ steps.deployment-path.outputs.DEPLOYMENT_PATH }}/ 2>/dev/null || true
+          fi
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          # Upload deployment directory
+          path: '${{ steps.deployment-path.outputs.DEPLOYMENT_PATH }}'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
