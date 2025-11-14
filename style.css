@@ -1058,6 +1058,26 @@ th {
     .projects-highlight::before {
         display: none !important;
     }
+
+    /* Remove blue color from links in print */
+    a {
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+    
+    [data-theme="light"] a {
+        color: #2c3e50 !important;
+    }
+    
+    [data-theme="dark"] a {
+        color: #f8f9fa !important;
+    }
+
+    /* Increase tagline font size for print */
+    .header-text .tagline {
+        font-size: 1rem !important;
+        font-weight: 500 !important;
+    }
 }
 
 @page {
