@@ -23,44 +23,50 @@ contact-linkedin: |
 profile-title: |
   Profile
 profile-desc: |
-  CTO with over 15 years of experience in designing SaaS platforms, technical leadership, and managing cloud & AI architectures. I work at the intersection of product strategy, technical performance, and user experience.
+  Product & Tech Director with over 15 years of experience, specialized in transforming strategic visions into profitable SaaS platforms (B2B/B2B2C). I operate on a 360° scope, driving product strategy, technical direction (Cloud & AI), and business alignment. My expertise lies at the intersection of user experience and data exploitation (IoT, smart context), with a particular focus on Smart Building solutions and indoor geolocation.
 skills-title: |
   Skills
 skill-1: |
-  Technical leadership & team management
+  Product strategy & 360° vision (roadmap, market fit, UX/UI)
 skill-2: |
-  Cloud architecture (AWS, Kubernetes, CI/CD, Scaleway)
+  Scalable SaaS platform management & ecosystem governance (B2B/B2B2C)
 skill-3: |
-  Full-Stack development: Node.js, React, Python
+  Cloud & IoT architecture (AWS, Kubernetes, CI/CD, Smart Building)
 skill-4: |
-  AI integration (LLM, AWS Bedrock, Langchain)
+  AI integration & contextual data analysis (LLM, Smart Context)
 skill-5: |
-  User experience (UX/UI, mobile, responsive)
+  Indoor geolocation & IoT technologies (Bluetooth LE, Polestar SDK)
 skill-6: |
-  CI/CD, DevOps, monitoring, multi-instance environment
+  Multidisciplinary team leadership & agile methodologies
 skill-7: |
-  Product strategy, technical documentation, agile methodology
+  Full-Stack development & performance optimization (Node.js, React, Python)
 projects-title: |
   Notable Achievements
 project-1: |
   <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Client platform, call center and AI<br>
-  👉 Architecture and development of the cloud-native platform.<br>
-  👉 Implementation of client journey automation and AI integration for call analysis.<br>
-  👉 Product management (roadmap, UX/UI, strategy)
+  👉 Product direction and architecture of a cloud-native platform with contextual analysis of customer interactions.<br>
+  👉 Implementation of client journey automation and AI integration for service optimization.<br>
+  👉 Product roadmap management, user-centered UX/UI design, and evolution strategy
 project-2: |
   <strong>Exalbot</strong> (2022–2023) — Cloud-native SaaS AI chatbot platform<br>
-  👉 Design and development of the AI chatbot with Python and Langchain.<br>
-  👉 Architecture and implementation of cloud infrastructure (Kubernetes, ArgoCD, Scaleway) and multi-environment deployment.<br>
-  👉 Project supervision, performance optimization and product management.
+  👉 Product design and development of an AI chatbot with contextual conversation analysis (Python, Langchain).<br>
+  👉 Scalable cloud architecture (Kubernetes, ArgoCD, Scaleway) and industrialized multi-environment deployments.<br>
+  👉 Product direction, performance optimization and SaaS lifecycle management
 project-3: |
-  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Multi-event kiosk application<br>
-  👉 Design, architecture and leadership of the SaaS platform and mobile and web applications.<br>
-  👉 Multi-client deployment, CI/CD setup and monitoring.<br>
-  👉 Product management, UX/UI and strategy.
+  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Multi-event kiosk platform<br>
+  👉 Product direction and architecture of an event SaaS platform with deployment cost optimization.<br>
+  👉 Industrialized multi-client deployments (scaling from 10 to 100+ events), CI/CD setup and monitoring.<br>
+  👉 Product vision management, user experience and B2B2C evolution strategy
 project-4: |
-  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Public SaaS mobile platform<br>
-  👉 Design, architecture and development of the SaaS platform and mobile and web applications.<br>
-  👉 Product management and coordination of UX/UI teams.
+  <strong>MobileSpot</strong> (2019–2022) — Smart Office & indoor geolocation solution<br>
+  👉 Product direction of an indoor mapping and geolocation solution for smart spaces (events, campuses, retail).<br>
+  👉 Strategic integration of Polestar SDK (Bluetooth LE) for contextual location services and occupancy management.<br>
+  👉 Successful deployments on complex sites: Bourget Airshow, Printemps Haussmann, multi-building campuses
+project-5: |
+  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — B2B2C healthcare SaaS platform<br>
+  👉 Product direction and architecture of a mobile health management platform with 1000+ pharmacy ecosystem.<br>
+  👉 Complex ecosystem management (300K+ patients, 30+ groups) and functional roadmap steering.<br>
+  👉 UX/UI coordination and strategic alignment with stakeholder needs
 experiences-title: |
   Experiences
 exp1-title: |
@@ -68,43 +74,43 @@ exp1-title: |
 exp1-sector: |
   Sector: Architecture
 exp1-point1: |
-  Strategic management of IT architecture and integration of cloud & AI tools.
+  Product direction and architecture of a cloud-native IT system with AI tool integration for process optimization.
 exp1-point2: |
-  Supervision of client journey automation and booking platform.
+  Product management of client journey automation and booking platform with focus on user experience.
 exp1-point3: |
-  Management of the technical roadmap
+  Strategic management of product and technical roadmap
 exp2-title: |
-  <strong>CTO - Exalgo</strong> (2022-2023)
+  <strong>CTO & Product Director - Exalgo</strong> (2022-2023)
 exp2-sector: |
   Sector: Software Development & Artificial Intelligence
 exp2-point1: |
-  Technical leadership of a cloud-native SaaS AI chatbot platform.
+  Product and technical direction of a cloud-native SaaS AI chatbot platform with contextual conversation analysis.
 exp2-point2: |
-  Design of deployment, cloud architecture and DevOps best practices.
+  Design of scalable cloud architecture and industrialized DevOps processes.
 exp2-point3: |
-  Optimization of service performance and scalability.
+  Performance optimization and strategic evolution of services.
 exp3-title: |
-  <strong>CTO - Leni</strong> (2019-2022)
+  <strong>CTO & Product Director - Leni</strong> (2019-2022)
 exp3-sector: |
-  Sector: Event Technology
+  Sector: Event Technology & Smart Office
 exp3-point1: |
-  R&D leadership on several innovative SaaS products (MobileSpot, Youslide, EasyPPT).
+  Product direction and R&D on several innovative SaaS solutions (MobileSpot, AppKiosk, Youslide) with IoT focus.
 exp3-point2: |
-  Management of a team of 10 developers, definition of product strategy.
+  Management of multidisciplinary teams (10 people) and 360° product strategy steering.
 exp3-point3: |
-  Supervision of software architecture, CI/CD and overall technical quality.
+  Supervision of scalable SaaS architecture, CI/CD and technical alignment with business objectives.
 exp4-title: |
-  <strong>Lead dev & Project Manager - Freelance</strong> (2007-2019)
+  <strong>Technical Lead & Product Director - Freelance</strong> (2007-2019)
 exp4-sector: |
   Sectors: Luxury, Automotive, Insurance, Transport, Agencies, Architecture, …
 exp4-point1: |
-  Design and implementation of custom web & mobile applications.
+  360° direction of SaaS and mobile projects from needs analysis to value optimization.
 exp4-point2: |
-  Coordination of multidisciplinary teams (dev, UX/UI, motion design).
+  Coordination of multidisciplinary teams (dev, UX/UI, motion design) and stakeholder management.
 exp4-point3: |
-  End-to-end project management, from client brief to delivery.
+  End-to-end project direction with focus on product-market fit and customer satisfaction.
 exp4-point4: |
-  Custom project from client brief to production
+  Strategic management of complete product lifecycle from client brief to production evolution
 languages-title: |
   Languages
 lang-fr: |
