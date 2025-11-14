@@ -1059,18 +1059,20 @@ th {
         display: none !important;
     }
 
-    /* Remove blue color from links in print */
-    a {
+    /* COMPLETE LINK STYLE RESET FOR PRINT - Force all links to inherit text color */
+    * a,
+    * a:link,
+    * a:visited,
+    * a:hover,
+    * a:active,
+    * a:focus {
         color: inherit !important;
         text-decoration: none !important;
-    }
-    
-    [data-theme="light"] a {
-        color: #2c3e50 !important;
-    }
-    
-    [data-theme="dark"] a {
-        color: #f8f9fa !important;
+        font-weight: inherit !important;
+        font-style: inherit !important;
+        background: none !important;
+        border: none !important;
+        outline: none !important;
     }
 
     /* Increase tagline font size for print */
