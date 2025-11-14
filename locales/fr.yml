@@ -34,7 +34,7 @@ skill-2: |
   Direction UX/UI, conception de parcours clients, interfaces multi-supports (mobile, web, bornes physiques)
 skill-3: |
   <strong>Solutions IoT & Géolocalisation Indoor</strong><br>
-  Technologies de localisation (Bluetooth LE, SDK Polestar), capteurs d'occupation, cartographie interactive, notifications contextuelles intelligentes
+  Technologies de localisation, cartographie interactive, notifications contextuelles intelligentes
 skill-4: |
   <strong>Architecture & Direction Technique</strong><br>
   Architecture cloud SaaS (AWS, Kubernetes, Scaleway), scalabilité, multi-instances, infrastructure as code, monitoring
@@ -47,27 +47,24 @@ skill-6: |
 projects-title: |
   Projets Stratégiques & Réalisations
 project-1: |
-  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-kiosk-mobilespot/">MobileSpot</a></strong> (2019–2022) — Solution IoT pour Retail & Événementiel<br>
-  👉 <strong>Pilotage produit complet</strong> : Définition de la vision et de la roadmap (cartographie indoor, géolocalisation, itinéraires, notifications contextuelles intelligentes, gestion de l'occupation).<br>
+  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Plateforme SaaS IoT<br>
+  <strong>Transformation produit</strong> : Passage d'un modèle projet sur-mesure (plusieurs jours de dev par déploiement) à une plateforme no-code industrialisée.<br>
+  👉 <strong>ROI & Scalabilité</strong> : Réduction drastique des coûts de production (-90%), capacité de déploiement sur 100+ salons, 50 000 utilisateurs par événement.<br>
+  👉 <strong>Pilotage 360°</strong> : Roadmap produit, architecture cloud, direction UX/UI, monitoring multi-clients.<br>
+  <strong>Module IoT et cartographie Mobigéo</strong><br>
   👉 <strong>Déploiement emblématique</strong> : Pilotage complet du projet Printemps Haussmann (Paris) — bornes interactives physiques (toujours en place) et application mobile, en collaboration avec JCDecaux (hardware). Fonctionnalités : géolocalisation indoor, itinéraires dans le magasin, notifications intelligentes contextuelles.<br>
   👉 <strong>IoT & Géolocalisation</strong> : Intégration technique du SDK Polestar (Bluetooth LE) pour la localisation indoor et les services contextuels.<br>
   👉 <strong>Autres déploiements</strong> : Salons professionnels (Bourget, etc.), produit également déployé sur des campus d'entreprise (Crédit Agricole).<br>
-  👉 <strong>Architecture & Scalabilité</strong> : Direction technique de la plateforme.
 project-2: |
-  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Plateforme No-Code Multi‑Événements<br>
-  👉 <strong>Transformation produit</strong> : Passage d'un modèle projet sur-mesure (plusieurs jours de dev) à une plateforme no-code industrialisée (½ journée de paramétrage).<br>
-  👉 <strong>ROI & Scalabilité</strong> : Réduction drastique des coûts de production (-90%), capacité de déploiement sur 100+ salons, 50 000 utilisateurs par événement.<br>
-  👉 <strong>Pilotage 360°</strong> : Roadmap produit, architecture cloud, direction UX/UI, monitoring multi-clients.
-project-3: |
   <strong>Exalbot</strong> (2022–2023) — Chatbot IA Cloud-Native (SaaS)<br>
   👉 <strong>Conception & IA</strong> : Développement du moteur de chatbot conversationnel (Python, Langchain, LLM), architecture RAG pour l'enrichissement contextuel des réponses.<br>
   👉 <strong>Pilotage produit</strong> : Définition de la roadmap et de la stratégie d'intégration IA.<br>
   👉 <strong>Infrastructure & DevOps</strong> : Architecture cloud (Kubernetes, ArgoCD, Scaleway), déploiement multi-environnements, optimisation des performances.
-project-4: |
+project-3: |
   <strong><a href="httpsa://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS Santé B2B2C<br>
   👉 <strong>Conception & Vision produit</strong> : Co-conception du produit avec le métier (vision, UX/UI, fonctionnalités) pour un écosystème complexe (1000 pharmacies, 30+ groupements, 300K patients).<br>
   👉 <strong>Direction technique & UX/UI</strong> : Pilotage de l'architecture SaaS et des applications mobiles (iOS, Android), management de l'équipe design.<br>
-project-5: |
+project-4: |
   <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Plateforme Client & IA Conversationnelle<br>
   👉 <strong>Stratégie produit & IA</strong> : Définition de la roadmap, intégration IA (RAG, LLM) pour l'analyse d'appels et l'automatisation des parcours clients.<br>
   👉 <strong>Architecture cloud-native</strong> : Mise en place de l'infrastructure AWS, CI/CD, environnements multi-instances.<br>
@@ -94,7 +91,7 @@ exp3-title: |
 exp3-point1: |
   Direction d'un pôle R&D (10 pers.), gestion des recrutements.
 exp3-point2: |
-  Pilotage du portefeuille de produits SaaS (Mobigéo, AppKiosk, Youslide) : roadmap, UX/UI, architecture, alignement produit/technique.
+  Pilotage du portefeuille de produits SaaS (AppKiosk, Youslide) : roadmap, UX/UI, architecture, alignement produit/technique.
 exp3-point4: |
   Supervision de l'architecture cloud globale, de la stratégie DevOps (CI/CD) et de la qualité technique.
 exp4-title: |
