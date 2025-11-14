@@ -9,15 +9,18 @@ This project now supports deploying multiple branches to GitHub Pages with diffe
 
 ## Architecture
 
-### GitHub Actions Workflow
+### GitHub Actions Workflows
 
-The [`static.yml`](.github/workflows/static.yml) workflow has been modified to:
+Two separate workflows handle the deployments:
 
-1. **Trigger on both branches**: Runs on pushes to `main` and `cvclaude` branches
-2. **Branch Detection**: Uses conditional logic to determine deployment path
-3. **Dynamic Path Configuration**:
-   - `main` branch → root deployment (`.`)
-   - `cvclaude` branch → subfolder deployment (`360`)
+#### Main Branch Workflow ([`static.yml`](.github/workflows/static.yml))
+- **Trigger**: Runs on pushes to `main` branch only
+- **Deployment**: Deploys to root path (`.`)
+
+#### CVClaude Branch Workflow ([`cvclaude-360.yml`](.github/workflows/cvclaude-360.yml))
+- **Trigger**: Runs on pushes to `cvclaude` branch only
+- **Deployment**: Deploys to `/360` subfolder
+- **Configuration**: Uses `BASE_PATH=/cv/360` environment variable
 
 ### Build Process Modifications
 
@@ -50,22 +53,19 @@ GitHub Pages Structure:
 
 ## How It Works
 
-### 1. Branch Detection
+### 1. Separate Workflows
 
-The workflow detects the current branch using `github.ref`:
+Each branch has its own dedicated workflow:
 
-```yaml
-- name: Determine deployment path
-  id: deployment-path
-  run: |
-    if [[ "${{ github.ref }}" == "refs/heads/cvclaude" ]]; then
-      echo "DEPLOYMENT_PATH=360" >> $GITHUB_OUTPUT
-      echo "BASE_PATH=/cv/360" >> $GITHUB_OUTPUT
-    else
-      echo "DEPLOYMENT_PATH=." >> $GITHUB_OUTPUT
-      echo "BASE_PATH=/cv" >> $GITHUB_OUTPUT
-    fi
-```
+**Main Branch Workflow** ([`static.yml`](.github/workflows/static.yml)):
+- Triggers on `main` branch pushes
+- Builds with default settings (root deployment)
+- Deploys files to root directory
+
+**CVClaude Branch Workflow** ([`cvclaude-360.yml`](.github/workflows/cvclaude-360.yml)):
+- Triggers on `cvclaude` branch pushes
+- Builds with `BASE_PATH=/cv/360` environment variable
+- Moves files to `360/` subdirectory before deployment
 
 ### 2. Build Configuration
 
@@ -98,15 +98,13 @@ if (CONFIG.basePath) {
 
 ### 4. Deployment
 
-Files are moved to the appropriate directory before upload:
+For CVClaude branch, files are moved to the 360 subdirectory:
 
 ```yaml
-- name: Prepare deployment directory
+- name: Prepare 360 deployment directory
   run: |
-    if [[ "${{ steps.deployment-path.outputs.DEPLOYMENT_PATH }}" != "." ]]; then
-      mkdir -p ${{ steps.deployment-path.outputs.DEPLOYMENT_PATH }}
-      mv *.html *.css *.js ${{ steps.deployment-path.outputs.DEPLOYMENT_PATH }}/ 2>/dev/null || true
-    fi
+    mkdir -p 360
+    mv *.html *.css *.js 360/ 2>/dev/null || true
 ```
 
 ## Testing
