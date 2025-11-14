@@ -1,7 +1,7 @@
 title: |
   Etienne Lescot – CV
 keywords: |
-  Etienne Lescot, CV, CTO, Full Stack, Cloud, IA, AWS, Kubernetes, Node.js, React, Python
+  Etienne Lescot, CV, Directeur Produit, CTO, SaaS, Cloud, IA, IoT, AWS, Kubernetes, Node.js, React
 lang-label: |
   Sélectionner la langue
 theme-label: |
@@ -9,7 +9,7 @@ theme-label: |
 download-label: |
   Téléchargez le CV
 tagline: |
-  CTO • Full Stack • Cloud & IA
+  Directeur Produit & Tech • CTO • SaaS, Cloud & IA
 name: |
   Etienne Lescot
 contact-title: |
@@ -23,44 +23,49 @@ contact-linkedin: |
 profile-title: |
   Profil
 profile-desc: |
-  CTO avec plus de 15 ans d'expérience dans la conception de plateformes SaaS, la direction technique et le pilotage d'architectures cloud & IA. J'interviens à la croisée de la stratégie produit, de la performance technique et de l'expérience utilisateur.
+  Directeur Produit & Tech (CTO) avec plus de 15 ans d'expérience, spécialisé dans la transformation de visions stratégiques en plateformes SaaS B2B/B2B2C rentables. J'interviens sur un périmètre 360°, pilotant la stratégie produit (roadmap, UX), la direction technique (Cloud, IA) et la performance business (ROI, scalabilité). Mon profil est à la croisée de l'innovation produit et de l'excellence technique.
 skills-title: |
-  Compétences
+  Compétences 360°
+# Refonte complète des compétences pour suivre votre priorisation (1. Produit, 2. Tech, 3. IA, 4. DevOps, 5. Agile, 6. Dev)
 skill-1: |
-  Leadership technique & pilotage d'équipe
+  <strong>Stratégie Produit & Vision 360°</strong><br>
+  Pilotage roadmap, vision & cycle de vie produit SaaS B2B, Expérience Utilisateur (UX/UI), analyse ROI & rentabilité, stratégie de scalabilité & Go-to-Market.
 skill-2: |
-  Architecture cloud (AWS, Kubernetes, CI/CD, Scaleway)
+  <strong>Direction Technique & Architecture</strong><br>
+  Leadership technique, architecture plateformes SaaS & Cloud (AWS, Scaleway), gestion d'équipes pluridisciplinaires, partenariats techniques & intégration SDK (dont IoT/BLE).
 skill-3: |
-  Développement Full‑Stack&nbsp;: Node.js, React, Python
+  <strong>Intelligence Artificielle (IA)</strong><br>
+  Intégration stratégique de l'IA (LLM, RAG, AWS Bedrock, Langchain) pour l'optimisation des parcours clients et l'analyse contextuelle.
 skill-4: |
-  Intégration IA (LLM, AWS Bedrock, Langchain)
+  <strong>DevOps & Cloud-Native</strong><br>
+  Expertise CI/CD (GitLab, ArgoCD), conteneurisation (Kubernetes, Docker), monitoring, et industrialisation des déploiements multi-instances.
 skill-5: |
-  Expérience utilisateur (UX/UI, mobile, responsive)
+  <strong>Gestion de Projet & Méthodologie</strong><br>
+  Pilotage agile (Scrum), documentation technique & fonctionnelle, gestion de la relation client, coordination d'équipes.
 skill-6: |
-  CI/CD, DevOps, monitoring, environnement multi-instances
-skill-7: |
-  Stratégie produit, documentation technique, méthode agile
+  <strong>Expertise Développement Full-Stack</strong><br>
+  Maîtrise de l'écosystème Node.js, React, Python, garantissant la crédibilité technique et la qualité du code.
 projects-title: |
   Réalisations notables
 project-1: |
   <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Plateforme client, call center et IA<br>
   👉 Architecture et développement de la plateforme cloud-native.<br>
-  👉 Mise en place de l’automatisation des parcours clients et intégration IA pour l’analyse des appels.<br>
-  👉 Pilotage produit (roadmap, UX/UI, stratégie)
+  👉 Mise en place de l’automatisation des parcours clients et intégration IA (analyse d'appels).<br>
+  👉 Pilotage de la vision produit (roadmap, UX/UI) et alignement sur les objectifs business.
 project-2: |
   <strong>Exalbot</strong> (2022–2023) — Plateforme SaaS de chatbot IA cloud-native<br>
-  👉 Conception et développement du chatbot IA avec Python et Langchain.<br>
-  👉 Architecture et Mise en place de l’infrastructure cloud (Kubernetes, ArgoCD, Scaleway) et déploiement multi-environnements.<br>
-  👉 Supervision du projet, optimisation des performances et pilotage produit.
+  👉 Conception du chatbot IA (Python, Langchain) pour l'analyse contextuelle (RAG).<br>
+  👉 Architecture cloud (Kubernetes, ArgoCD, Scaleway) et déploiement multi-environnements.<br>
+  👉 Pilotage de la vision produit et supervision de l'adéquation technique/marché.
 project-3: |
   <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Application kiosque multi‑événements<br>
-  👉 Conception, Architecture et direction du développement de la plateforme SaaS et des applications mobile et web.<br>
-  👉 Déploiement multi-clients, mise en place CI/CD et monitoring.<br>
-  👉 Pilotage produit, UX/UI et stratégie.
+  👉 Pilotage de la transformation produit d'un service manuel vers une plateforme SaaS no-code industrialisée.<br>
+  👉 <strong>Résultat ROI : Réduction de 90% des coûts</strong> de déploiement (de 5j à 0.5j).<br>
+  👉 <strong>Résultat Scalabilité : Passage de 10 à 100+ événements</strong> gérés, supportant 50K+ utilisateurs.
 project-4: |
-  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS mobile grand public<br>
-  👉 Conception, Architecture et développement de la plateforme SaaS et des applications mobile et web.<br>
-  👉 Pilotage produit et coordination des équipes UX/UI.
+  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS mobile B2B2C<br>
+  👉 Conception, Architecture et développement de la plateforme SaaS et des applications (mobile/web).<br>
+  👉 Pilotage de la stratégie produit B2B2C pour un écosystème complexe : <strong>1000+ pharmacies</strong> partenaires et <strong>300K+ comptes patients</strong>.
 experiences-title: |
   Expériences
 exp1-title: |
@@ -71,36 +76,36 @@ exp1-point1: |
 exp1-point2: |
   Supervision de l’automatisation des parcours clients et de la plateforme de réservation.
 exp1-point3: |
-  Gestion de la roadmap technique
+  Gestion de la roadmap technique alignée sur la stratégie produit.
 exp2-title: |
   <strong>CTO - Exalgo</strong> (2022‑2023)<br>
   Secteur : Développement logiciel & Intelligence artificielle
 exp2-point1: |
-  Direction technique d’une plateforme SaaS de chatbot IA cloud-native.
+  Direction technique & produit d’une plateforme SaaS de chatbot IA cloud-native.
 exp2-point2: |
   Conception du déploiement, de l’architecture cloud et des bonnes pratiques DevOps.
 exp2-point3: |
-  Optimisation des performances et de la scalabilité des services.
+  Pilotage de la performance, de la scalabilité et du reporting technique & business.
 exp3-title: |
   <strong>CTO - Leni</strong> (2019‑2022)<br>
   Secteur : Technologies pour l’événementiel
 exp3-point1: |
-  Leadership R&D sur plusieurs produits SaaS innovants (MobileSpot, Youslide, EasyPPT).
+  Leadership R&D sur plusieurs produits SaaS innovants (dont MobileSpot, AppKiosk).
 exp3-point2: |
-  Management d’une équipe de 10 développeurs, définition de la stratégie produit.
+  Management d’une équipe de 10 développeurs, co-définition de la stratégie produit (roadmap, UX).
 exp3-point3: |
-  Supervision de l’architecture logicielle, CI/CD et qualité technique globale.
+  Pilotage de l'intégration de SDK tiers (IoT) pour des services 'Smart Context' : géolocalisation indoor (BLE, Polestar) et notifications intelligentes (Mobilespot).
+exp3-point4: |
+  Garant de l'architecture logicielle, de la CI/CD et de la qualité technique globale.
 exp4-title: |
   <strong>Lead dev & Directeur de projet - Freelance</strong> (2007‑2019)<br>
   Secteurs : Luxe, Automobile, Assurance, Transport, Agences, Architecture, …
 exp4-point1: |
-  Conception et réalisation d’applications web & mobiles sur mesure.
+  Pilotage 360° de projets SaaS et mobiles sur-mesure (du besoin client au suivi ROI).
 exp4-point2: |
-  Coordination d’équipes pluridisciplinaires (dev, UX/UI, motion design).
+  Coordination d’équipes pluridisciplinaires (dev, UX/UI) et garant de la relation client.
 exp4-point3: |
-  Gestion de projets de bout en bout, du brief client à la livraison.
-exp4-point4: |
-  Projet sur mesure du brief client à la mise en production
+  Réalisation notable : Conception et lancement de la plateforme Digitec-Pharma (B2B2C).
 languages-title: |
   Langues
 lang-fr: |
