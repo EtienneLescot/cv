@@ -1,7 +1,7 @@
 title: |
   Etienne Lescot – CV
 keywords: |
-  Etienne Lescot, CV, CTO, Full Stack, Cloud, IA, AWS, Kubernetes, Node.js, React, Python
+  Etienne Lescot, CV, Directeur Technique, Directeur Produit, SaaS, Cloud, IA, IoT, Géolocalisation Indoor, AWS, Kubernetes
 lang-label: |
   Sélectionner la langue
 theme-label: |
@@ -9,7 +9,7 @@ theme-label: |
 download-label: |
   Téléchargez le CV
 tagline: |
-  CTO • Full Stack • Cloud & IA
+  Directeur Technique & Produit • SaaS, IoT & IA
 name: |
   Etienne Lescot
 contact-title: |
@@ -23,84 +23,98 @@ contact-linkedin: |
 profile-title: |
   Profil
 profile-desc: |
-  CTO avec plus de 15 ans d'expérience dans la conception de plateformes SaaS, la direction technique et le pilotage d'architectures cloud & IA. J'interviens à la croisée de la stratégie produit, de la performance technique et de l'expérience utilisateur.
+  Directeur Technique & Produit avec plus de 15 ans d'expérience dans la conception et le pilotage de plateformes SaaS (B2B/B2B2C). J'interviens à la croisée de la vision produit, de l'architecture technique et de l'expérience utilisateur, avec une expertise spécifique sur les solutions IoT (géolocalisation indoor, capteurs, notifications contextuelles) déployées dans des environnements complexes (retail, événementiel, santé).
+  
+  Mon ADN : transformer des besoins métiers en produits scalables et rentables, en pilotant l'ensemble du cycle — de la roadmap produit à la mise en production et l'optimisation continue.
 skills-title: |
   Compétences
 skill-1: |
-  Leadership technique & pilotage d'équipe
+  **Vision & Stratégie Produit**<br>
+  Définition de la vision produit, pilotage de roadmap, gestion du cycle de vie (conception → déploiement → optimisation), alignement stratégique produit/technique
 skill-2: |
-  Architecture cloud (AWS, Kubernetes, CI/CD, Scaleway)
+  **Expérience Utilisateur & Design**<br>
+  Direction UX/UI, conception de parcours clients, interfaces multi-supports (mobile, web, kiosques interactifs, bornes physiques)
 skill-3: |
-  Développement Full‑Stack&nbsp;: Node.js, React, Python
+  **Solutions IoT & Géolocalisation Indoor**<br>
+  Technologies de localisation (Bluetooth LE, SDK Polestar), capteurs d'occupation, cartographie interactive, notifications contextuelles intelligentes
 skill-4: |
-  Intégration IA (LLM, AWS Bedrock, Langchain)
+  **Architecture & Direction Technique**<br>
+  Architecture cloud SaaS (AWS, Kubernetes, Scaleway), scalabilité, multi-instances, infrastructure as code, monitoring
 skill-5: |
-  Expérience utilisateur (UX/UI, mobile, responsive)
+  **Intelligence Artificielle & Automation**<br>
+  IA conversationnelle (LLM, AWS Bedrock, Langchain), RAG (Retrieval-Augmented Generation), automatisation de parcours clients, analyse de contexte
 skill-6: |
-  CI/CD, DevOps, monitoring, environnement multi-instances
-skill-7: |
-  Stratégie produit, documentation technique, méthode agile
+  **Management & Pilotage**<br>
+  Leadership d'équipes pluridisciplinaires (dev, UX, produit), méthode agile, CI/CD, DevOps, optimisation de la rentabilité R&D
 projects-title: |
-  Réalisations notables
+  Projets Stratégiques & Réalisations
 project-1: |
-  <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Plateforme client, call center et IA<br>
-  👉 Architecture et développement de la plateforme cloud-native.<br>
-  👉 Mise en place de l’automatisation des parcours clients et intégration IA pour l’analyse des appels.<br>
-  👉 Pilotage produit (roadmap, UX/UI, stratégie)
+  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-kiosk-mobilespot/">MobileSpot</a></strong> (2019–2022) — Solution IoT pour Retail & Événementiel<br>
+  👉 <strong>Pilotage produit complet</strong> : Définition de la vision et de la roadmap (cartographie indoor, géolocalisation, itinéraires, notifications contextuelles intelligentes, gestion de l'occupation).<br>
+  👉 <strong>Déploiement emblématique</strong> : Pilotage complet du projet Printemps Haussmann (Paris) — bornes interactives physiques (toujours en place) et application mobile, en collaboration avec JCDecaux (hardware). Fonctionnalités : géolocalisation indoor, itinéraires dans le magasin, notifications intelligentes contextuelles.<br>
+  👉 <strong>IoT & Géolocalisation</strong> : Intégration technique du SDK Polestar (Bluetooth LE) pour la localisation indoor et les services contextuels.<br>
+  👉 <strong>Autres déploiements</strong> : Salons professionnels (Bourget, etc.), campus d'entreprise (Crédit Agricole - produit au catalogue).<br>
+  👉 <strong>Architecture & Scalabilité</strong> : Direction technique de la plateforme SaaS cloud-native (AWS, Kubernetes, CI/CD).
 project-2: |
-  <strong>Exalbot</strong> (2022–2023) — Plateforme SaaS de chatbot IA cloud-native<br>
-  👉 Conception et développement du chatbot IA avec Python et Langchain.<br>
-  👉 Architecture et Mise en place de l’infrastructure cloud (Kubernetes, ArgoCD, Scaleway) et déploiement multi-environnements.<br>
-  👉 Supervision du projet, optimisation des performances et pilotage produit.
+  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Plateforme No-Code Multi‑Événements<br>
+  👉 <strong>Transformation produit</strong> : Passage d'un modèle projet sur-mesure (plusieurs jours de dev) à une plateforme no-code industrialisée (½ journée de paramétrage).<br>
+  👉 <strong>ROI & Scalabilité</strong> : Réduction drastique des coûts de production (-90%), capacité de déploiement sur 100+ salons, 50 000 utilisateurs par événement.<br>
+  👉 <strong>Pilotage 360°</strong> : Roadmap produit, architecture cloud, direction UX/UI, monitoring multi-clients.
 project-3: |
-  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Application kiosque multi‑événements<br>
-  👉 Conception, Architecture et direction du développement de la plateforme SaaS et des applications mobile et web.<br>
-  👉 Déploiement multi-clients, mise en place CI/CD et monitoring.<br>
-  👉 Pilotage produit, UX/UI et stratégie.
+  <strong>Exalbot</strong> (2022–2023) — Chatbot IA Cloud-Native (SaaS)<br>
+  👉 <strong>Conception & IA</strong> : Développement du moteur de chatbot conversationnel (Python, Langchain, LLM), architecture RAG pour l'enrichissement contextuel des réponses.<br>
+  👉 <strong>Pilotage produit</strong> : Définition de la roadmap et de la stratégie d'intégration IA.<br>
+  👉 <strong>Infrastructure & DevOps</strong> : Architecture cloud (Kubernetes, ArgoCD, Scaleway), déploiement multi-environnements, optimisation des performances.
 project-4: |
-  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS mobile grand public<br>
-  👉 Conception, Architecture et développement de la plateforme SaaS et des applications mobile et web.<br>
-  👉 Pilotage produit et coordination des équipes UX/UI.
+  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS Santé B2B2C<br>
+  👉 <strong>Conception & Vision produit</strong> : Participation active à la définition du produit (en étroite collaboration avec le métier) pour un écosystème complexe (1000 pharmacies, 30+ groupements, 300K patients).<br>
+  👉 <strong>Direction technique & UX/UI</strong> : Pilotage de l'architecture SaaS et des applications mobiles (iOS, Android), management de l'équipe design.<br>
+  👉 <strong>Gestion des parties prenantes</strong> : Coordination des retours terrain (pharmaciens, patients) pour ajuster continuellement le produit.
+project-5: |
+  <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Plateforme Client & IA Conversationnelle<br>
+  👉 <strong>Stratégie produit & IA</strong> : Définition de la roadmap, intégration IA (RAG, LLM) pour l'analyse d'appels et l'automatisation des parcours clients.<br>
+  👉 <strong>Architecture cloud-native</strong> : Mise en place de l'infrastructure AWS, CI/CD, environnements multi-instances.<br>
+  👉 <strong>Optimisation</strong> : Réduction des coûts d'infrastructure et amélioration continue des performances.
 experiences-title: |
-  Expériences
+  Expériences Professionnelles
 exp1-title: |
   <strong>DSI - Saraé</strong> (2024‑présent)<br>
-  Secteur : Architecture
+  Secteur : Architecture & Services (TPE)
 exp1-point1: |
-  Pilotage stratégique de l’architecture du SI et intégration des outils cloud & IA.
+  Pilotage stratégique du SI (cloud, IA, automatisation) et définition de la roadmap produit (plateforme de réservation, parcours clients).
 exp1-point2: |
-  Supervision de l’automatisation des parcours clients et de la plateforme de réservation.
+  Direction de l'intégration IA conversationnelle (RAG, LLM) pour l'analyse des appels et l'automatisation des processus métiers.
 exp1-point3: |
-  Gestion de la roadmap technique
+  Optimisation des coûts d'infrastructure et amélioration continue des performances techniques.
 exp2-title: |
   <strong>CTO - Exalgo</strong> (2022‑2023)<br>
-  Secteur : Développement logiciel & Intelligence artificielle
+  Secteur : IA & Développement logiciel
 exp2-point1: |
-  Direction technique d’une plateforme SaaS de chatbot IA cloud-native.
+  Direction technique et produit d'une plateforme SaaS de chatbot IA : définition de la vision, pilotage de la roadmap, architecture RAG.
 exp2-point2: |
-  Conception du déploiement, de l’architecture cloud et des bonnes pratiques DevOps.
+  Conception de l'architecture cloud-native (Kubernetes, ArgoCD) et mise en place de la stratégie DevOps.
 exp2-point3: |
-  Optimisation des performances et de la scalabilité des services.
+  Optimisation des performances et de la scalabilité des services IA.
 exp3-title: |
   <strong>CTO - Leni</strong> (2019‑2022)<br>
-  Secteur : Technologies pour l’événementiel
+  Secteur : Technologies pour l'événementiel & Solutions IoT
 exp3-point1: |
-  Leadership R&D sur plusieurs produits SaaS innovants (MobileSpot, Youslide, EasyPPT).
+  Direction produit & technique de 3 solutions SaaS (MobileSpot, AppKiosk, Youslide) : définition de la vision, pilotage des roadmaps, direction UX/UI.
 exp3-point2: |
-  Management d’une équipe de 10 développeurs, définition de la stratégie produit.
+  Pilotage de la transformation no-code (AppKiosk) et de la stratégie de scalabilité (passage de 10 à 100+ déploiements).
 exp3-point3: |
-  Supervision de l’architecture logicielle, CI/CD et qualité technique globale.
+  Management d'une équipe de 10 développeurs et supervision de l'architecture cloud (AWS, Kubernetes, CI/CD).
+exp3-point4: |
+  Intégration de solutions IoT : géolocalisation indoor (SDK Polestar, Bluetooth LE), cartographie, notifications contextuelles, gestion de l'occupation (produit au catalogue).
 exp4-title: |
-  <strong>Lead dev & Directeur de projet - Freelance</strong> (2007‑2019)<br>
-  Secteurs : Luxe, Automobile, Assurance, Transport, Agences, Architecture, …
+  <strong>Lead Dev & Directeur de Projet - Freelance</strong> (2007‑2019)<br>
+  Secteurs : Luxe, Automobile, Assurance, Santé, Architecture
 exp4-point1: |
-  Conception et réalisation d’applications web & mobiles sur mesure.
+  Pilotage de projets SaaS et mobiles sur mesure, de l'analyse des besoins à la mise en production : vision produit, coordination d'équipes pluridisciplinaires (dev, UX/UI, design).
 exp4-point2: |
-  Coordination d’équipes pluridisciplinaires (dev, UX/UI, motion design).
+  Gestion de la relation client et des parties prenantes, suivi de la rentabilité des projets.
 exp4-point3: |
-  Gestion de projets de bout en bout, du brief client à la livraison.
-exp4-point4: |
-  Projet sur mesure du brief client à la mise en production
+  Réalisation notable : conception et direction technique de la plateforme DigitecPharma (B2B2C, 1000+ pharmacies).
 languages-title: |
   Langues
 lang-fr: |
@@ -110,6 +124,6 @@ lang-en: |
 interests-title: |
   Centres d'intérêt
 interest-1: |
-  Boxe : Endurance et combativité.
+  Boxe : Discipline et dépassement de soi.
 interest-2: |
-  Rénovation immobilière : Créativité et respect des normes.
+  Rénovation immobilière : Gestion de contraintes techniques et créativité.
