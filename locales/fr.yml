@@ -66,7 +66,7 @@ project-3: |
   👉 <strong>Pilotage produit</strong> : Définition de la roadmap et de la stratégie d'intégration IA.<br>
   👉 <strong>Infrastructure & DevOps</strong> : Architecture cloud (Kubernetes, ArgoCD, Scaleway), déploiement multi-environnements, optimisation des performances.
 project-4: |
-  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS Santé B2B2C<br>
+  <strong><a href="httpsa://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS Santé B2B2C<br>
   👉 <strong>Conception & Vision produit</strong> : Participation active à la définition du produit (en étroite collaboration avec le métier) pour un écosystème complexe (1000 pharmacies, 30+ groupements, 300K patients).<br>
   👉 <strong>Direction technique & UX/UI</strong> : Pilotage de l'architecture SaaS et des applications mobiles (iOS, Android), management de l'équipe design.<br>
 project-5: |
@@ -78,42 +78,38 @@ experiences-title: |
   Expériences Professionnelles
 exp1-title: |
   <strong>DSI - Saraé</strong> (2024‑présent)<br>
-  Secteur : Architecture & Services (TPE)
+  Secteur : Architecture & Services
 exp1-point1: |
-  Pilotage stratégique du SI (cloud, IA, automatisation) et définition de la roadmap produit (plateforme de réservation, parcours clients).
+  Pilotage stratégique de l'ensemble du SI (Cloud, IA, Outils métiers).
 exp1-point2: |
-  Direction de l'intégration IA conversationnelle (RAG, LLM) pour l'analyse des appels et l'automatisation des processus métiers.
-exp1-point3: |
-  Optimisation des coûts d'infrastructure et amélioration continue des performances techniques.
+  Définition de la gouvernance technique, de l'architecture cloud-native (AWS) et de la stratégie d'automatisation des processus.
 exp2-title: |
   <strong>CTO - Exalgo</strong> (2022‑2023)<br>
   Secteur : IA & Développement logiciel
 exp2-point1: |
-  Direction technique et produit d'une plateforme SaaS de chatbot IA : définition de la vision, pilotage de la roadmap, architecture RAG.
+  Direction de la R&D et définition de la vision technologique et produit de la plateforme SaaS.
 exp2-point2: |
-  Conception de l'architecture cloud-native (Kubernetes, ArgoCD) et mise en place de la stratégie DevOps.
+  Management de la stratégie d'infrastructure cloud-native (Kubernetes, DevOps, CI/CD) et garant de la scalabilité.
 exp2-point3: |
-  Optimisation des performances et de la scalabilité des services IA.
+  Pilotage de la performance technique et de la sécurité des services.
 exp3-title: |
   <strong>CTO - Leni</strong> (2019‑2022)<br>
   Secteur : Technologies pour l'événementiel & Solutions IoT
 exp3-point1: |
-  Direction produit & technique de solutions SaaS (MobileSpot/AppKiosk, Youslide) : vision, roadmaps, direction UX/UI.
+  Direction de l'ensemble du pôle R&D (10 pers.), gestion des recrutements.
 exp3-point2: |
-  Pilotage de la transformation no-code (AppKiosk) et de la stratégie de scalabilité (passage de 10 à 100+ déploiements).
-exp3-point3: |
-  Management d'une équipe de 10 développeurs et supervision de l'architecture cloud (Scaleway, Kubernetes, CI/CD).
+  Pilotage du portefeuille de produits SaaS (roadmap, UX/UI, architecture) et garant de l'alignement produit/technique.
 exp3-point4: |
-  Intégration de solutions IoT : géolocalisation indoor (SDK Polestar, Bluetooth LE), cartographie, notifications contextuelles, gestion de l'occupation (produit au catalogue).
+  Supervision de l'architecture cloud globale, de la stratégie DevOps (CI/CD) et de la qualité technique.
 exp4-title: |
   <strong>Lead Dev & Directeur de Projet - Freelance</strong> (2007‑2019)<br>
   Secteurs : Luxe, Automobile, Assurance, Santé, Architecture
 exp4-point1: |
-  Pilotage de projets SaaS et mobiles sur mesure, de l'analyse des besoins à la mise en production : vision produit, coordination d'équipes pluridisciplinaires (dev, UX/UI, design).
+  Pilotage de A à Z de projets web & mobiles en tant que consultant externe pour des clients grands comptes et ETI.
 exp4-point2: |
-  Gestion de la relation client et des parties prenantes, suivi de la rentabilité des projets.
+  Prise en charge de la relation client, de l'analyse des besoins, de la conception (architecture, UX/UI) et du management des équipes de réalisation.
 exp4-point3: |
-  Réalisation notable : conception et direction technique de la plateforme DigitecPharma (B2B2C, 1000+ pharmacies).
+  Garant du respect des engagements (coûts, délais) et de la rentabilité des missions.
 languages-title: |
   Langues
 lang-fr: |
