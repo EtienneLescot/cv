@@ -23,9 +23,7 @@ contact-linkedin: |
 profile-title: |
   Profile
 profile-desc: |
-  Technical & Product Director with over 15 years of experience in designing and leading SaaS platforms (B2B/B2B2C). I operate at the intersection of product vision, technical architecture, and user experience, with specific expertise in IoT solutions (indoor geolocation, sensors, contextual notifications) deployed in complex environments (retail, events, healthcare).
-
-  My DNA: transforming business needs into scalable and profitable products, managing the entire cycle — from product roadmap to deployment and continuous optimization.
+  Technical & Product Director with over 15 years of experience in designing SaaS platforms. I operate at the intersection of product vision, cloud architecture, and user experience, with specific expertise in IoT solutions.
 skills-title: |
   Skills
 skill-1: |
@@ -36,7 +34,7 @@ skill-2: |
   UX/UI direction, customer journey design, multi-device interfaces (mobile, web, physical kiosks)
 skill-3: |
   <strong>IoT Solutions & Indoor Geolocation</strong><br>
-  Localization technologies (Bluetooth LE, Polestar SDK), occupancy sensors, interactive mapping, smart contextual notifications
+  Localization technologies, interactive mapping, smart contextual notifications
 skill-4: |
   <strong>Technical Architecture & Direction</strong><br>
   Cloud SaaS architecture (AWS, Kubernetes, Scaleway), scalability, multi-instance, infrastructure as code, monitoring
@@ -49,71 +47,62 @@ skill-6: |
 projects-title: |
   Strategic Projects & Achievements
 project-1: |
-  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-kiosk-mobilespot/">MobileSpot</a></strong> (2019–2022) — IoT Solution for Retail & Events<br>
-  👉 <strong>Complete product leadership</strong>: Definition of vision and roadmap (indoor mapping, geolocation, routes, smart contextual notifications, occupancy management).<br>
-  👉 <strong>Iconic deployment</strong>: Complete project leadership for Printemps Haussmann (Paris) — physical interactive kiosks (still in place) and mobile application, in collaboration with JCDecaux (hardware). Features: indoor geolocation, in-store routes, smart contextual notifications.<br>
+  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — SaaS IoT Platform<br>
+  <strong>Product transformation</strong>: Transition from a custom project model (several days of dev per deployment) to an industrialized no-code platform.<br>
+  👉 <strong>ROI & Scalability</strong>: Drastic reduction in production costs (-90%), deployment capacity for 100+ events, 50,000 users per event.<br>
+  👉 <strong>360° Leadership</strong>: Product roadmap, cloud architecture, UX/UI direction, multi-client monitoring.<br>
+  <strong>IoT Module and Mobigéo Mapping</strong><br>
+  👉 <strong>Iconic Deployment</strong>: Complete project leadership for Printemps Haussmann (Paris) — physical interactive kiosks (still in place) and mobile application, in collaboration with JCDecaux (hardware). Features: indoor geolocation, in-store routes, smart contextual notifications.<br>
   👉 <strong>IoT & Geolocation</strong>: Technical integration of Polestar SDK (Bluetooth LE) for indoor localization and contextual services.<br>
-  👉 <strong>Other deployments</strong>: Professional trade shows (Bourget, etc.), corporate campuses (Crédit Agricole).<br>
-  👉 <strong>Architecture & Scalability</strong>: Technical direction of the platform.
+  👉 <strong>Other Deployments</strong>: Professional trade shows (Bourget, etc.), also deployed on corporate campuses (Crédit Agricole).
 project-2: |
-  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — No-Code Multi-Event Platform<br>
-  👉 <strong>Product transformation</strong>: Transition from a custom project model (several days of dev) to an industrialized no-code platform (½ day of configuration).<br>
-  👉 <strong>ROI & Scalability</strong>: Drastic reduction in production costs (-90%), deployment capacity on 100+ events, 50,000 users per event.<br>
-  👉 <strong>360° Leadership</strong>: Product roadmap, cloud architecture, UX/UI direction, multi-client monitoring.
-project-3: |
   <strong>Exalbot</strong> (2022–2023) — Cloud-Native AI Chatbot (SaaS)<br>
   👉 <strong>Design & AI</strong>: Development of conversational chatbot engine (Python, Langchain, LLM), RAG architecture for contextual response enrichment.<br>
-  👉 <strong>Product leadership</strong>: Definition of roadmap and AI integration strategy.<br>
+  👉 <strong>Product Leadership</strong>: Definition of roadmap and AI integration strategy.<br>
   👉 <strong>Infrastructure & DevOps</strong>: Cloud architecture (Kubernetes, ArgoCD, Scaleway), multi-environment deployment, performance optimization.
-project-4: |
+project-3: |
   <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — B2B2C SaaS Healthcare Platform<br>
-  👉 <strong>Design & Product Vision</strong>: Active participation in product definition (in close collaboration with business) for a complex ecosystem (1000 pharmacies, 30+ groups, 300K patients).<br>
+  👉 <strong>Design & Product Vision</strong>: Co-design of the product with business (vision, UX/UI, features) for a complex ecosystem (1000 pharmacies, 30+ groups, 300K patients).<br>
   👉 <strong>Technical & UX/UI Direction</strong>: Leadership of SaaS architecture and mobile applications (iOS, Android), design team management.
-project-5: |
+project-4: |
   <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Customer Platform & Conversational AI<br>
   👉 <strong>Product & AI Strategy</strong>: Roadmap definition, AI integration (RAG, LLM) for call analysis and customer journey automation.<br>
-  👉 <strong>Cloud-native architecture</strong>: Implementation of AWS infrastructure, CI/CD, multi-instance environments.<br>
+  👉 <strong>Cloud-native Architecture</strong>: Implementation of AWS infrastructure, CI/CD, multi-instance environments.<br>
   👉 <strong>Optimization</strong>: Reduction of infrastructure costs and continuous performance improvement.
 experiences-title: |
   Professional Experiences
 exp1-title: |
   <strong>CIO - Saraé</strong> (2024-present)<br>
-  Sector: Architecture & Services (SME)
+  Sector: Architecture & Services
 exp1-point1: |
-  Strategic leadership of IT (cloud, AI, automation) and definition of product roadmap (booking platform, customer journeys).
-exp1-point2: |
-  Leadership of conversational AI integration (RAG, LLM) for call analysis and business process automation.
-exp1-point3: |
-  Optimization of infrastructure costs and continuous improvement of technical performance.
+  IT strategy leadership (cloud, AI, automation), product roadmap definition.
 exp2-title: |
   <strong>CTO - Exalgo</strong> (2022-2023)<br>
   Sector: AI & Software Development
 exp2-point1: |
-  Technical and product leadership of an AI chatbot SaaS platform: vision definition, roadmap management, RAG architecture.
+  R&D leadership and definition of technological and product vision for the SaaS platform.
 exp2-point2: |
-  Design of cloud-native architecture (Kubernetes, ArgoCD) and implementation of DevOps strategy.
+  Management of cloud-native infrastructure strategy (Kubernetes, DevOps, CI/CD), ensuring scalability.
 exp2-point3: |
-  Optimization of performance and scalability of AI services.
+  Leadership of technical performance and service security.
 exp3-title: |
   <strong>CTO - Leni</strong> (2019-2022)<br>
   Sector: Event Technologies & IoT Solutions
 exp3-point1: |
-  Product & technical leadership of SaaS solutions (MobileSpot/AppKiosk, Youslide): vision, roadmaps, UX/UI direction.
+  Leadership of an R&D team (10 people), recruitment management.
 exp3-point2: |
-  Leadership of no-code transformation (AppKiosk) and scalability strategy (from 10 to 100+ deployments).
-exp3-point3: |
-  Management of a team of 10 developers and supervision of cloud architecture (Scaleway, Kubernetes, CI/CD).
+  Leadership of SaaS product portfolio (AppKiosk, Youslide): roadmap, UX/UI, architecture, product/technical alignment.
 exp3-point4: |
-  Integration of IoT solutions: indoor geolocation (Polestar SDK, Bluetooth LE), mapping, contextual notifications, occupancy management (product catalog).
+  Supervision of global cloud architecture, DevOps strategy (CI/CD), and technical quality.
 exp4-title: |
   <strong>Lead Dev & Project Manager - Freelance</strong> (2007-2019)<br>
   Sectors: Luxury, Automotive, Insurance, Healthcare, Architecture
 exp4-point1: |
-  Leadership of custom SaaS and mobile projects, from needs analysis to production: product vision, coordination of multidisciplinary teams (dev, UX/UI, design).
+  End-to-end leadership of web & mobile projects as an external consultant for large accounts and SMEs.
 exp4-point2: |
-  Client relationship management and stakeholder follow-up, project profitability tracking.
+  Client relationship management, needs analysis, design (architecture, UX/UI), and team management.
 exp4-point3: |
-  Notable achievement: design and technical leadership of the DigitecPharma platform (B2B2C, 1000+ pharmacies).
+  Ensuring commitments are met (costs, deadlines), and mission profitability.
 languages-title: |
   Languages
 lang-fr: |
@@ -125,4 +114,6 @@ interests-title: |
 interest-1: |
   Boxing: Discipline and self-improvement.
 interest-2: |
-  Real estate renovation: Technical constraint management and creativity.
+  Home Automation & IoT: Home Assistant, Zigbee, AI Assistant with extended context to home sensors, active technological watch.
+interest-3: |
+  Real Estate Renovation: Technical constraint management and creativity.
