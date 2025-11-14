@@ -845,8 +845,8 @@ th {
     body {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
-        font-size: 10pt !important;
-        line-height: 1.2 !important;
+        font-size: 9pt !important;
+        line-height: 1.1 !important;
         margin: 0 !important;
         padding: 0 !important;
     }
@@ -862,7 +862,7 @@ th {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
         grid-template-rows: auto auto auto auto auto !important;
-        gap: 10pt 14pt !important;
+        gap: 8pt 10pt !important;
         align-items: stretch !important;
         max-width: none !important;
         padding: 0 !important;
@@ -968,17 +968,17 @@ th {
     }
 
     .container {
-        gap: 5pt 14pt !important;
+        gap: 4pt 8pt !important;
     }
 
     .section {
         margin: 0 !important;
     }
      [data-theme="light"] .section {
-        padding: 1rem !important;
+        padding: 0.8rem !important;
     }
     [data-theme="dark"] .section {
-        padding: 0.9rem !important;
+        padding: 0.7rem !important;
     }
     [data-theme="dark"] .section ul {
         margin-bottom: 0 !important;
@@ -986,16 +986,16 @@ th {
     }
     .skills-section,
     .languages-interests-section {
-        margin-top: 30px;
+        margin-top: 20px;
     }
 
     .header-section {
-        margin-top: 100px;
+        margin-top: 50px;
         margin-bottom: 0;
     }
 
     .header-section h1 {
-        margin-bottom: 50px !important;
+        margin-bottom: 30px !important;
     }
 
    
@@ -1003,8 +1003,8 @@ th {
         padding-bottom: 0 !important
     }
     [data-theme=dark] .experiences-section ul li {
-        margin-bottom: .4rem !important;
-    }
+       margin-bottom: .3rem !important;
+   }
    
 
     /* Nettoyage : éléments interactifs */
@@ -1061,6 +1061,6 @@ th {
 }
 
 @page {
-    margin: 15mm;
+    margin: 10mm;
     size: A4;
 }

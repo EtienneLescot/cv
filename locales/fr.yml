@@ -51,7 +51,7 @@ project-1: |
   👉 <strong>Pilotage produit complet</strong> : Définition de la vision et de la roadmap (cartographie indoor, géolocalisation, itinéraires, notifications contextuelles intelligentes, gestion de l'occupation).<br>
   👉 <strong>Déploiement emblématique</strong> : Pilotage complet du projet Printemps Haussmann (Paris) — bornes interactives physiques (toujours en place) et application mobile, en collaboration avec JCDecaux (hardware). Fonctionnalités : géolocalisation indoor, itinéraires dans le magasin, notifications intelligentes contextuelles.<br>
   👉 <strong>IoT & Géolocalisation</strong> : Intégration technique du SDK Polestar (Bluetooth LE) pour la localisation indoor et les services contextuels.<br>
-  👉 <strong>Autres déploiements</strong> : Salons professionnels (Bourget, etc.), campus d'entreprise (Crédit Agricole).<br>
+  👉 <strong>Autres déploiements</strong> : Salons professionnels (Bourget, etc.), produit également déployé sur des campus d'entreprise (Crédit Agricole).<br>
   👉 <strong>Architecture & Scalabilité</strong> : Direction technique de la plateforme.
 project-2: |
   <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Plateforme No-Code Multi‑Événements<br>
@@ -65,7 +65,7 @@ project-3: |
   👉 <strong>Infrastructure & DevOps</strong> : Architecture cloud (Kubernetes, ArgoCD, Scaleway), déploiement multi-environnements, optimisation des performances.
 project-4: |
   <strong><a href="httpsa://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS Santé B2B2C<br>
-  👉 <strong>Conception & Vision produit</strong> : Participation active à la définition du produit (en étroite collaboration avec le métier) pour un écosystème complexe (1000 pharmacies, 30+ groupements, 300K patients).<br>
+  👉 <strong>Conception & Vision produit</strong> : Co-conception du produit avec le métier (vision, UX/UI, fonctionnalités) pour un écosystème complexe (1000 pharmacies, 30+ groupements, 300K patients).<br>
   👉 <strong>Direction technique & UX/UI</strong> : Pilotage de l'architecture SaaS et des applications mobiles (iOS, Android), management de l'équipe design.<br>
 project-5: |
   <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Plateforme Client & IA Conversationnelle<br>
@@ -78,9 +78,7 @@ exp1-title: |
   <strong>DSI - Saraé</strong> (2024‑présent)<br>
   Secteur : Architecture & Services
 exp1-point1: |
-  Pilotage stratégique de l'ensemble du SI (Cloud, IA, Outils métiers).
-exp1-point2: |
-  Définition de la gouvernance technique, de l'architecture cloud-native (AWS) et de la stratégie d'automatisation des processus.
+  Direction du SI : stratégie cloud (AWS), intégration IA conversationnelle, automatisation des processus métiers.
 exp2-title: |
   <strong>CTO - Exalgo</strong> (2022‑2023)<br>
   Secteur : IA & Développement logiciel
@@ -96,7 +94,7 @@ exp3-title: |
 exp3-point1: |
   Direction d'un pôle R&D (10 pers.), gestion des recrutements.
 exp3-point2: |
-  Pilotage du portefeuille de produits SaaS (roadmap, UX/UI, architecture) et garant de l'alignement produit/technique.
+  Pilotage du portefeuille de produits SaaS (Mobigéo, AppKiosk, Youslide) : roadmap, UX/UI, architecture, alignement produit/technique.
 exp3-point4: |
   Supervision de l'architecture cloud globale, de la stratégie DevOps (CI/CD) et de la qualité technique.
 exp4-title: |
@@ -119,4 +117,6 @@ interests-title: |
 interest-1: |
   Boxe : Discipline et dépassement de soi.
 interest-2: |
+  Domotique & IoT : Home Assistant, Zigbee, Assistant IA avec contexte étendu aux capteurs de la maison, veille technologique active.
+interest-3: |
   Rénovation immobilière : Gestion de contraintes techniques et créativité.
