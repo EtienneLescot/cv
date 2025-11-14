@@ -23,7 +23,7 @@ contact-linkedin: |
 profile-title: |
   Profil
 profile-desc: |
-  Directeur Produit avec plus de 15 ans d'expérience, spécialisé dans la transformation de visions stratégiques en plateformes SaaS rentables (B2B/B2B2C). J'interviens sur un périmètre 360°, pilotant la stratégie produit, la rentabilité (ROI) et la direction technique (Cloud & IA). Mon expertise se situe à la croisée de l'Expérience Utilisateur et de l'exploitation de la donnée (IoT, Smart Context), avec des succès prouvés dans la conception et le déploiement de solutions Smart Office et Smart Campus incluant la géolocalisation indoor (SDK Polestar) et la gestion de l'occupation pour des environnements complexes.
+  Directeur Produit avec plus de 15 ans d'expérience, spécialisé dans la transformation de visions stratégiques en plateformes SaaS rentables (B2B/B2B2C). J'interviens sur un périmètre 360°, pilotant la stratégie produit et la direction technique (Cloud & IA), avec en ligne de mire le ROI. Mon expertise se situe à la croisée de l'Expérience Utilisateur et de l'analyse contextuelle, avec des succès prouvés dans la conception et le déploiement de solutions innovantes pour des environnements complexes.
 skills-title: |
   Compétences Clés
 skill-1: |
@@ -31,11 +31,11 @@ skill-1: |
 skill-2: |
   Performance Business & Analyse ROI
 skill-3: |
-  Architecture IoT & Smart Context (BLE, Géolocalisation Indoor)
+  Architecture Carto & Géolocalisation (IoT, Bluetooth)
 skill-4: |
   Direction de Plateformes Cloud (AWS, Kubernetes, CI/CD)
 skill-5: |
-  Intégration IA & Services Intelligents (LLM, Langchain)
+  Intégration IA & Analyse Contextuelle (RAG, LLM, Langchain)
 skill-6: |
   Expérience Utilisateur & Optimisation des Parcours Clients
 skill-7: |
