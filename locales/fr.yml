@@ -1,7 +1,7 @@
 title: |
   Etienne Lescot – CV
 keywords: |
-  Etienne Lescot, CV, CTO, Full Stack, Cloud, IA, AWS, Kubernetes, Node.js, React, Python
+  Etienne Lescot, CV, Directeur Produit, CTO, SaaS, IoT, Smart Building, IA, Cloud
 lang-label: |
   Sélectionner la langue
 theme-label: |
@@ -9,7 +9,7 @@ theme-label: |
 download-label: |
   Téléchargez le CV
 tagline: |
-  CTO • Full Stack • Cloud & IA
+  Directeur Produit & Technique • SaaS B2B • IoT & Smart Building
 name: |
   Etienne Lescot
 contact-title: |
@@ -23,93 +23,76 @@ contact-linkedin: |
 profile-title: |
   Profil
 profile-desc: |
-  CTO avec plus de 15 ans d'expérience dans la conception de plateformes SaaS, la direction technique et le pilotage d'architectures cloud & IA. J'interviens à la croisée de la stratégie produit, de la performance technique et de l'expérience utilisateur.
+  Directeur Produit & Technique avec 15+ ans d'expérience dans le lancement et la scalabilité de plateformes SaaS B2B. Spécialisé dans la convergence produit-technologie-business, avec une expertise en solutions IoT/Smart Building et IA. J'interviens sur un périmètre 360° : de la vision produit au ROI, en passant par la direction technique et l'expérience utilisateur.
 skills-title: |
   Compétences
 skill-1: |
-  Leadership technique & pilotage d'équipe
+  Direction Produit 360° (Vision, Roadmap, P&L, Go-to-Market)
 skill-2: |
-  Architecture cloud (AWS, Kubernetes, CI/CD, Scaleway)
+  Stratégie IoT & Smart Building (Géolocalisation indoor, Capteurs, BLE)
 skill-3: |
-  Développement Full‑Stack&nbsp;: Node.js, React, Python
+  Leadership Technique & Management d'équipes pluridisciplinaires
 skill-4: |
-  Intégration IA (LLM, AWS Bedrock, Langchain)
+  Intelligence Artificielle (LLM, AWS Bedrock, Langchain)
 skill-5: |
-  Expérience utilisateur (UX/UI, mobile, responsive)
+  Architecture Cloud & DevOps (AWS, Kubernetes, CI/CD, Scalabilité)
 skill-6: |
-  CI/CD, DevOps, monitoring, environnement multi-instances
+  Expérience Utilisateur (UX/UI, Recherche utilisateur, Parcours clients)
 skill-7: |
-  Stratégie produit, documentation technique, méthode agile
+  Méthodes Agiles & Pilotage de la performance produit
 projects-title: |
-  Réalisations notables
+  Réalisations Stratégiques
 project-1: |
-  <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Plateforme client, call center et IA<br>
-  👉 Architecture et développement de la plateforme cloud-native.<br>
-  👉 Mise en place de l’automatisation des parcours clients et intégration IA pour l’analyse des appels.<br>
-  👉 Pilotage produit (roadmap, UX/UI, stratégie)
+  <strong>Plateforme IoT "Smart Office" - Mobilespot</strong> (2019-2022)<br>
+  👉 Pilotage produit d'une solution de géolocalisation indoor et gestion d'occupation d'espaces<br>
+  👉 Intégration SDK Polestar (BLE) pour services de contextualisation intelligente<br>
+  👉 Déploiement sur sites complexes : Salon du Bourget, Printemps Haussmann, campus d'entreprise
 project-2: |
-  <strong>Exalbot</strong> (2022–2023) — Plateforme SaaS de chatbot IA cloud-native<br>
-  👉 Conception et développement du chatbot IA avec Python et Langchain.<br>
-  👉 Architecture et Mise en place de l’infrastructure cloud (Kubernetes, ArgoCD, Scaleway) et déploiement multi-environnements.<br>
-  👉 Supervision du projet, optimisation des performances et pilotage produit.
+  <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...)<br>
+  👉 Direction produit et technique d'une plateforme client cloud-native avec intégration IA<br>
+  👉 Automatisation des parcours clients et analyse des données utilisateurs<br>
+  👉 Pilotage de la roadmap stratégique et de l'expérience utilisateur
 project-3: |
-  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Application kiosque multi‑événements<br>
-  👉 Conception, Architecture et direction du développement de la plateforme SaaS et des applications mobile et web.<br>
-  👉 Déploiement multi-clients, mise en place CI/CD et monitoring.<br>
-  👉 Pilotage produit, UX/UI et stratégie.
+  <strong>Transformation SaaS No-Code - AppKiosk</strong> (2019-2022)<br>
+  👉 Refonte produit vers une plateforme no-code réduisant les coûts de déploiement de 90%<br>
+  👉 Scaling de 10 à 100+ clients avec gestion de 50k utilisateurs par application<br>
+  👉 Optimisation du ROI et industrialisation des déploiements
 project-4: |
-  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS mobile grand public<br>
-  👉 Conception, Architecture et développement de la plateforme SaaS et des applications mobile et web.<br>
-  👉 Pilotage produit et coordination des équipes UX/UI.
+  <strong>Écosystème B2B2C - DigitecPharma</strong> (2017-2019)<br>
+  👉 Lancement et croissance d'une plateforme santé connectant 1000 pharmacies et 300k patients<br>
+  👉 Gestion des partenariats stratégiques et de l'expérience utilisateur multi-cibles<br>
+  👉 Pilotage de la scalabilité technique et business
 experiences-title: |
   Expériences
 exp1-title: |
-  <strong>DSI - Saraé</strong> (2024‑présent)<br>
-  Secteur : Architecture
+  <strong>DSI & Responsable Produit - Saraé</strong> (2024‑présent)
 exp1-point1: |
-  Pilotage stratégique de l’architecture du SI et intégration des outils cloud & IA.
+  Pilotage stratégique de l'architecture SI et définition de la roadmap produit
 exp1-point2: |
-  Supervision de l’automatisation des parcours clients et de la plateforme de réservation.
+  Intégration d'IA contextuelle pour l'optimisation des parcours clients
 exp1-point3: |
-  Gestion de la roadmap technique
+  Supervision de l'automatisation et de la scalabilité de la plateforme
 exp2-title: |
-  <strong>CTO - Exalgo</strong> (2022‑2023)<br>
-  Secteur : Développement logiciel & Intelligence artificielle
+  <strong>CTO & Lead Produit - Exalgo</strong> (2022‑2023)
 exp2-point1: |
-  Direction technique d’une plateforme SaaS de chatbot IA cloud-native.
+  Direction technique et produit d'une plateforme SaaS de chatbot IA cloud-native
 exp2-point2: |
-  Conception du déploiement, de l’architecture cloud et des bonnes pratiques DevOps.
+  Conception de l'architecture et stratégie de déploiement multi-environnements
 exp2-point3: |
-  Optimisation des performances et de la scalabilité des services.
+  Optimisation des performances et adéquation produit-marché
 exp3-title: |
-  <strong>CTO - Leni</strong> (2019‑2022)<br>
-  Secteur : Technologies pour l’événementiel
+  <strong>CTO & Responsable Produit - Leni</strong> (2019‑2022)
 exp3-point1: |
-  Leadership R&D sur plusieurs produits SaaS innovants (MobileSpot, Youslide, EasyPPT).
+  Leadership R&D et produit sur un portefeuille de solutions SaaS innovantes
 exp3-point2: |
-  Management d’une équipe de 10 développeurs, définition de la stratégie produit.
+  Management d'équipes pluridisciplinaires et gestion des partenariats techniques
 exp3-point3: |
-  Supervision de l’architecture logicielle, CI/CD et qualité technique globale.
+  Supervision de l'architecture et de la rentabilité des solutions (P&L)
 exp4-title: |
-  <strong>Lead dev & Directeur de projet - Freelance</strong> (2007‑2019)<br>
-  Secteurs : Luxe, Automobile, Assurance, Transport, Agences, Architecture, …
+  <strong>Lead Technique & Produit - Freelance</strong> (2007‑2019)
 exp4-point1: |
-  Conception et réalisation d’applications web & mobiles sur mesure.
+  Pilotage de projets SaaS de l'idéation à la scalabilité business
 exp4-point2: |
-  Coordination d’équipes pluridisciplinaires (dev, UX/UI, motion design).
+  Coordination d'équipes pluridisciplinaires et gestion de la relation client
 exp4-point3: |
-  Gestion de projets de bout en bout, du brief client à la livraison.
-exp4-point4: |
-  Projet sur mesure du brief client à la mise en production
-languages-title: |
-  Langues
-lang-fr: |
-  Français - Natif
-lang-en: |
-  Anglais - B2 Niveau avancé
-interests-title: |
-  Centres d'intérêt
-interest-1: |
-  Boxe : Endurance et combativité.
-interest-2: |
-  Rénovation immobilière : Créativité et respect des normes.
+  Conception d'expériences utilisateur et optimisation continue des produits
