@@ -29,22 +29,22 @@ profile-desc: |
 skills-title: |
   Compétences
 skill-1: |
-  **Vision & Stratégie Produit**<br>
+  <strong>Vision & Stratégie Produit</strong><br>
   Définition de la vision produit, pilotage de roadmap, gestion du cycle de vie (conception → déploiement → optimisation), alignement stratégique produit/technique
 skill-2: |
-  **Expérience Utilisateur & Design**<br>
-  Direction UX/UI, conception de parcours clients, interfaces multi-supports (mobile, web, kiosques interactifs, bornes physiques)
+  <strong>Expérience Utilisateur & Design</strong><br>
+  Direction UX/UI, conception de parcours clients, interfaces multi-supports (mobile, web, bornes physiques)
 skill-3: |
-  **Solutions IoT & Géolocalisation Indoor**<br>
+  <strong>Solutions IoT & Géolocalisation Indoor</strong><br>
   Technologies de localisation (Bluetooth LE, SDK Polestar), capteurs d'occupation, cartographie interactive, notifications contextuelles intelligentes
 skill-4: |
-  **Architecture & Direction Technique**<br>
+  <strong>Architecture & Direction Technique</strong><br>
   Architecture cloud SaaS (AWS, Kubernetes, Scaleway), scalabilité, multi-instances, infrastructure as code, monitoring
 skill-5: |
-  **Intelligence Artificielle & Automation**<br>
+  <strong>Intelligence Artificielle & Automation</strong><br>
   IA conversationnelle (LLM, AWS Bedrock, Langchain), RAG (Retrieval-Augmented Generation), automatisation de parcours clients, analyse de contexte
 skill-6: |
-  **Management & Pilotage**<br>
+  <strong>Management & Pilotage</strong><br>
   Leadership d'équipes pluridisciplinaires (dev, UX, produit), méthode agile, CI/CD, DevOps, optimisation de la rentabilité R&D
 projects-title: |
   Projets Stratégiques & Réalisations
@@ -53,8 +53,8 @@ project-1: |
   👉 <strong>Pilotage produit complet</strong> : Définition de la vision et de la roadmap (cartographie indoor, géolocalisation, itinéraires, notifications contextuelles intelligentes, gestion de l'occupation).<br>
   👉 <strong>Déploiement emblématique</strong> : Pilotage complet du projet Printemps Haussmann (Paris) — bornes interactives physiques (toujours en place) et application mobile, en collaboration avec JCDecaux (hardware). Fonctionnalités : géolocalisation indoor, itinéraires dans le magasin, notifications intelligentes contextuelles.<br>
   👉 <strong>IoT & Géolocalisation</strong> : Intégration technique du SDK Polestar (Bluetooth LE) pour la localisation indoor et les services contextuels.<br>
-  👉 <strong>Autres déploiements</strong> : Salons professionnels (Bourget, etc.), campus d'entreprise (Crédit Agricole - produit au catalogue).<br>
-  👉 <strong>Architecture & Scalabilité</strong> : Direction technique de la plateforme SaaS cloud-native (AWS, Kubernetes, CI/CD).
+  👉 <strong>Autres déploiements</strong> : Salons professionnels (Bourget, etc.), campus d'entreprise (Crédit Agricole).<br>
+  👉 <strong>Architecture & Scalabilité</strong> : Direction technique de la plateforme.
 project-2: |
   <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Plateforme No-Code Multi‑Événements<br>
   👉 <strong>Transformation produit</strong> : Passage d'un modèle projet sur-mesure (plusieurs jours de dev) à une plateforme no-code industrialisée (½ journée de paramétrage).<br>
@@ -69,7 +69,6 @@ project-4: |
   <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS Santé B2B2C<br>
   👉 <strong>Conception & Vision produit</strong> : Participation active à la définition du produit (en étroite collaboration avec le métier) pour un écosystème complexe (1000 pharmacies, 30+ groupements, 300K patients).<br>
   👉 <strong>Direction technique & UX/UI</strong> : Pilotage de l'architecture SaaS et des applications mobiles (iOS, Android), management de l'équipe design.<br>
-  👉 <strong>Gestion des parties prenantes</strong> : Coordination des retours terrain (pharmaciens, patients) pour ajuster continuellement le produit.
 project-5: |
   <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Plateforme Client & IA Conversationnelle<br>
   👉 <strong>Stratégie produit & IA</strong> : Définition de la roadmap, intégration IA (RAG, LLM) pour l'analyse d'appels et l'automatisation des parcours clients.<br>
@@ -99,11 +98,11 @@ exp3-title: |
   <strong>CTO - Leni</strong> (2019‑2022)<br>
   Secteur : Technologies pour l'événementiel & Solutions IoT
 exp3-point1: |
-  Direction produit & technique de 3 solutions SaaS (MobileSpot, AppKiosk, Youslide) : définition de la vision, pilotage des roadmaps, direction UX/UI.
+  Direction produit & technique de solutions SaaS (MobileSpot/AppKiosk, Youslide) : vision, roadmaps, direction UX/UI.
 exp3-point2: |
   Pilotage de la transformation no-code (AppKiosk) et de la stratégie de scalabilité (passage de 10 à 100+ déploiements).
 exp3-point3: |
-  Management d'une équipe de 10 développeurs et supervision de l'architecture cloud (AWS, Kubernetes, CI/CD).
+  Management d'une équipe de 10 développeurs et supervision de l'architecture cloud (Scaleway, Kubernetes, CI/CD).
 exp3-point4: |
   Intégration de solutions IoT : géolocalisation indoor (SDK Polestar, Bluetooth LE), cartographie, notifications contextuelles, gestion de l'occupation (produit au catalogue).
 exp4-title: |
