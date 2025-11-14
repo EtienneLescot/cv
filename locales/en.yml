@@ -23,7 +23,7 @@ contact-linkedin: |
 profile-title: |
   Profile
 profile-desc: |
-  Product Director with over 15 years of experience, specializing in transforming strategic visions into profitable SaaS platforms (B2B/B2B2C). I operate across a 360° scope, driving product strategy, profitability (ROI), and technical direction (Cloud & AI). My expertise lies at the intersection of User Experience and data exploitation (IoT, Smart Context), with proven success in designing and deploying Smart Office and Smart Campus solutions including indoor geolocation (Polestar SDK) and occupancy management for complex environments.
+  Product Director with over 15 years of experience, specializing in transforming strategic visions into profitable SaaS platforms (B2B/B2B2C). I operate across a 360° scope, driving product strategy and technical direction (Cloud & AI), with ROI as the ultimate goal. My expertise lies at the intersection of User Experience and contextual analysis, with proven success in designing and deploying innovative solutions for complex environments.
 skills-title: |
   Key Skills
 skill-1: |
@@ -31,11 +31,11 @@ skill-1: |
 skill-2: |
   Business Performance & ROI Analysis
 skill-3: |
-  IoT & Smart Context Architecture (BLE, Indoor Positioning)
+  Cartography & Geolocation Architecture (IoT, Bluetooth)
 skill-4: |
   Cloud Platform Leadership (AWS, Kubernetes, CI/CD)
 skill-5: |
-  AI Integration & Smart Services (LLM, Langchain)
+  AI Integration & Contextual Analysis (RAG, LLM, Langchain)
 skill-6: |
   User Experience & Customer Journey Optimization
 skill-7: |
