@@ -73,5 +73,5 @@ jobs:
           git add -f 360/style.min.css
           
           git status
-          git commit -m "Update 360 subfolder with cvclaude branch content [skip ci]" || echo "No changes to commit"
+          git commit -m "Update 360 subfolder with cvclaude branch content" || echo "No changes to commit"
           git push origin main
