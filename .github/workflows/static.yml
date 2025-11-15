@@ -41,21 +41,36 @@ jobs:
             echo "DEPLOYMENT_PATH=." >> $GITHUB_OUTPUT
             echo "BASE_PATH=/cv" >> $GITHUB_OUTPUT
           fi
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Install dependencies
-        run: npm install
-      - name: Build project
-        run: npm run build
+      - name: Check if 360 folder exists and deploy pre-built content
+        id: check-360
+        run: |
+          if [ -d "360" ] && [ "$(ls -A 360)" ]; then
+            echo "folder-exists=true" >> $GITHUB_OUTPUT
+            echo "Found 360 folder with content, deploying pre-built files"
+            ls -la 360/
+          else
+            echo "folder-exists=false" >> $GITHUB_OUTPUT
+            echo "No 360 folder found, building from source"
+          fi
+      
+      - name: Build from source if no 360 folder
+        if: steps.check-360.outputs.folder-exists == 'false'
+        run: |
+          npm install
+          npm run build
         env:
           BASE_PATH: ${{ steps.deployment-path.outputs.BASE_PATH }}
+      
       - name: Prepare deployment directory
         run: |
           if [[ "${{ steps.deployment-path.outputs.DEPLOYMENT_PATH }}" != "." ]]; then
             mkdir -p ${{ steps.deployment-path.outputs.DEPLOYMENT_PATH }}
-            mv *.html *.css *.js ${{ steps.deployment-path.outputs.DEPLOYMENT_PATH }}/ 2>/dev/null || true
+            # If 360 folder exists, copy its content, otherwise move built files
+            if [ -d "360" ] && [ "$(ls -A 360)" ]; then
+              cp -r 360/* ${{ steps.deployment-path.outputs.DEPLOYMENT_PATH }}/
+            else
+              mv *.html *.css *.js ${{ steps.deployment-path.outputs.DEPLOYMENT_PATH }}/ 2>/dev/null || true
+            fi
           fi
       - name: Setup Pages
         uses: actions/configure-pages@v5
