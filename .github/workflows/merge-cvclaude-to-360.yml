@@ -10,6 +10,9 @@ on:
   # test
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   merge-to-main:
     runs-on: ubuntu-latest
@@ -42,8 +45,8 @@ jobs:
           rm -rf 360
           # Create 360 folder
           mkdir -p 360
-          # Copy built files from cvclaude to 360 folder
-          cp -r cvclaude-build/*.html cvclaude-build/*.css cvclaude-build/*.js 360/ 2>/dev/null || true
+          # Copy ONLY the built HTML files and minified CSS to 360 folder
+          cp cvclaude-build/*.html cvclaude-build/*.min.css 360/ 2>/dev/null || true
           # Clean up cvclaude-build directory
           rm -rf cvclaude-build
       
@@ -53,4 +56,4 @@ jobs:
           git config --local user.name "GitHub Action"
           git add 360/
           git commit -m "Update 360 subfolder with cvclaude branch content [skip ci]" || echo "No changes to commit"
-          git push
+          git push origin main
