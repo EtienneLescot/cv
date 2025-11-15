@@ -19,7 +19,7 @@ contact-phone: |
 contact-email: |
   Email&nbsp;: <a href="mailto:etiennelescot@gmail.com">etiennelescot@gmail.com</a>
 contact-linkedin: |
-  LinkedIn&nbsp;: <a href="https://www.linkedin.com/in/etienne-lescot-69402019">linkedin.com/in/etienne-lescot-69402019</a>
+  LinkedIn&nbsp;: <a href="https://www.linkedin.com/in/etienne-lescot-69402019" target="_blank">linkedin.com/in/etienne-lescot-69402019</a>
 profile-title: |
   Profil
 profile-desc: |
@@ -43,7 +43,7 @@ skill-7: |
 projects-title: |
   Réalisations notables
 project-1: |
-  <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Plateforme client, call center et IA<br>
+  <strong><a href="https://www.sarae.eco/" target="_blank">SARAE</a></strong> (2024–...) — Plateforme client, call center et IA<br>
   👉 Architecture et développement de la plateforme cloud-native.<br>
   👉 Mise en place de l’automatisation des parcours clients et intégration IA pour l’analyse des appels.<br>
   👉 Pilotage produit (roadmap, UX/UI, stratégie)
@@ -53,12 +53,12 @@ project-2: |
   👉 Architecture et Mise en place de l’infrastructure cloud (Kubernetes, ArgoCD, Scaleway) et déploiement multi-environnements.<br>
   👉 Supervision du projet, optimisation des performances et pilotage produit.
 project-3: |
-  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Application kiosque multi‑événements<br>
+  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/" target="_blank">AppKiosk</a></strong> (2019–2022) — Application kiosque multi‑événements<br>
   👉 Conception, Architecture et direction du développement de la plateforme SaaS et des applications mobile et web.<br>
   👉 Déploiement multi-clients, mise en place CI/CD et monitoring.<br>
   👉 Pilotage produit, UX/UI et stratégie.
 project-4: |
-  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS mobile grand public<br>
+  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/" target="_blank">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS mobile grand public<br>
   👉 Conception, Architecture et développement de la plateforme SaaS et des applications mobile et web.<br>
   👉 Pilotage produit et coordination des équipes UX/UI.
 experiences-title: |

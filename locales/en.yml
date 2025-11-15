@@ -19,7 +19,7 @@ contact-phone: |
 contact-email: |
   Email: <a href="mailto:etiennelescot@gmail.com">etiennelescot@gmail.com</a>
 contact-linkedin: |
-  LinkedIn: <a href="https://www.linkedin.com/in/etienne-lescot-69402019">linkedin.com/in/etienne-lescot-69402019</a>
+  LinkedIn: <a href="https://www.linkedin.com/in/etienne-lescot-69402019" target="_blank">linkedin.com/in/etienne-lescot-69402019</a>
 profile-title: |
   Profile
 profile-desc: |
@@ -43,7 +43,7 @@ skill-7: |
 projects-title: |
   Notable Achievements
 project-1: |
-  <strong><a href="https://www.sarae.eco/">SARAE</a></strong> (2024–...) — Client platform, call center and AI<br>
+  <strong><a href="https://www.sarae.eco/" target="_blank">SARAE</a></strong> (2024–...) — Client platform, call center and AI<br>
   👉 Architecture and development of the cloud-native platform.<br>
   👉 Implementation of client journey automation and AI integration for call analysis.<br>
   👉 Product management (roadmap, UX/UI, strategy)
@@ -53,12 +53,12 @@ project-2: |
   👉 Architecture and implementation of cloud infrastructure (Kubernetes, ArgoCD, Scaleway) and multi-environment deployment.<br>
   👉 Project supervision, performance optimization and product management.
 project-3: |
-  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/">AppKiosk</a></strong> (2019–2022) — Multi-event kiosk application<br>
+  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/" target="_blank">AppKiosk</a></strong> (2019–2022) — Multi-event kiosk application<br>
   👉 Design, architecture and leadership of the SaaS platform and mobile and web applications.<br>
   👉 Multi-client deployment, CI/CD setup and monitoring.<br>
   👉 Product management, UX/UI and strategy.
 project-4: |
-  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/">DigitecPharma</a></strong> (2017–2019) — Public SaaS mobile platform<br>
+  <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/" target="_blank">DigitecPharma</a></strong> (2017–2019) — Public SaaS mobile platform<br>
   👉 Design, architecture and development of the SaaS platform and mobile and web applications.<br>
   👉 Product management and coordination of UX/UI teams.
 experiences-title: |
