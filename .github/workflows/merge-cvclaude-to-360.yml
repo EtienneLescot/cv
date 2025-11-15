@@ -75,11 +75,13 @@ jobs:
           git commit -m "Update 360 subfolder with cvclaude branch content" || echo "No changes to commit"
           git push origin main
       
-      - name: Trigger static deployment workflow
+      - name: Notify deployment required
         run: |
-          # Trigger the static.yml workflow manually using GitHub API
-          curl -X POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/static.yml/dispatches \
-            -d '{"ref":"main"}'
+          echo "✅ Files copied to 360/ folder in main branch"
+          echo "📋 Manual step required:"
+          echo "1. Go to GitHub Actions tab"
+          echo "2. Find 'Deploy static content to Pages' workflow"
+          echo "3. Click 'Run workflow' to deploy the updated 360/ folder"
+          echo "4. After deployment, check:"
+          echo "   - https://etiennelescot.github.io/cv/ (main content)"
+          echo "   - https://etiennelescot.github.io/cv/360/ (cvclaude content)"
