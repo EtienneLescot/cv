@@ -1,0 +1,55 @@
+# Workflow to merge cvclaude branch content into main branch's 360 subfolder
+name: Merge CVClaude to 360 subfolder
+
+on:
+  # Runs on pushes targeting the cvclaude branch
+  push:
+    branches: ["cvclaude"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  merge-to-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Checkout cvclaude branch
+        uses: actions/checkout@v4
+        with:
+          ref: cvclaude
+          path: cvclaude-build
+      
+      - name: Setup Node.js for cvclaude build
+        run: npm install
+        working-directory: ./cvclaude-build
+      
+      - name: Build cvclaude for 360 subfolder
+        run: npm run build
+        working-directory: ./cvclaude-build
+        env:
+          BASE_PATH: /cv/360
+      
+      - name: Create or update 360 subfolder in main
+        run: |
+          # Remove existing 360 folder if it exists
+          rm -rf 360
+          # Create 360 folder
+          mkdir -p 360
+          # Copy built files from cvclaude to 360 folder
+          cp -r cvclaude-build/*.html cvclaude-build/*.css cvclaude-build/*.js 360/ 2>/dev/null || true
+          # Clean up cvclaude-build directory
+          rm -rf cvclaude-build
+      
+      - name: Commit and push changes to main
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add 360/
+          git commit -m "Update 360 subfolder with cvclaude branch content [skip ci]" || echo "No changes to commit"
+          git push
