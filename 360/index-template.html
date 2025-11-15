@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="title"></title>
+    <script>
+      // Apply stored theme immediately to prevent flash of wrong theme
+      (function() {
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+          document.documentElement.setAttribute('data-theme', storedTheme);
+        }
+      })();
+    </script>
+    <meta
+      name="description"
+      content=""
+    />
+    <meta name="author" content="" />
+    <meta
+      name="keywords"
+      content=""
+    />
+    <meta property="og:title" content="" />
+    <meta
+      property="og:description"
+      content=""
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://etiennelescot.com/cv" />
+    <meta
+      property="og:image"
+      content="https://etiennelescot.com/images/profile.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="" />
+    <meta
+      name="twitter:description"
+      data-i18n="profile-desc"
+      content=""
+    />
+    <meta
+      name="twitter:image"
+      content="https://etiennelescot.com/images/profile.jpg"
+    />
+    <link rel="stylesheet" href="style.min.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Header Section - Full Width -->
+      <div class="header-section">
+        <div class="top-right-buttons">
+          <div class="lang-dropdown">
+            <button id="lang-button" class="lang-button" aria-label="">🌐</button>
+            <ul id="lang-menu" class="lang-menu">
+              <!-- Language options will be injected by build process -->
+            </ul>
+          </div>
+           <button id="toggle" aria-label="">🌞 / 🌜</button>
+          <button
+            id="print-btn"
+            aria-label=""
+            onclick="window.print()"
+          >
+            PDF
+          </button>
+        </div>
+        <h1>
+          <div class="header-content">
+            <div class="header-emoji">🌟</div>
+            <div class="header-text">
+              <span data-i18n="name"></span>
+              <span data-i18n="tagline" class="tagline"></span>
+            </div>
+          </div>
+        </h1>
+        
+        
+      </div>
+
+      <!-- Row 1: Contact (1×1) - Grid Position 1 -->
+      <div class="grid-item contact-section">
+        <div class="section neonbox">
+          <h2>📱 <span data-i18n="contact-title"></span></h2>
+          <ul>
+            <li data-i18n="contact-phone"></li>
+            <li data-i18n="contact-email"></li>
+            <li data-i18n="contact-linkedin"></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Row 1: Profil (2×1) - Grid Position 2-3 -->
+      <div class="grid-item profile-section">
+        <div class="section neonbox">
+          <h2>🐙 <span data-i18n="profile-title"></span></h2>
+          <p data-i18n="profile-desc"></p>
+        </div>
+      </div>
+
+      <!-- Row 2: Compétences (2×1) - Grid Position 1-2 -->
+      <div class="grid-item skills-section">
+        <div class="section neonbox">
+          <h2>💪 <span data-i18n="skills-title"></span></h2>
+          <ul>
+            <li data-i18n="skill-1"></li>
+            <li data-i18n="skill-2"></li>
+            <li data-i18n="skill-3"></li>
+            <li data-i18n="skill-4"></li>
+            <li data-i18n="skill-5"></li>
+            <li data-i18n="skill-6"></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <!-- Combined Languages & Interests (1×1) - Grid Position 3 -->
+      <div class="grid-item languages-interests-section">
+        <!-- Languages Section (upper 50%) -->
+        <div class="languages-section">
+          <div class="section neonbox">
+            <h2>🌐 <span data-i18n="languages-title"></span></h2>
+            <ul>
+              <li data-i18n="lang-fr"></li>
+              <li data-i18n="lang-en"></li>
+            </ul>
+          </div>
+        </div>
+        <!-- Interests Section (lower 50%) -->
+        <div class="interests-section">
+          <div class="section neonbox">
+            <h2>❤️ <span data-i18n="interests-title"></span></h2>
+            <ul>
+              <li data-i18n="interest-1"></li>
+              <li data-i18n="interest-2"></li>
+              <li data-i18n="interest-3"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Highlighted Projects Section - Full Width -->
+      <div class="section neonbox projects-highlight">
+        <h2>🚀 <span data-i18n="projects-title"></span></h2>
+        <ul>
+          <li data-i18n="project-1"></li>
+          <li data-i18n="project-2"></li>
+          <li data-i18n="project-3"></li>
+          <li data-i18n="project-4"></li>
+        </ul>
+      </div>
+
+      
+
+      <!-- Experiences Section - Full Width -->
+      <div class="grid-item experiences-section">
+        <div class="section neonbox">
+          <h2>🎒 <span data-i18n="experiences-title"></span></h2>
+          <ul>
+            <li>
+              <span data-i18n="exp1-title"></span>
+              <ul>
+                <li data-i18n="exp1-point1"></li>
+              </ul>
+            </li>
+            <li>
+              <span data-i18n="exp2-title"></span>
+              <ul>
+                <li data-i18n="exp2-point1"></li>
+                <li data-i18n="exp2-point2"></li>
+                <li data-i18n="exp2-point3"></li>
+              </ul>
+            </li>
+            <li>
+              <span data-i18n="exp3-title"></span>
+              <ul>
+                <li data-i18n="exp3-point1"></li>
+                <li data-i18n="exp3-point2"></li>
+              </ul>
+            </li>
+            <li>
+              <span data-i18n="exp4-title"></span>
+              <ul>
+                <li data-i18n="exp4-point1"></li>
+                <li data-i18n="exp4-point2"></li>
+                <li data-i18n="exp4-point3"></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const langButton = document.getElementById('lang-button');
+      const langMenu = document.getElementById('lang-menu');
+      const themeToggle = document.getElementById('toggle');
+      const htmlElement = document.documentElement;
+
+      if (langButton && langMenu) {
+        // Toggle dropdown visibility
+        langButton.addEventListener('click', function(e) {
+          e.stopPropagation();
+          langMenu.style.display = langMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+          langMenu.style.display = 'none';
+        });
+
+        // Handle language selection
+        langMenu.addEventListener('click', function(e) {
+          if (e.target.tagName === 'LI' && e.target.dataset.href) {
+            window.location.href = e.target.dataset.href;
+          }
+        });
+      }
+
+      // Theme toggle functionality
+      if (themeToggle) {
+        // Apply stored theme on page load, default to light if none stored
+        const storedTheme = localStorage.getItem('theme');
+        const defaultTheme = 'light';
+        const themeToApply = storedTheme || defaultTheme;
+
+        htmlElement.setAttribute('data-theme', themeToApply);
+        themeToggle.textContent = themeToApply === 'dark' ? '🌞 / 🌜' : '🌜 / 🌞';
+
+        // Function to update print theme style
+        function updatePrintThemeStyle(theme) {
+          const style = document.createElement('style');
+          style.id = 'print-theme-style';
+          style.innerHTML = `
+            @media print {
+              @page {
+                background: ${theme === 'dark' ? '#1A1A1A' : '#ffffff'} !important;
+              }
+            }
+          `;
+          // Remove any existing print theme style
+          const existingStyle = document.getElementById('print-theme-style');
+          if (existingStyle) {
+            document.head.removeChild(existingStyle);
+          }
+          document.head.appendChild(style);
+        }
+
+        // Set initial print theme style
+        updatePrintThemeStyle(themeToApply);
+
+        themeToggle.addEventListener('click', function() {
+          const currentTheme = htmlElement.getAttribute('data-theme');
+          const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          htmlElement.setAttribute('data-theme', newTheme);
+
+          // Store theme preference
+          localStorage.setItem('theme', newTheme);
+
+          // Update button text
+          themeToggle.textContent = newTheme === 'dark' ? '🌞 / 🌜' : '🌜 / 🌞';
+
+          // Update print theme style
+          updatePrintThemeStyle(newTheme);
+        });
+      }
+    });
+  </script>
+</html>
