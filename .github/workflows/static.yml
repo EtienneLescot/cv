@@ -2,7 +2,7 @@
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
+  # Runs on pushes targeting the main branch only
   push:
     branches: ["main"]
 
@@ -37,8 +37,10 @@ jobs:
           node-version: '20'
       - name: Install dependencies
         run: npm install
-      - name: Build project
+      - name: Build main project
         run: npm run build
+        env:
+          BASE_PATH: /cv
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
