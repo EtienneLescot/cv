@@ -1058,6 +1058,28 @@ th {
     .projects-highlight::before {
         display: none !important;
     }
+
+    /* COMPLETE LINK STYLE RESET FOR PRINT - Force all links to inherit text color */
+    * a,
+    * a:link,
+    * a:visited,
+    * a:hover,
+    * a:active,
+    * a:focus {
+        color: inherit !important;
+        text-decoration: none !important;
+        font-weight: inherit !important;
+        font-style: inherit !important;
+        background: none !important;
+        border: none !important;
+        outline: none !important;
+    }
+
+    /* Increase tagline font size for print */
+    .header-text .tagline {
+        font-size: 1rem !important;
+        font-weight: 500 !important;
+    }
 }
 
 @page {
