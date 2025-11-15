@@ -22,7 +22,7 @@ jobs:
         with:
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
-          clean: false
+          fetch-depth: 0
       
       - name: Checkout cvclaude branch
         uses: actions/checkout@v4
@@ -61,7 +61,17 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -A
+          
+          # Add files explicitly with verification
+          echo "Checking if 360/ files exist:"
+          ls -la 360/
+          
+          # Add files individually to ensure they're staged
+          git add 360/index.html
+          git add 360/index-fr.html
+          git add 360/index-en.html
+          git add 360/style.min.css
+          
           git status
           git commit -m "Update 360 subfolder with cvclaude branch content [skip ci]" || echo "No changes to commit"
           git push origin main
