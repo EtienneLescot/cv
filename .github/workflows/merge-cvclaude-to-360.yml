@@ -57,7 +57,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add 360/
+          git add -A
           git status
           git commit -m "Update 360 subfolder with cvclaude branch content [skip ci]" || echo "No changes to commit"
           git push origin main
