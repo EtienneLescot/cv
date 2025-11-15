@@ -11,15 +11,15 @@ This project now supports deploying multiple branches to GitHub Pages with diffe
 
 ### GitHub Actions Workflows
 
-Two separate workflows handle the deployments:
+Two workflows handle the deployments:
 
 #### Main Branch Workflow ([`static.yml`](.github/workflows/static.yml))
 - **Trigger**: Runs on pushes to `main` branch only
 - **Deployment**: Deploys to root path (`.`)
 
-#### CVClaude Branch Workflow ([`cvclaude-360.yml`](.github/workflows/cvclaude-360.yml))
-- **Trigger**: Runs on pushes to `cvclaude` branch only
-- **Deployment**: Deploys to `/360` subfolder
+#### CVClaude Merge Workflow ([`merge-cvclaude-to-360.yml`](.github/workflows/merge-cvclaude-to-360.yml))
+- **Trigger**: Runs on pushes to `cvclaude` branch
+- **Action**: Builds cvclaude branch and merges content into main branch's `/360` subfolder
 - **Configuration**: Uses `BASE_PATH=/cv/360` environment variable
 
 ### Build Process Modifications
@@ -53,19 +53,22 @@ GitHub Pages Structure:
 
 ## How It Works
 
-### 1. Separate Workflows
-
-Each branch has its own dedicated workflow:
+### 1. Main Branch Deployment
 
 **Main Branch Workflow** ([`static.yml`](.github/workflows/static.yml)):
 - Triggers on `main` branch pushes
 - Builds with default settings (root deployment)
-- Deploys files to root directory
+- Deploys files to root directory via GitHub Pages
 
-**CVClaude Branch Workflow** ([`cvclaude-360.yml`](.github/workflows/cvclaude-360.yml)):
+### 2. CVClaude Branch Integration
+
+**CVClaude Merge Workflow** ([`merge-cvclaude-to-360.yml`](.github/workflows/merge-cvclaude-to-360.yml)):
 - Triggers on `cvclaude` branch pushes
-- Builds with `BASE_PATH=/cv/360` environment variable
-- Moves files to `360/` subdirectory before deployment
+- Checks out both `main` and `cvclaude` branches
+- Builds cvclaude branch with `BASE_PATH=/cv/360` environment variable
+- Copies built files to `360/` subfolder in main branch
+- Commits and pushes changes to main branch
+- This triggers the main branch workflow to redeploy with updated 360 subfolder
 
 ### 2. Build Configuration
 
