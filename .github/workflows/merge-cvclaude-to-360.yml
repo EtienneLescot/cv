@@ -45,8 +45,14 @@ jobs:
           rm -rf 360
           # Create 360 folder
           mkdir -p 360
-          # Copy ONLY the built HTML files and minified CSS to 360 folder
-          cp cvclaude-build/*.html cvclaude-build/*.min.css 360/ 2>/dev/null || true
+          # List files to debug
+          echo "Files in cvclaude-build after build:"
+          ls -la cvclaude-build/
+          # Copy the built HTML files and minified CSS to 360 folder
+          cp cvclaude-build/index.html cvclaude-build/index-fr.html cvclaude-build/index-en.html cvclaude-build/style.min.css 360/ 2>/dev/null || true
+          # List files in 360 folder to verify
+          echo "Files copied to 360 folder:"
+          ls -la 360/
           # Clean up cvclaude-build directory
           rm -rf cvclaude-build
       
