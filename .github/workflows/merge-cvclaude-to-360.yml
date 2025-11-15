@@ -22,6 +22,7 @@ jobs:
         with:
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
+          clean: false
       
       - name: Checkout cvclaude branch
         uses: actions/checkout@v4
@@ -52,6 +53,9 @@ jobs:
           ls -la 360/
           # Clean up cvclaude-build directory
           rm -rf cvclaude-build
+          # Show git status to debug
+          echo "Git status after copying files:"
+          git status
       
       - name: Commit and push changes to main
         run: |
