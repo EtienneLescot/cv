@@ -48,8 +48,13 @@ jobs:
           # List files to debug
           echo "Files in cvclaude-build after build:"
           ls -la cvclaude-build/
-          # Copy the built HTML files and minified CSS to 360 folder
-          cp cvclaude-build/index.html cvclaude-build/index-fr.html cvclaude-build/index-en.html cvclaude-build/style.min.css 360/ 2>/dev/null || true
+          echo "Checking if specific files exist:"
+          ls -la cvclaude-build/index.html 2>/dev/null && echo "index.html exists" || echo "index.html does not exist"
+          ls -la cvclaude-build/index-fr.html 2>/dev/null && echo "index-fr.html exists" || echo "index-fr.html does not exist"
+          ls -la cvclaude-build/index-en.html 2>/dev/null && echo "index-en.html exists" || echo "index-en.html does not exist"
+          ls -la cvclaude-build/style.min.css 2>/dev/null && echo "style.min.css exists" || echo "style.min.css does not exist"
+          # Copy any existing HTML files and CSS to 360 folder
+          cp cvclaude-build/*.html cvclaude-build/*.css 360/ 2>/dev/null || echo "No files to copy"
           # List files in 360 folder to verify
           echo "Files copied to 360 folder:"
           ls -la 360/
