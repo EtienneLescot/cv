@@ -45,6 +45,10 @@
     align-items: flex-start;
 }
 
+.header-emoji:empty {
+    display: none;
+}
+
 .header-emoji {
     margin-right: 8px;
 }
@@ -268,14 +272,7 @@ h2 {
 }
 
 [data-theme="light"] h2::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 4px;
-    height: 100%;
-    background: var(--accent);
-    border-radius: 0;
+    display: none;
 }
 
 /* Special styling for contact section */
@@ -388,13 +385,7 @@ a:hover {
 }
 
 [data-theme="light"] .neonbox::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: var(--accent);
+    display: none;
 }
 
 /* Special contact section styling */
@@ -541,13 +532,7 @@ th {
 
 
 [data-theme="light"] .projects-highlight::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: var(--accent);
+    display: none;
 }
 
 
@@ -1057,7 +1042,9 @@ th {
         border: none !important;
     }
 
-    /* Projects highlight (barre décorative off en print) */
+    /* Nettoyage des barres décoratives en print */
+    h2::before,
+    .neonbox::before,
     .projects-highlight::before {
         display: none !important;
     }

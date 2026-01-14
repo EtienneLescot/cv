@@ -1,7 +1,7 @@
 title: |
   Etienne Lescot – CV
 keywords: |
-  Etienne Lescot, CV, DevOps Architect, Cloud Infrastructure, Industrialization, Pedagogy, SaaS, Cloud, AI, Containerization, Kubernetes, CI/CD
+  Etienne Lescot, CV, Technical Director, Product Director, SaaS, Cloud, AI, IoT, Indoor Localization, AWS, Kubernetes
 lang-label: |
   Select language
 theme-label: |
@@ -9,7 +9,7 @@ theme-label: |
 download-label: |
   Download CV
 tagline: |
-  DevOps Architect & Cloud Infrastructure • Industrialization, Pedagogy, Reliability
+  DevOps Architect • Cloud Architecture & SaaS
 name: |
   Etienne Lescot
 contact-title: |
@@ -23,27 +23,27 @@ contact-linkedin: |
 profile-title: |
   Profile
 profile-desc: |
-  DevOps Architect & Cloud Infrastructure with over 15 years of experience in industrializing SaaS platforms. I specialize in infrastructure reliability, team training (pedagogy), and deployment automation, with a pragmatic approach focused on scalability and security.
+  DevOps Architect with over 15 years of experience in designing SaaS platforms. I work at the intersection of cloud architecture, industrialization, and product vision, with specific expertise in scalable solutions and supporting teams towards technical autonomy.
 skills-title: |
   Skills
 skill-1: |
+  <strong>Cloud Architecture & DevOps</strong><br>
+  Cloud SaaS architecture (AWS, Kubernetes, Scaleway), scalability, multi-instance, infrastructure as code, monitoring
+skill-2: |
+  <strong>Support & Industrialization</strong><br>
+  Technical leadership, agile methodology, CI/CD, deployment automation, reliability and performance optimization
+skill-3: |
   <strong>Product Vision & Strategy</strong><br>
   Product vision definition, roadmap management, lifecycle management (design → deployment → optimization), product/technical strategic alignment
-skill-2: |
-  <strong>User Experience & Design</strong><br>
-  UX/UI direction, customer journey design, multi-device interfaces (mobile, web, physical kiosks)
-skill-3: |
-  <strong>IoT Solutions & Indoor Geolocation</strong><br>
-  Localization technologies, interactive mapping, smart contextual notifications
 skill-4: |
-  <strong>Technical Architecture & Direction</strong><br>
-  Cloud SaaS architecture (AWS, Kubernetes, Scaleway), scalability, multi-instance, infrastructure as code, monitoring
-skill-5: |
   <strong>Artificial Intelligence & Automation</strong><br>
   Conversational AI (LLM, AWS Bedrock, Langchain), RAG (Retrieval-Augmented Generation), customer journey automation, context analysis
+skill-5: |
+  <strong>IoT Solutions & Indoor Geolocation</strong><br>
+  Localization technologies, interactive mapping, smart contextual notifications
 skill-6: |
-  <strong>Management & Leadership</strong><br>
-  Leadership of multidisciplinary teams (dev, UX, product), agile methodology, CI/CD, DevOps, R&D profitability optimization
+  <strong>User Experience & Design</strong><br>
+  UX/UI direction, customer journey design, multi-device interfaces (mobile, web, physical kiosks)
 projects-title: |
   Strategic Projects & Achievements
 project-1: |
