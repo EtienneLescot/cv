@@ -1,7 +1,7 @@
 title: |
   Etienne Lescot – CV
 keywords: |
-  Etienne Lescot, CV, Directeur Technique, Directeur Produit, SaaS, Cloud, IA, IoT, Géolocalisation Indoor, AWS, Kubernetes
+  Etienne Lescot, CV, Architecte DevOps, Infrastructure Cloud, Industrialisation, Pédagogie, SaaS, Cloud, IA, Conteneurisation, Kubernetes, CI/CD
 lang-label: |
   Sélectionner la langue
 theme-label: |
@@ -9,7 +9,7 @@ theme-label: |
 download-label: |
   Téléchargez le CV
 tagline: |
-  Directeur Technique & Produit • SaaS, IoT & IA
+  Architecte DevOps & Infrastructure Cloud • Industrialisation, Pédagogie, Fiabilité
 name: |
   Etienne Lescot
 contact-title: |
@@ -23,52 +23,52 @@ contact-linkedin: |
 profile-title: |
   Profil
 profile-desc: |
-   Directeur Technique & Produit avec plus de 15 ans d'expérience dans la conception de plateformes SaaS. J'interviens à la croisée de la vision produit, de l'architecture cloud et de l'expérience utilisateur, avec une expertise spécifique sur les solutions intégrant de l'IoT.
+   Architecte DevOps & Infrastructure Cloud avec plus de 15 ans d'expérience dans l'industrialisation de plateformes SaaS. Je me spécialise dans la fiabilité des infrastructures, la formation d'équipes (pédagogie) et l'automatisation des déploiements, avec une approche pragmatique centrée sur la scalabilité et la sécurité.
 skills-title: |
   Compétences
 skill-1: |
-  <strong>Vision & Stratégie Produit</strong><br>
-  Définition de la vision produit, pilotage de roadmap, gestion du cycle de vie (conception → déploiement → optimisation), alignement stratégique produit/technique
+  <strong>Architecture & Infrastructure SaaS</strong><br>
+  Conception d'architectures cloud scalables (AWS, Kubernetes), capacité d'auto-hébergement (self-hosted), industrialisation des déploiements, gestion multi-instances, haute disponibilité
 skill-2: |
-  <strong>Expérience Utilisateur & Design</strong><br>
-  Direction UX/UI, conception de parcours clients, interfaces multi-supports (mobile, web, bornes physiques)
+  <strong>Culture DevOps & Pédagogie</strong><br>
+  Formation d'équipes, documentation technique, bonnes pratiques, automatisation des processus, amélioration continue, partage de connaissances
 skill-3: |
-  <strong>Solutions IoT & Géolocalisation Indoor</strong><br>
-  Technologies de localisation, cartographie interactive, notifications contextuelles intelligentes
+  <strong>Conteneurisation & Orchestration</strong><br>
+  Docker, Kubernetes, CI/CD (GitLab CI, GitHub Actions), gestion de clusters, déploiements blue-green, rollbacks, monitoring des conteneurs
 skill-4: |
-  <strong>Architecture & Direction Technique</strong><br>
-  Architecture cloud SaaS (AWS, Kubernetes, Scaleway), scalabilité, multi-instances, infrastructure as code, monitoring
+  <strong>Infrastructure Cloud & Sécurité</strong><br>
+  Architecture cloud-native (AWS, Scaleway), infrastructure as code (Terraform, Ansible), sécurité des applications, conformité, monitoring (Prometheus, Grafana), gestion des incidents
 skill-5: |
-  <strong>Intelligence Artificielle & Automation</strong><br>
-  IA conversationnelle (LLM, AWS Bedrock, Langchain), RAG (Retrieval-Augmented Generation), automatisation de parcours clients, analyse de contexte
+  <strong>Automatisation & Performance</strong><br>
+  Pipeline CI/CD, tests automatisés, optimisation des performances, analyse de logs, alerting, gestion de la capacité, scaling automatique
 skill-6: |
-  <strong>Management & Pilotage</strong><br>
-  Leadership d'équipes pluridisciplinaires (dev, UX, produit), méthode agile, CI/CD, DevOps, optimisation de la rentabilité R&D
+  <strong>Leadership & Stratégie Technique</strong><br>
+  Direction d'équipes DevOps/SRE, alignement technique/métier, gouvernance IT, budgétisation cloud, ROI des investissements techniques, transformation numérique
 projects-title: |
   Projets Stratégiques & Réalisations
 project-1: |
-  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/" target="_blank">AppKiosk</a></strong> (2019–2022) — Plateforme SaaS IoT<br>
-  <strong>Transformation produit</strong> : Passage d'un modèle projet sur-mesure (plusieurs jours de dev par déploiement) à une plateforme no-code industrialisée.<br>
-  👉 <strong>ROI & Scalabilité</strong> : Réduction drastique des coûts de production (-90%), capacité de déploiement sur 100+ salons, 50 000 utilisateurs par événement.<br>
-  👉 <strong>Pilotage 360°</strong> : Roadmap produit, architecture cloud, direction UX/UI, monitoring multi-clients.<br>
+  <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/" target="_blank">AppKiosk</a></strong> (2019–2022) — Plateforme SaaS IoT industrialisée<br>
+  <strong>Infrastructure & Déploiement</strong> : Transformation d'un modèle projet sur-mesure vers une plateforme no-code avec pipeline CI/CD automatisé, permettant des déploiements sur 100+ sites en self‑hosted.<br>
+  <strong>Scalabilité & Monitoring</strong> : Architecture cloud multi‑tenant (Kubernetes, AWS), monitoring centralisé (Prometheus, Grafana), gestion des incidents, haute disponibilité garantie.<br>
   <strong>Module IoT et cartographie Mobigéo</strong><br>
-  👉 <strong>Déploiement emblématique</strong> : Pilotage complet du projet Printemps Haussmann (Paris) — bornes interactives physiques (toujours en place) et application mobile, en collaboration avec JCDecaux (hardware). Fonctionnalités : géolocalisation indoor, itinéraires dans le magasin, notifications intelligentes contextuelles.<br>
-  👉 <strong>IoT & Géolocalisation</strong> : Intégration technique du SDK Polestar (Bluetooth LE) pour la localisation indoor et les services contextuels.<br>
-  👉 <strong>Autres déploiements</strong> : Salons professionnels (Bourget, etc.), produit également déployé sur des campus d'entreprise (Crédit Agricole).<br>
+  <strong>Déploiement hybride</strong> : Infrastructure mixte cloud/on‑premise pour le projet Printemps Haussmann (Paris) — bornes interactives physiques (JCDecaux) + application mobile, avec géolocalisation indoor et services contextuels.<br>
+  <strong>Automatisation</strong> : Pipeline de déploiement zero‑downtime, rollback automatisé, tests de charge pour 50 000 utilisateurs simultanés.<br>
+  <strong>Autres déploiements</strong> : Salons professionnels (Bourget), campus d'entreprise (Crédit Agricole) avec gestion centralisée des configurations.<br>
 project-2: |
   <strong>Exalbot</strong> (2022–2023) — Chatbot IA Cloud-Native (SaaS)<br>
-  👉 <strong>Conception & IA</strong> : Développement du moteur de chatbot conversationnel (Python, Langchain, LLM), architecture RAG pour l'enrichissement contextuel des réponses.<br>
-  👉 <strong>Pilotage produit</strong> : Définition de la roadmap et de la stratégie d'intégration IA.<br>
-  👉 <strong>Infrastructure & DevOps</strong> : Architecture cloud (Kubernetes, ArgoCD, Scaleway), déploiement multi-environnements, optimisation des performances.
+  <strong>Infrastructure Kubernetes</strong> : Architecture multi‑cluster (Kubernetes, ArgoCD, Scaleway) avec GitOps, déploiement blue‑green, gestion des secrets via Vault.<br>
+  <strong>CI/CD & Observability</strong> : Pipeline GitLab CI avec tests automatisés, monitoring des performances (Latency, P99), alerting sur les modèles LLM.<br>
+  <strong>Scalabilité & Coûts</strong> : Optimisation des ressources cloud (auto‑scaling HPA), réduction de 40% des coûts d'infrastructure tout en garantissant la disponibilité 24/7.
 project-3: |
   <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/" target="_blank">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS Santé B2B2C<br>
-  👉 <strong>Conception & Vision produit</strong> : Co-conception du produit avec le métier (vision, UX/UI, fonctionnalités) pour un écosystème complexe (1000 pharmacies, 30+ groupements, 300K patients).<br>
-  👉 <strong>Direction technique & UX/UI</strong> : Pilotage de l'architecture SaaS et des applications mobiles (iOS, Android), management de l'équipe design.<br>
+  <strong>Architecture Cloud & Conformité</strong> : Infrastructure AWS conforme HIPAA/GDPR, isolation des données patients, audit de sécurité, backup automatisé.<br>
+  <strong>DevOps & Déploiement</strong> : Pipeline CI/CD pour applications mobiles (iOS, Android) et backend, environnement de staging identique à la production, tests d'intégration automatisés.<br>
+  <strong>Monitoring & Support</strong> : Centralisation des logs (ELK), dashboard de supervision pour 1000 pharmacies, support technique 24/7 avec escalation automatisée.
 project-4: |
   <strong><a href="https://www.sarae.eco/" target="_blank">SARAE</a></strong> (2024–...) — Plateforme Client & IA Conversationnelle<br>
-  👉 <strong>Stratégie produit & IA</strong> : Définition de la roadmap, intégration IA (RAG, LLM) pour l'analyse d'appels et l'automatisation des parcours clients.<br>
-  👉 <strong>Architecture cloud-native</strong> : Mise en place de l'infrastructure AWS, CI/CD, environnements multi-instances.<br>
-  👉 <strong>Optimisation</strong> : Réduction des coûts d'infrastructure et amélioration continue des performances.
+  <strong>Infrastructure as Code</strong> : Déploiement Terraform sur AWS (EKS, RDS, S3), gestion des environnements (dev/staging/prod) via GitOps.<br>
+  <strong>CI/CD & Qualité</strong> : Pipeline GitHub Actions avec tests de sécurité (SAST, DAST), analyse de code, déploiement automatique sur validation.<br>
+  <strong>Monitoring & Performance</strong> : Observability stack (Prometheus, Loki, Tempo), alerting sur les métriques business, optimisation des coûts cloud (-30% en 6 mois).
 experiences-title: |
   Expériences Professionnelles
 exp1-title: |
