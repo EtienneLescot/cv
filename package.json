@@ -1,6 +1,6 @@
 {
   "name": "repos",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cette page présente mon curriculum vitæ dans un style rétro des années 90. Elle peut être ouverte localement en affichant `index.html` ou déployée sur GitHub Pages.",
   "main": "index.js",
   "scripts": {
