@@ -1,0 +1,88 @@
+# Workflow to deploy content from any branch into a subfolder on the main branch
+name: Deploy Branch to Subfolder
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!main'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-to-subfolder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      
+      - name: Checkout source branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          path: source-branch-build
+      
+      - name: Setup Node.js for build
+        run: npm install
+        working-directory: ./source-branch-build
+      
+      - name: Build branch content
+        run: npm run build
+        working-directory: ./source-branch-build
+        env:
+          BASE_PATH: /cv/${{ github.ref_name }}
+      
+      - name: Create or update subfolder in main
+        run: |
+          BRANCH_NAME="${{ github.ref_name }}"
+          # Remove existing folder for this branch if it exists
+          rm -rf "$BRANCH_NAME"
+          # Create branch folder
+          mkdir -p "$BRANCH_NAME"
+          # Copy ONLY the built HTML files and minified CSS to the folder
+          cp source-branch-build/index.html source-branch-build/index-fr.html source-branch-build/index-en.html source-branch-build/style.min.css "$BRANCH_NAME"/
+          # List files to verify
+          echo "Files copied to $BRANCH_NAME folder:"
+          ls -la "$BRANCH_NAME"/
+          # Clean up build directory
+          rm -rf source-branch-build
+          # Show git status to debug
+          echo "Git status after copying files:"
+          git status
+      
+      - name: Commit and push changes to main
+        run: |
+          BRANCH_NAME="${{ github.ref_name }}"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Add files explicitly with verification
+          echo "Checking if $BRANCH_NAME/ files exist:"
+          ls -la "$BRANCH_NAME"/
+          
+          # Add the entire folder
+          git add -f "$BRANCH_NAME"/
+          
+          git status
+          git commit -m "Update $BRANCH_NAME subfolder with content from branch ${{ github.ref_name }} [skip ci]" || echo "No changes to commit"
+          git push origin main
+      
+      - name: Notify deployment status
+        run: |
+          BRANCH_NAME="${{ github.ref_name }}"
+          echo "✅ Files copied to $BRANCH_NAME/ folder in main branch"
+          echo "📋 Manual step may be required if automatic deployment is not configured:"
+          echo "1. Go to GitHub Actions tab"
+          echo "2. Find 'Deploy static content to Pages' workflow (if it exists)"
+          echo "3. Click 'Run workflow' to deploy the updated folders"
+          echo "4. After deployment, check:"
+          echo "   - https://etiennelescot.github.io/cv/ (main content)"
+          echo "   - https://etiennelescot.github.io/cv/$BRANCH_NAME/ (branch content)"
