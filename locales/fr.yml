@@ -49,26 +49,26 @@ projects-title: |
 project-1: |
   <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/" target="_blank">AppKiosk</a></strong> (2019–2022) — Plateforme SaaS IoT<br>
   <strong>Transformation produit</strong> : Passage d'un modèle projet sur-mesure (plusieurs jours de dev par déploiement) à une plateforme no-code industrialisée.<br>
-  👉 <strong>ROI & Scalabilité</strong> : Réduction drastique des coûts de production (-90%), capacité de déploiement sur 100+ salons, 50 000 utilisateurs par événement.<br>
-  👉 <strong>Pilotage 360°</strong> : Roadmap produit, architecture cloud, direction UX/UI, monitoring multi-clients.<br>
+  >> <strong>ROI & Scalabilité</strong> : Réduction drastique des coûts de production (-90%), capacité de déploiement sur 100+ salons, 50 000 utilisateurs par événement.<br>
+  >> <strong>Pilotage 360°</strong> : Roadmap produit, architecture cloud, direction UX/UI, monitoring multi-clients.<br>
   <strong>Module IoT et cartographie Mobigéo</strong><br>
-  👉 <strong>Déploiement emblématique</strong> : Pilotage complet du projet Printemps Haussmann (Paris) — bornes interactives physiques (toujours en place) et application mobile, en collaboration avec JCDecaux (hardware). Fonctionnalités : géolocalisation indoor, itinéraires dans le magasin, notifications intelligentes contextuelles.<br>
-  👉 <strong>IoT & Géolocalisation</strong> : Intégration technique du SDK Polestar (Bluetooth LE) pour la localisation indoor et les services contextuels.<br>
-  👉 <strong>Autres déploiements</strong> : Salons professionnels (Bourget, etc.), produit également déployé sur des campus d'entreprise (Crédit Agricole).<br>
+  >> <strong>Déploiement emblématique</strong> : Pilotage complet du projet Printemps Haussmann (Paris) — bornes interactives physiques (toujours en place) et application mobile, en collaboration avec JCDecaux (hardware). Fonctionnalités : géolocalisation indoor, itinéraires dans le magasin, notifications intelligentes contextuelles.<br>
+  >> <strong>IoT & Géolocalisation</strong> : Intégration technique du SDK Polestar (Bluetooth LE) pour la localisation indoor et les services contextuels.<br>
+  >> <strong>Autres déploiements</strong> : Salons professionnels (Bourget, etc.), produit également déployé sur des campus d'entreprise (Crédit Agricole).<br>
 project-2: |
   <strong>Exalbot</strong> (2022–2023) — Chatbot IA Cloud-Native (SaaS)<br>
-  👉 <strong>Conception & IA</strong> : Développement du moteur de chatbot conversationnel (Python, Langchain, LLM), architecture RAG pour l'enrichissement contextuel des réponses.<br>
-  👉 <strong>Pilotage produit</strong> : Définition de la roadmap et de la stratégie d'intégration IA.<br>
-  👉 <strong>Infrastructure & DevOps</strong> : Architecture cloud (Kubernetes, ArgoCD, Scaleway), déploiement multi-environnements, optimisation des performances.
+  >> <strong>Conception & IA</strong> : Développement du moteur de chatbot conversationnel (Python, Langchain, LLM), architecture RAG pour l'enrichissement contextuel des réponses.<br>
+  >> <strong>Pilotage produit</strong> : Définition de la roadmap et de la stratégie d'intégration IA.<br>
+  >> <strong>Infrastructure & DevOps</strong> : Architecture cloud (Kubernetes, ArgoCD, Scaleway), déploiement multi-environnements, optimisation des performances.
 project-3: |
   <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/" target="_blank">DigitecPharma</a></strong> (2017–2019) — Plateforme SaaS Santé B2B2C<br>
-  👉 <strong>Conception & Vision produit</strong> : Co-conception du produit avec le métier (vision, UX/UI, fonctionnalités) pour un écosystème complexe (1000 pharmacies, 30+ groupements, 300K patients).<br>
-  👉 <strong>Direction technique & UX/UI</strong> : Pilotage de l'architecture SaaS et des applications mobiles (iOS, Android), management de l'équipe design.<br>
+  >> <strong>Conception & Vision produit</strong> : Co-conception du produit avec le métier (vision, UX/UI, fonctionnalités) pour un écosystème complexe (1000 pharmacies, 30+ groupements, 300K patients).<br>
+  >> <strong>Direction technique & UX/UI</strong> : Pilotage de l'architecture SaaS et des applications mobiles (iOS, Android), management de l'équipe design.<br>
 project-4: |
   <strong><a href="https://www.sarae.eco/" target="_blank">SARAE</a></strong> (2024–...) — Plateforme Client & IA Conversationnelle<br>
-  👉 <strong>Stratégie produit & IA</strong> : Définition de la roadmap, intégration IA (RAG, LLM) pour l'analyse d'appels et l'automatisation des parcours clients.<br>
-  👉 <strong>Architecture cloud-native</strong> : Mise en place de l'infrastructure AWS, CI/CD, environnements multi-instances.<br>
-  👉 <strong>Optimisation</strong> : Réduction des coûts d'infrastructure et amélioration continue des performances.
+  >> <strong>Stratégie produit & IA</strong> : Définition de la roadmap, intégration IA (RAG, LLM) pour l'analyse d'appels et l'automatisation des parcours clients.<br>
+  >> <strong>Architecture cloud-native</strong> : Mise en place de l'infrastructure AWS, CI/CD, environnements multi-instances.<br>
+  >> <strong>Optimisation</strong> : Réduction des coûts d'infrastructure et amélioration continue des performances.
 experiences-title: |
   Expériences Professionnelles
 exp1-title: |
