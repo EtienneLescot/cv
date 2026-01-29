@@ -2,41 +2,46 @@
    DARK THEME - Retro Terminal/Hacker Style
    ================================================================= */
 :root {
-
-    --contrast-high: #000000;
-    --contrast-low: #ffffff;
-    --button-border: 2px solid var(--accent);
+    --accent-blue: #007bff;
+    --accent-glow: rgba(0, 123, 255, 0.3);
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
 }
 
 [data-theme="dark"] {
-    --bg: #1A1A1A;
-    --text: #00ffaa;
-    --h2color: #00ff00;
-    --accent: #bebebe;
-    --link: #ffff00;
+    --bg: #0a0a0c;
+    --text: #e0e0e0;
+    --h2color: #ffffff;
+    --accent: var(--accent-blue);
+    --link: #4da3ff;
+    --grid-color: rgba(255, 255, 255, 0.05);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --contrast-high: #ffffff;
+    --contrast-low: #000000;
+    --button-border: 1px solid var(--glass-border);
 }
 
 /* =================================================================
-   LIGHT THEME - Creative/Asymmetric Professional Style
+   LIGHT THEME - 2026 Glassmorphism Style
    ================================================================= */
 [data-theme="light"] {
-    --bg: #ffffff;
-    --text: #2c3e50;
-    --accent: #3498db;
-    --secondary: #e74c3c;
-    --highlight: #f39c12;
-    --muted: #95a5a6;
-    --light-bg: #ecf0f1;
-    --contact-bg: #3498db;
-    --link: #2980b9;
+    --bg: #f8f9fa;
+    --text: #1a1a1c;
+    --accent: var(--accent-blue);
+    --secondary: #4a5568;
+    --highlight: #2b6cb0;
+    --muted: #718096;
+    --light-bg: rgba(255, 255, 255, 0.7);
+    --contact-bg: var(--accent-blue);
+    --link: #2b6cb0;
     --contrast-high: #ffffff;
-    --contrast-low: #2c3e50;
-    --button-border: 2px solid var(--accent);
-
-    /* Typography variables */
-    --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-    --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+    --contrast-low: #1a1a1c;
+    --grid-color: rgba(0, 0, 0, 0.05);
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --button-border: 1px solid var(--glass-border);
 }
 
 /* Header styling */
@@ -55,8 +60,12 @@
 }
 
 .header-text .tagline {
-    font-size: 0.8rem;
-    font-weight: normal;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-top: 0.2rem;
 }
 
 /* Button container for alignment */
@@ -73,17 +82,19 @@
 html,
 body {
     margin: 0;
-    background: var(--bg);
+    background-color: var(--bg);
+    background-image: radial-gradient(var(--grid-color) 1px, transparent 1px);
+    background-size: 24px 24px;
     color: var(--text);
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-primary);
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Light theme typography override */
-[data-theme="light"] html,
-[data-theme="light"] body {
+/* Dark theme typography override */
+[data-theme="dark"] html,
+[data-theme="dark"] body {
     font-family: var(--font-primary);
-    line-height: 1.7;
 }
 
 .container {
@@ -94,17 +105,20 @@ body {
 
 /* Dark theme styling (default) */
 h1 {
-    color: var(--accent);
+    color: var(--text);
     text-align: left;
     position: relative;
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: 3rem;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+    line-height: 1;
 }
 
-/* Light theme - Creative header styling */
-[data-theme="light"] h1 {
-    font-family: var(--font-heading);
-    color: var(--text);
+[data-theme="dark"] h1 {
+    color: #ffffff;
 }
 
 
@@ -117,31 +131,49 @@ h1 {
 #toggle,
 .lang-button,
 #print-btn {
-    background: var(--bg);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     color: var(--text);
     border: var(--button-border);
-    padding: 4px 8px;
+    padding: 8px 16px;
     cursor: pointer;
-    font-weight: bold;
-    height: 30px;
-    font-family: inherit;
-    transition: all 0.2s ease;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    font-family: var(--font-primary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#toggle:hover,
+.lang-button:hover,
+#print-btn:hover {
+    background: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 0 15px var(--accent-glow);
+    transform: translateY(-2px);
 }
 
 /* Light theme buttons - Modern professional style */
 [data-theme="light"] #toggle,
 [data-theme="light"] .lang-button,
 [data-theme="light"] #print-btn {
-    background: var(--contrast-high);
-    color: var(--accent);
-    border: 2px solid var(--accent);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--text);
+    border: var(--button-border);
     padding: 8px 16px;
-    border-radius: 25px;
+    border-radius: 8px;
     font-family: var(--font-primary);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     height: auto;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 [data-theme="light"] #toggle:hover,
@@ -241,22 +273,22 @@ h1 {
 h2 {
     border: none;
     position: relative;
-
-    margin: 1rem 0 1rem 0;
+    margin: 0 0 1.5rem 0;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 800;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
 }
 
 [data-theme="dark"] h2 {
-    color: var(--text);
-    border-bottom: 2px dashed var(--text);
-    font-size: 1.5rem;
+    color: var(--accent);
 }
 
 [data-theme="light"] h2 {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    font-weight: 600;
     color: var(--accent);
-    padding-left: 1.5rem;
 }
 
 .profile-section p {
@@ -267,12 +299,12 @@ h2 {
 [data-theme="light"] h2::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(to bottom, var(--accent), var(--secondary));
-    border-radius: 2px;
+    left: -1rem;
+    top: 0.2rem;
+    width: 3px;
+    height: 1rem;
+    background: var(--accent);
+    border-radius: 0;
 }
 
 /* Special styling for contact section */
@@ -292,16 +324,23 @@ h2 {
     position: relative;
 }
 
-[data-theme="dark"] .section {
-    border-radius: 0;
-    background-color: #2C2C2C;
-    border: 2px solid #404040;
-    color: #B0B0B1;
+.section {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: var(--button-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Light theme - Asymmetric section layouts */
-[data-theme="light"] .section {
-    color: #6d6d6d;
+[data-theme="dark"] .section {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .section:hover {
+    box-shadow: 0 8px 32px var(--accent-glow);
 }
 
 /* Dark theme lists */
@@ -323,20 +362,17 @@ ul li {
     padding-left: 1rem;
 }
 
-[data-theme="light"] ul li::before {
-    content: '→';
+ul li::before {
+    content: '>';
     position: absolute;
     left: 0;
     color: var(--accent);
-    font-weight: bold;
+    font-weight: 900;
+    font-family: var(--font-mono);
 }
 
 [data-theme="light"] .contact-section ul li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: #ffffff;
-    font-weight: bold;
+    color: var(--accent);
 }
 
 /* Nested lists in light theme */
@@ -376,22 +412,20 @@ a:hover {
     border-radius: 0;
 }
 
-/* Light theme - Creative section styling */
-[data-theme="light"] .neonbox {
-    border: none;
-    background: var(--light-bg);
+/* Glassmorphism neonbox */
+.neonbox {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: var(--button-border);
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
 }
 
-[data-theme="light"] .neonbox::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--accent), var(--secondary), var(--highlight));
+[data-theme="light"] .neonbox {
+    background: rgba(255, 255, 255, 0.4);
 }
 
 /* Special contact section styling */
@@ -527,13 +561,14 @@ th {
 
 /* Projects - Full Width Highlight */
 [data-theme="light"] .projects-highlight {
-    background: linear-gradient(135deg, var(--light-bg) 0%, rgba(255, 255, 255, 0.9) 100%);
-    border-radius: 8px 35px 8px 35px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
 }
 
 /* Projects - Full Width Highlight */
 [data-theme="dark"] .projects-highlight {
-    border-radius: 0;
+    background: var(--glass-bg);
+    border-radius: 12px;
 }
 
 
@@ -543,8 +578,8 @@ th {
     top: 0;
     left: 0;
     right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, var(--accent) 0%, var(--secondary) 50%, var(--highlight) 100%);
+    height: 4px;
+    background: var(--accent);
 }
 
 
@@ -752,10 +787,10 @@ th {
 
     /* Dark theme mobile adjustments */
     h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
         text-align: left;
         margin: 1rem 0;
-        line-height: 1.2;
+        line-height: 1.1;
     }
 
     h2 {
@@ -812,7 +847,7 @@ th {
 
     /* Extra small screens */
     h1 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
 
     h2 {
@@ -849,6 +884,7 @@ th {
         line-height: 1.1 !important;
         margin: 0 !important;
         padding: 0 !important;
+        background-image: none !important;
     }
 
     /* Grille d’impression : 
@@ -928,6 +964,9 @@ th {
         height: 100% !important;
         display: flex !important;
         flex-direction: column !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: #f8f9fa !important;
     }
 
     .contact-section .section,
@@ -952,6 +991,9 @@ th {
     .neonbox {
         break-inside: avoid !important;
         page-break-inside: avoid !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: none !important;
     }
 
     /* Typo compacte & éviter les sauts après titres */
@@ -1024,10 +1066,12 @@ th {
         color: #2c3e50 !important;
     }
 
-    [data-theme="light"] .neonbox {
-        background: #f8f9fa !important;
-        border: 1px solid #dee2e6 !important;
+    [data-theme="light"] .neonbox,
+    [data-theme="light"] .section {
+        background: #ffffff !important;
+        border: 1px solid #e0e0e0 !important;
         box-shadow: none !important;
+        color: #1a1a1c !important;
     }
 
     [data-theme="light"] .contact-section .neonbox {
@@ -1042,10 +1086,12 @@ th {
         color: #f8f9fa !important;
     }
 
-    [data-theme="dark"] .neonbox {
-        background: #2c2c2c !important;
-        border: 2px solid #444 !important;
+    [data-theme="dark"] .neonbox,
+    [data-theme="dark"] .section {
+        background: #ffffff !important;
+        border: 1px solid #e0e0e0 !important;
         box-shadow: none !important;
+        color: #1a1a1c !important;
     }
 
     [data-theme="dark"] .contact-section .neonbox {
