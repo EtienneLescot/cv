@@ -49,26 +49,26 @@ projects-title: |
 project-1: |
   <strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/" target="_blank">AppKiosk</a></strong> (2019–2022) — SaaS IoT Platform<br>
   <strong>Product transformation</strong>: Transition from a custom project model (several days of dev per deployment) to an industrialized no-code platform.<br>
-  👉 <strong>ROI & Scalability</strong>: Drastic reduction in production costs (-90%), deployment capacity for 100+ events, 50,000 users per event.<br>
-  👉 <strong>360° Leadership</strong>: Product roadmap, cloud architecture, UX/UI direction, multi-client monitoring.<br>
+  >> <strong>ROI & Scalability</strong>: Drastic reduction in production costs (-90%), deployment capacity for 100+ events, 50,000 users per event.<br>
+  >> <strong>360° Leadership</strong>: Product roadmap, cloud architecture, UX/UI direction, multi-client monitoring.<br>
   <strong>IoT Module and Mobigéo Mapping</strong><br>
-  👉 <strong>Iconic Deployment</strong>: Complete project leadership for Printemps Haussmann (Paris) — physical interactive kiosks (still in place) and mobile application, in collaboration with JCDecaux (hardware). Features: indoor geolocation, in-store routes, smart contextual notifications.<br>
-  👉 <strong>IoT & Geolocation</strong>: Technical integration of Polestar SDK (Bluetooth LE) for indoor localization and contextual services.<br>
-  👉 <strong>Other Deployments</strong>: Professional trade shows (Bourget, etc.), also deployed on corporate campuses (Crédit Agricole).
+  >> <strong>Iconic Deployment</strong>: Complete project leadership for Printemps Haussmann (Paris) — physical interactive kiosks (still in place) and mobile application, in collaboration with JCDecaux (hardware). Features: indoor geolocation, in-store routes, smart contextual notifications.<br>
+  >> <strong>IoT & Geolocation</strong>: Technical integration of Polestar SDK (Bluetooth LE) for indoor localization and contextual services.<br>
+  >> <strong>Other Deployments</strong>: Professional trade shows (Bourget, etc.), also deployed on corporate campuses (Crédit Agricole).
 project-2: |
   <strong>Exalbot</strong> (2022–2023) — Cloud-Native AI Chatbot (SaaS)<br>
-  👉 <strong>Design & AI</strong>: Development of conversational chatbot engine (Python, Langchain, LLM), RAG architecture for contextual response enrichment.<br>
-  👉 <strong>Product Leadership</strong>: Definition of roadmap and AI integration strategy.<br>
-  👉 <strong>Infrastructure & DevOps</strong>: Cloud architecture (Kubernetes, ArgoCD, Scaleway), multi-environment deployment, performance optimization.
+  >> <strong>Design & AI</strong>: Development of conversational chatbot engine (Python, Langchain, LLM), RAG architecture for contextual response enrichment.<br>
+  >> <strong>Product Leadership</strong>: Definition of roadmap and AI integration strategy.<br>
+  >> <strong>Infrastructure & DevOps</strong>: Cloud architecture (Kubernetes, ArgoCD, Scaleway), multi-environment deployment, performance optimization.
 project-3: |
   <strong><a href="https://digitecpharma.fr/landing-page-site-et-appli/" target="_blank">DigitecPharma</a></strong> (2017–2019) — B2B2C SaaS Healthcare Platform<br>
-  👉 <strong>Design & Product Vision</strong>: Co-design of the product with business (vision, UX/UI, features) for a complex ecosystem (1000 pharmacies, 30+ groups, 300K patients).<br>
-  👉 <strong>Technical & UX/UI Direction</strong>: Leadership of SaaS architecture and mobile applications (iOS, Android), design team management.
+  >> <strong>Design & Product Vision</strong>: Co-design of the product with business (vision, UX/UI, features) for a complex ecosystem (1000 pharmacies, 30+ groups, 300K patients).<br>
+  >> <strong>Technical & UX/UI Direction</strong>: Leadership of SaaS architecture and mobile applications (iOS, Android), design team management.
 project-4: |
   <strong><a href="https://www.sarae.eco/" target="_blank">SARAE</a></strong> (2024–...) — Customer Platform & Conversational AI<br>
-  👉 <strong>Product & AI Strategy</strong>: Roadmap definition, AI integration (RAG, LLM) for call analysis and customer journey automation.<br>
-  👉 <strong>Cloud-native Architecture</strong>: Implementation of AWS infrastructure, CI/CD, multi-instance environments.<br>
-  👉 <strong>Optimization</strong>: Reduction of infrastructure costs and continuous performance improvement.
+  >> <strong>Product & AI Strategy</strong>: Roadmap definition, AI integration (RAG, LLM) for call analysis and customer journey automation.<br>
+  >> <strong>Cloud-native Architecture</strong>: Implementation of AWS infrastructure, CI/CD, multi-instance environments.<br>
+  >> <strong>Optimization</strong>: Reduction of infrastructure costs and continuous performance improvement.
 experiences-title: |
   Professional Experiences
 exp1-title: |
