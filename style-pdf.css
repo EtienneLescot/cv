@@ -1,0 +1,240 @@
+/**
+ * ============================================================================
+ * CSS OPTIMISÉ POUR GÉNÉRATION PDF
+ * ============================================================================
+ * 
+ * Ce CSS est appliqué UNIQUEMENT lors de la génération PDF via la classe
+ * .pdf-mode sur <html>. Il optimise le layout pour tenir sur 2 pages A4
+ * sans utiliser de zoom brutal.
+ * 
+ * Stratégie:
+ * - Réduire légèrement les espacements
+ * - Compacter les marges internes
+ * - Ajuster les tailles de police de manière subtile
+ * - Forcer des page breaks aux bons endroits
+ */
+
+/* ============================================================================
+   OPTIMISATIONS GLOBALES
+   ============================================================================ */
+
+html.pdf-mode body {
+  font-size: 9pt !important;
+  line-height: 1.25 !important;
+  background-image: none !important;
+}
+
+html.pdf-mode .container {
+  padding: 8px 12px !important;  /* Drastiquement réduit */
+  gap: 4px !important;  /* Très peu d'espace entre éléments */
+  max-width: 100% !important;
+}
+
+/* ============================================================================
+   HEADER - Compacter
+   ============================================================================ */
+
+html.pdf-mode .header-section {
+  margin-bottom: 4px !important;
+}
+
+html.pdf-mode .header-section h1 {
+  font-size: 1.8rem !important;
+  margin-bottom: 2px !important;
+  line-height: 1 !important;
+}
+
+html.pdf-mode .header-text .tagline {
+  font-size: 0.75rem !important;
+  margin-top: 0px !important;
+}
+
+/* ============================================================================
+   SECTIONS - Réduire espacements drastiquement
+   ============================================================================ */
+
+html.pdf-mode .section {
+  padding: 6px !important;  /* Très réduit */
+  margin-bottom: 3px !important;  /* Minimal */
+}
+
+html.pdf-mode .section h2 {
+  font-size: 0.95rem !important;
+  margin-bottom: 4px !important;
+  line-height: 1.1 !important;
+}
+
+html.pdf-mode .section h3 {
+  font-size: 0.85rem !important;
+  margin-bottom: 2px !important;
+  line-height: 1.1 !important;
+}
+
+html.pdf-mode .section p {
+  font-size: 8.5pt !important;
+  line-height: 1.2 !important;
+  margin-bottom: 2px !important;
+}
+
+html.pdf-mode .section ul {
+  margin: 2px 0 !important;
+  padding-left: 12px !important;
+}
+
+html.pdf-mode .section li {
+  font-size: 8.5pt !important;
+  line-height: 1.2 !important;
+  margin-bottom: 1px !important;
+}
+
+/* ============================================================================
+   ITEMS - Compacter les expériences, projets, etc.
+   ============================================================================ */
+
+html.pdf-mode .experience-item,
+html.pdf-mode .project-item,
+html.pdf-mode .skill-item {
+  margin-bottom: 4px !important;
+}
+
+html.pdf-mode .experience-item:last-child,
+html.pdf-mode .project-item:last-child {
+  margin-bottom: 0 !important;
+}
+
+html.pdf-mode .experience-item h3 {
+  margin-bottom: 1px !important;
+}
+
+html.pdf-mode .experience-item ul {
+  margin: 1px 0 !important;
+}
+
+html.pdf-mode .experience-item li {
+  font-size: 8pt !important;
+  line-height: 1.15 !important;
+  margin-bottom: 1px !important;
+}
+
+/* ============================================================================
+   GRID - Ajuster les gaps
+   ============================================================================ */
+
+html.pdf-mode .grid-item {
+  margin-bottom: 0 !important;
+}
+
+/* Réduire l'espacement entre colonnes en grid layout */
+html.pdf-mode .container {
+  column-gap: 10px !important;
+  row-gap: 6px !important;
+}
+
+/* ============================================================================
+   SAUT DE PAGE STRATÉGIQUE
+   ============================================================================ */
+
+/* PROJETS : Marge importante au-dessus pour forcer le saut ET donner de l'air en page 2 */
+html.pdf-mode .projects-highlight {
+  margin-top: 60px !important;  /* Force le saut + espace confortable en haut de page 2 */
+  margin-bottom: 6px !important;
+  padding: 6px !important;
+}
+
+html.pdf-mode .experience-section {
+  margin-top: 0px !important;
+  page-break-before: auto !important;
+}
+
+/* Éviter de couper certains éléments */
+html.pdf-mode .experience-item,
+html.pdf-mode .project-item,
+html.pdf-mode .section {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+ drastiquement
+   ============================================================================ */
+
+html.pdf-mode .neonbox {
+  padding: 6
+html.pdf-mode .neonbox {
+  padding: 8px !important;
+}
+
+/* ============================================================================
+   AJUSTEMENTS SPÉCIFIQUES PAR SECTION
+   ============================================================================ */
+
+/* Contact - plus compact */
+html.pdf-mode .contact-section ul {
+  margin: 2px 0 !important;
+}
+
+html.pdf-mode .contact-section li {
+  margin-bottom: 1px !important;
+}
+
+/* Profile - texte plus serré */
+html.pdf-mode .profile-section p {
+  line-height: 1.15 !important;
+}
+
+/* Skills - liste compacte */
+html.pdf-mode .skills-section ul {
+  margin: 1px 0 !important;
+}
+
+/* Projects highlight - compacter davantage */
+html.pdf-mode .projects-highlight h2 {
+  margin-bottom: 4px !important;
+}
+
+html.pdf-mode .project-item {
+  margin-bottom: 4px !important;
+}
+
+html.pdf-mode .project-item h3 {
+  margin-bottom: 1px !important;
+}
+
+html.pdf-mode .project-item p,
+html.pdf-mode .project-item li {
+  font-size: 8pt !important;
+  line-height: 1.15 !important;
+  margin-bottom: 1px !important;
+}
+
+/* ============================================================================
+   CONSERVATION DES COULEURS
+   ============================================================================ */
+
+html.pdf-mode * {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+/* ============================================================================
+   NOTES POUR ITÉRATION
+   ============================================================================ */
+
+/*
+ZONES D'AJUSTEMENT PRIORITAIRES:
+
+1. .experience-section { margin-top: XXpx }
+   → Ajuster pour contrôler le saut de page
+
+2. .section { padding: XXpx }
+   → Réduire si besoin de plus d'espace vertical
+
+3. body { font-size: XXpt }
+   → Dernière option si vraiment trop de contenu
+
+4. .container { gap: XXpx }
+   → Réduire l'espacement général
+
+STRATÉGIE DE DEBUG:
+- Générer le PDF avec --pages 0 (pas de zoom) pour voir le rendu naturel
+- Ajuster le CSS ci-dessus
+- Re-générer jusqu'à obtenir ~2 pages naturellement
+*/

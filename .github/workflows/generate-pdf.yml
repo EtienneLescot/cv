@@ -1,0 +1,105 @@
+name: Generate CV PDFs
+
+# Déclenché sur:
+# - Push sur main/master
+# - Workflow manuel (workflow_dispatch)
+# - Pull requests (pour tests)
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'index-template.html'
+      - 'style.css'
+      - 'locales/*.yml'
+      - 'generate-pdf-production.js'
+  workflow_dispatch:  # Permet déclenchement manuel
+  pull_request:
+
+jobs:
+  generate-pdfs:
+    name: Generate CVs (All Locales & Themes)
+    runs-on: ubuntu-latest
+    
+    # Timeout après 10 minutes (normalement ~1-2 min)
+    timeout-minutes: 10
+
+    steps:
+      # 1. Checkout du code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 3. Installation des dépendances
+      - name: Install Node dependencies
+        run: npm ci
+
+      # 4. Installation de Playwright + Chromium
+      # --with-deps installe les dépendances système requises
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      # 5. Génération des PDFs (toutes combinaisons)
+      - name: Generate PDF - FR Dark
+        run: node generate-pdf-production.js --locale fr --theme dark
+
+      - name: Generate PDF - FR Light
+        run: node generate-pdf-production.js --locale fr --theme light
+
+      - name: Generate PDF - EN Dark
+        run: node generate-pdf-production.js --locale en --theme dark
+
+      - name: Generate PDF - EN Light
+        run: node generate-pdf-production.js --locale en --theme light
+
+      # 6. Validation des outputs
+      - name: Validate PDF outputs
+        run: |
+          echo "Checking generated PDFs..."
+          for pdf in exports/*.pdf; do
+            if [ ! -s "$pdf" ]; then
+              echo "❌ Error: $pdf is empty or missing"
+              exit 1
+            fi
+            echo "✅ $pdf - $(du -h "$pdf" | cut -f1)"
+          done
+
+      # 7. Upload des PDFs en artifacts (disponibles 30 jours)
+      - name: Upload PDF artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdfs-${{ github.sha }}
+          path: exports/*.pdf
+          retention-days: 30
+
+      # 8. (Optionnel) Commit des PDFs dans le repo
+      # ⚠️ Décommenter si vous voulez versionner les PDFs
+      # Attention: peut faire grossir le repo rapidement
+      # - name: Commit PDFs to repository
+      #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      #   run: |
+      #     git config user.name "github-actions[bot]"
+      #     git config user.email "github-actions[bot]@users.noreply.github.com"
+      #     git add exports/*.pdf
+      #     git diff --staged --quiet || git commit -m "chore: update generated PDFs [skip ci]"
+      #     git push
+
+  # Job optionnel: Déploiement des PDFs sur GitHub Pages ou autre
+  # deploy-pdfs:
+  #   needs: generate-pdfs
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  #   steps:
+  #     - uses: actions/download-artifact@v4
+  #       with:
+  #         name: cv-pdfs-${{ github.sha }}
+  #         path: pdfs
+  #     
+  #     # Uploader sur S3, GitHub Releases, etc.
