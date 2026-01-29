@@ -27,7 +27,7 @@
    LIGHT THEME - 2026 Glassmorphism Style
    ================================================================= */
 [data-theme="light"] {
-    --bg: #f8f9fa;
+    --bg: #eef2f7;
     --text: #1a1a1c;
     --accent: var(--accent-blue);
     --secondary: #4a5568;
@@ -38,10 +38,10 @@
     --link: #2b6cb0;
     --contrast-high: #ffffff;
     --contrast-low: #1a1a1c;
-    --grid-color: rgba(0, 0, 0, 0.05);
-    --glass-bg: rgba(255, 255, 255, 0.6);
-    --glass-border: rgba(0, 0, 0, 0.08);
-    --button-border: 1px solid var(--glass-border);
+    --grid-color: rgba(0, 0, 0, 0.04);
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --button-border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* Header styling */
@@ -83,12 +83,20 @@ html,
 body {
     margin: 0;
     background-color: var(--bg);
-    background-image: radial-gradient(var(--grid-color) 1px, transparent 1px);
+    background-image:
+        radial-gradient(var(--grid-color) 1px, transparent 1px);
     background-size: 24px 24px;
     color: var(--text);
     font-family: var(--font-primary);
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh;
+}
+
+[data-theme="light"] body {
+    background-image:
+        radial-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(135deg, #eef2f7 0%, #dfe6ed 100%);
 }
 
 /* Dark theme typography override */
@@ -297,20 +305,13 @@ h2 {
 }
 
 [data-theme="light"] h2::before {
-    content: '';
-    position: absolute;
-    left: -1rem;
-    top: 0.2rem;
-    width: 3px;
-    height: 1rem;
-    background: var(--accent);
-    border-radius: 0;
+    display: none;
 }
 
 /* Special styling for contact section */
 [data-theme="light"] .contact-section h2 {
-    color: var(--contrast-high);
-    font-size: 1.4rem;
+    color: #ffffff;
+    font-size: 1.2rem;
     padding-left: 0;
 }
 
@@ -326,17 +327,22 @@ h2 {
 
 .section {
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: var(--button-border);
     border-radius: 12px;
     padding: 1.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 [data-theme="dark"] .section {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .section {
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 [data-theme="dark"] .section:hover {
@@ -415,27 +421,42 @@ a:hover {
 /* Glassmorphism neonbox */
 .neonbox {
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: var(--button-border);
     border-radius: 12px;
     padding: 1.5rem;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
+}
+
+[data-theme="dark"] .neonbox {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 [data-theme="light"] .neonbox {
-    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 /* Special contact section styling */
 [data-theme="light"] .contact-section .neonbox {
-    background: var(--contact-bg);
-    color: var(--contrast-high);
+    background: rgba(0, 123, 255, 0.7);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="light"] .contact-section .neonbox h2 {
+    color: #ffffff;
+}
+
+[data-theme="light"] .contact-section .neonbox ul li::before {
+    color: #ffffff;
 }
 
 [data-theme="light"] .contact-section::before {
-    background: rgba(255, 255, 255, 0.2);
+    display: none;
 }
 
 .contact-section a {
@@ -443,7 +464,8 @@ a:hover {
 }
 
 [data-theme="light"] .contact-section a {
-    color: var(--contrast-high);
+    color: #ffffff;
+    text-decoration: underline;
 }
 
 /* Prevent block breaking when exporting to PDF */
@@ -546,24 +568,14 @@ th {
     padding: 2.5rem;
     position: relative;
     overflow: hidden;
-}
-
-.projects-highlight {
-    grid-column: 1 / -1;
-    background: #2C2C2C;
-
-    padding: 2.5rem;
-    border: 1px solid #404040;
-    border-radius: 0;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Projects - Full Width Highlight */
-[data-theme="light"] .projects-highlight {
-    background: rgba(255, 255, 255, 0.5);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: var(--button-border);
     border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
 }
+
 
 /* Projects - Full Width Highlight */
 [data-theme="dark"] .projects-highlight {
@@ -573,13 +585,7 @@ th {
 
 
 [data-theme="light"] .projects-highlight::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: var(--accent);
+    display: none;
 }
 
 
