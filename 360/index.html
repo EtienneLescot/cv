@@ -37,7 +37,7 @@
             <ul id="lang-menu" class="lang-menu"><li data-href="/cv/360/./index.html" class="disabled">FR</li><li data-href="/cv/360/./index-en.html">EN</li></ul>
           </div>
            <button id="toggle" aria-label="Changer de thème
-">🌞 / 🌜</button>
+">[ THEME ]</button>
           <button id="print-btn" aria-label="Téléchargez le CV
 " onclick="window.print()">
             PDF
@@ -45,7 +45,7 @@
         </div>
         <h1>
           <div class="header-content">
-            <div class="header-emoji">🌟</div>
+            <div class="header-emoji">::</div>
             <div class="header-text">
               <span data-i18n="name">Etienne Lescot
 </span>
@@ -61,7 +61,7 @@
       <!-- Row 1: Contact (1×1) - Grid Position 1 -->
       <div class="grid-item contact-section">
         <div class="section neonbox">
-          <h2>📱 <span data-i18n="contact-title">Contact
+          <h2>[#] <span data-i18n="contact-title">Contact
 </span></h2>
           <ul>
             <li data-i18n="contact-phone">Tél&nbsp;: +33&nbsp;6&nbsp;80&nbsp;51&nbsp;21&nbsp;20
@@ -77,7 +77,7 @@
       <!-- Row 1: Profil (2×1) - Grid Position 2-3 -->
       <div class="grid-item profile-section">
         <div class="section neonbox">
-          <h2>🐙 <span data-i18n="profile-title">Profil
+          <h2>[P] <span data-i18n="profile-title">Profil
 </span></h2>
           <p data-i18n="profile-desc">Directeur Technique &amp; Produit avec plus de 15 ans d'expérience dans la conception de plateformes SaaS. J'interviens à la croisée de la vision produit, de l'architecture cloud et de l'expérience utilisateur, avec une expertise spécifique sur les solutions intégrant de l'IoT.
 </p>
@@ -87,7 +87,7 @@
       <!-- Row 2: Compétences (2×1) - Grid Position 1-2 -->
       <div class="grid-item skills-section">
         <div class="section neonbox">
-          <h2>💪 <span data-i18n="skills-title">Compétences
+          <h2>[S] <span data-i18n="skills-title">Compétences
 </span></h2>
           <ul>
             <li data-i18n="skill-1"><strong>Vision &amp; Stratégie Produit</strong><br>
@@ -118,7 +118,7 @@ Leadership d'équipes pluridisciplinaires (dev, UX, produit), méthode agile, CI
         <!-- Languages Section (upper 50%) -->
         <div class="languages-section">
           <div class="section neonbox">
-            <h2>🌐 <span data-i18n="languages-title">Langues
+            <h2>[L] <span data-i18n="languages-title">Langues
 </span></h2>
             <ul>
               <li data-i18n="lang-fr">Français - Natif
@@ -131,7 +131,7 @@ Leadership d'équipes pluridisciplinaires (dev, UX, produit), méthode agile, CI
         <!-- Interests Section (lower 50%) -->
         <div class="interests-section">
           <div class="section neonbox">
-            <h2>❤️ <span data-i18n="interests-title">Centres d'intérêt
+            <h2>[I] <span data-i18n="interests-title">Centres d'intérêt
 </span></h2>
             <ul>
               <li data-i18n="interest-1">Boxe : Discipline et dépassement de soi.
@@ -147,7 +147,7 @@ Leadership d'équipes pluridisciplinaires (dev, UX, produit), méthode agile, CI
 
       <!-- Highlighted Projects Section - Full Width -->
       <div class="section neonbox projects-highlight">
-        <h2>🚀 <span data-i18n="projects-title">Projets Stratégiques &amp; Réalisations
+        <h2>[*] <span data-i18n="projects-title">Projets Stratégiques &amp; Réalisations
 </span></h2>
         <ul>
           <li data-i18n="project-1"><strong><a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/" target="_blank">AppKiosk</a></strong> (2019–2022) — Plateforme SaaS IoT<br>
@@ -181,7 +181,7 @@ Leadership d'équipes pluridisciplinaires (dev, UX, produit), méthode agile, CI
       <!-- Experiences Section - Full Width -->
       <div class="grid-item experiences-section">
         <div class="section neonbox">
-          <h2>🎒 <span data-i18n="experiences-title">Expériences Professionnelles
+          <h2>[E] <span data-i18n="experiences-title">Expériences Professionnelles
 </span></h2>
           <ul>
             <li>
@@ -235,6 +235,6 @@ Secteurs : Luxe, Automobile, Assurance, Santé, Architecture
       </div>
     </div>
   
-  <script>document.addEventListener("DOMContentLoaded",function(){const t=document.getElementById("lang-button"),e=document.getElementById("lang-menu"),n=document.getElementById("toggle"),d=document.documentElement;if(t&&e&&(t.addEventListener("click",function(t){t.stopPropagation(),e.style.display="block"===e.style.display?"none":"block"}),document.addEventListener("click",function(){e.style.display="none"}),e.addEventListener("click",function(t){"LI"===t.target.tagName&&t.target.dataset.href&&(window.location.href=t.target.dataset.href)})),n){const o=localStorage.getItem("theme")||"light";function a(t){const e=document.createElement("style");e.id="print-theme-style",e.innerHTML=`\n            @media print {\n              @page {\n                background: ${"dark"===t?"#1A1A1A":"#ffffff"} !important;\n              }\n            }\n          `;const n=document.getElementById("print-theme-style");n&&document.head.removeChild(n),document.head.appendChild(e)}d.setAttribute("data-theme",o),n.textContent="dark"===o?"🌞 / 🌜":"🌜 / 🌞",a(o),n.addEventListener("click",function(){const t="dark"===d.getAttribute("data-theme")?"light":"dark";d.setAttribute("data-theme",t),localStorage.setItem("theme",t),n.textContent="dark"===t?"🌞 / 🌜":"🌜 / 🌞",a(t)})}});</script>
+  <script>document.addEventListener("DOMContentLoaded",function(){const t=document.getElementById("lang-button"),e=document.getElementById("lang-menu"),n=document.getElementById("toggle"),d=document.documentElement;if(t&&e&&(t.addEventListener("click",function(t){t.stopPropagation(),e.style.display="block"===e.style.display?"none":"block"}),document.addEventListener("click",function(){e.style.display="none"}),e.addEventListener("click",function(t){"LI"===t.target.tagName&&t.target.dataset.href&&(window.location.href=t.target.dataset.href)})),n){const o=localStorage.getItem("theme")||"light";function a(t){const e=document.createElement("style");e.id="print-theme-style",e.innerHTML=`\n            @media print {\n              @page {\n                background: ${"dark"===t?"#1A1A1A":"#ffffff"} !important;\n              }\n            }\n          `;const n=document.getElementById("print-theme-style");n&&document.head.removeChild(n),document.head.appendChild(e)}d.setAttribute("data-theme",o),n.textContent="dark"===o?"[ LIGHT ]":"[ DARK ]",a(o),n.addEventListener("click",function(){const t="dark"===d.getAttribute("data-theme")?"light":"dark";d.setAttribute("data-theme",t),localStorage.setItem("theme",t),n.textContent="dark"===t?"[ LIGHT ]":"[ DARK ]",a(t)})}});</script>
 
 </body></html>
