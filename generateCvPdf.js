@@ -356,7 +356,21 @@ async function captureWithVirtualA4Window(localizedHtml, outputDir, themeName, u
 
     // Obtenir la hauteur totale (incluant la marge de sécurité)
     const totalHeight = await page.evaluate(() => document.documentElement.scrollHeight);
-    console.log(`  Hauteur totale du contenu: ${totalHeight}px (incluant marge de sécurité)`);
+    // Calculer la hauteur réelle du contenu en ignorant les pseudo-éléments (::after)
+    const realContentHeight = await page.evaluate(() => {
+      try {
+        const children = Array.from(document.body.children).filter(el => getComputedStyle(el).display !== 'none');
+        if (!children.length) return document.documentElement.scrollHeight;
+        const last = children[children.length - 1];
+        const rect = last.getBoundingClientRect();
+        return Math.ceil(rect.bottom + window.scrollY);
+      } catch (e) {
+        return document.documentElement.scrollHeight;
+      }
+    });
+
+    console.log(`  Hauteur totale du contenu (avec marge): ${totalHeight}px`);
+    console.log(`  Hauteur réelle du contenu (sans ::after): ${realContentHeight}px`);
 
     // Calculer la hauteur de la fenêtre virtuelle A4 (ratio fixe)
     const windowWidth = CONFIG.viewport.width;
@@ -371,12 +385,13 @@ async function captureWithVirtualA4Window(localizedHtml, outputDir, themeName, u
       const safeCutPoints = await findSafeCutPoints(page);
       console.log(`✓ ${safeCutPoints.length} point(s) de coupure détecté(s): ${safeCutPoints.join(', ')}`);
       
-      // Calculer les positions de scroll optimales
-      scrollPositions = findOptimalCutPositions(safeCutPoints, totalHeight, windowHeight);
+      // Calculer les positions de scroll optimales en se basant sur la hauteur réelle
+      // du contenu (on évite ainsi la page de sécurité ajoutée via ::after)
+      scrollPositions = findOptimalCutPositions(safeCutPoints, realContentHeight, windowHeight);
       console.log(`  Positions de scroll finales: ${scrollPositions.join(', ')}`);
     } else {
       // Scroll régulier tous les windowHeight px
-      const numPages = Math.ceil(totalHeight / windowHeight);
+      const numPages = Math.ceil(realContentHeight / windowHeight);
       scrollPositions = Array.from({ length: numPages }, (_, i) => i * windowHeight);
     }
 
