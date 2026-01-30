@@ -35,7 +35,7 @@ html.pdf-mode .container {
    ============================================================================ */
 
 html.pdf-mode .header-section {
-  margin-top: 0px !important;
+  margin-top: 18px !important;
   margin-bottom: 30px !important;
 }
 
@@ -131,8 +131,8 @@ html.pdf-mode .grid-item {
 
 /* PROJETS : Marge importante au-dessus pour forcer le saut ET donner de l'air en page 2 */
 html.pdf-mode .projects-highlight {
-  margin-top: 142px !important;  /* Force le saut + espace en haut de page 2 */
-  margin-bottom: 135px !important;
+  margin-top: 123px !important;  /* Force le saut + espace en haut de page 2 */
+  margin-bottom: 132px !important;
   padding: 8px !important;
 }
 
