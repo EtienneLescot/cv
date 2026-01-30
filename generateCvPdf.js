@@ -543,29 +543,42 @@ async function createPdfFromA4Images(imageBuffers, outputPath) {
     // Embed l'image PNG dans le PDF
     const pngImage = await pdfDoc.embedPng(imageBuffers[i]);
     
-    // Dessiner l'image en préservant le ratio
-    const imgRatio = metadata.height / metadata.width;
-    const a4Ratio = a4Height / a4Width;
+    // Calculer les ratios
+    const imgRatio = metadata.width / metadata.height;
+    const a4Ratio = a4Width / a4Height;
+    const ratioDiff = Math.abs(imgRatio - a4Ratio) / a4Ratio;
     
-    let drawWidth = a4Width;
-    let drawHeight = drawWidth * imgRatio;
-    
-    // Si l'image dépasse, limiter à la hauteur A4
-    if (drawHeight > a4Height) {
-      drawHeight = a4Height;
-      drawWidth = drawHeight / imgRatio;
+    // Sécurité: n'étirer que si la différence de ratio est très faible (<1%)
+    if (ratioDiff < 0.01) {
+      // Ratios quasi-identiques: étirer pour éviter la ligne blanche due à l'arrondi
+      console.log(`    ✓ Ratio OK (diff: ${(ratioDiff * 100).toFixed(2)}%) - étirement autorisé`);
+      page.drawImage(pngImage, {
+        x: 0,
+        y: 0,
+        width: a4Width,
+        height: a4Height
+      });
+    } else {
+      // Ratios trop différents: préserver le ratio et centrer (sécurité)
+      console.warn(`    ⚠ Ratio différent (diff: ${(ratioDiff * 100).toFixed(2)}%) - préservation du ratio`);
+      let drawWidth = a4Width;
+      let drawHeight = drawWidth / imgRatio;
+      
+      if (drawHeight > a4Height) {
+        drawHeight = a4Height;
+        drawWidth = drawHeight * imgRatio;
+      }
+      
+      const x = (a4Width - drawWidth) / 2;
+      const y = (a4Height - drawHeight) / 2;
+      
+      page.drawImage(pngImage, {
+        x,
+        y,
+        width: drawWidth,
+        height: drawHeight
+      });
     }
-    
-    // Centrer l'image
-    const x = (a4Width - drawWidth) / 2;
-    const y = (a4Height - drawHeight) / 2;
-    
-    page.drawImage(pngImage, {
-      x,
-      y,
-      width: drawWidth,
-      height: drawHeight
-    });
   }
   
   console.log('  Écriture du fichier PDF...');
