@@ -52,6 +52,8 @@
 
 .header-emoji {
     margin-right: 8px;
+    color: var(--accent);
+    opacity: 0.8;
 }
 
 .header-text {
@@ -66,6 +68,13 @@
     letter-spacing: 2px;
     color: var(--muted);
     margin-top: 0.2rem;
+}
+
+.symbol {
+    color: var(--accent);
+    margin-right: 10px;
+    font-weight: 900;
+    opacity: 0.7;
 }
 
 /* Button container for alignment */
@@ -111,10 +120,10 @@ h1 {
     text-align: left;
     position: relative;
     font-size: 3rem;
-    font-weight: 900;
-    font-style: italic;
+    font-weight: 800;
+    font-style: normal;
     text-transform: uppercase;
-    letter-spacing: -1px;
+    letter-spacing: 1px;
     margin-bottom: 0.5rem;
     line-height: 1;
 }
@@ -278,10 +287,10 @@ h2 {
     margin: 0 0 1.5rem 0;
     font-family: var(--font-heading);
     font-size: 1.2rem;
-    font-weight: 800;
-    font-style: italic;
+    font-weight: 700;
+    font-style: normal;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     color: var(--accent);
 }
 
@@ -441,6 +450,17 @@ a:hover {
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+[data-theme="dark"] .contact-section .neonbox {
+    background: rgba(0, 123, 255, 0.15);
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.contact-section h2 .symbol {
+    color: inherit;
+    opacity: 1;
+}
+
 [data-theme="light"] .contact-section .neonbox h2 {
     color: #ffffff;
 }
@@ -513,14 +533,11 @@ th {
 .contact-section {
     grid-column: span 1;
     grid-row: span 1;
-    height: fit-content;
-    align-self: start;
 }
 
 .profile-section {
     grid-column: span 2;
     grid-row: span 1;
-    align-self: start;
 }
 
 /* Row 2: Compétences (2×1) + Langues (1×1) */
@@ -588,19 +605,27 @@ th {
     display: none;
 }
 
+.profile-section .neonbox,
+.contact-section .neonbox {
+    justify-content: flex-start;
+}
+
+.profile-section .neonbox p,
+.contact-section .neonbox ul {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 /* Experiences - Full Width */
 .experiences-section {
     grid-column: 1 / -1;
     margin-top: 1rem;
 }
 
-/* Alignment optimization for sidebar elements */
+/* Skip alignment optimization that causes vertical stretching */
 .contact-section,
 .languages-section {
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    min-height: auto;
 }
 
 
@@ -613,7 +638,6 @@ th {
     height: 100%;
 }
 
-.grid-item .neonbox,
 .grid-item .neonbox {
     flex: 1;
     display: flex;

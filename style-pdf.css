@@ -131,7 +131,7 @@ html.pdf-mode .grid-item {
 
 /* PROJETS : Marge importante au-dessus pour forcer le saut ET donner de l'air en page 2 */
 html.pdf-mode .projects-highlight {
-  margin-top: 127px !important;  /* Force le saut + espace en haut de page 2 */
+  margin-top: 142px !important;  /* Force le saut + espace en haut de page 2 */
   margin-bottom: 217px !important;
   padding: 8px !important;
 }
