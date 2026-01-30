@@ -19,8 +19,8 @@
    ============================================================================ */
 
 html.pdf-mode body {
-  font-size: 12pt !important;
-  line-height: 1.6 !important;
+  font-size: 14pt !important;
+  line-height: 1.4 !important;
   /* background-image conservé pour la décoration */
 }
 
@@ -35,7 +35,8 @@ html.pdf-mode .container {
    ============================================================================ */
 
 html.pdf-mode .header-section {
-  margin-bottom: 15px !important;
+  margin-top: 0px !important;
+  margin-bottom: 100px !important;
 }
 
 html.pdf-mode .header-section h1 {
@@ -72,7 +73,6 @@ html.pdf-mode .section h3 {
 }
 
 html.pdf-mode .section p {
-  font-size: 11pt !important;
   line-height: 1.6 !important;
   margin-bottom: 8px !important;
 }
@@ -83,7 +83,6 @@ html.pdf-mode .section ul {
 }
 
 html.pdf-mode .section li {
-  font-size: 11pt !important;
   line-height: 1.6 !important;
   margin-bottom: 5px !important;
 }
@@ -138,12 +137,12 @@ html.pdf-mode .container {
 
 /* PROJETS : Marge importante au-dessus pour forcer le saut ET donner de l'air en page 2 */
 html.pdf-mode .projects-highlight {
-  margin-top: 50px !important;  /* Force le saut + espace en haut de page 2 */
-  margin-bottom: 8px !important;
+  margin-top: 150px !important;  /* Force le saut + espace en haut de page 2 */
+  margin-bottom: 200px !important;
   padding: 8px !important;
 }
 
-html.pdf-mode .experience-section {
+html.pdf-mode .experiences-section {
   margin-top: 0px !important;
   page-break-before: auto !important;
 }
@@ -171,13 +170,16 @@ html.pdf-mode .contact-section ul {
 
 html.pdf-mode .contact-section li {
   margin-bottom: 6px !important;
-  font-size: 11pt !important;
 }
 
 /* Profile - lisibilité maximale */
 html.pdf-mode .profile-section p {
   line-height: 1.6 !important;
-  font-size: 11pt !important;
+}
+
+/* Skills - Full width to allow languages/interests below */
+html.pdf-mode .skills-section {
+  grid-column: 1 / -1 !important;
 }
 
 /* Skills - espacement */
@@ -187,12 +189,24 @@ html.pdf-mode .skills-section ul {
 
 html.pdf-mode .skills-section li {
   margin-bottom: 5px !important;
-  font-size: 11pt !important;
+}
+
+/* Languages & Interests - Side by side BELOW experiences */
+html.pdf-mode .languages-interests-section {
+  grid-column: 1 / -1 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 10px !important;
+  order: 10 !important; /* Pousse la section après les expériences (order 0 par défaut) */
+}
+
+html.pdf-mode .languages-interests-section > div {
+  flex: 1 !important;
 }
 
 /* Languages - espacement */
 html.pdf-mode .languages-section {
-  margin-top: 10px !important;
+  margin-top: 0 !important;
 }
 
 html.pdf-mode .languages-section ul {
@@ -201,13 +215,9 @@ html.pdf-mode .languages-section ul {
 
 html.pdf-mode .languages-section li {
   margin-bottom: 5px !important;
-  font-size: 11pt !important;
 }
 
-/* Projects highlight - page 2 lisible */
-html.pdf-mode .projects-highlight h2 {
-  margin-bottom: 10px !important;
-}
+
 
 html.pdf-mode .project-item {
   margin-bottom: 10px !important;
@@ -220,7 +230,6 @@ html.pdf-mode .project-item h3 {
 
 html.pdf-mode .project-item p,
 html.pdf-mode .project-item li {
-  font-size: 10.5pt !important;
   line-height: 1.5 !important;
   margin-bottom: 4px !important;
 }
