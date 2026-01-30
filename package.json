@@ -9,6 +9,7 @@
     "build:locales": "node build-static-locales.js",
     "build:minify": "node build-minify.js",
     "build": "npm run build:minify && npm run build:locales",
+    "build:pdf": "node build-pdf.js",
     "build:full": "npm run build:minify && npm run build:locales",
     "pdf": "node generateCvPdf.js",
     "pdf:all": "node generateCvPdf.js --locale fr --theme dark && node generateCvPdf.js --locale fr --theme light && node generateCvPdf.js --locale en --theme dark && node generateCvPdf.js --locale en --theme light"

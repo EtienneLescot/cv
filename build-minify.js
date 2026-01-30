@@ -13,8 +13,10 @@ const { minify: minifyJs } = require('terser');
 const postcss = require('postcss');
 
 // Configuration
+// Allow overriding the CSS input file via environment variable (used by build:pdf)
+const DEFAULT_CSS_INPUT = path.join(__dirname, 'style.css');
 const CONFIG = {
-  cssInput: path.join(__dirname, 'style.css'),
+  cssInput: process.env.CSS_INPUT ? path.join(__dirname, process.env.CSS_INPUT) : DEFAULT_CSS_INPUT,
   cssOutput: path.join(__dirname, 'style.min.css'),
   jsFiles: [
     {

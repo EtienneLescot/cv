@@ -25,23 +25,27 @@ const getPreferredLanguage = (acceptLanguage) => {
 };
 
 const server = http.createServer((req, res) => {
+  // (no special preview route; use `npm run build:pdf` to generate PDF-styled assets)
+
   let filePath = '.' + req.url;
-  if (filePath === './') {
+  // strip query string to correctly resolve static files (e.g. style-pdf.css?v=...)
+  let cleanPath = filePath.split('?')[0];
+  if (cleanPath === './') {
     // Handle root request with language redirection
     const acceptLanguage = req.headers['accept-language'];
     const lang = getPreferredLanguage(acceptLanguage);
 
     if (lang === 'fr') {
-      filePath = './index.html'; // French default
+      cleanPath = './index.html'; // French default
     } else {
-      filePath = `./index-${lang}.html`;
+      cleanPath = `./index-${lang}.html`;
     }
   }
 
-  const ext = path.extname(filePath);
+  const ext = path.extname(cleanPath);
   const contentType = CONTENT_TYPES[ext] || 'text/plain';
 
-  fs.readFile(filePath, (err, content) => {
+  fs.readFile(cleanPath, (err, content) => {
     if (err) {
       if (err.code === 'ENOENT') {
         res.writeHead(404);
@@ -51,10 +55,10 @@ const server = http.createServer((req, res) => {
         res.end('Server error: ' + err.code);
       }
     } else {
-      // Set efficient cache policy for static assets
+      // Set cache policy for static assets; disable long-term caching for CSS during development
       const cacheHeaders = {
         'Content-Type': contentType,
-        'Cache-Control': 'public, max-age=31536000, immutable'
+        'Cache-Control': ext === '.css' ? 'no-cache' : 'public, max-age=31536000, immutable'
       };
 
       res.writeHead(200, cacheHeaders);
