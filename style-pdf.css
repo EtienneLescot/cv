@@ -26,7 +26,7 @@ html.pdf-mode body {
 
 html.pdf-mode .container {
   padding: 15px 18px !important;
-  gap: 10px !important;
+  gap: 10px !important; /* Unified gap for all sections */
   max-width: 100% !important;
 }
 
@@ -36,11 +36,11 @@ html.pdf-mode .container {
 
 html.pdf-mode .header-section {
   margin-top: 0px !important;
-  margin-bottom: 100px !important;
+  margin-bottom: 30px !important;
 }
 
 html.pdf-mode .header-section h1 {
-  font-size: 2.8rem !important;
+  font-size: 2.2rem !important;
   margin-bottom: 8px !important;
   line-height: 1.2 !important;
 }
@@ -56,7 +56,7 @@ html.pdf-mode .header-text .tagline {
 
 html.pdf-mode .section {
   padding: 12px !important;
-  margin-bottom: 10px !important;
+  margin: 0 !important; /* Spacing handled by container gap */
   border-radius: 0 !important;  /* Supprimer les bords arrondis */
 }
 
@@ -122,13 +122,7 @@ html.pdf-mode .experience-item li {
    ============================================================================ */
 
 html.pdf-mode .grid-item {
-  margin-bottom: 0 !important;
-}
-
-/* Réduire l'espacement entre colonnes en grid layout */
-html.pdf-mode .container {
-  column-gap: 10px !important;
-  row-gap: 6px !important;
+  margin: 0 !important;
 }
 
 /* ============================================================================
@@ -137,8 +131,8 @@ html.pdf-mode .container {
 
 /* PROJETS : Marge importante au-dessus pour forcer le saut ET donner de l'air en page 2 */
 html.pdf-mode .projects-highlight {
-  margin-top: 150px !important;  /* Force le saut + espace en haut de page 2 */
-  margin-bottom: 200px !important;
+  margin-top: 127px !important;  /* Force le saut + espace en haut de page 2 */
+  margin-bottom: 217px !important;
   padding: 8px !important;
 }
 
@@ -191,24 +185,34 @@ html.pdf-mode .skills-section li {
   margin-bottom: 5px !important;
 }
 
-/* Languages & Interests - Side by side BELOW experiences */
+/* Languages & Interests - Split for separate placement */
 html.pdf-mode .languages-interests-section {
-  grid-column: 1 / -1 !important;
-  display: flex !important;
-  flex-direction: row !important;
-  gap: 10px !important;
-  order: 10 !important; /* Pousse la section après les expériences (order 0 par défaut) */
+  display: contents !important;
 }
 
-html.pdf-mode .languages-interests-section > div {
-  flex: 1 !important;
+/* Languages - Below skills, full width */
+html.pdf-mode .languages-section {
+  grid-column: 1 / -1 !important;
+  margin: 0 !important;
+  min-height: auto !important;
+}
+
+/* Interests - Bottom, full width */
+html.pdf-mode .interests-section {
+  grid-column: 1 / -1 !important;
+  margin: 0 !important;
+  order: 100 !important; /* Move to the very bottom */
+}
+
+html.pdf-mode .interests-section ul {
+  margin: 6px 0 !important;
+}
+
+html.pdf-mode .interests-section li {
+  margin-bottom: 5px !important;
 }
 
 /* Languages - espacement */
-html.pdf-mode .languages-section {
-  margin-top: 0 !important;
-}
-
 html.pdf-mode .languages-section ul {
   margin: 6px 0 !important;
 }

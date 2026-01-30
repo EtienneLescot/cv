@@ -27,7 +27,7 @@
    LIGHT THEME - 2026 Glassmorphism Style
    ================================================================= */
 [data-theme="light"] {
-    --bg: #eef2f7;
+    --bg: #d1d9e1;
     --text: #1a1a1c;
     --accent: var(--accent-blue);
     --secondary: #4a5568;
@@ -38,7 +38,7 @@
     --link: #2b6cb0;
     --contrast-high: #ffffff;
     --contrast-low: #1a1a1c;
-    --grid-color: rgba(0, 0, 0, 0.04);
+    --grid-color: rgba(255, 255, 255, 0.45);
     --glass-bg: rgba(255, 255, 255, 0.75);
     --glass-border: rgba(255, 255, 255, 0.5);
     --button-border: 1px solid rgba(0, 0, 0, 0.08);
@@ -91,12 +91,6 @@ body {
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
     min-height: 100vh;
-}
-
-[data-theme="light"] body {
-    background-image:
-        radial-gradient(var(--grid-color) 1px, transparent 1px),
-        linear-gradient(135deg, #eef2f7 0%, #dfe6ed 100%);
 }
 
 /* Dark theme typography override */
