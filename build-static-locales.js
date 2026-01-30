@@ -92,6 +92,10 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
 
   // Update document language
   document.documentElement.lang = localeName;
+  
+  // Activer le mode PDF pour visualisation (styles de style-pdf.css)
+  // Cette classe active les règles CSS avec le préfixe html.pdf-mode
+  document.documentElement.classList.add('pdf-mode');
 
   // Update CSS path to include base path
   const cssLink = document.querySelector('link[rel="stylesheet"]');

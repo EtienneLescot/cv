@@ -16,10 +16,10 @@ async function buildCombinedCss() {
     const pdfPath = path.join(__dirname, 'style-pdf.css');
 
     const baseCss = fs.existsSync(basePath) ? fs.readFileSync(basePath, 'utf8') : '';
-    const pdfCssRaw = fs.existsSync(pdfPath) ? fs.readFileSync(pdfPath, 'utf8') : '';
+    const pdfCss = fs.existsSync(pdfPath) ? fs.readFileSync(pdfPath, 'utf8') : '';
 
-    // Remove the html.pdf-mode prefix from pdfCssRaw so overrides apply when concatenated
-    const pdfCss = pdfCssRaw.replace(/html\.pdf-mode\s*/g, '');
+    // Garder le préfixe html.pdf-mode pour que les règles soient conditionnelles
+    // La classe sera activée automatiquement via JS dans les pages générées
 
     // Minify base and pdf parts separately (so comments and spacing are cleaned)
     const baseResult = await postcss([cssnano]).process(baseCss, { from: 'style.css' });
