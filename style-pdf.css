@@ -25,8 +25,8 @@ html.pdf-mode body {
 }
 
 html.pdf-mode .container {
-  padding: 20px 25px !important;
-  gap: 15px !important;
+  padding: 15px 18px !important;
+  gap: 10px !important;
   max-width: 100% !important;
 }
 
@@ -35,7 +35,7 @@ html.pdf-mode .container {
    ============================================================================ */
 
 html.pdf-mode .header-section {
-  margin-bottom: 25px !important;
+  margin-bottom: 15px !important;
 }
 
 html.pdf-mode .header-section h1 {
@@ -55,7 +55,8 @@ html.pdf-mode .header-text .tagline {
 
 html.pdf-mode .section {
   padding: 12px !important;
-  margin-bottom: 18px !important;
+  margin-bottom: 10px !important;
+  border-radius: 0 !important;  /* Supprimer les bords arrondis */
 }
 
 html.pdf-mode .section h2 {
@@ -137,7 +138,7 @@ html.pdf-mode .container {
 
 /* PROJETS : Marge importante au-dessus pour forcer le saut ET donner de l'air en page 2 */
 html.pdf-mode .projects-highlight {
-  margin-top: 80px !important;  /* Force le saut + espace confortable en haut de page 2 */
+  margin-top: 50px !important;  /* Force le saut + espace en haut de page 2 */
   margin-bottom: 8px !important;
   padding: 8px !important;
 }
@@ -154,11 +155,7 @@ html.pdf-mode .section {
   page-break-inside: avoid !important;
   break-inside: avoid !important;
 }
- drastiquement
-   ============================================================================ */
 
-html.pdf-mode .neonbox {
-  padding: 6
 html.pdf-mode .neonbox {
   padding: 12px !important;
 }
@@ -193,13 +190,27 @@ html.pdf-mode .skills-section li {
   font-size: 11pt !important;
 }
 
+/* Languages - espacement */
+html.pdf-mode .languages-section {
+  margin-top: 10px !important;
+}
+
+html.pdf-mode .languages-section ul {
+  margin: 6px 0 !important;
+}
+
+html.pdf-mode .languages-section li {
+  margin-bottom: 5px !important;
+  font-size: 11pt !important;
+}
+
 /* Projects highlight - page 2 lisible */
 html.pdf-mode .projects-highlight h2 {
-  margin-bottom: 12px !important;
+  margin-bottom: 10px !important;
 }
 
 html.pdf-mode .project-item {
-  margin-bottom: 12px !important;
+  margin-bottom: 10px !important;
 }
 
 html.pdf-mode .project-item h3 {
@@ -221,6 +232,23 @@ html.pdf-mode .project-item li {
 html.pdf-mode * {
   -webkit-print-color-adjust: exact !important;
   print-color-adjust: exact !important;
+}
+
+/* ============================================================================
+   MARGE DE SÉCURITÉ POUR SCROLL COMPLET
+   ============================================================================
+   
+   CRITIQUE : Permet de scroller suffisamment pour capturer la dernière page
+   complète. Sans cela, le browser ne peut pas scroller assez bas et la 
+   dernière capture sera incomplète.
+*/
+
+html.pdf-mode::after {
+  content: "";
+  display: block;
+  height: 1500px !important;  /* Marge de sécurité généreuse */
+  width: 100%;
+  background: transparent;
 }
 
 /* ============================================================================

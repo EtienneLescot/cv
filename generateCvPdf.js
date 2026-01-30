@@ -45,10 +45,10 @@ const CONFIG = {
   supportedThemes: ['dark', 'light'],
   
   // Viewport optimal pour capturer le CV
-  // Largeur basée sur le container max-width (900px) + marge
+  // Largeur généreuse pour bon rendu, sera redimensionné à A4
   viewport: {
-    width: 1000,
-    height: 1400  // Sera étendu automatiquement par fullPage
+    width: 900,   // Largeur confortable
+    height: 1273  // Ratio A4 (900 * 1.414)
   },
   
   // Dimensions A4 en pixels (96 DPI)
@@ -246,6 +246,7 @@ async function preparePage(page, usePdfMode = true) {
 /**
  * Analyse le DOM pour trouver les positions des sections
  * Retourne un tableau de positions Y où il est "safe" de couper
+ * La coupure se fait au MILIEU de l'espace entre deux sections
  */
 async function findSafeCutPoints(page) {
   return await page.evaluate((config) => {
@@ -254,20 +255,48 @@ async function findSafeCutPoints(page) {
     // Trouver tous les éléments qui correspondent aux sélecteurs
     const elements = [];
     config.pagination.breakSelectors.forEach(selector => {
-      document.querySelectorAll(selector).forEach(el => elements.push(el));
+      document.querySelectorAll(selector).forEach(el => elements.push({
+        element: el,
+        selector: selector
+      }));
     });
     
-    // Récupérer les positions Y de ces éléments
-    elements.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-      const absoluteY = rect.top + scrollY;
+    // Trier les éléments par position Y
+    const sortedElements = elements
+      .map(({ element, selector }) => {
+        const rect = element.getBoundingClientRect();
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+        const absoluteY = rect.top + scrollY;
+        const style = window.getComputedStyle(element);
+        const marginTop = parseInt(style.marginTop) || 0;
+        
+        return {
+          element,
+          selector,
+          y: absoluteY,
+          marginTop: marginTop,
+          height: rect.height
+        };
+      })
+      .filter(item => item.height >= config.pagination.minSectionHeight)
+      .sort((a, b) => a.y - b.y);
+    
+    // Pour chaque élément (sauf le premier), calculer le milieu de l'espace avec l'élément précédent
+    for (let i = 1; i < sortedElements.length; i++) {
+      const prevElement = sortedElements[i - 1];
+      const currentElement = sortedElements[i];
       
-      // Ajouter uniquement si l'élément a une hauteur significative
-      if (rect.height >= config.pagination.minSectionHeight) {
-        cutPoints.push(Math.round(absoluteY));
-      }
-    });
+      // Position de fin de l'élément précédent
+      const prevEnd = prevElement.y + prevElement.height;
+      
+      // Position de début de l'élément actuel (incluant son margin-top)
+      const currentStart = currentElement.y;
+      
+      // Couper au milieu de l'espace entre les deux
+      const middlePoint = Math.round((prevEnd + currentStart) / 2);
+      
+      cutPoints.push(middlePoint);
+    }
     
     // Trier et dédupliquer
     return [...new Set(cutPoints)].sort((a, b) => a - b);
@@ -277,7 +306,11 @@ async function findSafeCutPoints(page) {
 /**
  * Capture un screenshot complet de la page en mode screen
  */
-async function captureScreenshot(localizedHtml, tempScreenshotPath, themeName, usePdfMode = true) {
+/**
+ * Capture des pages avec fenêtre virtuelle A4 scrollante
+ * Concept : Une fenêtre de ratio A4 "glisse" le long de la page en scrollant
+ */
+async function captureWithVirtualA4Window(localizedHtml, outputDir, themeName, usePdfMode = true) {
   let browser;
   
   try {
@@ -307,9 +340,9 @@ async function captureScreenshot(localizedHtml, tempScreenshotPath, themeName, u
     await page.emulateMedia({ media: 'screen' });
     
     console.log('✓ Navigateur initialisé');
-    console.log(`  Viewport: ${CONFIG.viewport.width}px largeur`);
+    console.log(`  Viewport: ${CONFIG.viewport.width}×${CONFIG.viewport.height}px`);
+    console.log(`  Fenêtre virtuelle A4: ${CONFIG.a4.widthPx}×${CONFIG.a4.heightPx}px (ratio 1:1.414)`);
     console.log(`  Media: screen (${themeName}) - @media print désactivé`);
-    console.log(`  Mode: ${usePdfMode ? 'PDF CSS optimisé' : 'Screen standard'}`);
 
     console.log('\n📄 Chargement du HTML...');
     await page.setContent(localizedHtml, {
@@ -321,34 +354,81 @@ async function captureScreenshot(localizedHtml, tempScreenshotPath, themeName, u
     await waitForLayoutStability(page);
     await preparePage(page, usePdfMode);
 
-    // Analyser les points de coupure potentiels
-    let safeCutPoints = null;
+    // Obtenir la hauteur totale (incluant la marge de sécurité)
+    const totalHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+    console.log(`  Hauteur totale du contenu: ${totalHeight}px (incluant marge de sécurité)`);
+
+    // Calculer la hauteur de la fenêtre virtuelle A4 (ratio fixe)
+    const windowWidth = CONFIG.viewport.width;
+    const windowHeight = Math.round(windowWidth * 1.414);  // Ratio A4 exact
+    
+    console.log(`  Fenêtre virtuelle A4: ${windowWidth}×${windowHeight}px`);
+
+    // Analyser les sections pour ajuster les positions de scroll
+    let scrollPositions = [0];
     if (CONFIG.pagination.smartBreak) {
-      console.log('\n🔍 Analyse des sections pour découpage intelligent...');
-      safeCutPoints = await findSafeCutPoints(page);
-      console.log(`✓ ${safeCutPoints.length} point(s) de coupure détecté(s)`);
+      console.log('\n🔍 Analyse des sections pour ajustement du scroll...');
+      const safeCutPoints = await findSafeCutPoints(page);
+      console.log(`✓ ${safeCutPoints.length} point(s) de coupure détecté(s): ${safeCutPoints.join(', ')}`);
+      
+      // Calculer les positions de scroll optimales
+      scrollPositions = findOptimalCutPositions(safeCutPoints, totalHeight, windowHeight);
+      console.log(`  Positions de scroll finales: ${scrollPositions.join(', ')}`);
+    } else {
+      // Scroll régulier tous les windowHeight px
+      const numPages = Math.ceil(totalHeight / windowHeight);
+      scrollPositions = Array.from({ length: numPages }, (_, i) => i * windowHeight);
     }
 
-    console.log('\n📸 Capture du screenshot complet...');
-    await page.screenshot({ 
-      path: tempScreenshotPath,
-      fullPage: true,  // Capture TOUTE la page, même si elle est longue
-      type: 'png'
-    });
+    // Capturer chaque page avec la fenêtre virtuelle A4 (HAUTEUR FIXE)
+    console.log(`\n📸 Capture avec fenêtre A4 fixe (${scrollPositions.length} pages)...`);
+    const screenshots = [];
     
-    // Récupérer les dimensions réelles de la page capturée
-    const dimensions = await page.evaluate(() => {
-      return {
-        width: document.documentElement.scrollWidth,
-        height: document.documentElement.scrollHeight
-      };
-    });
+    for (let i = 0; i < scrollPositions.length; i++) {
+      const scrollY = scrollPositions[i];
+      
+      // Vérifier qu'on peut capturer une fenêtre complète
+      if (scrollY + windowHeight > totalHeight + 100) {
+        console.log(`  Page ${i + 1}: Ignorée (dépasse le contenu: Y=${scrollY})`);
+        break;
+      }
+      
+      console.log(`  Page ${i + 1}: Scroll à Y=${scrollY}px, capture ${windowHeight}px (fenêtre fixe)`);
+      
+      // Scroller à la position
+      await page.evaluate((y) => {
+        window.scrollTo(0, y);
+      }, scrollY);
+      
+      // Attendre stabilisation
+      await page.waitForTimeout(200);
+      
+      const screenshotPath = path.join(outputDir, `page-${i + 1}.png`);
+      
+      // Capturer TOUJOURS la même hauteur (fenêtre fixe)
+      await page.screenshot({
+        path: screenshotPath,
+        type: 'png',
+        clip: {
+          x: 0,
+          y: 0,  // Relatif au viewport après scroll
+          width: windowWidth,
+          height: windowHeight
+        }
+      });
+      
+      screenshots.push({
+        path: screenshotPath,
+        width: windowWidth,
+        height: windowHeight  // TOUJOURS la même hauteur
+      });
+    }
     
-    console.log(`✓ Screenshot capturé: ${dimensions.width}×${dimensions.height}px`);
+    console.log(`✓ ${screenshots.length} zone(s) capturée(s)`);
     
     await browser.close();
     
-    return { dimensions, safeCutPoints };
+    return screenshots;
     
   } catch (error) {
     console.error('\n❌ Erreur lors de la capture:', error.message);
@@ -362,92 +442,39 @@ async function captureScreenshot(localizedHtml, tempScreenshotPath, themeName, u
 // ============================================================================
 
 /**
- * Découpe le screenshot en tranches A4 avec découpage intelligent
- * Retourne un tableau de buffers PNG
+ * Convertit les screenshots en format A4
+ * Redimensionne à la largeur A4 en préservant le ratio
  */
-async function sliceScreenshotIntoA4Pages(screenshotPath, screenshotDimensions, safeCutPoints = null) {
-  console.log('\n✂️  Découpage du screenshot en pages A4...');
+async function convertToA4Format(screenshots) {
+  console.log('\n🔄 Conversion en format A4...');
   
-  const image = sharp(screenshotPath);
-  const metadata = await image.metadata();
+  const a4Pages = [];
   
-  console.log(`  Dimensions image: ${metadata.width}×${metadata.height}px`);
-  console.log(`  Dimensions A4 cible: ${CONFIG.a4.widthPx}×${CONFIG.a4.heightPx}px`);
-  
-  // Calculer le ratio pour redimensionner à la largeur A4
-  const scaleRatio = CONFIG.a4.widthPx / metadata.width;
-  const scaledHeight = Math.round(metadata.height * scaleRatio);
-  
-  console.log(`  Ratio de redimensionnement: ${scaleRatio.toFixed(3)}`);
-  console.log(`  Hauteur après redimensionnement: ${scaledHeight}px`);
-  
-  // Redimensionner l'image à la largeur A4
-  const resizedImage = await image
-    .resize(CONFIG.a4.widthPx, scaledHeight, {
-      fit: 'fill',
-      kernel: 'lanczos3'  // Meilleure qualité de redimensionnement
-    })
-    .png()
-    .toBuffer();
-  
-  // Calculer les points de coupure optimaux
-  let cutPositions;
-  
-  if (safeCutPoints && safeCutPoints.length > 0) {
-    console.log('  Mode découpage intelligent activé');
+  for (let i = 0; i < screenshots.length; i++) {
+    const screenshot = screenshots[i];
+    console.log(`  Page ${i + 1}: ${screenshot.width}×${screenshot.height}px`);
     
-    // Convertir les safe cut points en coordonnées de l'image redimensionnée
-    const scaledCutPoints = safeCutPoints.map(y => Math.round(y * scaleRatio));
+    const image = sharp(screenshot.path);
     
-    // Trouver les meilleurs points de coupure pour maximiser l'utilisation des pages
-    cutPositions = findOptimalCutPositions(scaledCutPoints, scaledHeight, CONFIG.a4.heightPx);
-    console.log(`  Points de coupure optimisés: ${cutPositions.join(', ')}`);
-  } else {
-    // Découpage simple tous les CONFIG.a4.heightPx
-    const numPages = Math.ceil(scaledHeight / CONFIG.a4.heightPx);
-    cutPositions = Array.from({ length: numPages }, (_, i) => i * CONFIG.a4.heightPx);
-    console.log(`  Mode découpage automatique: ${cutPositions.length} page(s)`);
+    // Redimensionner à la largeur A4
+    const scaleRatio = CONFIG.a4.widthPx / screenshot.width;
+    const scaledHeight = Math.round(screenshot.height * scaleRatio);
+    
+    console.log(`    → Redimensionnement: ${CONFIG.a4.widthPx}×${scaledHeight}px (ratio: ${scaleRatio.toFixed(3)})`);
+    
+    const resized = await image
+      .resize(CONFIG.a4.widthPx, scaledHeight, {
+        fit: 'fill',
+        kernel: 'lanczos3'
+      })
+      .png()
+      .toBuffer();
+    
+    a4Pages.push(resized);
   }
   
-  // Découper en tranches
-  const slices = [];
-  for (let i = 0; i < cutPositions.length; i++) {
-    const top = cutPositions[i];
-    const bottom = cutPositions[i + 1] || scaledHeight;
-    const height = Math.min(CONFIG.a4.heightPx, bottom - top);
-    
-    console.log(`  Page ${i + 1}: extraction de ${top}px à ${top + height}px`);
-    
-    // Créer une image A4
-    const slice = await sharp({
-      create: {
-        width: CONFIG.a4.widthPx,
-        height: CONFIG.a4.heightPx,
-        channels: 4,
-        background: { r: 0, g: 0, b: 0, alpha: 0 }
-      }
-    })
-    .composite([{
-      input: await sharp(resizedImage)
-        .extract({
-          left: 0,
-          top: top,
-          width: CONFIG.a4.widthPx,
-          height: height
-        })
-        .toBuffer(),
-      top: 0,
-      left: 0
-    }])
-    .png()
-    .toBuffer();
-    
-    slices.push(slice);
-  }
-  
-  console.log(`✓ ${slices.length} page(s) créée(s)`);
-  
-  return slices;
+  console.log(`✓ ${a4Pages.length} page(s) convertie(s)`);
+  return a4Pages;
 }
 
 /**
@@ -492,9 +519,9 @@ function findOptimalCutPositions(safeCutPoints, totalHeight, pageHeight) {
 // ============================================================================
 
 /**
- * Crée un PDF multi-pages à partir des tranches d'images
+ * Crée un PDF multi-pages à partir des images A4
  */
-async function createPdfFromSlices(slices, outputPath) {
+async function createPdfFromA4Images(imageBuffers, outputPath) {
   console.log('\n📝 Création du PDF final...');
   
   const pdfDoc = await PDFDocument.create();
@@ -504,21 +531,40 @@ async function createPdfFromSlices(slices, outputPath) {
   const a4Width = 595.28;
   const a4Height = 841.89;
   
-  for (let i = 0; i < slices.length; i++) {
-    console.log(`  Ajout de la page ${i + 1}/${slices.length}...`);
+  for (let i = 0; i < imageBuffers.length; i++) {
+    console.log(`  Ajout de la page ${i + 1}/${imageBuffers.length}...`);
+    
+    // Obtenir les dimensions de l'image
+    const metadata = await sharp(imageBuffers[i]).metadata();
     
     // Créer une nouvelle page A4
     const page = pdfDoc.addPage([a4Width, a4Height]);
     
     // Embed l'image PNG dans le PDF
-    const pngImage = await pdfDoc.embedPng(slices[i]);
+    const pngImage = await pdfDoc.embedPng(imageBuffers[i]);
     
-    // Dessiner l'image pour remplir toute la page
+    // Dessiner l'image en préservant le ratio
+    const imgRatio = metadata.height / metadata.width;
+    const a4Ratio = a4Height / a4Width;
+    
+    let drawWidth = a4Width;
+    let drawHeight = drawWidth * imgRatio;
+    
+    // Si l'image dépasse, limiter à la hauteur A4
+    if (drawHeight > a4Height) {
+      drawHeight = a4Height;
+      drawWidth = drawHeight / imgRatio;
+    }
+    
+    // Centrer l'image
+    const x = (a4Width - drawWidth) / 2;
+    const y = (a4Height - drawHeight) / 2;
+    
     page.drawImage(pngImage, {
-      x: 0,
-      y: 0,
-      width: a4Width,
-      height: a4Height
+      x,
+      y,
+      width: drawWidth,
+      height: drawHeight
     });
   }
   
@@ -526,7 +572,7 @@ async function createPdfFromSlices(slices, outputPath) {
   const pdfBytes = await pdfDoc.save();
   await fs.writeFile(outputPath, pdfBytes);
   
-  console.log(`✓ PDF créé: ${slices.length} page(s)`);
+  console.log(`✓ PDF créé: ${imageBuffers.length} page(s)`);
 }
 
 // ============================================================================
@@ -641,33 +687,30 @@ async function main() {
     );
     console.log('✓ HTML prêt');
 
-    // Capture du screenshot
-    const tempScreenshotPath = path.join(CONFIG.tempDir, 'full-screenshot.png');
-    const { dimensions, safeCutPoints } = await captureScreenshot(
+    // Capture avec fenêtre virtuelle A4 scrollante
+    const screenshots = await captureWithVirtualA4Window(
       localizedHtml, 
-      tempScreenshotPath, 
+      CONFIG.tempDir,
       selectedTheme,
       CONFIG.pagination.usePdfCss
     );
 
-    // Découpage en pages A4
-    const slices = await sliceScreenshotIntoA4Pages(
-      tempScreenshotPath, 
-      dimensions,
-      safeCutPoints
-    );
+    // Conversion en format A4
+    const a4Pages = await convertToA4Format(screenshots);
 
     // Création du PDF final
-    await createPdfFromSlices(slices, outputPath);
+    await createPdfFromA4Images(a4Pages, outputPath);
 
     // Nettoyage
     console.log('\n🧹 Nettoyage des fichiers temporaires...');
-    await fs.unlink(tempScreenshotPath);
+    for (const screenshot of screenshots) {
+      await fs.unlink(screenshot.path);
+    }
     console.log('✓ Nettoyage terminé');
 
     console.log('\n============================================================');
     console.log(`✅ PDF généré avec succès: ${outputPath}`);
-    console.log(`   ${slices.length} page(s) A4`);
+    console.log(`   ${a4Pages.length} page(s) A4`);
     console.log('============================================================\n');
 
   } catch (error) {
@@ -682,4 +725,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { captureScreenshot, sliceScreenshotIntoA4Pages, createPdfFromSlices };
+module.exports = { captureWithVirtualA4Window, convertToA4Format, createPdfFromA4Images };
