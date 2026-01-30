@@ -21,7 +21,7 @@
 html.pdf-mode body {
   font-size: 12pt !important;
   line-height: 1.6 !important;
-  background-image: none !important;
+  /* background-image conservé pour la décoration */
 }
 
 html.pdf-mode .container {
