@@ -480,26 +480,27 @@ async function convertToA4Format(screenshots) {
 /**
  * Trouve les positions de coupure optimales basées sur les safe cut points
  * pour maximiser l'utilisation des pages A4
+ * IMPORTANT: Garantit un espacement MINIMUM de pageHeight entre chaque position
  */
 function findOptimalCutPositions(safeCutPoints, totalHeight, pageHeight) {
   const positions = [0];
   let currentPos = 0;
   
   while (currentPos < totalHeight) {
-    const idealNextPos = currentPos + pageHeight;
+    const minNextPos = currentPos + pageHeight;  // Position minimale (pas de chevauchement)
     
-    if (idealNextPos >= totalHeight) {
+    if (minNextPos >= totalHeight) {
       break;  // Dernière page
     }
     
-    // Trouver le safe cut point le plus proche de idealNextPos
-    // Priorité aux points AVANT idealNextPos pour éviter de déborder
-    let bestCutPoint = idealNextPos;
+    // Trouver le safe cut point le plus proche APRÈS minNextPos
+    let bestCutPoint = minNextPos;
     let minDistance = Infinity;
     
     for (const cutPoint of safeCutPoints) {
-      if (cutPoint > currentPos && cutPoint <= idealNextPos + 100) {  // Tolérance de 100px après
-        const distance = Math.abs(cutPoint - idealNextPos);
+      // SÉCURITÉ: le cutPoint doit être AU MOINS à minNextPos (pas de chevauchement)
+      if (cutPoint >= minNextPos && cutPoint <= minNextPos + 200) {  // Tolérance de 200px
+        const distance = cutPoint - minNextPos;
         if (distance < minDistance) {
           minDistance = distance;
           bestCutPoint = cutPoint;
