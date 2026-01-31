@@ -445,6 +445,7 @@ async function captureWithVirtualA4Window(localizedHtml, outputDir, themeName, u
             container.style.backgroundSize = bgSize;
             container.style.backgroundPosition = bgPosition;
             container.style.backgroundRepeat = bgRepeat;
+            container.style.backgroundAttachment = 'fixed'; // CRITIQUE: fixe le background pour éviter les décalages entre tiles
           }
           
           // Retirer le background du body ET html pour éviter la duplication

@@ -61,6 +61,14 @@ html.pdf-mode .section {
   border-radius: 0 !important;  /* Supprimer les bords arrondis */
 }
 
+html.pdf-mode[data-theme="dark"] .section {
+  background-color: #111113 !important; /* Couleur opaque pour masquer les points du background */
+}
+
+html.pdf-mode[data-theme="light"] .section {
+  background-color: #ffffff !important; /* Couleur opaque blanche pour le thème light */
+}
+
 html.pdf-mode .section h2 {
   font-size: 1.25rem !important;
   margin-bottom: 10px !important;
@@ -152,6 +160,14 @@ html.pdf-mode .section {
 
 html.pdf-mode .neonbox {
   padding: 12px !important;
+}
+
+html.pdf-mode[data-theme="dark"] .neonbox {
+  background-color: #111113 !important;
+}
+
+html.pdf-mode[data-theme="light"] .neonbox {
+  background-color: #ffffff !important;
 }
 
 /* ============================================================================
@@ -246,6 +262,9 @@ html.pdf-mode .project-item li {
 html.pdf-mode * {
   -webkit-print-color-adjust: exact !important;
   print-color-adjust: exact !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 /* ============================================================================
