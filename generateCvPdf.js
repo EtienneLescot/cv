@@ -538,6 +538,13 @@ async function captureWithVirtualA4Window(localizedHtml, outputDir, themeName, u
       screenshots.push({ path: stitchedPath, width: finalWidth, height: finalHeight });
     }  // Fermeture de la boucle for (scrollPositions)
     
+    // Supprimer la dernière page (marge de sécurité du padding-bottom: 300px)
+    if (screenshots.length > 2) {
+      const lastPage = screenshots.pop();
+      await fs.unlink(lastPage.path).catch(() => {});
+      console.log(`✓ Dernière page supprimée (marge de sécurité)`);
+    }
+    
     console.log(`✓ ${screenshots.length} zone(s) capturée(s)`);
     
     await browser.close();

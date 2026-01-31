@@ -28,6 +28,7 @@ html.pdf-mode .container {
   padding: 15px 18px !important;
   gap: 10px !important; /* Unified gap for all sections */
   max-width: 100% !important;
+  padding-bottom: 300px !important; /* Space for scrolling to capture last page */
 }
 
 /* ============================================================================
