@@ -307,10 +307,13 @@ async function findSafeCutPoints(page) {
  * Capture un screenshot complet de la page en mode screen
  */
 /**
- * Capture des pages avec fenêtre virtuelle A4 scrollante
- * Concept : Une fenêtre de ratio A4 "glisse" le long de la page en scrollant
+ * Capture des pages avec fenêtre virtuelle A4 scrollante + tiling haute résolution
+ * Concept:
+ * 1. Scale le contenu CSS (ex: ×2)
+ * 2. Capture des tiles en scrollant horizontalement puis verticalement
+ * 3. Stitch les tiles pour reconstituer chaque page A4
  */
-async function captureWithVirtualA4Window(localizedHtml, outputDir, themeName, usePdfMode = true) {
+async function captureWithVirtualA4Window(localizedHtml, outputDir, themeName, usePdfMode = true, scale = 1, tiles = '1x1') {
   let browser;
   
   try {
@@ -326,9 +329,12 @@ async function captureWithVirtualA4Window(localizedHtml, outputDir, themeName, u
       ]
     });
 
+    const cssScale = isFinite(scale) && scale > 0 ? scale : 1;
+    const [cols, rows] = (typeof tiles === 'string' ? tiles.split('x').map(n => parseInt(n, 10)) : [1, 1]);
+
     const context = await browser.newContext({
       viewport: CONFIG.viewport,
-      deviceScaleFactor: 1,
+      deviceScaleFactor: 1,  // On utilise CSS scale au lieu de deviceScaleFactor
       hasTouch: false,
       isMobile: false,
       colorScheme: themeName === 'dark' ? 'dark' : 'light'
@@ -343,6 +349,9 @@ async function captureWithVirtualA4Window(localizedHtml, outputDir, themeName, u
     console.log(`  Viewport: ${CONFIG.viewport.width}×${CONFIG.viewport.height}px`);
     console.log(`  Fenêtre virtuelle A4: ${CONFIG.a4.widthPx}×${CONFIG.a4.heightPx}px (ratio 1:1.414)`);
     console.log(`  Media: screen (${themeName}) - @media print désactivé`);
+    if (cssScale > 1) {
+      console.log(`  Scale CSS: ×${cssScale} → Tiling ${cols}×${rows}`);
+    }
 
     console.log('\n📄 Chargement du HTML...');
     await page.setContent(localizedHtml, {
@@ -354,10 +363,9 @@ async function captureWithVirtualA4Window(localizedHtml, outputDir, themeName, u
     await waitForLayoutStability(page);
     await preparePage(page, usePdfMode);
 
-    // Obtenir la hauteur totale (incluant la marge de sécurité)
-    const totalHeight = await page.evaluate(() => document.documentElement.scrollHeight);
-    // Calculer la hauteur réelle du contenu en ignorant les pseudo-éléments (::after)
-    const realContentHeight = await page.evaluate(() => {
+    // Obtenir la hauteur AVANT le zoom pour calculer les positions de scroll
+    const totalHeightPreScale = await page.evaluate(() => document.documentElement.scrollHeight);
+    const realContentHeightPreScale = await page.evaluate(() => {
       try {
         const children = Array.from(document.body.children).filter(el => getComputedStyle(el).display !== 'none');
         if (!children.length) return document.documentElement.scrollHeight;
@@ -369,8 +377,7 @@ async function captureWithVirtualA4Window(localizedHtml, outputDir, themeName, u
       }
     });
 
-    console.log(`  Hauteur totale du contenu (avec marge): ${totalHeight}px`);
-    console.log(`  Hauteur réelle du contenu (sans ::after): ${realContentHeight}px`);
+    console.log(`  Hauteur réelle du contenu (pré-scale): ${realContentHeightPreScale}px`);
 
     // Calculer la hauteur de la fenêtre virtuelle A4 (ratio fixe)
     const windowWidth = CONFIG.viewport.width;
@@ -378,66 +385,158 @@ async function captureWithVirtualA4Window(localizedHtml, outputDir, themeName, u
     
     console.log(`  Fenêtre virtuelle A4: ${windowWidth}×${windowHeight}px`);
 
-    // Analyser les sections pour ajuster les positions de scroll
+    // Analyser les sections pour ajuster les positions de scroll (AVANT zoom)
     let scrollPositions = [0];
     if (CONFIG.pagination.smartBreak) {
       console.log('\n🔍 Analyse des sections pour ajustement du scroll...');
       const safeCutPoints = await findSafeCutPoints(page);
       console.log(`✓ ${safeCutPoints.length} point(s) de coupure détecté(s): ${safeCutPoints.join(', ')}`);
       
-      // Calculer les positions de scroll optimales en se basant sur la hauteur réelle
-      // du contenu (on évite ainsi la page de sécurité ajoutée via ::after)
-      scrollPositions = findOptimalCutPositions(safeCutPoints, realContentHeight, windowHeight);
-      console.log(`  Positions de scroll finales: ${scrollPositions.join(', ')}`);
+      scrollPositions = findOptimalCutPositions(safeCutPoints, realContentHeightPreScale, windowHeight);
+      console.log(`  Positions de scroll (pré-scale): ${scrollPositions.join(', ')}`);
     } else {
-      // Scroll régulier tous les windowHeight px
-      const numPages = Math.ceil(realContentHeight / windowHeight);
+      const numPages = Math.ceil(realContentHeightPreScale / windowHeight);
       scrollPositions = Array.from({ length: numPages }, (_, i) => i * windowHeight);
     }
 
-    // Capturer chaque page avec la fenêtre virtuelle A4 (HAUTEUR FIXE)
-    console.log(`\n📸 Capture avec fenêtre A4 fixe (${scrollPositions.length} pages)...`);
+    // Maintenant appliquer le zoom CSS APRÈS avoir calculé les positions
+    if (cssScale > 1) {
+      await page.evaluate((scaleValue) => {
+        const container = document.querySelector('.container');
+        const body = document.body;
+        const html = document.documentElement;
+        
+        if (container) {
+          container.style.transformOrigin = 'top left';
+          container.style.transform = `scale(${scaleValue})`;
+          
+          // Vérifier le background sur html puis body (copier TOUT le background)
+          let bgColor, bgImage, bgSize, bgPosition, bgRepeat;
+          const htmlBg = window.getComputedStyle(html).backgroundImage;
+          const bodyBg = window.getComputedStyle(body).backgroundImage;
+          
+          if (htmlBg && htmlBg !== 'none') {
+            // Background sur html
+            const htmlStyle = window.getComputedStyle(html);
+            bgColor = htmlStyle.backgroundColor;
+            bgImage = htmlStyle.backgroundImage;
+            bgSize = htmlStyle.backgroundSize;
+            bgPosition = htmlStyle.backgroundPosition;
+            bgRepeat = htmlStyle.backgroundRepeat;
+          } else if (bodyBg && bodyBg !== 'none') {
+            // Background sur body
+            const bodyStyle = window.getComputedStyle(body);
+            bgColor = bodyStyle.backgroundColor;
+            bgImage = bodyStyle.backgroundImage;
+            bgSize = bodyStyle.backgroundSize;
+            bgPosition = bodyStyle.backgroundPosition;
+            bgRepeat = bodyStyle.backgroundRepeat;
+          } else {
+            // Pas d'image mais peut-être une couleur
+            const htmlStyle = window.getComputedStyle(html);
+            const bodyStyle = window.getComputedStyle(body);
+            bgColor = htmlStyle.backgroundColor !== 'rgba(0, 0, 0, 0)' ? htmlStyle.backgroundColor : bodyStyle.backgroundColor;
+          }
+          
+          // Copier le background complet sur container
+          if (bgColor) container.style.backgroundColor = bgColor;
+          if (bgImage && bgImage !== 'none') {
+            container.style.backgroundImage = bgImage;
+            container.style.backgroundSize = bgSize;
+            container.style.backgroundPosition = bgPosition;
+            container.style.backgroundRepeat = bgRepeat;
+          }
+          
+          // Retirer le background du body ET html pour éviter la duplication
+          body.style.backgroundImage = 'none';
+          body.style.backgroundColor = 'transparent';
+          body.style.background = 'transparent';
+          html.style.backgroundImage = 'none';
+          html.style.backgroundColor = 'transparent';
+          html.style.background = 'transparent';
+        }
+      }, cssScale);
+      await page.waitForTimeout(200);
+      console.log(`✓ Container zoomé ×${cssScale} (background déplacé)`);
+    }
+
+    // Capturer chaque page avec tiling (scroll horizontal + vertical)
+    console.log(`\n📸 Capture avec tiling ${cols}×${rows} (${scrollPositions.length} pages)...`);
     const screenshots = [];
     
     for (let i = 0; i < scrollPositions.length; i++) {
-      const scrollY = scrollPositions[i];
+      const scrollYPage = scrollPositions[i];
       
-      // Vérifier qu'on peut capturer une fenêtre complète
-      if (scrollY + windowHeight > totalHeight + 100) {
-        console.log(`  Page ${i + 1}: Ignorée (dépasse le contenu: Y=${scrollY})`);
-        break;
-      }
-      
-      console.log(`  Page ${i + 1}: Scroll à Y=${scrollY}px, capture ${windowHeight}px (fenêtre fixe)`);
-      
-      // Scroller à la position
-      await page.evaluate((y) => {
-        window.scrollTo(0, y);
-      }, scrollY);
-      
-      // Attendre stabilisation
-      await page.waitForTimeout(200);
-      
-      const screenshotPath = path.join(outputDir, `page-${i + 1}.png`);
-      
-      // Capturer TOUJOURS la même hauteur (fenêtre fixe)
-      await page.screenshot({
-        path: screenshotPath,
-        type: 'png',
-        clip: {
-          x: 0,
-          y: 0,  // Relatif au viewport après scroll
-          width: windowWidth,
-          height: windowHeight
+      console.log(`  Page ${i + 1}: Capture à Y=${scrollYPage}px`);
+
+      const pageTiles = [];
+
+      // Pour chaque ligne de tiles
+      for (let r = 0; r < rows; r++) {
+        // Scroll vertical: position de base * scale + offset de ligne * windowHeight
+        const scrollY = scrollYPage * cssScale + r * windowHeight;
+        
+        // Pour chaque colonne de tiles
+        for (let c = 0; c < cols; c++) {
+          // Scroll horizontal vers la colonne
+          const scrollX = c * windowWidth;
+
+          await page.evaluate(({ x, y }) => { window.scrollTo(x, y); }, { x: scrollX, y: scrollY });
+          await page.waitForTimeout(100);
+
+          const tilePath = path.join(outputDir, `page-${i + 1}-r${r}-c${c}.png`);
+          await page.screenshot({ path: tilePath, type: 'png' });
+
+          // Lire dimensions réelles
+          const meta = await sharp(tilePath).metadata();
+          pageTiles.push({ 
+            path: tilePath, 
+            row: r, 
+            col: c,
+            width: meta.width, 
+            height: meta.height 
+          });
+          console.log(`    Tile [${r},${c}]: ${meta.width}×${meta.height}px`);
         }
-      });
+      }
+
+      // Assembler les tiles en une seule image A4
+      const stitchedPath = path.join(outputDir, `page-${i + 1}.png`);
       
-      screenshots.push({
-        path: screenshotPath,
-        width: windowWidth,
-        height: windowHeight  // TOUJOURS la même hauteur
-      });
-    }
+      // Calculer dimensions finales (somme des tiles)
+      const tileW = pageTiles[0].width;
+      const tileH = pageTiles[0].height;
+      const finalWidth = tileW * cols;
+      const finalHeight = tileH * rows;
+
+      // Créer une image vide et composer les tiles
+      const composites = pageTiles.map(t => ({ 
+        input: t.path, 
+        left: t.col * tileW, 
+        top: t.row * tileH 
+      }));
+      
+      await sharp({ 
+        create: { 
+          width: finalWidth, 
+          height: finalHeight, 
+          channels: 4, 
+          background: { r: 0, g: 0, b: 0, alpha: 0 } 
+        } 
+      })
+      .composite(composites)
+      .png()
+      .toFile(stitchedPath);
+      
+      console.log(`    ✓ Assemblage: ${finalWidth}×${finalHeight}px → ${stitchedPath}`);
+
+      // Cleanup tiles
+      for (const tile of pageTiles) {
+        await fs.unlink(tile.path).catch(() => {});
+      }
+
+      screenshots.push({ path: stitchedPath, width: finalWidth, height: finalHeight });
+    }  // Fermeture de la boucle for (scrollPositions)
     
     console.log(`✓ ${screenshots.length} zone(s) capturée(s)`);
     
@@ -471,21 +570,44 @@ async function convertToA4Format(screenshots) {
     
     const image = sharp(screenshot.path);
     
-    // Redimensionner à la largeur A4
-    const scaleRatio = CONFIG.a4.widthPx / screenshot.width;
-    const scaledHeight = Math.round(screenshot.height * scaleRatio);
+    // Vérifier le ratio
+    const actualRatio = screenshot.height / screenshot.width;
+    const a4Ratio = CONFIG.a4.heightPx / CONFIG.a4.widthPx;
+    const ratioDiff = Math.abs(actualRatio - a4Ratio) / a4Ratio;
     
-    console.log(`    → Redimensionnement: ${CONFIG.a4.widthPx}×${scaledHeight}px (ratio: ${scaleRatio.toFixed(3)})`);
+    let processedBuffer;
+    let finalWidth, finalHeight;
     
-    const resized = await image
-      .resize(CONFIG.a4.widthPx, scaledHeight, {
-        fit: 'fill',
-        kernel: 'lanczos3'
-      })
-      .png()
-      .toBuffer();
+    // Si l'image est déjà au bon ratio ET en haute résolution, la garder telle quelle
+    if (ratioDiff < 0.01 && screenshot.width >= CONFIG.a4.widthPx) {
+      console.log(`    → Haute résolution conservée (ratio: ${actualRatio.toFixed(3)}, diff: ${(ratioDiff * 100).toFixed(2)}%)`);
+      processedBuffer = await image.png().toBuffer();
+      finalWidth = screenshot.width;
+      finalHeight = screenshot.height;
+    } else {
+      // Redimensionner à la largeur A4 seulement si nécessaire
+      const scaleRatio = CONFIG.a4.widthPx / screenshot.width;
+      const scaledHeight = Math.round(screenshot.height * scaleRatio);
+      
+      console.log(`    → Redimensionnement: ${CONFIG.a4.widthPx}×${scaledHeight}px (ratio: ${scaleRatio.toFixed(3)})`);
+      
+      processedBuffer = await image
+        .resize(CONFIG.a4.widthPx, scaledHeight, {
+          fit: 'fill',
+          kernel: 'lanczos3'
+        })
+        .png()
+        .toBuffer();
+      
+      finalWidth = CONFIG.a4.widthPx;
+      finalHeight = scaledHeight;
+    }
     
-    a4Pages.push(resized);
+    a4Pages.push({
+      buffer: processedBuffer,
+      width: finalWidth,
+      height: finalHeight
+    });
   }
   
   console.log(`✓ ${a4Pages.length} page(s) convertie(s)`);
@@ -550,24 +672,30 @@ async function createPdfFromA4Images(imageBuffers, outputPath) {
   for (let i = 0; i < imageBuffers.length; i++) {
     console.log(`  Ajout de la page ${i + 1}/${imageBuffers.length}...`);
     
-    // Obtenir les dimensions de l'image
-    const metadata = await sharp(imageBuffers[i]).metadata();
+    const pageData = imageBuffers[i];
+    const buffer = pageData.buffer || pageData;  // Support ancien format (buffer direct)
     
     // Créer une nouvelle page A4
     const page = pdfDoc.addPage([a4Width, a4Height]);
     
-    // Embed l'image PNG dans le PDF
-    const pngImage = await pdfDoc.embedPng(imageBuffers[i]);
+    // Embed l'image PNG dans le PDF (haute résolution conservée)
+    const pngImage = await pdfDoc.embedPng(buffer);
+    
+    // Obtenir les dimensions natives de l'image
+    const { width: imgWidth, height: imgHeight } = pngImage.scale(1);
     
     // Calculer les ratios
-    const imgRatio = metadata.width / metadata.height;
+    const imgRatio = imgWidth / imgHeight;
     const a4Ratio = a4Width / a4Height;
     const ratioDiff = Math.abs(imgRatio - a4Ratio) / a4Ratio;
     
-    // Sécurité: n'étirer que si la différence de ratio est très faible (<1%)
+    if (pageData.width) {
+      console.log(`    Image: ${pageData.width}×${pageData.height}px → PDF: ${a4Width.toFixed(0)}×${a4Height.toFixed(0)}pt`);
+    }
+    
+    // Toujours étirer sur toute la page (l'image haute-res sera affichée dans le cadre A4)
     if (ratioDiff < 0.01) {
-      // Ratios quasi-identiques: étirer pour éviter la ligne blanche due à l'arrondi
-      console.log(`    ✓ Ratio OK (diff: ${(ratioDiff * 100).toFixed(2)}%) - étirement autorisé`);
+      console.log(`    ✓ Ratio OK (diff: ${(ratioDiff * 100).toFixed(2)}%)`);
       page.drawImage(pngImage, {
         x: 0,
         y: 0,
@@ -575,7 +703,6 @@ async function createPdfFromA4Images(imageBuffers, outputPath) {
         height: a4Height
       });
     } else {
-      // Ratios trop différents: préserver le ratio et centrer (sécurité)
       console.warn(`    ⚠ Ratio différent (diff: ${(ratioDiff * 100).toFixed(2)}%) - préservation du ratio`);
       let drawWidth = a4Width;
       let drawHeight = drawWidth / imgRatio;
@@ -618,7 +745,9 @@ function parseCliArgs() {
     theme: 'dark',
     output: null,
     url: null,
-    pages: CONFIG.pagination.targetPages  // Nombre de pages cibles
+    pages: CONFIG.pagination.targetPages,  // Nombre de pages cibles
+    scale: 1,
+    tiles: undefined  // Auto-détecté basé sur scale
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -636,6 +765,12 @@ function parseCliArgs() {
       i++;
     } else if (args[i] === '--pages' && args[i + 1]) {
       options.pages = parseInt(args[i + 1]);
+      i++;
+    } else if (args[i] === '--scale' && args[i + 1]) {
+      options.scale = parseFloat(args[i + 1]);
+      i++;
+    } else if (args[i] === '--tiles' && args[i + 1]) {
+      options.tiles = args[i + 1];
       i++;
     }
   }
@@ -717,11 +852,17 @@ async function main() {
     console.log('✓ HTML prêt');
 
     // Capture avec fenêtre virtuelle A4 scrollante
+    // Auto-déterminer tiles basé sur scale
+    const scale = options.scale || 1;
+    const tiles = options.tiles || (scale === 1 ? '1x1' : `${scale}x${scale}`);
+    
     const screenshots = await captureWithVirtualA4Window(
-      localizedHtml, 
+      localizedHtml,
       CONFIG.tempDir,
       selectedTheme,
-      CONFIG.pagination.usePdfCss
+      CONFIG.pagination.usePdfCss,
+      scale,
+      tiles
     );
 
     // Conversion en format A4
