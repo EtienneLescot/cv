@@ -170,6 +170,11 @@ html.pdf-mode[data-theme="light"] .neonbox {
   background-color: #ffffff !important;
 }
 
+/* Exception: La boîte contact garde sa couleur bleue */
+html.pdf-mode[data-theme="light"] .contact-section .neonbox {
+  background: rgba(0, 123, 255, 0.9) !important;
+}
+
 /* ============================================================================
    AJUSTEMENTS SPÉCIFIQUES PAR SECTION
    ============================================================================ */
