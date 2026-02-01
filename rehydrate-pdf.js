@@ -23,6 +23,7 @@
 
 const { chromium } = require('@playwright/test');
 const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
+const fontkit = require('@pdf-lib/fontkit');
 const fs = require('fs').promises;
 const fsSync = require('fs');
 const path = require('path');
@@ -61,7 +62,71 @@ const CONFIG = {
   // Output
   outputDir: './exports',
   supportedLocales: ['fr', 'en'],
-  supportedThemes: ['dark', 'light']
+  supportedThemes: ['dark', 'light'],
+  
+  // Fine-tuning options
+  positioning: {
+    // Mode: 'auto' uses bounding box dimensions directly, 'manual' uses calculated baseline
+    mode: 'auto',  // 'auto' or 'manual'
+    
+    // Baseline positioning strategy (only used in manual mode):
+    // 'top': Use rect.top + fontSize (current behavior)
+    // 'baseline': Use estimated baseline position
+    // 'bottom': Use rect.bottom
+    strategy: 'baseline',
+    
+    // Manual offset adjustments (in pixels before scaling)
+    offsetY: 0,  // Global offset: Positive = move text down, Negative = move text up
+    offsetX: 0,  // Global offset: Positive = move text right, Negative = move text left
+    
+    // Specific offsets by element type (added to global offset)
+    offsetsByType: {
+      h1: 0,
+      h2: 0,
+      h3: 0,
+      h4: 0,
+      h5: 0,
+      h6: 0,
+      body: 0
+    },
+    
+    // Font size adjustment factors (multiplicative)
+    fontSizeAdjust: 1.0,           // Global adjustment
+    
+    // Specific adjustments by element type
+    fontSizeAdjustments: {
+      h1: 1.20,      // Large main title
+      h2: 1.15,      // Section titles
+      h3: 1.10,      // Sub-section titles
+      h4: 1.05,      // Small titles
+      h5: 1.02,      // Very small titles
+      h6: 1.00,      // Smallest titles
+      body: 0.95     // Regular body text
+    },
+    
+    // Baseline offset as percentage of fontSize (0.0 to 1.0)
+    // For Inter font: 0.203 (20.3% descent)
+    baselineOffset: 0.203
+  },
+  
+  // Font configuration
+  fonts: {
+    // Try to use embedded custom fonts for better accuracy
+    useCustomFonts: true,  // Set to true if you have Inter.ttf in fonts/ folder
+    
+    // Local font paths (if available)
+    fontPaths: {
+      'Inter-Regular': './fonts/Inter-Regular.ttf',
+      'Inter-Bold': './fonts/Inter-Bold.ttf'
+    },
+    
+    // Standard PDF fonts to use (closest to Inter)
+    // Helvetica is the closest sans-serif font to Inter in PDF standard fonts
+    standardFonts: {
+      regular: StandardFonts.Helvetica,
+      bold: StandardFonts.HelveticaBold
+    }
+  }
 };
 
 // ============================================================================
@@ -166,6 +231,79 @@ function generateHtml(locale, theme) {
 }
 
 // ============================================================================
+// FONT HANDLING - Download and embed custom fonts
+// ============================================================================
+
+/**
+ * Download a font from URL (with caching)
+ */
+async function loadFontFromFile(fontPath) {
+  try {
+    const fontBytes = await fs.readFile(fontPath);
+    return fontBytes;
+  } catch (error) {
+    console.warn(`  ⚠️  Could not load font from ${fontPath}: ${error.message}`);
+    return null;
+  }
+}
+
+/**
+ * Load and embed fonts into PDF document
+ * Returns an object with font references: { regular, bold }
+ */
+async function loadFonts(pdfDoc) {
+  const fonts = { regular: null, bold: null };
+  
+  if (!CONFIG.fonts.useCustomFonts) {
+    // Use standard fonts
+    fonts.regular = await pdfDoc.embedFont(CONFIG.fonts.standardFonts.regular);
+    fonts.bold = await pdfDoc.embedFont(CONFIG.fonts.standardFonts.bold);
+    console.log('✅ Using standard PDF fonts (Helvetica - closest to Inter)');
+    return fonts;
+  }
+  
+  try {
+    console.log('🔍 Loading custom fonts from files...');
+    
+    // Try to load Inter Regular
+    if (CONFIG.fonts.fontPaths['Inter-Regular']) {
+      const regularBuffer = await loadFontFromFile(CONFIG.fonts.fontPaths['Inter-Regular']);
+      if (regularBuffer) {
+        fonts.regular = await pdfDoc.embedFont(regularBuffer);
+        console.log('  ✅ Inter Regular loaded from file');
+      }
+    }
+    
+    // Try to load Inter Bold
+    if (CONFIG.fonts.fontPaths['Inter-Bold']) {
+      const boldBuffer = await loadFontFromFile(CONFIG.fonts.fontPaths['Inter-Bold']);
+      if (boldBuffer) {
+        fonts.bold = await pdfDoc.embedFont(boldBuffer);
+        console.log('  ✅ Inter Bold loaded from file');
+      }
+    }
+    
+    // Fallback if any font is missing
+    if (!fonts.regular) {
+      fonts.regular = await pdfDoc.embedFont(CONFIG.fonts.standardFonts.regular);
+      console.log('  ⚠️  Using Helvetica as fallback for regular font');
+    }
+    if (!fonts.bold) {
+      fonts.bold = await pdfDoc.embedFont(CONFIG.fonts.standardFonts.bold);
+      console.log('  ⚠️  Using Helvetica-Bold as fallback for bold font');
+    }
+    
+  } catch (error) {
+    console.warn(`⚠️  Error loading custom fonts: ${error.message}`);
+    console.log('  Using fallback fonts...');
+    fonts.regular = await pdfDoc.embedFont(CONFIG.fonts.standardFonts.regular);
+    fonts.bold = await pdfDoc.embedFont(CONFIG.fonts.standardFonts.bold);
+  }
+  
+  return fonts;
+}
+
+// ============================================================================
 // TEXT EXTRACTION - Extract text with precise coordinates from HTML
 // ============================================================================
 
@@ -191,12 +329,36 @@ async function extractTextCoordinates(page) {
           // Get all client rects (handles multiline text)
           const rects = range.getClientRects();
           
-          // Get computed style from parent element
+          // Get computed style for font size and metrics
           const parent = node.parentElement;
           const style = parent ? window.getComputedStyle(parent) : null;
           const fontSize = style ? parseFloat(style.fontSize) : 16;
           const fontFamily = style ? style.fontFamily : 'Arial';
           const fontWeight = style ? style.fontWeight : 'normal';
+          const lineHeight = style ? style.lineHeight : 'normal';
+          const textTransform = style ? style.textTransform : 'none';
+          const letterSpacing = style ? parseFloat(style.letterSpacing) || 0 : 0;
+          
+          // Detect element type (for font size adjustments)
+          let elementType = 'body';
+          let tagName = parent ? parent.tagName.toLowerCase() : '';
+          
+          // Walk up the DOM to find if we're in a heading
+          let current = parent;
+          while (current && elementType === 'body') {
+            const tag = current.tagName ? current.tagName.toLowerCase() : '';
+            if (tag === 'h1' || tag === 'h2' || tag === 'h3' || tag === 'h4' || tag === 'h5' || tag === 'h6') {
+              elementType = 'heading';
+              tagName = tag;
+              break;
+            }
+            current = current.parentElement;
+          }
+          
+          // Calculate baseline offset
+          // For Inter font: descent is ~20% of fontSize, ascent is ~75%
+          const estimatedDescent = fontSize * 0.203;  // Inter specific
+          const estimatedAscent = fontSize * 0.75;     // Inter specific
           
           // If we have multiple rects, the text wraps across lines
           if (rects.length > 1) {
@@ -216,11 +378,19 @@ async function extractTextCoordinates(page) {
                   text: lineText,
                   x: rect.left,
                   y: rect.top,
+                  bottom: rect.bottom,
                   width: rect.width,
                   height: rect.height,
                   fontSize: fontSize,
                   fontFamily: fontFamily,
-                  fontWeight: fontWeight
+                  fontWeight: fontWeight,
+                  lineHeight: lineHeight,
+                  textTransform: textTransform,
+                  letterSpacing: letterSpacing,
+                  estimatedBaseline: rect.top + estimatedAscent,
+                  estimatedDescent: estimatedDescent,
+                  elementType: elementType,
+                  tagName: tagName
                 });
               }
             }
@@ -232,11 +402,19 @@ async function extractTextCoordinates(page) {
                 text: text,
                 x: rect.left,
                 y: rect.top,
+                bottom: rect.bottom,
                 width: rect.width,
                 height: rect.height,
                 fontSize: fontSize,
                 fontFamily: fontFamily,
-                fontWeight: fontWeight
+                fontWeight: fontWeight,
+                lineHeight: lineHeight,
+                textTransform: textTransform,
+                letterSpacing: letterSpacing,
+                estimatedBaseline: rect.top + estimatedAscent,
+                estimatedDescent: estimatedDescent,
+                elementType: elementType,
+                tagName: tagName
               });
             }
           }
@@ -299,8 +477,11 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
   const existingPdfBytes = await fs.readFile(pdfPath);
   const pdfDoc = await PDFDocument.load(existingPdfBytes);
   
-  // Load standard font (pdf-lib limitation: can't embed custom fonts easily)
-  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  // Register fontkit to support custom fonts
+  pdfDoc.registerFontkit(fontkit);
+  
+  // Load fonts (Inter or fallback to Helvetica)
+  const fonts = await loadFonts(pdfDoc);
   
   // Get pages
   const pages = pdfDoc.getPages();
@@ -354,15 +535,99 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
     
     // Convert coordinates from HTML (top-left origin) to PDF (bottom-left origin)
     // PDF Y starts from bottom, HTML Y starts from top
-    const pdfX = item.x * scaleX;
-    const pdfY = pageHeight - (relativeY * scaleY) - (item.fontSize * scaleY);
-    const pdfFontSize = item.fontSize * scaleY;
+    
+    // Calculate element-specific offset
+    let elementOffsetY = CONFIG.positioning.offsetY;  // Start with global offset
+    if (item.elementType === 'heading' && item.tagName) {
+      const specificOffset = CONFIG.positioning.offsetsByType[item.tagName];
+      if (specificOffset !== undefined) {
+        elementOffsetY += specificOffset;
+      }
+    } else if (item.elementType === 'body') {
+      elementOffsetY += CONFIG.positioning.offsetsByType.body;
+    }
+    
+    // Apply manual offsets BEFORE scaling
+    const adjustedX = item.x + CONFIG.positioning.offsetX;
+    
+    // Apply font size adjustments based on element type
+    let fontSizeMultiplier = CONFIG.positioning.fontSizeAdjust;
+    
+    // Get specific adjustment for this element type
+    if (item.elementType === 'heading' && item.tagName) {
+      const tagAdjustment = CONFIG.positioning.fontSizeAdjustments[item.tagName];
+      if (tagAdjustment) {
+        fontSizeMultiplier *= tagAdjustment;
+      }
+    } else if (item.elementType === 'body') {
+      fontSizeMultiplier *= CONFIG.positioning.fontSizeAdjustments.body;
+    }
+    
+    const adjustedFontSize = item.fontSize * fontSizeMultiplier;
+    
+    // Calculate Y position based on mode
+    let adjustedY;
+    
+    if (CONFIG.positioning.mode === 'auto') {
+      // AUTO MODE: Use the bounding box dimensions directly
+      // The rect.height already represents the visual height of the text
+      // Position at the bottom of the bounding box (where the baseline roughly is)
+      // This works because PDF drawText positions at the baseline by default
+      
+      // Use the bottom of the rect as the baseline position
+      // Subtract a small percentage of height for descenders
+      const descentRatio = 0.15; // ~15% for descenders in Inter
+      adjustedY = item.bottom - (item.height * descentRatio) + elementOffsetY;
+      
+    } else {
+      // MANUAL MODE: Use strategy-based calculation
+      switch (CONFIG.positioning.strategy) {
+        case 'baseline':
+          // Use estimated baseline position
+          adjustedY = item.estimatedBaseline + elementOffsetY;
+          break;
+        case 'bottom':
+          // Use bottom of bounding box minus descent
+          adjustedY = (item.bottom - item.estimatedDescent) + elementOffsetY;
+          break;
+        case 'top':
+        default:
+          // Use top + fontSize (original behavior)
+          adjustedY = item.y + item.fontSize + elementOffsetY;
+          break;
+      }
+    }
+    
+    const pdfX = adjustedX * scaleX;
+    const pdfY = pageHeight - ((adjustedY - (pageIndex * windowHeight)) * scaleY);
+    const pdfFontSize = adjustedFontSize * scaleY;
     
     // Draw invisible text (opacity = 0)
     try {
+      // Select appropriate font based on weight
+      const fontWeight = parseInt(item.fontWeight) || 400;
+      const isBold = fontWeight >= 600 || item.fontWeight === 'bold';
+      const selectedFont = isBold ? fonts.bold : fonts.regular;
+      
+      // Apply text-transform (uppercase, lowercase, capitalize)
+      let transformedText = item.text;
+      if (item.textTransform) {
+        switch (item.textTransform) {
+          case 'uppercase':
+            transformedText = transformedText.toUpperCase();
+            break;
+          case 'lowercase':
+            transformedText = transformedText.toLowerCase();
+            break;
+          case 'capitalize':
+            transformedText = transformedText.replace(/\b\w/g, l => l.toUpperCase());
+            break;
+        }
+      }
+      
       // Clean text to avoid encoding issues with WinAnsi
       // Replace problematic Unicode characters
-      const cleanText = item.text
+      const cleanText = transformedText
         .replace(/→/g, '->')      // Arrow
         .replace(/‑/g, '-')        // Non-breaking hyphen
         .replace(/–/g, '-')        // En dash
@@ -381,7 +646,7 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
         x: pdfX,
         y: pdfY,
         size: pdfFontSize,
-        font: font,
+        font: selectedFont,
         color: debugMode ? rgb(1, 0, 0) : rgb(0, 0, 0),  // Red in debug mode
         opacity: debugMode ? 0.5 : 0  // Semi-transparent in debug, invisible otherwise
       });
@@ -414,10 +679,65 @@ async function rehydratePdf(options = {}) {
   const inputPdf = options.input || null;
   const debugMode = options.debug || false;
   
+  // Apply fine-tuning options to CONFIG
+  if (options.mode) {
+    CONFIG.positioning.mode = options.mode;
+  }
+  if (options.offsetY !== undefined) {
+    CONFIG.positioning.offsetY = options.offsetY;
+  }
+  if (options.offsetX !== undefined) {
+    CONFIG.positioning.offsetX = options.offsetX;
+  }
+  if (options.strategy) {
+    CONFIG.positioning.strategy = options.strategy;
+  }
+  
+  // Apply preset adjustments
+  if (options.preset) {
+    const presets = {
+      tight: {
+        h1: 1.25, h2: 1.20, h3: 1.15, h4: 1.10, h5: 1.05, h6: 1.02, body: 0.92
+      },
+      normal: {
+        h1: 1.20, h2: 1.15, h3: 1.10, h4: 1.05, h5: 1.02, h6: 1.00, body: 0.95
+      },
+      loose: {
+        h1: 1.15, h2: 1.12, h3: 1.08, h4: 1.04, h5: 1.01, h6: 0.98, body: 0.98
+      }
+    };
+    
+    const selectedPreset = presets[options.preset];
+    if (selectedPreset) {
+      CONFIG.positioning.fontSizeAdjustments = { ...selectedPreset };
+      console.log(`🎯 Applied preset: ${options.preset}`);
+    } else {
+      console.warn(`⚠️  Unknown preset: ${options.preset}`);
+    }
+  }
+  
+  // Apply specific offsets by type
+  if (options.offsetH1 !== undefined) {
+    CONFIG.positioning.offsetsByType.h1 = options.offsetH1;
+  }
+  if (options.offsetH2 !== undefined) {
+    CONFIG.positioning.offsetsByType.h2 = options.offsetH2;
+  }
+  if (options.offsetH3 !== undefined) {
+    CONFIG.positioning.offsetsByType.h3 = options.offsetH3;
+  }
+  if (options.offsetBody !== undefined) {
+    CONFIG.positioning.offsetsByType.body = options.offsetBody;
+  }
+  
   console.log('\n' + '='.repeat(80));
   console.log('🔄 PDF REHYDRATION - Adding Invisible Selectable Text');
   console.log('='.repeat(80));
   console.log(`📍 Locale: ${locale} | Theme: ${theme}`);
+  console.log(`🤖 Mode: ${CONFIG.positioning.mode.toUpperCase()} ${CONFIG.positioning.mode === 'auto' ? '(smart bounding box)' : '(manual baseline)'}`);
+  console.log(`🎯 Positioning: strategy=${CONFIG.positioning.strategy}, offsetY=${CONFIG.positioning.offsetY}, offsetX=${CONFIG.positioning.offsetX}`);
+  const adj = CONFIG.positioning.fontSizeAdjustments;
+  console.log(`🔤 Font sizes: h1×${adj.h1}, h2×${adj.h2}, h3×${adj.h3}, body×${adj.body}`);
   console.log('');
   
   let browser;
@@ -544,7 +864,17 @@ function parseArgs() {
   const options = {
     locale: 'fr',
     theme: 'dark',
-    input: null
+    input: null,
+    debug: false,
+    mode: 'auto',  // 'auto' or 'manual'
+    offsetY: 0,
+    offsetX: 0,
+    strategy: 'baseline',
+    preset: null,  // 'tight', 'normal', 'loose', or null for manual
+    offsetH1: undefined,
+    offsetH2: undefined,
+    offsetH3: undefined,
+    offsetBody: undefined
   };
   
   for (let i = 0; i < args.length; i++) {
@@ -558,22 +888,64 @@ function parseArgs() {
       options.input = args[++i];
     } else if (arg === '--debug') {
       options.debug = true;
+    } else if (arg === '--mode' && i + 1 < args.length) {
+      options.mode = args[++i];
+    } else if (arg === '--offset-y' && i + 1 < args.length) {
+      options.offsetY = parseFloat(args[++i]);
+    } else if (arg === '--offset-x' && i + 1 < args.length) {
+      options.offsetX = parseFloat(args[++i]);
+    } else if (arg === '--strategy' && i + 1 < args.length) {
+      options.strategy = args[++i];
+    } else if (arg === '--preset' && i + 1 < args.length) {
+      options.preset = args[++i];
+    } else if (arg === '--offset-h1' && i + 1 < args.length) {
+      options.offsetH1 = parseFloat(args[++i]);
+    } else if (arg === '--offset-h2' && i + 1 < args.length) {
+      options.offsetH2 = parseFloat(args[++i]);
+    } else if (arg === '--offset-h3' && i + 1 < args.length) {
+      options.offsetH3 = parseFloat(args[++i]);
+    } else if (arg === '--offset-body' && i + 1 < args.length) {
+      options.offsetBody = parseFloat(args[++i]);
     } else if (arg === '--help') {
       console.log(`
 Usage: node rehydrate-pdf.js [options]
 
 Options:
-  --locale <fr|en>      Locale to use (default: fr)
-  --theme <dark|light>  Theme to use (default: dark)
-  --input <path>        Path to input raster PDF (optional)
-  --debug               Show text overlay in red (for debugging alignment)
-  --help                Show this help message
+  --locale <fr|en>              Locale to use (default: fr)
+  --theme <dark|light>          Theme to use (default: dark)
+  --input <path>                Path to input raster PDF (optional)
+  --debug                       Show text overlay in red (for debugging alignment)
+  --mode <auto|manual>          Positioning mode (default: auto)
+                                  auto: Uses bounding box dimensions directly (recommended)
+                                  manual: Uses calculated baseline with strategy
+  --strategy <method>           Positioning strategy for manual mode: 'baseline', 'top', or 'bottom'
+  --offset-y <pixels>           Global vertical offset (+ down, - up)
+  --offset-x <pixels>           Global horizontal offset (+ right, - left)
+  --offset-h1 <pixels>          Additional offset for h1 titles (added to --offset-y)
+  --offset-h2 <pixels>          Additional offset for h2 titles (added to --offset-y)
+  --offset-h3 <pixels>          Additional offset for h3 titles (added to --offset-y)
+  --offset-body <pixels>        Additional offset for body text (added to --offset-y)
+  --preset <name>               Apply preset font size adjustments: 'tight', 'normal', or 'loose'
+  --help                        Show this help message
+
+Presets:
+  tight:  Larger headings, smaller body (h1:1.25, h2:1.20, body:0.92)
+  normal: Balanced adjustments (h1:1.20, h2:1.15, body:0.95) [default]
+  loose:  Smaller adjustments (h1:1.15, h2:1.12, body:0.98)
 
 Examples:
-  node rehydrate-pdf.js
-  node rehydrate-pdf.js --locale en --theme light
-  node rehydrate-pdf.js --input exports/cv-fr-d.pdf
+  # Recommended: Auto mode (uses bounding boxes directly)
   node rehydrate-pdf.js --debug
+  node rehydrate-pdf.js --debug --preset normal
+  
+  # Fine-tune with small offsets if needed
+  node rehydrate-pdf.js --debug --offset-y -0.5
+  
+  # Manual mode (old behavior, more complex)
+  node rehydrate-pdf.js --debug --mode manual --strategy baseline --preset normal
+  
+  # Final version (without debug)
+  node rehydrate-pdf.js --preset normal
       `);
       process.exit(0);
     }
