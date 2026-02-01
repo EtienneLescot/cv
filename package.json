@@ -12,7 +12,9 @@
     "build:pdf": "node build-pdf.js",
     "build:full": "npm run build:minify && npm run build:locales",
     "pdf": "node generateCvPdf.js",
-    "pdf:all": "node generateCvPdf.js --locale fr --theme dark && node generateCvPdf.js --locale fr --theme light && node generateCvPdf.js --locale en --theme dark && node generateCvPdf.js --locale en --theme light"
+    "pdf:all": "node generateCvPdf.js --locale fr --theme dark && node generateCvPdf.js --locale fr --theme light && node generateCvPdf.js --locale en --theme dark && node generateCvPdf.js --locale en --theme light",
+    "rehydrate": "node rehydrate-pdf.js",
+    "rehydrate:all": "node rehydrate-pdf.js --locale fr --theme dark && node rehydrate-pdf.js --locale fr --theme light && node rehydrate-pdf.js --locale en --theme dark && node rehydrate-pdf.js --locale en --theme light"
   },
   "repository": {
     "type": "git",
