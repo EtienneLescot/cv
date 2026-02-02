@@ -24,25 +24,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install Playwright
+        run: npx playwright install --with-deps chromium
+
       - name: Generate all PDF variants
         run: |
           echo "🚀 Génération de tous les PDFs..."
           
           # Français Dark
           echo "📄 Generating FR Dark..."
-          node generateCvPdf.js --locale fr --theme dark --scale 2
+          node generateCvPdf.js --locale fr --theme dark --scale 2 --tiles 2x2
           
           # Français Light
           echo "📄 Generating FR Light..."
-          node generateCvPdf.js --locale fr --theme light --scale 2
+          node generateCvPdf.js --locale fr --theme light --scale 2 --tiles 2x2
           
           # Anglais Dark
           echo "📄 Generating EN Dark..."
-          node generateCvPdf.js --locale en --theme dark --scale 2
+          node generateCvPdf.js --locale en --theme dark --scale 2 --tiles 2x2
           
           # Anglais Light
           echo "📄 Generating EN Light..."
-          node generateCvPdf.js --locale en --theme light --scale 2
+          node generateCvPdf.js --locale en --theme light --scale 2 --tiles 2x2
           
           echo "✅ All PDFs generated successfully!"
 

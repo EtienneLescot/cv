@@ -498,7 +498,7 @@ async function extractTextCoordinates(page) {
 /**
  * Load the raster PDF and overlay invisible text on it
  */
-async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false) {
+async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false, theme = 'dark') {
   console.log(`📄 Loading raster PDF: ${pdfPath}`);
   
   // Load the existing raster PDF
@@ -676,6 +676,11 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
   // ==========================================================================
   if (textData.gaps && textData.gaps.length > 0) {
     console.log(`🧱 Drawing ${textData.gaps.length} invisible structural separators...`);
+    
+    // Define adaptive color for barriers based on theme to minimize artifacts
+    // Even if opacity is broken, the color should blend in.
+    const barrierColor = theme === 'dark' ? rgb(0, 0, 0) : rgb(1, 1, 1);
+    
     for (const gapY of textData.gaps) {
        const pageIndex = Math.floor(gapY / windowHeight);
        if (pageIndex < pages.length) {
@@ -689,26 +694,19 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
          
          if (debugMode) console.log(`  Drawing separator at HTML Y=${gapY.toFixed(0)} -> PDF Y=${pdfY.toFixed(0)} on Page ${pageIndex + 1}`);
          
-         // 1. Draw ALMOST invisible line (opacity > 0 ensures it's rendered in DOM structure)
-         page.drawLine({
-           start: { x: 0, y: pdfY },
-           end: { x: page.getWidth(), y: pdfY },
-           thickness: 2,
-           opacity: 0.01,
-           color: rgb(0.9, 0.9, 0.9) // Light gray, nearly invisible
-         });
-
-         // 2. Add invisible text barrier (dots across the page)
-         // Text is the strongest signal for content ordering
+         // 1. Draw invisible text barrier (dots across the page)
+         // We removed the line as it was causing visible artifacts.
+         // Text is the strongest signal for content ordering anyway.
          try {
-             const barrierText = '.'.repeat(200); // Dense line of dots
+             // Use very small size to be effectively invisible
+             const barrierText = '.'.repeat(200); 
              page.drawText(barrierText, {
                  x: 0,
                  y: pdfY,
-                 size: 4,
+                 size: 0.1, // Tiny size to be invisible to eye but present for parser
                  font: fonts.regular,
-                 color: rgb(1, 1, 1),
-                 opacity: 0 // Text can be fully invisible and still break reading flow
+                 color: barrierColor,
+                 opacity: 0 // Should be invisible, but size+color is our backup
              });
          } catch (e) {
              console.warn('Failed to draw text barrier:', e);
@@ -1138,7 +1136,7 @@ async function rehydratePdf(options = {}) {
     if (debugMode) {
       console.log('🐛 DEBUG MODE: Text will be visible in RED');
     }
-    await overlayTextOnPdf(pdfPath, textData, outputPath, debugMode);
+    await overlayTextOnPdf(pdfPath, textData, outputPath, debugMode, theme);
     
     // Success!
     console.log('\n' + '='.repeat(80));
