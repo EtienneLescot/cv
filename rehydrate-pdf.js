@@ -365,29 +365,41 @@ async function extractTextCoordinates(page) {
           
           // If we have multiple rects, the text wraps across lines
           if (rects.length > 1) {
-            // Calculate total width of all rects
-            const totalWidth = Array.from(rects).reduce((sum, r) => sum + r.width, 0);
-            let textIndex = 0;
+            // Extract text character by character to find exact line breaks
+            let charIndex = 0;
             
             for (let i = 0; i < rects.length; i++) {
               const rect = rects[i];
               
               if (rect.width === 0 || rect.height === 0) continue;
               
-              // Estimate how many characters are on this line based on width ratio
-              const widthRatio = rect.width / totalWidth;
-              const estimatedChars = Math.round(text.length * widthRatio);
+              // Find where this line starts and ends by checking Y position of each character
+              let lineStart = charIndex;
+              let lineEnd = charIndex;
               
-              // Extract text for this line
-              let lineEnd = Math.min(textIndex + estimatedChars, text.length);
+              const testRange = document.createRange();
+              testRange.selectNodeContents(node);
               
-              // If this is the last rect, take all remaining text
-              if (i === rects.length - 1) {
-                lineEnd = text.length;
+              // Iterate character by character to find where line breaks
+              for (let j = charIndex; j < text.length; j++) {
+                testRange.setStart(node, j);
+                testRange.setEnd(node, j + 1);
+                
+                const charRect = testRange.getBoundingClientRect();
+                
+                // Check if this character is on the same line (Y position within tolerance)
+                const onSameLine = Math.abs(charRect.top - rect.top) < rect.height * 0.3;
+                
+                if (onSameLine) {
+                  lineEnd = j + 1;
+                } else if (j > charIndex) {
+                  // We've moved to a different line, stop here
+                  break;
+                }
               }
               
-              const lineText = text.substring(textIndex, lineEnd).trim();
-              textIndex = lineEnd;
+              const lineText = text.substring(lineStart, lineEnd).trim();
+              charIndex = lineEnd;
               
               if (lineText.length > 0) {
                 results.push({
