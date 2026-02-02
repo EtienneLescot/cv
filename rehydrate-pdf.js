@@ -541,12 +541,188 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
   console.log(`📐 HTML dimensions: ${htmlWidth}x${htmlHeight}px`);
   console.log(`📐 Scale factors: X=${scaleX.toFixed(3)}, Y=${scaleY.toFixed(3)}`);
   
+  // Sorting Strategy: TRUST THE HTML DOM ORDER
+  // The user confirms the HTML structure is the "source of truth".
+  // Since extractTextCoordinates() iterates via TreeWalker (DOM order),
+  // the textItems array is already in the correct logical reading order.
+  // Any spatial sorting (Column/Grid) risks scrambling this natural order.
+  
+  if (debugMode) {
+    console.log('🔄 Ordering: Using natural DOM order (HTML source of truth)');
+  }
+  
+  const sortedItems = textData.textItems;
+
+  if (debugMode) {
+    console.log('\n=== READING ORDER (First 30 items) ===');
+    sortedItems.slice(0, 30).forEach((i, idx) => {
+      console.log(`${(idx+1).toString().padStart(2)}. Y=${i.y.toFixed(0).padStart(4)} X=${i.x.toFixed(0).padStart(3)} "${i.text.substring(0, 35)}"`);
+    });
+  }
+  
+  // Detect large vertical gaps to inject invisible structure breakers
+  // This helps PDF viewers understand that "Row 1" and "Row 2" are separate blocks
+  const sortedByY = [...textData.textItems].sort((a, b) => a.y - b.y);
+  const gaps = [];
+  
+  if (sortedByY.length > 0) {
+    let maxYInBlock = sortedByY[0].bottom;
+    
+    // Debug gap detection
+    if (debugMode) console.log(`🔍 Analyzing vertical gaps (Start Y=${sortedByY[0].y.toFixed(0)})...`);
+
+    for (const item of sortedByY) {
+      // Ignore items that are too small or likely noise (less than 5px height)
+      if (item.height < 5) continue;
+      
+      const gapSize = item.y - maxYInBlock;
+      
+      // Use a smaller threshold (e.g. 20px) to catch tighter sections
+      if (gapSize > 25) { 
+        if (debugMode) {
+            console.log(`  Found gap of ${gapSize.toFixed(0)}px between Y=${maxYInBlock.toFixed(0)} and Y=${item.y.toFixed(0)}`);
+        }
+        gaps.push((maxYInBlock + item.y) / 2);
+      }
+      
+      // Only extend block bottom if it pushes further down
+      if (item.bottom > maxYInBlock) {
+        maxYInBlock = item.bottom;
+      }
+    }
+  }
+  if (debugMode) {
+    console.log(`🧱 Detected ${gaps.length} vertical gaps for structural separation: ${gaps.map(g => g.toFixed(0)).join(', ')}`);
+  }
+  // Store gaps for drawing phase
+  textData.gaps = gaps;
+  
+  // Map icon text to readable labels for ATS compatibility
+  const iconLabels = {
+    '::': '',  // Header icon - remove
+    '##': '',  // Section icon - remove (H2 title already present)
+    '[]': '',  // Section icon - remove
+    '>>': '•',  // Bullet point
+    '||': '',  // Section icon - remove
+    '<>': '',  // Section icon - remove
+    '//': '',  // Section icon - remove
+    '++': '',  // Section icon - remove
+    '--': '-'
+  };
+  
+  // Apply icon mapping to all items BEFORE deduplication
+  const mappedItems = sortedItems.map(item => {
+    const trimmed = item.text.trim();
+    if (debugMode && (trimmed === '##' || trimmed.includes('CONTACT'))) {
+      console.log(`📝 Mapping: "${trimmed}" → "${iconLabels[trimmed] || trimmed}"`);
+    }
+    if (iconLabels.hasOwnProperty(trimmed)) {
+      return { ...item, text: iconLabels[trimmed] };
+    }
+    return item;
+  });
+  
+  // Remove duplicates: if two items have same Y position and same text, keep the one with larger width
+  const deduplicatedItems = [];
+  
+  for (let i = 0; i < mappedItems.length; i++) {
+    const item = mappedItems[i];
+    
+    // Skip empty text
+    if (item.text.length === 0) {
+      continue;
+    }
+    
+    // Check if this item is a duplicate of any existing item (within 30px in Y)
+    const duplicateIndex = deduplicatedItems.findIndex(existing => {
+      return Math.abs(item.y - existing.y) < 30 && 
+             item.text.trim() === existing.text.trim();
+    });
+    
+    if (duplicateIndex >= 0) {
+      // Found duplicate - keep the one with larger width (likely the real heading, not icon)
+      if (debugMode && (item.text.includes('CONTACT') || item.text.includes('COMPÉTENCES'))) {
+        console.log(`🔍 Duplicate #${i}: "${item.text}" at Y=${item.y.toFixed(1)} (w=${item.width.toFixed(1)}) vs existing at Y=${deduplicatedItems[duplicateIndex].y.toFixed(1)} (w=${deduplicatedItems[duplicateIndex].width.toFixed(1)})`);
+      }
+      // Always keep the larger one
+      if (item.width > deduplicatedItems[duplicateIndex].width) {
+        if (debugMode && (item.text.includes('CONTACT') || item.text.includes('COMPÉTENCES'))) {
+          console.log(`  → Replacing with larger item`);
+        }
+        deduplicatedItems[duplicateIndex] = item;  // Replace with larger one
+      } else {
+        if (debugMode && (item.text.includes('CONTACT') || item.text.includes('COMPÉTENCES'))) {
+          console.log(`  → Keeping existing (larger)`);
+        }
+      }
+      // Don't add - we already have this text
+      continue;
+    }
+    
+    // Not a duplicate, add it
+    if (debugMode && (item.text.includes('CONTACT') || item.text.includes('COMPÉTENCES'))) {
+      console.log(`✅ Adding #${i}: "${item.text}" at Y=${item.y.toFixed(1)} (width=${item.width.toFixed(1)})`);
+    }
+    deduplicatedItems.push(item);
+  }
+  
+  if (debugMode) {
+    console.log(`🔍 Deduplication: ${mappedItems.length} items → ${deduplicatedItems.length} items (${mappedItems.length - deduplicatedItems.length} duplicates removed)`);
+  }
+  
+  // ==========================================================================
+  // Draw invisible structural separators (lines in vertical gaps)
+  // This helps PDF viewers distinguish blocks (Row 1 vs Row 2)
+  // ==========================================================================
+  if (textData.gaps && textData.gaps.length > 0) {
+    console.log(`🧱 Drawing ${textData.gaps.length} invisible structural separators...`);
+    for (const gapY of textData.gaps) {
+       const pageIndex = Math.floor(gapY / windowHeight);
+       if (pageIndex < pages.length) {
+         const page = pages[pageIndex];
+         const pageHeight = page.getHeight();
+         
+         // Convert global HTML Y to local PDF Y
+         // Note: Logic mirrored from item processing below
+         const relativeY = gapY - (pageIndex * windowHeight);
+         const pdfY = pageHeight - (relativeY * scaleY);
+         
+         if (debugMode) console.log(`  Drawing separator at HTML Y=${gapY.toFixed(0)} -> PDF Y=${pdfY.toFixed(0)} on Page ${pageIndex + 1}`);
+         
+         // 1. Draw ALMOST invisible line (opacity > 0 ensures it's rendered in DOM structure)
+         page.drawLine({
+           start: { x: 0, y: pdfY },
+           end: { x: page.getWidth(), y: pdfY },
+           thickness: 2,
+           opacity: 0.01,
+           color: rgb(0.9, 0.9, 0.9) // Light gray, nearly invisible
+         });
+
+         // 2. Add invisible text barrier (dots across the page)
+         // Text is the strongest signal for content ordering
+         try {
+             const barrierText = '.'.repeat(200); // Dense line of dots
+             page.drawText(barrierText, {
+                 x: 0,
+                 y: pdfY,
+                 size: 4,
+                 font: fonts.regular,
+                 color: rgb(1, 1, 1),
+                 opacity: 0 // Text can be fully invisible and still break reading flow
+             });
+         } catch (e) {
+             console.warn('Failed to draw text barrier:', e);
+         }
+       }
+    }
+  }
+
   // Process each text item
   let itemsProcessed = 0;
   let itemsSkipped = 0;
   let itemsAdjusted = 0;  // Track how many had width adjustments
   
-  for (const item of textData.textItems) {
+  for (const item of deduplicatedItems) {
     // Determine which page this text belongs to based on windowHeight
     const pageIndex = Math.floor(item.y / windowHeight);
     
@@ -656,7 +832,7 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
       
       // Clean text to avoid encoding issues with WinAnsi
       // Replace problematic Unicode characters
-      const cleanText = transformedText
+      let cleanText = transformedText
         .replace(/→/g, '->')      // Arrow
         .replace(/‑/g, '-')        // Non-breaking hyphen
         .replace(/–/g, '-')        // En dash
@@ -670,6 +846,8 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
           return c;
         })
         .replace(/[^\x00-\xFF]/g, '?');  // Replace other non-Latin1 with ?
+      
+      // Note: Icon mapping already done during deduplication, no need to re-apply here
       
       // Dynamic fontSize adjustment to match exact width
       if (CONFIG.positioning.adjustFontSizeToWidth && item.width > 0 && cleanText.length > 0) {
@@ -708,6 +886,13 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
             console.log(`   ⚠️ Width measurement failed: ${error.message}`);
           }
         }
+      }
+      
+      // Note: Icon mapping already done during deduplication, no need to re-apply here
+      
+      // Skip empty text (like :: icon)
+      if (cleanText.length === 0) {
+        continue;
       }
       
       page.drawText(cleanText, {
