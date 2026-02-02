@@ -28,24 +28,37 @@ node server.js
 
 Cela démarrera un serveur sur `http://localhost:3000` qui servira tous les fichiers du projet.
 
-## Conversion HTML vers PDF
-Pour générer un PDF à partir du CV, utilisez le script `html-to-pdf.js` :
+## Conversion HTML vers PDF (Pixel-Perfect)
+
+Pour générer un PDF haute fidélité (identique à l'écran) avec texte sélectionnable :
 
 ```bash
-node html-to-pdf.js [html_file] [css_file] [output_pdf] [safe_mode]
+# Générer le PDF par défaut (FR, Dark)
+npm run pdf
+
+# Générer toutes les variantes (FR/EN, Dark/Light)
+npm run pdf:all
 ```
 
-Par défaut, il utilise `index.html`, `style.css` et génère `output.pdf`. Le quatrième paramètre optionnel `safe_mode` permet d'activer le mode sécurisé pour les caractères spéciaux (true/false). Par exemple :
+### Options disponibles
 
+- `--locale <fr|en>` : Langue du CV (défaut: `fr`)
+- `--theme <dark|light>` : Thème visuel (défaut: `dark`)
+- `--scale <n>` : Facteur de qualité (ex: `2` pour rendu Retina/Print). Défaut: `1`.
+- `--tiles <NxN>` : Découpage en tuiles (ex: `2x2`). Utile avec `--scale` élevé pour éviter les limites de mémoire du navigateur. Automatique si non spécifié.
+
+Exemple pour un rendu haute qualité :
 ```bash
-# Génération normale
-node html-to-pdf.js index.html style.css cv.pdf
-
-# Génération avec mode sécurisé pour les caractères spéciaux
-node html-to-pdf.js index.html style.css cv-safe.pdf true
+node generateCvPdf.js --scale 2
 ```
 
-Cela générera un fichier PDF nommé `cv.pdf` ou `cv-safe.pdf` avec le style appliqué. Le mode sécurisé escape les caractères spéciaux dans le CSS pour éviter les problèmes d'affichage sur certaines plateformes.
+Le script utilise une approche hybride avancée :
+1.  **Capture Visuelle** : Génère des images haute résolution via Playwright (pour un rendu CSS exact, sans hacks `@media print`).
+2.  **Réhydratation** : Analyse le DOM HTML pour extraire le texte et sa position.
+3.  **Injection** : Superpose une couche de texte invisible par-dessus les images.
+4.  **Structuration** : Insère des séparateurs invisibles pour garantir un ordre de lecture logique (Gauche -> Droite, Haut -> Bas) compatible avec les ATS et le copier-coller.
+
+Pour plus de détails techniques, voir [PDF_GENERATION_README.md](PDF_GENERATION_README.md).
 
 ## Ajout de nouvelles langues
 Pour ajouter une nouvelle langue :

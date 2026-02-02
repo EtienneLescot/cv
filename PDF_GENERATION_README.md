@@ -33,7 +33,7 @@ npx playwright install chromium
 ```bash
 npm run pdf
 # ou
-node generate-pdf-production.js
+node generateCvPdf.js
 ```
 
 ### Générer toutes les combinaisons
@@ -52,29 +52,38 @@ Génère automatiquement :
 
 ```bash
 # Français avec thème clair
-node generate-pdf-production.js --locale fr --theme light
+node generateCvPdf.js --locale fr --theme light
 
 # Anglais avec thème sombre
-node generate-pdf-production.js --locale en --theme dark
+node generateCvPdf.js --locale en --theme dark
 
 # Spécifier le chemin de sortie
-node generate-pdf-production.js --locale fr --theme dark --output ./mon-cv.pdf
+node generateCvPdf.js --locale fr --theme dark --output ./mon-cv.pdf
 ```
+
+## ✨ Réhydratation (Texte Sélectionnable)
+
+Le script inclut automatiquement une étape de **réhydratation** :
+1.  Génération d'un PDF "Raster" (Image) pour un rendu pixel-perfect.
+2.  Extraction des coordonnées du texte depuis le HTML (DOM).
+3.  Injection d'une couche de texte transparent par-dessus le PDF.
+4.  Insertion de séparateurs structurels invisibles pour forcer l'ordre de lecture (copier-coller) et le support ATS.
+
+Cette étape garantit que le texte est sélectionnable et que les colonnes ne sont pas mélangées lors du copier-coller.
 
 ## 🔧 Configuration
 
-Toutes les configurations sont dans `generate-pdf-production.js` :
+Toutes les configurations sont dans `generateCvPdf.js` :
 
 ```javascript
 const CONFIG = {
-  // Viewport A4 optimal (794×1123px à 96 DPI)
-  viewport: { width: 794, height: 1123 },
+  // Viewport A4 optimal (900px de large, redimensionné)
+  viewport: { width: 900, height: 1273 },
   
-  // Configuration PDF
-  pdf: {
-    format: 'A4',
-    printBackground: true,  // Conserve les arrière-plans
-    margin: { top: 0, bottom: 0, left: 0, right: 0 }
+  // Options de pagination
+  pagination: {
+    usePdfCss: true,  // Utiliser style-pdf.css
+    smartBreak: true  // Découpage intelligent
   },
   
   // Timeouts (ms)

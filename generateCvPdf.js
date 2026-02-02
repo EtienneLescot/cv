@@ -28,6 +28,7 @@ const fs = require('fs').promises;
 const fsSync = require('fs');
 const path = require('path');
 const yaml = require('yaml');
+const { rehydratePdf } = require('./rehydrate-pdf');
 
 // ============================================================================
 // CONFIGURATION
@@ -876,8 +877,36 @@ async function main() {
     // Conversion en format A4
     const a4Pages = await convertToA4Format(screenshots);
 
-    // Création du PDF final
-    await createPdfFromA4Images(a4Pages, outputPath);
+    // Création du PDF final (Temporaire Raster)
+    const rasterOutputPath = outputPath.replace('.pdf', '-raster.pdf');
+    console.log(`💾 Sauvegarde du PDF raster temporaire : ${rasterOutputPath}`);
+    await createPdfFromA4Images(a4Pages, rasterOutputPath);
+
+    // PIPELINE DE RÉHYDRATATION
+    console.log('\n🔮 Réhydratation du PDF (Ajout du texte sélectionnable)...');
+    try {
+        const rehydratedPath = await rehydratePdf({
+            input: rasterOutputPath,
+            locale: selectedLocale,
+            theme: selectedTheme,
+            preset: 'normal',
+            debug: false
+        });
+        
+        // Renommer le résultat final vers la sortie attendue
+        await fs.rename(rehydratedPath, outputPath);
+        
+        // Supprimer le raster temporaire
+        await fs.unlink(rasterOutputPath);
+        console.log(`✨ Réhydratation réussie !`);
+        
+    } catch (e) {
+        console.error("⚠️ Erreur lors de la réhydratation, utilisation du PDF raster brut comme fallback.", e);
+        // Fallback: Si la réhydratation échoue, on utilise le raster
+        if (fsSync.existsSync(rasterOutputPath)) {
+            await fs.rename(rasterOutputPath, outputPath);
+        }
+    }
 
     // Nettoyage
     console.log('\n🧹 Nettoyage des fichiers temporaires...');
