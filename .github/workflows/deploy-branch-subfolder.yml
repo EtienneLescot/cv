@@ -31,11 +31,15 @@ jobs:
           path: source-branch-build
       
       - name: Setup Node.js for build
-        run: npm install
+        run: |
+          npm install
+          npx playwright install --with-deps
         working-directory: ./source-branch-build
       
       - name: Build branch content
-        run: npm run build
+        run: |
+          npm run build
+          npm run pdf:all
         working-directory: ./source-branch-build
         env:
           BASE_PATH: /cv/${{ github.ref_name }}
@@ -49,6 +53,8 @@ jobs:
           mkdir -p "$BRANCH_NAME"
           # Copy ONLY the built HTML files and minified CSS to the folder
           cp source-branch-build/index.html source-branch-build/index-fr.html source-branch-build/index-en.html source-branch-build/style.min.css "$BRANCH_NAME"/
+          # Copy generated PDFs
+          cp source-branch-build/exports/*.pdf "$BRANCH_NAME"/
           # List files to verify
           echo "Files copied to $BRANCH_NAME folder:"
           ls -la "$BRANCH_NAME"/
