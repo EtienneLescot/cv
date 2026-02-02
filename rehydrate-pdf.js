@@ -69,6 +69,9 @@ const CONFIG = {
     // Mode: 'auto' uses bounding box dimensions directly, 'manual' uses calculated baseline
     mode: 'auto',  // 'auto' or 'manual'
     
+    // Font size adjustment strategy
+    adjustFontSizeToWidth: true,  // Dynamically adjust fontSize to match exact text width
+    
     // Baseline positioning strategy (only used in manual mode):
     // 'top': Use rect.top + fontSize (current behavior)
     // 'baseline': Use estimated baseline position
@@ -362,18 +365,31 @@ async function extractTextCoordinates(page) {
           
           // If we have multiple rects, the text wraps across lines
           if (rects.length > 1) {
-            // Process each rect separately
+            // Calculate total width of all rects
+            const totalWidth = Array.from(rects).reduce((sum, r) => sum + r.width, 0);
+            let textIndex = 0;
+            
             for (let i = 0; i < rects.length; i++) {
               const rect = rects[i];
               
-              // For wrapped text, we need to approximate which part of text is on which line
-              // This is imperfect, but better than nothing
-              const charsPerLine = Math.ceil(text.length / rects.length);
-              const start = i * charsPerLine;
-              const end = Math.min((i + 1) * charsPerLine, text.length);
-              const lineText = text.substring(start, end).trim();
+              if (rect.width === 0 || rect.height === 0) continue;
               
-              if (lineText.length > 0 && rect.width > 0 && rect.height > 0) {
+              // Estimate how many characters are on this line based on width ratio
+              const widthRatio = rect.width / totalWidth;
+              const estimatedChars = Math.round(text.length * widthRatio);
+              
+              // Extract text for this line
+              let lineEnd = Math.min(textIndex + estimatedChars, text.length);
+              
+              // If this is the last rect, take all remaining text
+              if (i === rects.length - 1) {
+                lineEnd = text.length;
+              }
+              
+              const lineText = text.substring(textIndex, lineEnd).trim();
+              textIndex = lineEnd;
+              
+              if (lineText.length > 0) {
                 results.push({
                   text: lineText,
                   x: rect.left,
@@ -516,6 +532,7 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
   // Process each text item
   let itemsProcessed = 0;
   let itemsSkipped = 0;
+  let itemsAdjusted = 0;  // Track how many had width adjustments
   
   for (const item of textData.textItems) {
     // Determine which page this text belongs to based on windowHeight
@@ -600,7 +617,7 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
     
     const pdfX = adjustedX * scaleX;
     const pdfY = pageHeight - ((adjustedY - (pageIndex * windowHeight)) * scaleY);
-    const pdfFontSize = adjustedFontSize * scaleY;
+    let pdfFontSize = adjustedFontSize * scaleY;
     
     // Draw invisible text (opacity = 0)
     try {
@@ -642,6 +659,45 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
         })
         .replace(/[^\x00-\xFF]/g, '?');  // Replace other non-Latin1 with ?
       
+      // Dynamic fontSize adjustment to match exact width
+      if (CONFIG.positioning.adjustFontSizeToWidth && item.width > 0 && cleanText.length > 0) {
+        // Calculate the expected width in PDF coordinates
+        const expectedPdfWidth = item.width * scaleX;
+        
+        // Use actual font metrics to measure text width
+        try {
+          const actualWidthBefore = selectedFont.widthOfTextAtSize(cleanText, pdfFontSize);
+          
+          if (actualWidthBefore > 0) {
+            // Calculate adjustment ratio
+            const widthRatio = expectedPdfWidth / actualWidthBefore;
+            
+            if (debugMode) {
+              console.log(`\n📏 "${cleanText.substring(0, 50)}${cleanText.length > 50 ? '...' : ''}"`);
+              console.log(`   Chars: ${cleanText.length} | HTML width: ${item.width.toFixed(1)}px → PDF: ${expectedPdfWidth.toFixed(1)}pt`);
+              console.log(`   Font: ${pdfFontSize.toFixed(2)}pt | Calculated width: ${actualWidthBefore.toFixed(1)}pt`);
+              console.log(`   Ratio: ${widthRatio.toFixed(3)} ${widthRatio < 0.7 ? '❌ TOO SMALL' : widthRatio > 1.5 ? '❌ TOO LARGE' : widthRatio < 0.95 || widthRatio > 1.05 ? '⚠️ ADJUSTED' : '✅ OK'}`);
+            }
+            
+            // Apply adjustment (with safety bounds to avoid extreme values)
+            if (widthRatio > 0.7 && widthRatio < 1.5) {
+              const oldSize = pdfFontSize;
+              pdfFontSize *= widthRatio;
+              itemsAdjusted++;
+              
+              if (debugMode && Math.abs(widthRatio - 1.0) > 0.05) {
+                console.log(`   → Adjusted: ${oldSize.toFixed(2)}pt → ${pdfFontSize.toFixed(2)}pt`);
+              }
+            }
+          }
+        } catch (error) {
+          // Silently fail if font measurement doesn't work
+          if (debugMode) {
+            console.log(`   ⚠️ Width measurement failed: ${error.message}`);
+          }
+        }
+      }
+      
       page.drawText(cleanText, {
         x: pdfX,
         y: pdfY,
@@ -659,6 +715,9 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
   }
   
   console.log(`✅ Overlaid ${itemsProcessed}/${textData.textItems.length} text items (${itemsSkipped} skipped - out of bounds)`);
+  if (CONFIG.positioning.adjustFontSizeToWidth) {
+    console.log(`📊 Width adjustments applied: ${itemsAdjusted}/${itemsProcessed} items`);
+  }
   
   // Save the rehydrated PDF
   const pdfBytes = await pdfDoc.save();
@@ -682,6 +741,9 @@ async function rehydratePdf(options = {}) {
   // Apply fine-tuning options to CONFIG
   if (options.mode) {
     CONFIG.positioning.mode = options.mode;
+  }
+  if (options.adjustWidth !== undefined) {
+    CONFIG.positioning.adjustFontSizeToWidth = options.adjustWidth;
   }
   if (options.offsetY !== undefined) {
     CONFIG.positioning.offsetY = options.offsetY;
@@ -735,6 +797,7 @@ async function rehydratePdf(options = {}) {
   console.log('='.repeat(80));
   console.log(`📍 Locale: ${locale} | Theme: ${theme}`);
   console.log(`🤖 Mode: ${CONFIG.positioning.mode.toUpperCase()} ${CONFIG.positioning.mode === 'auto' ? '(smart bounding box)' : '(manual baseline)'}`);
+  console.log(`📏 Width adjustment: ${CONFIG.positioning.adjustFontSizeToWidth ? 'ENABLED (pixel-perfect wrapping)' : 'disabled'}`);
   console.log(`🎯 Positioning: strategy=${CONFIG.positioning.strategy}, offsetY=${CONFIG.positioning.offsetY}, offsetX=${CONFIG.positioning.offsetX}`);
   const adj = CONFIG.positioning.fontSizeAdjustments;
   console.log(`🔤 Font sizes: h1×${adj.h1}, h2×${adj.h2}, h3×${adj.h3}, body×${adj.body}`);
@@ -867,6 +930,7 @@ function parseArgs() {
     input: null,
     debug: false,
     mode: 'auto',  // 'auto' or 'manual'
+    adjustWidth: true,  // Adjust fontSize to match width
     offsetY: 0,
     offsetX: 0,
     strategy: 'baseline',
@@ -890,6 +954,8 @@ function parseArgs() {
       options.debug = true;
     } else if (arg === '--mode' && i + 1 < args.length) {
       options.mode = args[++i];
+    } else if (arg === '--no-width-adjust') {
+      options.adjustWidth = false;
     } else if (arg === '--offset-y' && i + 1 < args.length) {
       options.offsetY = parseFloat(args[++i]);
     } else if (arg === '--offset-x' && i + 1 < args.length) {
@@ -918,6 +984,7 @@ Options:
   --mode <auto|manual>          Positioning mode (default: auto)
                                   auto: Uses bounding box dimensions directly (recommended)
                                   manual: Uses calculated baseline with strategy
+  --no-width-adjust             Disable automatic fontSize adjustment for width matching
   --strategy <method>           Positioning strategy for manual mode: 'baseline', 'top', or 'bottom'
   --offset-y <pixels>           Global vertical offset (+ down, - up)
   --offset-x <pixels>           Global horizontal offset (+ right, - left)
@@ -934,15 +1001,15 @@ Presets:
   loose:  Smaller adjustments (h1:1.15, h2:1.12, body:0.98)
 
 Examples:
-  # Recommended: Auto mode (uses bounding boxes directly)
+  # Recommended: Auto mode with width adjustment (pixel-perfect)
   node rehydrate-pdf.js --debug
   node rehydrate-pdf.js --debug --preset normal
   
   # Fine-tune with small offsets if needed
   node rehydrate-pdf.js --debug --offset-y -0.5
   
-  # Manual mode (old behavior, more complex)
-  node rehydrate-pdf.js --debug --mode manual --strategy baseline --preset normal
+  # Disable width adjustment if it causes issues
+  node rehydrate-pdf.js --debug --no-width-adjust
   
   # Final version (without debug)
   node rehydrate-pdf.js --preset normal
