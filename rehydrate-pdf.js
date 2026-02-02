@@ -717,6 +717,51 @@ async function overlayTextOnPdf(pdfPath, textData, outputPath, debugMode = false
     }
   }
 
+  // ==========================================================================
+  // REORDERING STRATEGY: Band-Based Visual Sorting
+  // To ensure correct reading order (Row by Row, then Left to Right), we:
+  // 1. Assign each item to a "Band" based on the structural gaps detected above.
+  // 2. Sort items: Band Index (Top-Down) -> Column (Left-Right) -> Y (Top-Down).
+  // ==========================================================================
+  
+  // Helper to find band index
+  const getBandIndex = (y, gaps) => {
+    // If no gaps, everything is one band
+    if (!gaps || gaps.length === 0) return 0;
+    
+    for (let i = 0; i < gaps.length; i++) {
+        if (y < gaps[i]) return i;
+    }
+    return gaps.length; // Last band
+  };
+
+  if (debugMode) {
+      console.log('🔄 Re-sorting items by Visual Bands (Top-to-Bottom, then Left-to-Right columns)...');
+  }
+
+  deduplicatedItems.sort((a, b) => {
+      // 1. Primary Sort: Vertical Band (Row)
+      const bandA = getBandIndex(a.y, textData.gaps);
+      const bandB = getBandIndex(b.y, textData.gaps);
+      if (bandA !== bandB) return bandA - bandB;
+      
+      // 2. Secondary Sort: Column Cluster
+      // Cluster columns by threshold (e.g. 400px) to distinguish Left Col vs Right Col
+      // This ensures we read "Left Contact" then "Right Profil" completely, instead of interleaving lines
+      const colA = a.x < 400 ? 0 : 1; 
+      const colB = b.x < 400 ? 0 : 1;
+      
+      if (colA !== colB) return colA - colB; // Left Column before Right Column within the same band
+      
+      // 3. Tertiary Sort: Y Position within the column
+      // Sort Top-to-Bottom
+      const yDiff = a.y - b.y;
+      if (Math.abs(yDiff) > 2) return yDiff; // Top to Bottom (2px tolerance)
+      
+      // 4. Final: X Position (indented items etc)
+      return a.x - b.x;
+  });
+
   // Process each text item
   let itemsProcessed = 0;
   let itemsSkipped = 0;
