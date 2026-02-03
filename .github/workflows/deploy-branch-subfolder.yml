@@ -54,7 +54,14 @@ jobs:
           git fetch --all --prune
           # List only remote branch refs under origin, strip the 'origin/' prefix,
           # and exclude main and HEAD entries.
-          BRANCHES=$(git for-each-ref --format='%(refname:short)' refs/remotes/origin/* | sed 's|^origin/||' | grep -v '^main$' | grep -v '^HEAD$')
+          # Determine remote to use (prefer 'origin', fall back to first remote)
+          REMOTE=$(git remote | grep -E '^origin$' || true)
+          if [ -z "$REMOTE" ]; then
+            REMOTE=$(git remote | head -n1)
+          fi
+
+          # List remote branch heads robustly and exclude main/HEAD
+          BRANCHES=$(git ls-remote --heads "$REMOTE" | awk '{print $2}' | sed 's#refs/heads/##' | grep -v '^main$' | grep -v '^HEAD$' || true)
 
           for BRANCH_NAME in $BRANCHES; do
             echo "📄 Processing branch: $BRANCH_NAME"
