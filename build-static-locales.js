@@ -93,14 +93,21 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
   // Update document language
   document.documentElement.lang = localeName;
   
-  // Activer le mode PDF pour visualisation (styles de style-pdf.css)
-  // Cette classe active les règles CSS avec le préfixe html.pdf-mode
-  document.documentElement.classList.add('pdf-mode');
+  // NE PAS activer le mode PDF pour la version web !
+  // La version web utilise style-web.css au lieu de style-pdf.css
+  // document.documentElement.classList.add('pdf-mode');  // <-- SUPPRIMÉ
 
-  // Update CSS path to include base path
+  // Update CSS: charger style.css ET style-web.css pour la version web
   const cssLink = document.querySelector('link[rel="stylesheet"]');
-  if (cssLink && CONFIG.basePath) {
-    cssLink.href = `${CONFIG.basePath}/style.min.css`;
+  if (cssLink) {
+    // Remplacer le lien unique par deux liens: style.min.css + style-web.min.css
+    cssLink.href = CONFIG.basePath ? `${CONFIG.basePath}/style.min.css` : 'style.min.css';
+    
+    // Ajouter style-web.css après style.css
+    const webCssLink = document.createElement('link');
+    webCssLink.rel = 'stylesheet';
+    webCssLink.href = CONFIG.basePath ? `${CONFIG.basePath}/style-web.min.css` : 'style-web.min.css';
+    cssLink.parentNode.insertBefore(webCssLink, cssLink.nextSibling);
   }
 
   // Update title

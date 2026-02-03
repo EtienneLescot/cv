@@ -59,17 +59,10 @@
             </ul>
           </div>
            <button id="toggle" aria-label="">[ THEME ]</button>
-          <button
-            id="print-btn"
-            aria-label=""
-            onclick="window.print()"
-          >
-            PDF
-          </button>
         </div>
         <h1>
           <div class="header-content">
-            <div class="header-emoji">::</div>
+            <div class="header-emoji"></div>
             <div class="header-text">
               <span data-i18n="name"></span>
               <span data-i18n="tagline" class="tagline"></span>
@@ -80,30 +73,30 @@
         
       </div>
 
-      <!-- Row 1: Contact (1×1) - Grid Position 1 -->
-      <div class="grid-item contact-section">
+      <!-- Contact Section -->
+      <section class="contact-section">
         <div class="section neonbox">
-          <h2><span class="symbol">##</span> <span data-i18n="contact-title"></span></h2>
+          <h2><span data-i18n="contact-title"></span></h2>
           <ul>
             <li data-i18n="contact-phone"></li>
             <li data-i18n="contact-email"></li>
             <li data-i18n="contact-linkedin"></li>
           </ul>
         </div>
-      </div>
+      </section>
 
-      <!-- Row 1: Profil (2×1) - Grid Position 2-3 -->
-      <div class="grid-item profile-section">
+      <!-- Profile Section -->
+      <section class="profile-section">
         <div class="section neonbox">
-          <h2><span class="symbol">>></span> <span data-i18n="profile-title"></span></h2>
+          <h2><span data-i18n="profile-title"></span></h2>
           <p data-i18n="profile-desc"></p>
         </div>
-      </div>
+      </section>
 
-      <!-- Row 2: Compétences (2×1) - Grid Position 1-2 -->
-      <div class="grid-item skills-section">
+      <!-- Skills Section -->
+      <section class="skills-section">
         <div class="section neonbox">
-          <h2><span class="symbol">[]</span> <span data-i18n="skills-title"></span></h2>
+          <h2><span data-i18n="skills-title"></span></h2>
           <ul>
             <li data-i18n="skill-1"></li>
             <li data-i18n="skill-2"></li>
@@ -113,37 +106,12 @@
             <li data-i18n="skill-6"></li>
           </ul>
         </div>
-      </div>
+      </section>
 
-      <!-- Row 2 -->
-      <!-- Combined Languages & Interests (1×1) - Grid Position 3 -->
-      <div class="grid-item languages-interests-section">
-        <!-- Languages Section (upper 50%) -->
-        <div class="languages-section">
-          <div class="section neonbox">
-            <h2><span class="symbol">||</span> <span data-i18n="languages-title"></span></h2>
-            <ul>
-              <li data-i18n="lang-fr"></li>
-              <li data-i18n="lang-en"></li>
-            </ul>
-          </div>
-        </div>
-        <!-- Interests Section (lower 50%) -->
-        <div class="interests-section">
-          <div class="section neonbox">
-            <h2><span class="symbol">++</span> <span data-i18n="interests-title"></span></h2>
-            <ul>
-              <li data-i18n="interest-1"></li>
-              <li data-i18n="interest-2"></li>
-              <li data-i18n="interest-3"></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Highlighted Projects Section - Full Width -->
-      <div class="section neonbox projects-highlight">
-        <h2><span class="symbol"><></span> <span data-i18n="projects-title"></span></h2>
+      <!-- Projects Section -->
+      <section class="projects-section">
+      <div class="section neonbox">
+        <h2><span data-i18n="projects-title"></span></h2>
         <ul>
           <li data-i18n="project-1"></li>
           <li data-i18n="project-2"></li>
@@ -151,13 +119,12 @@
           <li data-i18n="project-4"></li>
         </ul>
       </div>
+      </section>
 
-      
-
-      <!-- Experiences Section - Full Width -->
-      <div class="grid-item experiences-section">
+      <!-- Experiences Section -->
+      <section class="experiences-section">
         <div class="section neonbox">
-          <h2><span class="symbol">//</span> <span data-i18n="experiences-title"></span></h2>
+          <h2><span data-i18n="experiences-title"></span></h2>
           <ul>
             <li>
               <span data-i18n="exp1-title"></span>
@@ -190,7 +157,30 @@
             </li>
           </ul>
         </div>
-      </div>
+      </section>
+
+      <!-- Languages Section -->
+      <section class="languages-section">
+        <div class="section neonbox">
+          <h2><span data-i18n="languages-title"></span></h2>
+          <ul>
+            <li data-i18n="lang-fr"></li>
+            <li data-i18n="lang-en"></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Interests Section -->
+      <section class="interests-section">
+        <div class="section neonbox">
+          <h2><span data-i18n="interests-title"></span></h2>
+          <ul>
+            <li data-i18n="interest-1"></li>
+            <li data-i18n="interest-2"></li>
+            <li data-i18n="interest-3"></li>
+          </ul>
+        </div>
+      </section>
     </div>
   </body>
   <script>

@@ -16,8 +16,16 @@ const postcss = require('postcss');
 // Allow overriding the CSS input file via environment variable (used by build:pdf)
 const DEFAULT_CSS_INPUT = path.join(__dirname, 'style.css');
 const CONFIG = {
-  cssInput: process.env.CSS_INPUT ? path.join(__dirname, process.env.CSS_INPUT) : DEFAULT_CSS_INPUT,
-  cssOutput: path.join(__dirname, 'style.min.css'),
+  cssFiles: [
+    {
+      input: process.env.CSS_INPUT ? path.join(__dirname, process.env.CSS_INPUT) : DEFAULT_CSS_INPUT,
+      output: path.join(__dirname, 'style.min.css')
+    },
+    {
+      input: path.join(__dirname, 'style-web.css'),
+      output: path.join(__dirname, 'style-web.min.css')
+    }
+  ],
   jsFiles: [
     {
       input: path.join(__dirname, 'server.js'),
@@ -29,15 +37,21 @@ const CONFIG = {
 /**
  * Minify CSS file
  */
-async function minifyCssFile() {
-  console.log(`🎨 Minifying CSS: ${CONFIG.cssInput} → ${CONFIG.cssOutput}`);
+async function minifyCssFile(fileConfig) {
+  console.log(`🎨 Minifying CSS: ${fileConfig.input} → ${fileConfig.output}`);
 
   try {
-    const css = fs.readFileSync(CONFIG.cssInput, 'utf8');
-    const result = await postcss([cssnano]).process(css, { from: CONFIG.cssInput });
+    // Check if file exists
+    if (!fs.existsSync(fileConfig.input)) {
+      console.log(`⚠️  Skipping ${fileConfig.input} (file not found)`);
+      return true; // Don't fail build if optional file is missing
+    }
 
-    fs.writeFileSync(CONFIG.cssOutput, result.css, 'utf8');
-    console.log(`✅ CSS minified successfully (${(css.length - result.css.length) / 1024} KiB saved)`);
+    const css = fs.readFileSync(fileConfig.input, 'utf8');
+    const result = await postcss([cssnano]).process(css, { from: fileConfig.input });
+
+    fs.writeFileSync(fileConfig.output, result.css, 'utf8');
+    console.log(`✅ CSS minified successfully (${((css.length - result.css.length) / 1024).toFixed(2)} KiB saved)`);
     return true;
   } catch (error) {
     console.error(`❌ CSS minification failed:`, error);
@@ -77,8 +91,12 @@ async function build() {
   console.log('🚀 Starting asset minification build');
   console.log('----------------------------------');
 
-  // Minify CSS
-  const cssSuccess = await minifyCssFile();
+  // Minify CSS files
+  let cssSuccessCount = 0;
+  for (const cssFile of CONFIG.cssFiles) {
+    const success = await minifyCssFile(cssFile);
+    if (success) cssSuccessCount++;
+  }
 
   // Minify JavaScript files
   let jsSuccessCount = 0;
@@ -89,10 +107,10 @@ async function build() {
 
   console.log('----------------------------------');
   console.log('📊 Build Summary:');
-  console.log(`- CSS: ${cssSuccess ? '✅ Success' : '❌ Failed'}`);
+  console.log(`- CSS: ${cssSuccessCount}/${CONFIG.cssFiles.length} files successful`);
   console.log(`- JS: ${jsSuccessCount}/${CONFIG.jsFiles.length} files successful`);
 
-  if (cssSuccess && jsSuccessCount === CONFIG.jsFiles.length) {
+  if (cssSuccessCount === CONFIG.cssFiles.length && jsSuccessCount === CONFIG.jsFiles.length) {
     console.log('🎉 All assets minified successfully!');
     return true;
   } else {
