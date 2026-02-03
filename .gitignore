@@ -9,3 +9,4 @@ index.html
 *.min.css
 *.min.js
 .bin/
+.env

@@ -19,41 +19,62 @@ jobs:
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v4
+        if: ${{ !env.ACT }}
         with:
           ref: main
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
       
       - name: Checkout source branch
         uses: actions/checkout@v4
+        if: ${{ !env.ACT }}
         with:
           ref: ${{ github.ref_name }}
           path: source-branch-build
-      
+
       - name: Setup Node.js for build
+        if: ${{ !env.ACT }}
         run: |
           npm install
           npx playwright install --with-deps
-        working-directory: ./source-branch-build
+        working-directory: ${{ github.workspace }}/source-branch-build
+
+      - name: Setup Node.js for build (act)
+        if: ${{ env.ACT }}
+        run: |
+          npm install
+          npx playwright install --with-deps
+        working-directory: ${{ github.workspace }}
       
       - name: Build branch content and generate PDFs
+        if: ${{ !env.ACT }}
         run: |
           npm run build
           echo "📄 Generating PDFs for branch..."
           npm run pdf:all
-        working-directory: ./source-branch-build
+        working-directory: ${{ github.workspace }}/source-branch-build
+
+      - name: Build branch content and generate PDFs (act)
+        if: ${{ env.ACT }}
+        run: |
+          npm run build
+          echo "📄 Generating PDFs for branch..."
+          npm run pdf:all
+        working-directory: ${{ github.workspace }}
         env:
           BASE_PATH: /cv/${{ github.ref_name }}
           BRANCH_NAME: ${{ github.ref_name }}
 
       - name: Upload PDFs as artifacts
+        if: ${{ !env.ACT }}
         uses: actions/upload-artifact@v4
         with:
           name: pdf-${{ github.ref_name }}
-          path: source-branch-build/exports/*.pdf
+          path: ${{ github.workspace }}/source-branch-build/exports/*.pdf
           if-no-files-found: error
+
       
       - name: Create or update subfolder in main
+        if: ${{ !env.ACT }}
         run: |
           BRANCH_NAME="${{ github.ref_name }}"
           # Remove existing folder for this branch if it exists
@@ -74,6 +95,7 @@ jobs:
           git status
       
       - name: Commit and push changes to main
+        if: ${{ !env.ACT }}
         run: |
           BRANCH_NAME="${{ github.ref_name }}"
           git config --local user.email "action@github.com"
@@ -91,6 +113,7 @@ jobs:
           git push origin main
       
       - name: Notify deployment status
+        if: ${{ !env.ACT }}
         run: |
           BRANCH_NAME="${{ github.ref_name }}"
           echo "✅ Files copied to $BRANCH_NAME/ folder in main branch"
@@ -101,3 +124,8 @@ jobs:
           echo "4. After deployment, check:"
           echo "   - https://etiennelescot.github.io/cv/ (main content)"
           echo "   - https://etiennelescot.github.io/cv/$BRANCH_NAME/ (branch content)"
+
+      - name: List generated PDFs (act)
+        if: ${{ env.ACT }}
+        run: |
+          ls -la "$GITHUB_WORKSPACE/exports" || true
