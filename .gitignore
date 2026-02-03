@@ -8,3 +8,4 @@ index.html
 # Minified files
 *.min.css
 *.min.js
+.bin/
