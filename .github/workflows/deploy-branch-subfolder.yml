@@ -62,13 +62,22 @@ jobs:
             REMOTE=$(git remote | head -n1)
           fi
 
-          # List remote branch heads robustly and exclude main/HEAD
-          BRANCHES=$(git ls-remote --heads "$REMOTE" | awk '{print $2}' | sed 's#refs/heads/##' | grep -v '^main$' | grep -v '^HEAD$' || true)
+          # List remote tracking refs under the chosen remote and exclude main/HEAD
+          BRANCHES=$(git for-each-ref --format='%(refname:short)' refs/remotes/"$REMOTE"/* | sed "s|^$REMOTE/||" | grep -v '^main$' | grep -v '^HEAD$' || true)
 
           for BRANCH_NAME in $BRANCHES; do
             echo "📄 Processing branch: $BRANCH_NAME"
             rm -rf source-branch-build
-            git worktree add --force source-branch-build "origin/$BRANCH_NAME"
+            # Create a worktree pointing at the remote-tracking ref for this branch
+            git worktree add --force source-branch-build "refs/remotes/$REMOTE/$BRANCH_NAME" || true
+
+            # Ensure the worktree directory exists before entering it
+            if [ ! -d source-branch-build ]; then
+              echo "ERROR: worktree not created for branch '$BRANCH_NAME' (tried refs/remotes/$REMOTE/$BRANCH_NAME)"
+              echo "Available remote refs for $REMOTE:"
+              git for-each-ref --format='%(refname:short)' refs/remotes/"$REMOTE"/* || true
+              exit 1
+            fi
 
             pushd source-branch-build
             npm install
