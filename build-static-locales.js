@@ -12,6 +12,7 @@ const { JSDOM } = require('jsdom');
 const glob = require('glob');
 const yaml = require('yaml');
 const { minify: minifyJs } = require('terser');
+const { execSync } = require('child_process');
 
 // Configuration
 const CONFIG = {
@@ -23,6 +24,20 @@ const CONFIG = {
   // Base path for resources (empty for root, '/360' for subfolder)
   basePath: process.env.BASE_PATH || ''
 };
+
+function getBranchName() {
+  const envBranch = process.env.BRANCH_NAME || process.env.GITHUB_REF_NAME;
+  if (envBranch) {
+    return envBranch;
+  }
+
+  try {
+    return execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8' }).trim();
+  } catch (error) {
+    console.warn('⚠ Unable to detect git branch, defaulting to "main"');
+    return 'main';
+  }
+}
 
 /**
  * Load and validate locale files
@@ -182,6 +197,25 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
       console.warn(`⚠ Missing translation for key: "${key}" in locale ${localeName}`);
     }
   });
+
+  // Inject GitHub and Online CV links under contact section
+  const branchName = getBranchName();
+  const githubUrl = 'https://github.com/EtienneLescot';
+  const cvUrl = `https://etiennelescot.github.io/cv/${branchName}`;
+
+  const githubLabel = localeName === 'en' ? 'GitHub' : 'Github';
+  const cvLabel = localeName === 'en' ? 'Online CV' : 'CV en ligne';
+  const cvUrlFinal = localeName === 'en' ? `${cvUrl}/index-en.html` : cvUrl;
+
+  const githubEl = document.querySelector('[data-contact-github]');
+  if (githubEl) {
+    githubEl.innerHTML = `${githubLabel} : <a href="${githubUrl}" target="_blank">${githubUrl}</a>`;
+  }
+
+  const cvEl = document.querySelector('[data-contact-cv]');
+  if (cvEl) {
+    cvEl.innerHTML = `${cvLabel} : <a href="${cvUrlFinal}" target="_blank">${cvUrlFinal}</a>`;
+  }
 
   // Add language selection dropdown
   const langMenu = document.getElementById('lang-menu');

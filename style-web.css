@@ -31,6 +31,17 @@
     content: "::";
 }
 
+/* Hide online CV link on web (PDF only) */
+[data-contact-cv] {
+    display: none;
+}
+
+/* Ensure symbols visible in light theme */
+[data-theme="light"] h2::before,
+[data-theme="light"] .header-emoji::before {
+    display: inline-block;
+}
+
 /* =================================================================
    DECORATIVE SYMBOLS - Added via CSS for web display only
    ================================================================= */

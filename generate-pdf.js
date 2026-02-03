@@ -103,6 +103,14 @@ async function generatePdf(locale, theme, options = {}) {
     // Activer le mode PDF
     document.documentElement.classList.add('pdf-mode');
   }, theme);
+
+  // Retirer le CSS web (décoratif) pour le PDF
+  await page.evaluate(() => {
+    const links = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
+    links
+      .filter(link => link.getAttribute('href') && link.getAttribute('href').includes('style-web'))
+      .forEach(link => link.remove());
+  });
   
   // Charger le CSS PDF
   const cssPdfPath = path.join(CONFIG.htmlDir, 'style-pdf.css');

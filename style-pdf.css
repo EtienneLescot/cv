@@ -24,6 +24,17 @@ html.pdf-mode body {
   height: auto !important;
   min-height: 0 !important;
   overflow: visible !important;
+  background-image: none !important;
+}
+
+html.pdf-mode[data-theme="dark"],
+html.pdf-mode[data-theme="dark"] body {
+  background-color: #121620 !important;
+}
+
+html.pdf-mode[data-theme="light"],
+html.pdf-mode[data-theme="light"] body {
+  background-color: #e3ebf4 !important;
 }
 
 html.pdf-mode .container {
@@ -71,7 +82,7 @@ html.pdf-mode .interests-section {
    ============================================================================ */
 
 html.pdf-mode .header-section {
-  margin-bottom: 1rem !important;
+  margin-bottom: 2.5rem !important;
 }
 
 html.pdf-mode .header-section h1 {
@@ -97,6 +108,15 @@ html.pdf-mode .section {
 html.pdf-mode .section h2 {
   font-size: 1.1rem !important;
   margin-bottom: 0.6rem !important;
+}
+
+/* Profil - espacement titre/contenu harmonisé */
+html.pdf-mode .profile-section h2 {
+  margin-bottom: 0.6rem !important;
+}
+
+html.pdf-mode .profile-section p {
+  margin-top: 0 !important;
 }
 
 html.pdf-mode .section h3 {
@@ -186,4 +206,38 @@ html.pdf-mode * {
   -webkit-print-color-adjust: exact !important;
   print-color-adjust: exact !important;
   color-adjust: exact !important;
+}
+
+/* ============================================================================
+   DECORATIVE SYMBOLS (PDF) - Désactivés
+   ============================================================================ */
+
+html.pdf-mode h2::before,
+html.pdf-mode .header-emoji::before {
+  content: "" !important;
+  display: none !important;
+}
+
+/* ============================================================================
+  PAGE BREAK UTILITIES
+  ============================================================================ */
+
+/* Forcer un saut de page (PDF uniquement) */
+html.pdf-mode .pdf-page-break {
+  break-before: page !important;
+  page-break-before: always !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+/* Espace minimum en haut des pages après un saut */
+html.pdf-mode .pdf-page-break + section .section {
+  margin-top: 3rem !important;
+}
+
+/* Optionnel: séparateur visuel si besoin en HTML (masqué en PDF) */
+html.pdf-mode .pdf-page-separator {
+  display: none !important;
 }

@@ -40,21 +40,11 @@ jobs:
         run: |
           npm run build
           echo "📄 Generating PDFs for branch..."
-          # Français Dark
-          echo "  - Generating FR Dark"
-          node generateCvPdf.js --locale fr --theme dark --scale 2 --tiles 2x2
-          # Français Light
-          echo "  - Generating FR Light"
-          node generateCvPdf.js --locale fr --theme light --scale 2 --tiles 2x2
-          # Anglais Dark
-          echo "  - Generating EN Dark"
-          node generateCvPdf.js --locale en --theme dark --scale 2 --tiles 2x2
-          # Anglais Light
-          echo "  - Generating EN Light"
-          node generateCvPdf.js --locale en --theme light --scale 2 --tiles 2x2
+          npm run pdf:all
         working-directory: ./source-branch-build
         env:
           BASE_PATH: /cv/${{ github.ref_name }}
+          BRANCH_NAME: ${{ github.ref_name }}
       
       - name: Create or update subfolder in main
         run: |
@@ -64,7 +54,7 @@ jobs:
           # Create branch folder
           mkdir -p "$BRANCH_NAME"
           # Copy ONLY the built HTML files and minified CSS to the folder
-          cp source-branch-build/index.html source-branch-build/index-fr.html source-branch-build/index-en.html source-branch-build/style.min.css "$BRANCH_NAME"/
+          cp source-branch-build/index.html source-branch-build/index-fr.html source-branch-build/index-en.html source-branch-build/style.min.css source-branch-build/style-web.min.css "$BRANCH_NAME"/
           # Copy generated PDFs
           cp source-branch-build/exports/*.pdf "$BRANCH_NAME"/
           # List files to verify
