@@ -4,8 +4,7 @@ name: Deploy Branch to Subfolder
 on:
   push:
     branches:
-      - '**'
-      - '!main'
+      - main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -29,14 +28,7 @@ jobs:
         if: ${{ !env.ACT }}
         with:
           ref: ${{ github.ref_name }}
-          path: source-branch-build
-
-      - name: Setup Node.js for build
-        if: ${{ !env.ACT }}
-        run: |
-          npm install
-          npx playwright install --with-deps
-        working-directory: ${{ github.workspace }}/source-branch-build
+          fetch-depth: 0
 
       - name: Setup Node.js for build (act)
         if: ${{ env.ACT }}
@@ -44,14 +36,6 @@ jobs:
           npm install
           npx playwright install --with-deps
         working-directory: ${{ github.workspace }}
-      
-      - name: Build branch content and generate PDFs
-        if: ${{ !env.ACT }}
-        run: |
-          npm run build
-          echo "📄 Generating PDFs for branch..."
-          npm run pdf:all
-        working-directory: ${{ github.workspace }}/source-branch-build
 
       - name: Build branch content and generate PDFs (act)
         if: ${{ env.ACT }}
@@ -64,66 +48,68 @@ jobs:
           BASE_PATH: /cv/${{ github.ref_name }}
           BRANCH_NAME: ${{ github.ref_name }}
 
+      - name: Build and copy all branches
+        if: ${{ !env.ACT }}
+        run: |
+          git fetch --all --prune
+          BRANCHES=$(git for-each-ref --format='%(refname:short)' refs/remotes/origin | sed 's|^origin/||' | grep -v '^main$')
+
+          for BRANCH_NAME in $BRANCHES; do
+            echo "📄 Processing branch: $BRANCH_NAME"
+            rm -rf source-branch-build
+            git worktree add --force source-branch-build "origin/$BRANCH_NAME"
+
+            pushd source-branch-build
+            npm install
+            npx playwright install --with-deps
+            npm run build
+            echo "📄 Generating PDFs for branch..."
+            BRANCH_NAME="$BRANCH_NAME" BASE_PATH="/cv/$BRANCH_NAME" npm run pdf:all
+            popd
+
+            rm -rf "$BRANCH_NAME"
+            mkdir -p "$BRANCH_NAME"
+            cp source-branch-build/index.html source-branch-build/index-fr.html source-branch-build/index-en.html source-branch-build/style.min.css source-branch-build/style-web.min.css "$BRANCH_NAME"/
+            cp source-branch-build/exports/*.pdf "$BRANCH_NAME"/
+            echo "Files copied to $BRANCH_NAME folder:"
+            ls -la "$BRANCH_NAME"/
+
+            git worktree remove --force source-branch-build
+          done
+
+          echo "Git status after copying files:"
+          git status
+
       - name: Upload PDFs as artifacts
         if: ${{ !env.ACT }}
         uses: actions/upload-artifact@v4
         with:
-          name: pdf-${{ github.ref_name }}
-          path: ${{ github.workspace }}/source-branch-build/exports/*.pdf
+          name: pdf-all-branches
+          path: ${{ github.workspace }}/*/cv-*.pdf
           if-no-files-found: error
-
-      
-      - name: Create or update subfolder in main
-        if: ${{ !env.ACT }}
-        run: |
-          BRANCH_NAME="${{ github.ref_name }}"
-          # Remove existing folder for this branch if it exists
-          rm -rf "$BRANCH_NAME"
-          # Create branch folder
-          mkdir -p "$BRANCH_NAME"
-          # Copy ONLY the built HTML files and minified CSS to the folder
-          cp source-branch-build/index.html source-branch-build/index-fr.html source-branch-build/index-en.html source-branch-build/style.min.css source-branch-build/style-web.min.css "$BRANCH_NAME"/
-          # Copy generated PDFs
-          cp source-branch-build/exports/*.pdf "$BRANCH_NAME"/
-          # List files to verify
-          echo "Files copied to $BRANCH_NAME folder:"
-          ls -la "$BRANCH_NAME"/
-          # Clean up build directory
-          rm -rf source-branch-build
-          # Show git status to debug
-          echo "Git status after copying files:"
-          git status
       
       - name: Commit and push changes to main
         if: ${{ !env.ACT }}
         run: |
-          BRANCH_NAME="${{ github.ref_name }}"
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
-          # Add files explicitly with verification
-          echo "Checking if $BRANCH_NAME/ files exist:"
-          ls -la "$BRANCH_NAME"/
-          
-          # Add the entire folder
-          git add -f "$BRANCH_NAME"/
-          
+
+          git add -f */
           git status
-          git commit -m "Update $BRANCH_NAME subfolder with content from branch ${{ github.ref_name }} [skip ci]" || echo "No changes to commit"
+          git commit -m "Update branch subfolders from all branches [skip ci]" || echo "No changes to commit"
           git push origin main
       
       - name: Notify deployment status
         if: ${{ !env.ACT }}
         run: |
-          BRANCH_NAME="${{ github.ref_name }}"
-          echo "✅ Files copied to $BRANCH_NAME/ folder in main branch"
+          echo "✅ Files copied to branch folders in main branch"
           echo "📋 Manual step may be required if automatic deployment is not configured:"
           echo "1. Go to GitHub Actions tab"
           echo "2. Find 'Deploy static content to Pages' workflow (if it exists)"
           echo "3. Click 'Run workflow' to deploy the updated folders"
           echo "4. After deployment, check:"
           echo "   - https://etiennelescot.github.io/cv/ (main content)"
-          echo "   - https://etiennelescot.github.io/cv/$BRANCH_NAME/ (branch content)"
+          echo "   - https://etiennelescot.github.io/cv/<branch>/ (branch content)"
 
       - name: List generated PDFs (act)
         if: ${{ env.ACT }}
