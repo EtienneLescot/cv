@@ -22,6 +22,7 @@
  */
 
 const { chromium } = require('@playwright/test');
+const { PDFDocument } = require('pdf-lib');
 const fs = require('fs').promises;
 const fsSync = require('fs');
 const path = require('path');
@@ -40,6 +41,7 @@ const CONFIG = {
   pdfOptions: {
     format: 'A4',
     printBackground: true,
+    preferCSSPageSize: false,
     margin: {
       top: '0mm',
       right: '0mm',
@@ -56,7 +58,7 @@ const CONFIG = {
 /**
  * Génère un PDF depuis un fichier HTML
  */
-async function generatePdf(locale, theme) {
+async function generatePdf(locale, theme, options = {}) {
   const htmlFile = `index-${locale}.html`;
   const htmlPath = path.join(CONFIG.htmlDir, htmlFile);
   const outputPath = path.join(CONFIG.outputDir, `cv-${locale}-${theme}.pdf`);
@@ -78,13 +80,22 @@ async function generatePdf(locale, theme) {
     headless: true
   });
   
-  const page = await browser.newPage();
+  const page = await browser.newPage({
+    viewport: {
+      width: 1200,
+      height: 3000
+    },
+    deviceScaleFactor: options.raster ? 2 : 1
+  });
   
   // Charger le HTML avec baseURL pour que les CSS relatifs fonctionnent
   const htmlContent = await fs.readFile(htmlPath, 'utf-8');
   await page.goto(`file://${htmlPath}`, {
     waitUntil: 'networkidle'
   });
+
+  // Forcer le rendu en mode "screen" pour éviter les surprises de print
+  await page.emulateMedia({ media: 'screen' });
   
   // Appliquer le thème
   await page.evaluate((selectedTheme) => {
@@ -99,13 +110,41 @@ async function generatePdf(locale, theme) {
   await page.addStyleTag({ content: cssPdfContent });
   
   // Attendre que tout soit rendu
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(1500);
   
-  // Générer le PDF
-  await page.pdf({
-    path: outputPath,
-    ...CONFIG.pdfOptions
+  // Vérifier la hauteur du contenu
+  const contentHeight = await page.evaluate(() => {
+    return document.querySelector('.container')?.scrollHeight || document.body.scrollHeight;
   });
+  console.log(`   Content height: ${contentHeight}px`);
+  
+  if (options.raster) {
+    // Génération raster (capture fullPage + PDF) pour éviter tout découpage
+    const pngBuffer = await page.screenshot({
+      fullPage: true,
+      type: 'png'
+    });
+
+    const pdfDoc = await PDFDocument.create();
+    const pngImage = await pdfDoc.embedPng(pngBuffer);
+    const pngDims = pngImage.scale(1);
+    const pdfPage = pdfDoc.addPage([pngDims.width, pngDims.height]);
+    pdfPage.drawImage(pngImage, {
+      x: 0,
+      y: 0,
+      width: pngDims.width,
+      height: pngDims.height
+    });
+
+    const pdfBytes = await pdfDoc.save();
+    await fs.writeFile(outputPath, pdfBytes);
+  } else {
+    // Génération vectorielle standard (multi-pages A4)
+    await page.pdf({
+      path: outputPath,
+      ...CONFIG.pdfOptions
+    });
+  }
   
   await browser.close();
   
@@ -115,13 +154,13 @@ async function generatePdf(locale, theme) {
 /**
  * Génère toutes les combinaisons de PDFs
  */
-async function generateAll() {
+async function generateAll(options = {}) {
   console.log('🚀 Generating all PDF combinations...\n');
   
   for (const locale of CONFIG.supportedLocales) {
     for (const theme of CONFIG.supportedThemes) {
       try {
-        await generatePdf(locale, theme);
+        await generatePdf(locale, theme, options);
       } catch (error) {
         console.error(`❌ Error generating ${locale}/${theme}:`, error.message);
       }
@@ -142,7 +181,8 @@ async function main() {
   const options = {
     locale: 'fr',
     theme: 'dark',
-    all: false
+    all: false,
+    raster: false
   };
   
   for (let i = 0; i < args.length; i++) {
@@ -152,6 +192,10 @@ async function main() {
       options.theme = args[++i];
     } else if (args[i] === '--all') {
       options.all = true;
+    } else if (args[i] === '--raster') {
+      options.raster = true;
+    } else if (args[i] === '--vector') {
+      options.raster = false;
     }
   }
   
@@ -170,9 +214,9 @@ async function main() {
   
   try {
     if (options.all) {
-      await generateAll();
+      await generateAll({ raster: options.raster });
     } else {
-      await generatePdf(options.locale, options.theme);
+      await generatePdf(options.locale, options.theme, { raster: options.raster });
     }
   } catch (error) {
     console.error('❌ Error:', error.message);

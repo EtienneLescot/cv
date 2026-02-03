@@ -15,17 +15,55 @@
  */
 
 /* ============================================================================
-   OPTIMISATIONS GLOBALES - Espacements uniquement
-   ============================================================================ */
+  OPTIMISATIONS GLOBALES - Espacements uniquement
+  ============================================================================ */
 
+html.pdf-mode,
 html.pdf-mode body {
   line-height: 1.5 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
 }
 
 html.pdf-mode .container {
-  gap: 0.5rem !important;
+  display: block !important;
+  gap: 0 !important;
   padding: 1rem !important;
   max-width: 100% !important;
+}
+
+/* ============================================================================
+   SIMPLIFICATION VISUELLE - Pas d'effets complexes
+   ============================================================================ */
+
+html.pdf-mode * {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition: none !important;
+}
+
+html.pdf-mode .section,
+html.pdf-mode .neonbox {
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Supprimer les layouts flex pour le PDF */
+html.pdf-mode .header-content,
+html.pdf-mode .top-right-buttons,
+html.pdf-mode .contact-section ul,
+html.pdf-mode .profile-section,
+html.pdf-mode .skills-section,
+html.pdf-mode .projects-section,
+html.pdf-mode .experiences-section,
+html.pdf-mode .languages-section,
+html.pdf-mode .interests-section {
+  display: block !important;
 }
 
 /* ============================================================================
@@ -110,8 +148,29 @@ html.pdf-mode .lang-dropdown {
    ============================================================================ */
 
 html.pdf-mode .section {
-  page-break-inside: avoid !important;
-  break-inside: avoid !important;
+  page-break-inside: auto !important;
+  break-inside: auto !important;
+}
+
+html.pdf-mode li {
+  page-break-inside: auto !important;
+  break-inside: auto !important;
+}
+
+html.pdf-mode .neonbox {
+  page-break-inside: auto !important;
+  break-inside: auto !important;
+  overflow: visible !important;
+}
+
+html.pdf-mode h1,
+html.pdf-mode h2,
+html.pdf-mode h3,
+html.pdf-mode h4,
+html.pdf-mode h5,
+html.pdf-mode h6 {
+  break-after: auto !important;
+  page-break-after: auto !important;
 }
 
 /* Force page break before projects if needed */

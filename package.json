@@ -11,8 +11,10 @@
     "build": "npm run build:minify && npm run build:locales",
     "build:pdf": "node build-pdf.js",
     "build:full": "npm run build:minify && npm run build:locales",
-    "pdf": "node generate-pdf.js",
-    "pdf:all": "node generate-pdf.js --all",
+    "pdf": "node generate-pdf.js --vector",
+    "pdf:all": "node generate-pdf.js --all --vector",
+    "pdf:raster": "node generate-pdf.js --raster",
+    "pdf:raster:all": "node generate-pdf.js --all --raster",
     "pdf:deprecated": "node generateCvPdf.js.deprecated",
     "rehydrate": "node rehydrate-pdf.js",
     "rehydrate:all": "node rehydrate-pdf.js --locale fr --theme dark && node rehydrate-pdf.js --locale fr --theme light && node rehydrate-pdf.js --locale en --theme dark && node rehydrate-pdf.js --locale en --theme light"
