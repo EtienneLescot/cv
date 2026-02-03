@@ -63,7 +63,8 @@ jobs:
           fi
 
           # List remote tracking refs under the chosen remote and exclude main/HEAD
-          BRANCHES=$(git for-each-ref --format='%(refname:short)' refs/remotes/"$REMOTE"/* | sed "s|^$REMOTE/||" | grep -v '^main$' | grep -v '^HEAD$' || true)
+          # Exclude main, HEAD, and any branch that matches the remote name itself
+          BRANCHES=$(git for-each-ref --format='%(refname:short)' refs/remotes/"$REMOTE"/* | sed "s|^$REMOTE/||" | grep -v '^main$' | grep -v '^HEAD$' | grep -v "^$REMOTE$" || true)
 
           for BRANCH_NAME in $BRANCHES; do
             echo "📄 Processing branch: $BRANCH_NAME"
