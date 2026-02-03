@@ -118,8 +118,6 @@ jobs:
               echo "Files copied to $BRANCH_NAME folder:"
               ls -la "$BRANCH_NAME"/
             fi
-            echo "Files copied to $BRANCH_NAME folder:"
-            ls -la "$BRANCH_NAME"/
 
             git worktree remove --force source-branch-build
           done
