@@ -1,4 +1,0 @@
-## Deprecated workflow
-## Replaced by `.github/workflows/deploy-branch-subfolder.yml` which
-## now generates PDFs per-branch and copies them into branch subfolders.
-## Keeping this file as a placeholder to avoid accidental re-use.
