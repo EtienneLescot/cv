@@ -42,7 +42,9 @@ jobs:
         run: |
           npm run build
           echo "📄 Generating PDFs for branch..."
-          npm run pdf:all
+          # Only run PDF generation if the script exists in package.json
+          node -e "try{const s=require(process.cwd()+'/package.json').scripts||{}; process.exit(s['pdf:all']?0:1)}catch(e){process.exit(1)}" \
+            && npm run pdf:all || echo "No 'pdf:all' script found — skipping PDF generation (act)"
         working-directory: ${{ github.workspace }}
         env:
           BASE_PATH: /cv/${{ github.ref_name }}
@@ -73,7 +75,11 @@ jobs:
             npx playwright install --with-deps
             npm run build
             echo "📄 Generating PDFs for branch..."
-            BRANCH_NAME="$BRANCH_NAME" BASE_PATH="/cv/$BRANCH_NAME" npm run pdf:all
+            # Only run PDF generation for this branch if `pdf:all` is defined in its package.json
+            pushd source-branch-build >/dev/null
+            node -e "try{const s=require(process.cwd()+'/package.json').scripts||{}; process.exit(s['pdf:all']?0:1)}catch(e){process.exit(1)}" \
+              && BRANCH_NAME="$BRANCH_NAME" BASE_PATH="/cv/$BRANCH_NAME" npm run pdf:all || echo "No 'pdf:all' script in $BRANCH_NAME — skipping PDFs"
+            popd >/dev/null
             popd
 
             rm -rf "$BRANCH_NAME"
