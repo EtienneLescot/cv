@@ -36,10 +36,22 @@ jobs:
           npx playwright install --with-deps
         working-directory: ./source-branch-build
       
-      - name: Build branch content
+      - name: Build branch content and generate PDFs
         run: |
           npm run build
-          npm run pdf:all
+          echo "📄 Generating PDFs for branch..."
+          # Français Dark
+          echo "  - Generating FR Dark"
+          node generateCvPdf.js --locale fr --theme dark --scale 2 --tiles 2x2
+          # Français Light
+          echo "  - Generating FR Light"
+          node generateCvPdf.js --locale fr --theme light --scale 2 --tiles 2x2
+          # Anglais Dark
+          echo "  - Generating EN Dark"
+          node generateCvPdf.js --locale en --theme dark --scale 2 --tiles 2x2
+          # Anglais Light
+          echo "  - Generating EN Light"
+          node generateCvPdf.js --locale en --theme light --scale 2 --tiles 2x2
         working-directory: ./source-branch-build
         env:
           BASE_PATH: /cv/${{ github.ref_name }}
