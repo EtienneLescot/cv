@@ -40,14 +40,20 @@ jobs:
       - name: Build branch content and generate PDFs (act)
         if: ${{ env.ACT }}
         run: |
+          BRANCH_NAME="${{ github.ref_name }}"
+          if [ "${BRANCH_NAME}" = "main" ]; then
+            export BASE_PATH="/cv"
+          else
+            export BASE_PATH="/cv/${BRANCH_NAME}"
+          fi
+
           npm run build
           echo "📄 Generating PDFs for branch..."
           # Only run PDF generation if the script exists in package.json
           node -e "try{const s=require(process.cwd()+'/package.json').scripts||{}; process.exit(s['pdf:all']?0:1)}catch(e){process.exit(1)}" \
-            && npm run pdf:all || echo "No 'pdf:all' script found — skipping PDF generation (act)"
+            && BASE_PATH="$BASE_PATH" BRANCH_NAME="$BRANCH_NAME" npm run pdf:all || echo "No 'pdf:all' script found — skipping PDF generation (act)"
         working-directory: ${{ github.workspace }}
         env:
-          BASE_PATH: /cv/${{ github.ref_name }}
           BRANCH_NAME: ${{ github.ref_name }}
 
       - name: Build and copy all branches
@@ -70,7 +76,7 @@ jobs:
             echo "📄 Processing branch: $BRANCH_NAME"
             rm -rf source-branch-build
             # Create a worktree pointing at the remote-tracking ref for this branch
-            git worktree add --force source-branch-build "refs/remotes/$REMOTE/$BRANCH_NAME" || true
+            git worktree add --force source-branch-build "$REMOTE/$BRANCH_NAME"
 
             # Ensure the worktree directory exists before entering it
             if [ ! -d source-branch-build ]; then
@@ -86,16 +92,29 @@ jobs:
             npm run build
             echo "📄 Generating PDFs for branch..."
             # Only run PDF generation for this branch if `pdf:all` is defined in its package.json
-            pushd source-branch-build >/dev/null
             node -e "try{const s=require(process.cwd()+'/package.json').scripts||{}; process.exit(s['pdf:all']?0:1)}catch(e){process.exit(1)}" \
               && BRANCH_NAME="$BRANCH_NAME" BASE_PATH="/cv/$BRANCH_NAME" npm run pdf:all || echo "No 'pdf:all' script in $BRANCH_NAME — skipping PDFs"
-            popd >/dev/null
             popd
 
-            rm -rf "$BRANCH_NAME"
-            mkdir -p "$BRANCH_NAME"
-            cp source-branch-build/index.html source-branch-build/index-fr.html source-branch-build/index-en.html source-branch-build/style.min.css source-branch-build/style-web.min.css "$BRANCH_NAME"/
-            cp source-branch-build/exports/*.pdf "$BRANCH_NAME"/
+            # If branch is main, copy files to repository root; otherwise use per-branch folder
+            if [ "$BRANCH_NAME" = "main" ]; then
+              echo "Copying files for 'main' into repository root"
+              mkdir -p exports || true
+              cp source-branch-build/index.html source-branch-build/index-fr.html source-branch-build/index-en.html ./
+              cp source-branch-build/style.min.css source-branch-build/style-web.min.css ./ || true
+              cp source-branch-build/exports/*.pdf exports/ || true
+              echo "Root files copied:"
+              ls -la index*.html || true
+              ls -la style*.css || true
+              ls -la exports/*.pdf || true
+            else
+              rm -rf "$BRANCH_NAME"
+              mkdir -p "$BRANCH_NAME"
+              cp source-branch-build/index.html source-branch-build/index-fr.html source-branch-build/index-en.html source-branch-build/style.min.css source-branch-build/style-web.min.css "$BRANCH_NAME"/
+              cp source-branch-build/exports/*.pdf "$BRANCH_NAME"/
+              echo "Files copied to $BRANCH_NAME folder:"
+              ls -la "$BRANCH_NAME"/
+            fi
             echo "Files copied to $BRANCH_NAME folder:"
             ls -la "$BRANCH_NAME"/
 
@@ -119,7 +138,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          git add -f */
+          git add -f */ index.html index-fr.html index-en.html style.min.css style-web.min.css exports/*.pdf || true
           git status
           git commit -m "Update branch subfolders from all branches [skip ci]" || echo "No changes to commit"
           git push origin main
