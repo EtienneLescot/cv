@@ -61,16 +61,16 @@ jobs:
         run: |
           git fetch --all --prune
           # List only remote branch refs under origin, strip the 'origin/' prefix,
-          # and exclude main and HEAD entries.
+          # and exclude HEAD entries (main is now included).
           # Determine remote to use (prefer 'origin', fall back to first remote)
           REMOTE=$(git remote | grep -E '^origin$' || true)
           if [ -z "$REMOTE" ]; then
             REMOTE=$(git remote | head -n1)
           fi
 
-          # List remote tracking refs under the chosen remote and exclude main/HEAD
-          # Exclude main, HEAD, and any branch that matches the remote name itself
-          BRANCHES=$(git for-each-ref --format='%(refname:short)' refs/remotes/"$REMOTE"/* | sed "s|^$REMOTE/||" | grep -v '^main$' | grep -v '^HEAD$' | grep -v "^$REMOTE$" || true)
+          # List remote tracking refs under the chosen remote and exclude HEAD
+          # Exclude HEAD and any branch that matches the remote name itself
+          BRANCHES=$(git for-each-ref --format='%(refname:short)' refs/remotes/"$REMOTE"/* | sed "s|^$REMOTE/||" | grep -v '^HEAD$' | grep -v "^$REMOTE$" || true)
 
           for BRANCH_NAME in $BRANCHES; do
             echo "📄 Processing branch: $BRANCH_NAME"
@@ -101,7 +101,8 @@ jobs:
               echo "Copying files for 'main' into repository root"
               mkdir -p exports || true
               cp source-branch-build/index.html source-branch-build/index-fr.html source-branch-build/index-en.html ./
-              cp source-branch-build/style.min.css source-branch-build/style-web.min.css ./ || true
+              cp source-branch-build/style.min.css ./ 2>/dev/null || true
+              cp source-branch-build/style-web.min.css ./ 2>/dev/null || true
               cp source-branch-build/exports/*.pdf exports/ || true
               echo "Root files copied:"
               ls -la index*.html || true
@@ -110,8 +111,10 @@ jobs:
             else
               rm -rf "$BRANCH_NAME"
               mkdir -p "$BRANCH_NAME"
-              cp source-branch-build/index.html source-branch-build/index-fr.html source-branch-build/index-en.html source-branch-build/style.min.css source-branch-build/style-web.min.css "$BRANCH_NAME"/
-              cp source-branch-build/exports/*.pdf "$BRANCH_NAME"/
+              cp source-branch-build/index.html source-branch-build/index-fr.html source-branch-build/index-en.html "$BRANCH_NAME"/
+              cp source-branch-build/style.min.css "$BRANCH_NAME"/ 2>/dev/null || true
+              cp source-branch-build/style-web.min.css "$BRANCH_NAME"/ 2>/dev/null || true
+              cp source-branch-build/exports/*.pdf "$BRANCH_NAME"/ 2>/dev/null || true
               echo "Files copied to $BRANCH_NAME folder:"
               ls -la "$BRANCH_NAME"/
             fi
