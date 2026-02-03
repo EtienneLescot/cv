@@ -107,6 +107,7 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
 
   // Update document language
   document.documentElement.lang = localeName;
+  document.documentElement.setAttribute('data-base-path', CONFIG.basePath);
   
   // NE PAS activer le mode PDF pour la version web !
   // La version web utilise style-web.css au lieu de style-pdf.css

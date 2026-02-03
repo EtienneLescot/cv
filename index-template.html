@@ -59,6 +59,7 @@
             </ul>
           </div>
            <button id="toggle" aria-label="">[ THEME ]</button>
+          <a id="print-btn" href="#" target="_blank" rel="noopener" aria-label="">PDF</a>
         </div>
         <h1>
           <div class="header-content">
@@ -194,7 +195,23 @@
       const langButton = document.getElementById('lang-button');
       const langMenu = document.getElementById('lang-menu');
       const themeToggle = document.getElementById('toggle');
+      const pdfButton = document.getElementById('print-btn');
       const htmlElement = document.documentElement;
+
+      function updatePdfLink() {
+        if (!pdfButton) {
+          return;
+        }
+
+        const locale = htmlElement.lang || 'fr';
+        const theme = htmlElement.getAttribute('data-theme') || 'light';
+        const basePath = htmlElement.getAttribute('data-base-path') || '';
+        const normalizedBase = basePath ? basePath.replace(/\/$/, '') : '.';
+        const fileName = `cv-${locale}-${theme}.pdf`;
+        const href = `${normalizedBase}/${fileName}`;
+
+        pdfButton.setAttribute('href', href);
+      }
 
       if (langButton && langMenu) {
         // Toggle dropdown visibility
@@ -247,6 +264,7 @@
 
         // Set initial print theme style
         updatePrintThemeStyle(themeToApply);
+        updatePdfLink();
 
         themeToggle.addEventListener('click', function() {
           const currentTheme = htmlElement.getAttribute('data-theme');
@@ -261,6 +279,7 @@
 
           // Update print theme style
           updatePrintThemeStyle(newTheme);
+          updatePdfLink();
         });
       }
     });
