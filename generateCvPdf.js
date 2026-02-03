@@ -757,6 +757,12 @@ function parseCliArgs() {
     pages: CONFIG.pagination.targetPages,  // Nombre de pages cibles
     scale: 1,
     tiles: undefined  // Auto-détecté basé sur scale
+    ,
+    // Rehydration options (can be provided at top-level or with rehydrate- prefix)
+    preset: null,          // optional preset for rehydration (tight|normal|loose)
+    debug: false,          // show debug overlay during rehydration
+    rehydratePreset: null, // explicit rehydrate preset (overrides --preset)
+    rehydrateDebug: false  // explicit rehydrate debug flag (overrides --debug)
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -781,6 +787,18 @@ function parseCliArgs() {
     } else if (args[i] === '--tiles' && args[i + 1]) {
       options.tiles = args[i + 1];
       i++;
+    } else if (args[i] === '--preset' && args[i + 1]) {
+      // Preset for rehydration (or general preset)
+      options.preset = args[i + 1];
+      i++;
+    } else if (args[i] === '--rehydrate-preset' && args[i + 1]) {
+      options.rehydratePreset = args[i + 1];
+      i++;
+    } else if (args[i] === '--debug') {
+      // Enable debug overlay for rehydration
+      options.debug = true;
+    } else if (args[i] === '--rehydrate-debug') {
+      options.rehydrateDebug = true;
     }
   }
 
@@ -885,27 +903,31 @@ async function main() {
     // PIPELINE DE RÉHYDRATATION
     console.log('\n🔮 Réhydratation du PDF (Ajout du texte sélectionnable)...');
     try {
-        const rehydratedPath = await rehydratePdf({
-            input: rasterOutputPath,
-            locale: selectedLocale,
-            theme: selectedTheme,
-            preset: 'normal',
-            debug: false
-        });
+      // Determine preset/debug for rehydration: explicit rehydrate flags override general ones
+      const rehydratePreset = options.rehydratePreset || options.preset || 'normal';
+      const rehydrateDebug = options.rehydrateDebug || options.debug || false;
+
+      const rehydratedPath = await rehydratePdf({
+        input: rasterOutputPath,
+        locale: selectedLocale,
+        theme: selectedTheme,
+        preset: rehydratePreset,
+        debug: rehydrateDebug
+      });
         
-        // Renommer le résultat final vers la sortie attendue
-        await fs.rename(rehydratedPath, outputPath);
+      // Rename the rehydrated PDF to the expected output path
+      await fs.rename(rehydratedPath, outputPath);
         
-        // Supprimer le raster temporaire
-        await fs.unlink(rasterOutputPath);
-        console.log(`✨ Réhydratation réussie !`);
+      // Remove the temporary raster PDF
+      await fs.unlink(rasterOutputPath);
+      console.log(`✨ Réhydratation réussie (preset=${rehydratePreset}, debug=${rehydrateDebug}) !`);
         
     } catch (e) {
-        console.error("⚠️ Erreur lors de la réhydratation, utilisation du PDF raster brut comme fallback.", e);
-        // Fallback: Si la réhydratation échoue, on utilise le raster
-        if (fsSync.existsSync(rasterOutputPath)) {
-            await fs.rename(rasterOutputPath, outputPath);
-        }
+      console.error("⚠️ Erreur lors de la réhydratation, utilisation du PDF raster brut comme fallback.", e);
+      // Fallback: Si la réhydratation échoue, on utilise le raster
+      if (fsSync.existsSync(rasterOutputPath)) {
+        await fs.rename(rasterOutputPath, outputPath);
+      }
     }
 
     // Nettoyage
