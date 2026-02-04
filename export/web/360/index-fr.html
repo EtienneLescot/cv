@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="fr" data-theme="light" data-base-path="/cv/devops"><head>
+<!DOCTYPE html><html lang="fr" data-theme="light" data-base-path=""><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title data-i18n="title">Etienne Lescot – CV
@@ -23,7 +23,7 @@
     <meta name="twitter:description" data-i18n="profile-desc" content="Directeur Technique &amp; Produit avec plus de 15 ans d'expérience dans la conception de plateformes SaaS. J'interviens à la croisée de la vision produit, de l'architecture cloud et de l'expérience utilisateur, avec une expertise spécifique sur les solutions intégrant de l'IoT.
 ">
     <meta name="twitter:image" content="https://etiennelescot.com/images/profile.jpg">
-    <link rel="stylesheet" href="/cv/devops/style.min.css"><link rel="stylesheet" href="/cv/devops/style-web.min.css">
+    <link rel="stylesheet" href="style.min.css"><link rel="stylesheet" href="style-web.min.css">
   </head>
 
   <body>
@@ -34,7 +34,7 @@
           <div class="lang-dropdown">
             <button id="lang-button" class="lang-button" aria-label="Sélectionner la langue
 ">FR</button>
-            <ul id="lang-menu" class="lang-menu"><li data-href="/cv/devops/./index.html" class="disabled">FR</li><li data-href="/cv/devops/./index-en.html">EN</li></ul>
+            <ul id="lang-menu" class="lang-menu"><li data-href="./index.html" class="disabled">FR</li><li data-href="./index-en.html">EN</li></ul>
           </div>
            <button id="toggle" aria-label="Changer de thème
 ">[ THEME ]</button>
@@ -236,6 +236,6 @@ Secteurs : Luxe, Automobile, Assurance, Santé, Architecture
       </section>
     </div>
   
-  <script>document.addEventListener("DOMContentLoaded",function(){const t=document.getElementById("lang-button"),e=document.getElementById("lang-menu"),n=document.getElementById("toggle"),d=document.getElementById("print-btn"),a=document.documentElement;function o(){if(!d)return;const t=a.lang||"fr",e=a.getAttribute("data-theme")||"light",n=a.getAttribute("data-base-path")||"",o=`${n?n.replace(/\/$/,""):"."}/pdf/cv-${t}-${e}.pdf`;d.setAttribute("href",o)}if(t&&e&&(t.addEventListener("click",function(t){t.stopPropagation(),e.style.display="block"===e.style.display?"none":"block"}),document.addEventListener("click",function(){e.style.display="none"}),e.addEventListener("click",function(t){"LI"===t.target.tagName&&t.target.dataset.href&&(window.location.href=t.target.dataset.href)})),n){const c=localStorage.getItem("theme")||"light";function i(t){const e=document.createElement("style");e.id="print-theme-style",e.innerHTML=`\n            @media print {\n              @page {\n                background: ${"dark"===t?"#1A1A1A":"#ffffff"} !important;\n              }\n            }\n          `;const n=document.getElementById("print-theme-style");n&&document.head.removeChild(n),document.head.appendChild(e)}a.setAttribute("data-theme",c),n.textContent="dark"===c?"[ LIGHT ]":"[ DARK ]",i(c),o(),n.addEventListener("click",function(){const t="dark"===a.getAttribute("data-theme")?"light":"dark";a.setAttribute("data-theme",t),localStorage.setItem("theme",t),n.textContent="dark"===t?"[ LIGHT ]":"[ DARK ]",i(t),o()})}});</script>
+  <script>document.addEventListener("DOMContentLoaded",function(){const t=document.getElementById("lang-button"),e=document.getElementById("lang-menu"),n=document.getElementById("toggle"),a=document.getElementById("print-btn"),d=document.documentElement;function o(){if(!a)return;const t=d.lang||"fr",e=d.getAttribute("data-theme")||"light",n=d.getAttribute("data-base-path")||"",o=`${n?n.replace(/\/$/,""):"."}/cv-${t}-${e}.pdf`;a.setAttribute("href",o)}if(t&&e&&(t.addEventListener("click",function(t){t.stopPropagation(),e.style.display="block"===e.style.display?"none":"block"}),document.addEventListener("click",function(){e.style.display="none"}),e.addEventListener("click",function(t){"LI"===t.target.tagName&&t.target.dataset.href&&(window.location.href=t.target.dataset.href)})),n){const c=localStorage.getItem("theme")||"light";function i(t){const e=document.createElement("style");e.id="print-theme-style",e.innerHTML=`\n            @media print {\n              @page {\n                background: ${"dark"===t?"#1A1A1A":"#ffffff"} !important;\n              }\n            }\n          `;const n=document.getElementById("print-theme-style");n&&document.head.removeChild(n),document.head.appendChild(e)}d.setAttribute("data-theme",c),n.textContent="dark"===c?"[ LIGHT ]":"[ DARK ]",i(c),o(),n.addEventListener("click",function(){const t="dark"===d.getAttribute("data-theme")?"light":"dark";d.setAttribute("data-theme",t),localStorage.setItem("theme",t),n.textContent="dark"===t?"[ LIGHT ]":"[ DARK ]",i(t),o()})}});</script>
 
 </body></html>
