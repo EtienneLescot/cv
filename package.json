@@ -1,7 +1,7 @@
 {
   "name": "repos",
   "version": "1.0.2",
-  "description": "Cette page présente mon curriculum vitæ dans un style rétro des années 90. Elle peut être ouverte localement en affichant `index.html` ou déployée sur GitHub Pages.",
+  "description": "Personal CV website and PDF generator",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
