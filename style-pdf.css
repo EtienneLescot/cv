@@ -327,4 +327,5 @@ html.pdf-mode .pdf-page-break-after {
 html.pdf-mode .experience-page-break {
   page-break-before: always !important;
   break-before: page !important;
+  margin-top: 3rem !important;
 }
