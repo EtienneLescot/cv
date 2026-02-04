@@ -13,44 +13,25 @@
         }
       })();
     </script>
-    <meta
-      name="description"
-      content=""
-    />
+    <meta name="description" content="" />
     <meta name="author" content="" />
-    <meta
-      name="keywords"
-      content=""
-    />
+    <meta name="keywords" content="" />
     <meta property="og:title" content="" />
-    <meta
-      property="og:description"
-      content=""
-    />
+    <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://etiennelescot.com/cv" />
-    <meta
-      property="og:image"
-      content="https://etiennelescot.com/images/profile.jpg"
-    />
+    <meta property="og:image" content="https://etiennelescot.com/images/profile.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="" />
-    <meta
-      name="twitter:description"
-      data-i18n="profile-desc"
-      content=""
-    />
-    <meta
-      name="twitter:image"
-      content="https://etiennelescot.com/images/profile.jpg"
-    />
+    <meta name="twitter:description" data-i18n="profile-desc" content="" />
+    <meta name="twitter:image" content="https://etiennelescot.com/images/profile.jpg" />
     <link rel="stylesheet" href="style.min.css" />
   </head>
 
   <body>
-    <div class="container">
-      <!-- Header Section - Full Width -->
-      <div class="header-section">
+    <main class="container">
+      <!-- Header Section -->
+      <header class="header-section">
         <div class="top-right-buttons">
           <div class="lang-dropdown">
             <button id="lang-button" class="lang-button" aria-label="">[ LANG ]</button>
@@ -58,32 +39,23 @@
               <!-- Language options will be injected by build process -->
             </ul>
           </div>
-           <button id="toggle" aria-label="">[ THEME ]</button>
+          <button id="toggle" aria-label="">[ THEME ]</button>
           <a id="print-btn" href="#" target="_blank" rel="noopener" aria-label="">PDF</a>
         </div>
-        <h1>
-          <div class="header-content">
-            <div class="header-emoji"></div>
-            <div class="header-text">
-              <span data-i18n="name"></span>
-              <span data-i18n="tagline" class="tagline"></span>
-            </div>
-          </div>
-        </h1>
-        
-        
-      </div>
+        <h1 data-i18n="name">Etienne Lescot</h1>
+        <p class="tagline" data-i18n="tagline">Directeur Technique et Produit - SaaS, IoT, IA</p>
+      </header>
 
       <!-- Contact Section -->
       <section class="contact-section">
         <div class="section neonbox">
-          <h2><span data-i18n="contact-title"></span></h2>
+          <h2 data-i18n="contact-title">Contact</h2>
           <ul>
-            <li data-i18n="contact-phone"></li>
-            <li data-i18n="contact-email"></li>
-            <li data-i18n="contact-linkedin"></li>
-            <li data-contact-github></li>
-            <li data-contact-cv></li>
+            <li data-i18n="contact-phone">Tel: +33 6 80 51 21 20</li>
+            <li data-i18n="contact-email">Email: etiennelescot@gmail.com</li>
+            <li data-i18n="contact-linkedin">LinkedIn: https://...</li>
+            <li data-contact-github>GitHub: https://github.com/EtienneLescot</li>
+            <li data-contact-cv>CV en ligne: https://etiennelescot.github.io/cv/main</li>
           </ul>
         </div>
       </section>
@@ -91,39 +63,24 @@
       <!-- Profile Section -->
       <section class="profile-section">
         <div class="section neonbox">
-          <h2><span data-i18n="profile-title"></span></h2>
-          <p data-i18n="profile-desc"></p>
+          <h2 data-i18n="profile-title">Profil</h2>
+          <p data-i18n="profile-desc">Directeur Technique et Produit...</p>
         </div>
       </section>
 
       <!-- Skills Section -->
       <section class="skills-section">
         <div class="section neonbox">
-          <h2><span data-i18n="skills-title"></span></h2>
+          <h2 data-i18n="skills-title">Compétences</h2>
           <ul>
-            <li data-i18n="skill-1"></li>
-            <li data-i18n="skill-2"></li>
-            <li data-i18n="skill-3"></li>
-            <li data-i18n="skill-4"></li>
-            <li data-i18n="skill-5"></li>
-            <li data-i18n="skill-6"></li>
+            <li data-i18n="skill-1">Vision et Stratégie Produit...</li>
+            <li data-i18n="skill-2">Expérience Utilisateur et Design...</li>
+            <li data-i18n="skill-3">Solutions IoT et Géolocalisation Indoor...</li>
+            <li data-i18n="skill-4">Architecture et Direction Technique...</li>
+            <li data-i18n="skill-5">Intelligence Artificielle et Automation...</li>
+            <li data-i18n="skill-6">Management et Pilotage...</li>
           </ul>
         </div>
-      </section>
-
-      <div class="pdf-page-break"></div>
-
-      <!-- Projects Section -->
-      <section class="projects-section">
-      <div class="section neonbox">
-        <h2><span data-i18n="projects-title"></span></h2>
-        <ul>
-          <li data-i18n="project-1"></li>
-          <li data-i18n="project-2"></li>
-          <li data-i18n="project-3"></li>
-          <li data-i18n="project-4"></li>
-        </ul>
-      </div>
       </section>
 
       <div class="pdf-page-break"></div>
@@ -131,37 +88,66 @@
       <!-- Experiences Section -->
       <section class="experiences-section">
         <div class="section neonbox">
-          <h2><span data-i18n="experiences-title"></span></h2>
+          <h2 data-i18n="experiences-title">Expériences Professionnelles</h2>
+
+          <!-- Experience 1: CTO Saraé (2024-2025) -->
+          <article class="experience-item">
+            <h3 data-i18n="exp1-title">CTO - Saraé (2024-2025)</h3>
+            <p data-i18n="exp1-sector">Secteur: Architecture et Services</p>
+            <ul>
+              <li data-i18n="exp1-point1">Stratégie cloud (AWS), intégration IA conversationnelle...</li>
+              <li data-i18n="exp1-project-sarae">Projet SARAE...</li>
+            </ul>
+          </article>
+
+          <!-- Experience 2: CTO Exalgo (2022-2023) -->
+          <article class="experience-item">
+            <h3 data-i18n="exp2-title">CTO - Exalgo (2022-2023)</h3>
+            <p data-i18n="exp2-sector">Secteur: IA et Développement logiciel</p>
+            <ul>
+              <li data-i18n="exp2-point1">Direction R&D...</li>
+              <li data-i18n="exp2-point2">Management stratégie infrastructure...</li>
+              <li data-i18n="exp2-point3">Leadership performance technique...</li>
+              <li data-i18n="exp2-project-exalbot">Projet Exalbot...</li>
+            </ul>
+          </article>
+
+          <!-- Experience 3: CTO Leni (2019-2022) -->
+          <article class="experience-item">
+            <h3 data-i18n="exp3-title">CTO - Leni (2019-2022)</h3>
+            <p data-i18n="exp3-sector">Secteur: Technologies pour l'événementiel et Solutions IoT</p>
+            <ul>
+              <li data-i18n="exp3-point1">Direction pôle R&D...</li>
+              <li data-i18n="exp3-point2">Pilotage portefeuille produits SaaS...</li>
+              <li data-i18n="exp3-point3">Supervision architecture cloud...</li>
+              <li data-i18n="exp3-project-appkiosk">Projet AppKiosk...</li>
+            </ul>
+          </article>
+
+          <!-- Experience 4: Freelance (2007-2019) -->
+          <article class="experience-item experience-page-break">
+            <h3 data-i18n="exp4-title">Lead Dev et Directeur de Projet - Freelance (2007-2019)</h3>
+            <p data-i18n="exp4-sectors">Secteurs: Santé, Luxe, Événementiel, Services</p>
+            <ul>
+              <li data-i18n="exp4-tech">Technologies...</li>
+              <li data-i18n="exp4-project-digitec">DigitecPharma (2017-2019)...</li>
+              <li data-i18n="exp4-project-serious">Serious Game Unity 3D...</li>
+              <li data-i18n="exp4-project-luxury">Campagnes digitales innovantes...</li>
+              <li data-i18n="exp4-point1">Pilotage de A à Z...</li>
+              <li data-i18n="exp4-point2">Prise en charge relation client...</li>
+              <li data-i18n="exp4-point3">Garant du respect des engagements...</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- Formation Section -->
+      <section class="formation-section">
+        <div class="section neonbox">
+          <h2 data-i18n="formation-title">Formation</h2>
           <ul>
-            <li>
-              <span data-i18n="exp1-title"></span>
-              <ul>
-                <li data-i18n="exp1-point1"></li>
-              </ul>
-            </li>
-            <li>
-              <span data-i18n="exp2-title"></span>
-              <ul>
-                <li data-i18n="exp2-point1"></li>
-                <li data-i18n="exp2-point2"></li>
-                <li data-i18n="exp2-point3"></li>
-              </ul>
-            </li>
-            <li>
-              <span data-i18n="exp3-title"></span>
-              <ul>
-                <li data-i18n="exp3-point1"></li>
-                <li data-i18n="exp3-point2"></li>
-              </ul>
-            </li>
-            <li>
-              <span data-i18n="exp4-title"></span>
-              <ul>
-                <li data-i18n="exp4-point1"></li>
-                <li data-i18n="exp4-point2"></li>
-                <li data-i18n="exp4-point3"></li>
-              </ul>
-            </li>
+            <li data-i18n="formation-bts">BTS Logistique, ESPL, Angers, 2005</li>
+            <li data-i18n="formation-autodidacte">Autodidacte et Veille Technologique (2007 - Aujourd'hui)</li>
           </ul>
         </div>
       </section>
@@ -169,10 +155,10 @@
       <!-- Languages Section -->
       <section class="languages-section">
         <div class="section neonbox">
-          <h2><span data-i18n="languages-title"></span></h2>
+          <h2 data-i18n="languages-title">Langues</h2>
           <ul>
-            <li data-i18n="lang-fr"></li>
-            <li data-i18n="lang-en"></li>
+            <li data-i18n="lang-fr">Français - Natif</li>
+            <li data-i18n="lang-en">Anglais - B2 Niveau avancé</li>
           </ul>
         </div>
       </section>
@@ -180,15 +166,15 @@
       <!-- Interests Section -->
       <section class="interests-section">
         <div class="section neonbox">
-          <h2><span data-i18n="interests-title"></span></h2>
+          <h2 data-i18n="interests-title">Centres d'intérêt</h2>
           <ul>
-            <li data-i18n="interest-1"></li>
-            <li data-i18n="interest-2"></li>
-            <li data-i18n="interest-3"></li>
+            <li data-i18n="interest-1">Boxe: Discipline et dépassement de soi</li>
+            <li data-i18n="interest-2">Domotique et IoT...</li>
+            <li data-i18n="interest-3">Rénovation immobilière...</li>
           </ul>
         </div>
       </section>
-    </div>
+    </main>
   </body>
   <script>
     document.addEventListener('DOMContentLoaded', function() {

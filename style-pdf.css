@@ -1,17 +1,19 @@
 /**
  * ============================================================================
- * CSS OPTIMISÉ POUR GÉNÉRATION PDF
+ * CSS OPTIMISÉ POUR GÉNÉRATION PDF - ATS-SAFE
  * ============================================================================
  * 
  * Ce CSS ajuste uniquement les espacements et la densité pour le PDF.
  * Les styles visuels (polices, couleurs, backgrounds, arrondis) sont
  * conservés depuis style.css pour un rendu identique.
  * 
- * Stratégie:
+ * Stratégie ATS-safe:
  * - Garder TOUS les styles visuels (polices, couleurs, neonbox, etc.)
  * - Réduire uniquement les espacements pour optimiser la place
  * - Gérer les page breaks
  * - Cacher les boutons UI
+ * - Afficher le lien CV en ligne
+ * - Désactiver les symboles décoratifs ::before
  */
 
 /* ============================================================================
@@ -70,8 +72,8 @@ html.pdf-mode .top-right-buttons,
 html.pdf-mode .contact-section ul,
 html.pdf-mode .profile-section,
 html.pdf-mode .skills-section,
-html.pdf-mode .projects-section,
 html.pdf-mode .experiences-section,
+html.pdf-mode .formation-section,
 html.pdf-mode .languages-section,
 html.pdf-mode .interests-section {
   display: block !important;
@@ -90,7 +92,7 @@ html.pdf-mode .header-section h1 {
   margin-bottom: 0.5rem !important;
 }
 
-html.pdf-mode .header-text .tagline {
+html.pdf-mode .tagline {
   font-size: 0.9rem !important;
   margin-top: 0.3rem !important;
 }
@@ -102,7 +104,20 @@ html.pdf-mode .header-text .tagline {
 html.pdf-mode .section {
   padding: 0.8rem !important;
   margin-bottom: 0.5rem !important;
-  /* Garder border-radius, background, box-shadow de style.css */
+}
+
+/* Experiences section with full-bleed background (edge to edge) */
+html.pdf-mode .experiences-section .section,
+html.pdf-mode .experiences-section .neonbox {
+  border-radius: 0 !important;
+  /* Extend background to page edges with negative margins */
+  margin-left: -1rem !important;
+  margin-right: -1rem !important;
+  /* Add padding back to keep content readable */
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  padding-top: 0.8rem !important;
+  padding-bottom: 0.8rem !important;
 }
 
 html.pdf-mode .section h2 {
@@ -132,6 +147,7 @@ html.pdf-mode .section p {
 html.pdf-mode .section ul {
   margin: 0.5rem 0 !important;
   padding-left: 1.2rem !important;
+  list-style-type: none !important;
 }
 
 html.pdf-mode .section li {
@@ -143,12 +159,43 @@ html.pdf-mode .section li:last-child {
   margin-bottom: 0 !important;
 }
 
+html.pdf-mode .section li::before {
+  content: "- " !important;
+  margin-left: -1.2rem !important;
+  padding-right: 0.5rem !important;
+  display: inline-block !important;
+  width: 1.2rem !important;
+}
+
 /* ============================================================================
-   PROJECTS - Espacement compact
+   EXPERIENCE ITEMS - Compact spacing
    ============================================================================ */
 
-html.pdf-mode .projects-section .section {
-  padding: 1rem !important;
+html.pdf-mode .experience-item {
+  margin-bottom: 1rem !important;
+  padding-bottom: 0.8rem !important;
+}
+
+html.pdf-mode .experience-item:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+html.pdf-mode .experience-item h3 {
+  margin-bottom: 0.25rem !important;
+}
+
+html.pdf-mode .experience-item p {
+  margin: 0.15rem 0 !important;
+}
+
+html.pdf-mode .experience-item ul {
+  margin-top: 0.3rem !important;
+  margin-bottom: 0.3rem !important;
+}
+
+html.pdf-mode .experience-item li {
+  margin-bottom: 0.3rem !important;
 }
 
 /* ============================================================================
@@ -161,6 +208,15 @@ html.pdf-mode #lang-button,
 html.pdf-mode #print-btn,
 html.pdf-mode .lang-dropdown {
   display: none !important;
+}
+
+/* ============================================================================
+   CONTACT SECTION - Afficher lien CV en PDF
+   ============================================================================ */
+
+/* Afficher le lien CV en ligne dans le PDF */
+html.pdf-mode [data-contact-cv] {
+  display: list-item !important;
 }
 
 /* ============================================================================
@@ -193,8 +249,7 @@ html.pdf-mode h6 {
   page-break-after: auto !important;
 }
 
-/* Force page break before projects if needed */
-html.pdf-mode .projects-section {
+html.pdf-mode .experiences-section {
   page-break-before: auto !important;
 }
 
@@ -209,11 +264,10 @@ html.pdf-mode * {
 }
 
 /* ============================================================================
-   DECORATIVE SYMBOLS (PDF) - Désactivés
+   DECORATIVE SYMBOLS (PDF) - Désactivés pour ATS-safe
    ============================================================================ */
 
-html.pdf-mode h2::before,
-html.pdf-mode .header-emoji::before {
+html.pdf-mode h2::before {
   content: "" !important;
   display: none !important;
 }
@@ -240,4 +294,37 @@ html.pdf-mode .pdf-page-break + section .section {
 /* Optionnel: séparateur visuel si besoin en HTML (masqué en PDF) */
 html.pdf-mode .pdf-page-separator {
   display: none !important;
+}
+
+/* ============================================================================
+  FORMATION SECTION - Add top margin
+  ============================================================================ */
+html.pdf-mode .formation-section {
+  margin-top: 2rem !important;
+}
+
+html.pdf-mode .formation-section .section {
+  margin-top: 0 !important;
+}
+
+/* ============================================================================
+  MANUAL PAGE BREAK - For specific content breaks
+  ============================================================================ */
+html.pdf-mode .pdf-page-break-after {
+  display: inline !important;
+  page-break-after: always !important;
+  break-after: page !important;
+}
+
+/* Hide the page break marker on web */
+.pdf-page-break-after {
+  display: none;
+}
+
+/* ============================================================================
+  FORCED PAGE BREAK BEFORE FREELANCE EXPERIENCE
+  ============================================================================ */
+html.pdf-mode .experience-page-break {
+  page-break-before: always !important;
+  break-before: page !important;
 }

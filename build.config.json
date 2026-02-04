@@ -6,11 +6,11 @@
       "displayName": "Version principale",
       "description": "Version principale du CV"
     },
-    "360": {
-      "enabled": false,
-      "outputPath": "360",
-      "displayName": "Vue 360°",
-      "description": "Version alternative avec vue 360° (désactivée temporairement)"
+    "short": {
+      "enabled": true,
+      "outputPath": "short",
+      "displayName": "Short version",
+      "description": "Version courte du CV, limitée à une page"
     }
   },
   "defaultBranch": "main",
