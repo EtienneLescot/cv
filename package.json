@@ -9,6 +9,8 @@
     "build:locales": "node build-static-locales.js",
     "build:minify": "node build-minify.js",
     "build": "npm run build:minify && npm run build:locales",
+    "build:export": "OUTPUT_DIR=export/web npm run build:minify && OUTPUT_DIR=export/web npm run build:locales",
+    "build:local": "npm run build",
     "build:pdf": "node build-pdf.js",
     "build:full": "npm run build:minify && npm run build:locales",
     "pdf": "node generate-pdf.js --vector",

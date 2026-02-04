@@ -22,7 +22,9 @@ const CONFIG = {
   defaultLocale: 'fr',
   supportedLocales: ['fr', 'en'],
   // Base path for resources (empty for root, '/360' for subfolder)
-  basePath: process.env.BASE_PATH || ''
+  basePath: process.env.BASE_PATH || '',
+  // Output directory (empty for current directory)
+  outputDir: process.env.OUTPUT_DIR || ''
 };
 
 function getBranchName() {
@@ -290,9 +292,18 @@ async function minifyInlineScripts(html) {
  * Save generated HTML to file
  */
 function saveOutputFile(outputHtml, localeName) {
-  const outputPath = path.join(__dirname, CONFIG.outputPattern.replace('{locale}', localeName));
+  let outputPath = CONFIG.outputPattern.replace('{locale}', localeName);
+  if (CONFIG.outputDir) {
+    outputPath = path.join(CONFIG.outputDir, outputPath);
+  } else {
+    outputPath = path.join(__dirname, outputPath);
+  }
 
   try {
+    // Ensure output directory exists
+    if (CONFIG.outputDir) {
+      fs.mkdirSync(CONFIG.outputDir, { recursive: true });
+    }
     fs.writeFileSync(outputPath, outputHtml, 'utf8');
     console.log(`✓ Generated: ${outputPath}`);
     return true;
@@ -334,7 +345,14 @@ async function buildStaticLocales() {
 
       // For default locale, also generate index.html
       if (localeName === CONFIG.defaultLocale) {
-        const defaultOutputPath = path.join(__dirname, 'index.html');
+        let defaultOutputPath = 'index.html';
+        if (CONFIG.outputDir) {
+          defaultOutputPath = path.join(CONFIG.outputDir, defaultOutputPath);
+          // Ensure output directory exists
+          fs.mkdirSync(CONFIG.outputDir, { recursive: true });
+        } else {
+          defaultOutputPath = path.join(__dirname, defaultOutputPath);
+        }
         try {
           fs.writeFileSync(defaultOutputPath, outputHtml, 'utf8');
           console.log(`✓ Generated: ${defaultOutputPath}`);

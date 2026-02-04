@@ -15,21 +15,32 @@ const postcss = require('postcss');
 // Configuration
 // Allow overriding the CSS input file via environment variable (used by build:pdf)
 const DEFAULT_CSS_INPUT = path.join(__dirname, 'style.css');
+const OUTPUT_DIR = process.env.OUTPUT_DIR || '';
+
+function getOutputPath(filename) {
+  if (OUTPUT_DIR) {
+    // Ensure output directory exists
+    fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+    return path.join(OUTPUT_DIR, filename);
+  }
+  return path.join(__dirname, filename);
+}
+
 const CONFIG = {
   cssFiles: [
     {
       input: process.env.CSS_INPUT ? path.join(__dirname, process.env.CSS_INPUT) : DEFAULT_CSS_INPUT,
-      output: path.join(__dirname, 'style.min.css')
+      output: getOutputPath('style.min.css')
     },
     {
       input: path.join(__dirname, 'style-web.css'),
-      output: path.join(__dirname, 'style-web.min.css')
+      output: getOutputPath('style-web.min.css')
     }
   ],
   jsFiles: [
     {
       input: path.join(__dirname, 'server.js'),
-      output: path.join(__dirname, 'server.min.js')
+      output: getOutputPath('server.min.js')
     }
   ]
 };
