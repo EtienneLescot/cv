@@ -1,13 +1,13 @@
 /* =================================================================
-   CV GENERATOR - WEB ADVANCED GRID LAYOUT
+   CV GENERATOR - WEB ADVANCED STYLING
    =================================================================
    
-   This stylesheet extends style.css with advanced CSS Grid layout.
-   It reorganizes the simple one-column HTML into a sophisticated
-   multi-column layout for web display.
+   This stylesheet extends style.css with web-specific enhancements.
+   It adds decorative elements and responsive layout improvements
+   while maintaining ATS-friendly HTML structure.
    
-   The HTML order remains ATS-friendly, but CSS Grid repositions
-   sections visually for better web presentation.
+   The HTML order remains linear and ATS-safe.
+   CSS adds progressive enhancement for web display only.
    ================================================================= */
 
 /* =================================================================
@@ -26,9 +26,10 @@
     margin-bottom: 2rem;
 }
 
-/* Header emoji :: added via CSS */
-.header-emoji::before {
-    content: "::";
+/* Header tagline styling */
+.tagline {
+    display: block;
+    margin-top: 0.5rem;
 }
 
 /* Hide online CV link on web (PDF only) */
@@ -37,8 +38,7 @@
 }
 
 /* Ensure symbols visible in light theme */
-[data-theme="light"] h2::before,
-[data-theme="light"] .header-emoji::before {
+[data-theme="light"] h2::before {
     display: inline-block;
 }
 
@@ -67,16 +67,16 @@
     font-family: var(--font-mono);
 }
 
-/* Projects: <> */
-.projects-section h2::before {
-    content: "<> ";
+/* Experiences: // */
+.experiences-section h2::before {
+    content: "// ";
     color: var(--accent);
     font-family: var(--font-mono);
 }
 
-/* Experiences: // */
-.experiences-section h2::before {
-    content: "// ";
+/* Formation: <> */
+.formation-section h2::before {
+    content: "<> ";
     color: var(--accent);
     font-family: var(--font-mono);
 }
@@ -96,132 +96,52 @@
 }
 
 /* =================================================================
-   PROJECTS HIGHLIGHT STYLING
+   EXPERIENCE ITEMS STYLING
    ================================================================= */
-.section{
-    margin: 0 !important;
-}
-.projects-section .section {
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
+.experience-item {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--glass-border);
 }
 
-[data-theme="dark"] .projects-section .section {
-    background: var(--glass-bg);
-    border-radius: 12px;
+.experience-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.experience-item h3 {
+    margin-bottom: 0.5rem;
+}
+
+.experience-item p {
+    margin: 0.3rem 0;
+    font-style: italic;
+    color: var(--muted);
 }
 
 /* =================================================================
-   RESPONSIVE BREAKPOINTS - Adapt grid for smaller screens
+   SECTIONS MARGIN
    ================================================================= */
-
-@media (max-width: 1100px) {
-    /* Tablet: 2-column grid */
-    .container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-        max-width: 900px;
-    }
-
-    /* Adjust grid positions for tablet */
-    .header-section {
-        grid-column: 1 / -1;
-        grid-row: 1;
-    }
-
-    .contact-section {
-        grid-column: 1;
-        grid-row: 2;
-    }
-
-    .profile-section {
-        grid-column: 2;
-        grid-row: 2;
-    }
-
-    .skills-section {
-        grid-column: 1 / -1;
-        grid-row: 3;
-    }
-
-    .languages-section {
-        grid-column: 1;
-        grid-row: 4;
-    }
-
-    .interests-section {
-        grid-column: 2;
-        grid-row: 4;
-        margin-top: 0;
-    }
-
-    .projects-section {
-        grid-column: 1 / -1;
-        grid-row: 5;
-    }
-
-    .experiences-section {
-        grid-column: 1 / -1;
-        grid-row: 6;
-    }
-
-    .projects-section .section {
-        padding: 2rem;
-    }
+.section {
+    margin: 0 !important;
 }
 
+/* =================================================================
+   RESPONSIVE BREAKPOINTS
+   ================================================================= */
+
 @media (max-width: 800px) {
-    /* Single column for narrower screens */
     .container {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
         max-width: 100%;
         padding: 1rem;
-    }
-
-    /* All sections span full width in natural order */
-    .header-section,
-    .contact-section,
-    .profile-section,
-    .skills-section,
-    .projects-section,
-    .experiences-section,
-    .languages-section,
-    .interests-section {
-        grid-column: 1;
-    }
-
-    .header-section { grid-row: 1; }
-    .contact-section { grid-row: 2; }
-    .profile-section { grid-row: 3; }
-    .skills-section { grid-row: 4; }
-    .projects-section { grid-row: 5; }
-    .experiences-section { grid-row: 6; }
-    .languages-section { grid-row: 7; }
-    .interests-section { 
-        grid-row: 8;
-        margin-top: 0;
-    }
-
-    .projects-section .section {
-        padding: 1.5rem;
     }
 }
 
 @media (max-width: 768px) {
-    /* Mobile: Single column */
     .container {
-        grid-template-columns: 1fr;
         gap: 1.5rem;
         max-width: 100%;
         padding: 1rem;
     }
-
-    .projects-section .section {
-        margin: 0;
-        padding: 1.5rem;
-        border-radius: 12px;
-    }
 }
-
