@@ -2,6 +2,13 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
+// Serve files from dist/web if it exists, otherwise from root
+const SERVE_DIR = fs.existsSync(path.join(__dirname, 'dist/web'))
+  ? path.join(__dirname, 'dist/web')
+  : __dirname;
+
+console.log(`🌐 Serving files from: ${SERVE_DIR}`);
+
 const PORT = 3001;
 const CONTENT_TYPES = {
   '.html': 'text/html',
@@ -25,27 +32,26 @@ const getPreferredLanguage = (acceptLanguage) => {
 };
 
 const server = http.createServer((req, res) => {
-  // (no special preview route; use `npm run build:pdf` to generate PDF-styled assets)
-
-  let filePath = '.' + req.url;
-  // strip query string to correctly resolve static files (e.g. style-pdf.css?v=...)
-  let cleanPath = filePath.split('?')[0];
-  if (cleanPath === './') {
-    // Handle root request with language redirection
+  // Parse URL and remove query string
+  let urlPath = req.url.split('?')[0];
+  
+  // Remove /cv prefix if present (for compatibility with built files)
+  urlPath = urlPath.replace(/^\/cv/, '');
+  
+  // Handle root request with language redirection
+  if (urlPath === '/' || urlPath === '') {
     const acceptLanguage = req.headers['accept-language'];
     const lang = getPreferredLanguage(acceptLanguage);
-
-    if (lang === 'fr') {
-      cleanPath = './index.html'; // French default
-    } else {
-      cleanPath = `./index-${lang}.html`;
-    }
+    urlPath = lang === 'fr' ? '/index.html' : `/index-${lang}.html`;
   }
 
-  const ext = path.extname(cleanPath);
+  // Build file path relative to SERVE_DIR
+  let filePath = path.join(SERVE_DIR, urlPath);
+  
+  const ext = path.extname(filePath);
   const contentType = CONTENT_TYPES[ext] || 'text/plain';
 
-  fs.readFile(cleanPath, (err, content) => {
+  fs.readFile(filePath, (err, content) => {
     if (err) {
       if (err.code === 'ENOENT') {
         res.writeHead(404);

@@ -2,111 +2,238 @@
 
 Cette page présente mon curriculum vitæ dans un style rétro des années 90. Elle peut être ouverte localement en affichant `index.html` ou déployée sur GitHub Pages.
 
-## Aperçu
-- Basculer entre mode sombre et clair avec le bouton en haut à droite.
-- Langue détectée automatiquement (fr/en) avec un bouton pour changer.
-- CSS séparée dans `style.css` pour faciliter les modifications.
-- Support multilingue avec fichiers de traduction dans `locales/` (français et anglais) au format YAML pour une meilleure lisibilité.
+## 📋 Aperçu
 
-## Utilisation
-Clonez le dépôt puis ouvrez la page :
+- Basculer entre mode sombre et clair avec le bouton en haut à droite
+- Langue détectée automatiquement (fr/en) avec un bouton pour changer
+- Support multilingue avec fichiers de traduction dans `locales/` (français et anglais) au format YAML
+- Génération de PDFs haute qualité avec texte sélectionnable
+- Déploiement automatique sur GitHub Pages
+
+## 🚀 Démarrage rapide
+
+### Installation
 
 ```bash
 git clone <repo>
 cd cv
-open index.html # ou double‑cliquez sur le fichier
+npm install
+npx playwright install --with-deps
 ```
 
-Vous pouvez aussi héberger les fichiers sur GitHub Pages afin d'accéder au CV en ligne.
-
-## Serveur de développement local
-Pour tester le CV avec un serveur local, utilisez le script `server.js` :
+### Build local
 
 ```bash
-node server.js
+# Build complet (HTML + PDF)
+npm run build
+
+# Build uniquement le HTML
+npm run build:web
+
+# Build uniquement les PDFs
+npm run build:pdf
 ```
 
-Cela démarrera un serveur sur `http://localhost:3000` qui servira tous les fichiers du projet.
+Les fichiers générés se trouvent dans :
+- `dist/web/` - Fichiers HTML et CSS (gitignored)
+- `dist/pdf/` - Fichiers PDF (committés pour GitHub Pages)
 
-## Conversion HTML vers PDF (Pixel-Perfect)
-
-Pour générer un PDF haute fidélité (identique à l'écran) avec texte sélectionnable :
+### Serveur de développement
 
 ```bash
-# Générer le PDF par défaut (FR, Dark)
-npm run pdf
-
-# Générer toutes les variantes (FR/EN, Dark/Light)
-npm run pdf:all
+npm run dev
 ```
 
-### Options disponibles
+Ouvre le CV sur `http://localhost:3000`
 
-- `--locale <fr|en>` : Langue du CV (défaut: `fr`)
-- `--theme <dark|light>` : Thème visuel (défaut: `dark`)
-- `--scale <n>` : Facteur de qualité (ex: `2` pour rendu Retina/Print). Défaut: `1`.
-- `--tiles <NxN>` : Découpage en tuiles (ex: `2x2`). Utile avec `--scale` élevé pour éviter les limites de mémoire du navigateur. Automatique si non spécifié.
+## 🏗️ Structure du projet
 
-Exemple pour un rendu haute qualité :
+```
+cv/
+├── dist/                      # Dossier de build
+│   ├── web/                  # HTML/CSS générés (gitignored)
+│   └── pdf/                  # PDFs (committés)
+├── build.config.json         # Configuration des branches à builder
+├── build.js                  # Script de build unifié
+├── build-all-branches.js     # Build multi-branches (CI)
+├── locales/                  # Fichiers de traduction YAML
+│   ├── fr.yml
+│   └── en.yml
+├── fonts/                    # Polices Inter
+├── scripts/
+│   ├── clean.js             # Nettoyage des builds
+│   └── migrate-to-dist.sh   # Migration export/ → dist/
+└── .github/workflows/
+    └── build-deploy.yml     # CI/CD GitHub Actions
+```
+
+## 📦 Système de build
+
+### Configuration des branches
+
+Le fichier [`build.config.json`](build.config.json) définit quelles branches sont buildées :
+
+```json
+{
+  "branches": {
+    "main": {
+      "enabled": true,
+      "outputPath": "",
+      "displayName": "Version principale"
+    },
+    "360": {
+      "enabled": true,
+      "outputPath": "360",
+      "displayName": "Vue 360°"
+    }
+  }
+}
+```
+
+### Commandes disponibles
+
+| Commande | Description |
+|----------|-------------|
+| `npm run dev` | Démarre le serveur de développement local |
+| `npm run build` | Build la branche courante (HTML + PDF) |
+| `npm run build:web` | Build HTML uniquement |
+| `npm run build:pdf` | Build PDFs uniquement |
+| `npm run build:all-branches` | Build toutes les branches (utilisé par CI) |
+| `npm run clean` | Nettoie tous les fichiers générés |
+| `npm run clean:web` | Nettoie uniquement les fichiers web |
+| `npm run clean:pdf` | Nettoie uniquement les PDFs |
+
+## 🔄 Workflow CI/CD
+
+Le workflow GitHub Actions ([`.github/workflows/build-deploy.yml`](.github/workflows/build-deploy.yml)) :
+
+1. **Build** toutes les branches configurées dans `build.config.json`
+2. **Commit** les PDFs dans `dist/pdf/` (nécessaire pour les URLs stables)
+3. **Deploy** `dist/web/` vers GitHub Pages
+
+### URLs déployées
+
+- **Main** : `https://etiennelescot.github.io/cv/`
+- **Branch 360** : `https://etiennelescot.github.io/cv/360/`
+- **PDFs** : `https://etiennelescot.github.io/cv/pdf/cv-fr-dark.pdf`
+
+## 📄 Génération de PDFs
+
+Le système génère des PDFs haute fidélité avec :
+
+- ✅ Texte sélectionnable (pas juste une image)
+- ✅ Rendu CSS pixel-perfect
+- ✅ Support des thèmes (dark/light)
+- ✅ Multi-langues (fr/en)
+
+### Comment ça marche ?
+
+1. Génération des HTML statiques via Playwright
+2. Capture avec CSS appliqué
+3. Export en PDF natif (vectoriel)
+
+Les PDFs sont générés dans `dist/pdf/` et committés dans Git car :
+- Nécessaires pour les liens stables dans les pages HTML
+- GitHub Actions artifacts expirent après 90 jours
+- Pas d'alternative viable pour GitHub Pages
+
+## 🌍 Ajout de nouvelles langues
+
+1. Créez un fichier YAML dans `locales/` (ex: `es.yml` pour espagnol)
+2. Copiez le contenu de `locales/en.yml` et traduisez
+3. Ajoutez la locale dans `build.config.json` :
+
+```json
+{
+  "locales": ["fr", "en", "es"]
+}
+```
+
+4. Rebuild : `npm run build`
+
+## 🔧 Ajout d'une nouvelle branche
+
+Pour ajouter une variante du CV (ex: version DevOps) :
+
+1. Créez la branche Git : `git checkout -b devops`
+2. Modifiez le contenu du CV
+3. Ajoutez la branche dans `build.config.json` :
+
+```json
+{
+  "branches": {
+    "devops": {
+      "enabled": true,
+      "outputPath": "devops",
+      "displayName": "DevOps Focus"
+    }
+  }
+}
+```
+
+4. Le CI va automatiquement builder et déployer vers `/cv/devops/`
+
+## 🧹 Nettoyage
+
 ```bash
-node generateCvPdf.js --scale 2
+# Nettoyer tous les fichiers générés
+npm run clean
+
+# Nettoyer uniquement les HTML
+npm run clean:web
+
+# Nettoyer uniquement les PDFs
+npm run clean:pdf
 ```
 
-Le script utilise une approche hybride avancée :
-1.  **Capture Visuelle** : Génère des images haute résolution via Playwright (pour un rendu CSS exact, sans hacks `@media print`).
-2.  **Réhydratation** : Analyse le DOM HTML pour extraire le texte et sa position.
-3.  **Injection** : Superpose une couche de texte invisible par-dessus les images.
-4.  **Structuration** : Insère des séparateurs invisibles pour garantir un ordre de lecture logique (Gauche -> Droite, Haut -> Bas) compatible avec les ATS et le copier-coller.
+## 🐛 Dépannage
 
-Pour plus de détails techniques, voir [PDF_GENERATION_README.md](PDF_GENERATION_README.md).
+### Le build échoue
 
-## Ajout de nouvelles langues
-Pour ajouter une nouvelle langue :
-
-1. Créez un fichier YAML dans le dossier `locales/` (par exemple `es.yml` pour l'espagnol)
-2. Copiez le contenu de `locales/en.yml` et traduisez les valeurs
-3. La langue sera automatiquement détectée et disponible via le bouton de changement de langue
-
-Le format YAML permet une meilleure lisibilité et la possibilité d'ajouter des commentaires dans les fichiers de traduction.
-
-## Génération de fichiers statiques multilingues
-
-### Build Process (Nouvelle Architecture SSG)
-Le projet utilise maintenant une architecture de Static Site Generation (SSG) pour générer des fichiers HTML statiques pour chaque langue avec optimisation des performances.
-
-#### Commandes de build
 ```bash
-# Générer tous les fichiers statiques pour chaque locale avec optimisation
-npm run build:full
+# Vérifier les dépendances
+npm ci
+npx playwright install --with-deps
 
-# Ou utiliser les étapes séparées
-npm run build:minify  # Minifie CSS et JS
-npm run build:locales # Génère les fichiers HTML statiques
+# Nettoyer et rebuilder
+npm run clean
+npm run build
 ```
 
-#### Fichiers générés
-- `index-fr.html` - Version française statique avec JS minifié
-- `index-en.html` - Version anglaise statique avec JS minifié
-- `style.min.css` - CSS minifiée (10 KiB de gains)
-- Les fichiers générés sont exclus du git via `.gitignore`
+### Les PDFs ne sont pas générés
 
-#### Déploiement
-Les fichiers statiques peuvent être déployés directement sur n'importe quel serveur web ou CDN. Pour le déploiement, vous pouvez :
-1. Utiliser GitHub Pages avec les fichiers générés
-2. Déployer sur Netlify, Vercel ou tout autre service de static hosting
-3. Servir les fichiers directement depuis un serveur web
+Vérifiez que Playwright est installé :
 
-#### Avantages
-- ✅ Chargement instantané (pas de traitement client)
-- ✅ SEO-friendly (contenu pré-rendu)
-- ✅ Robuste (pas de corruption HTML)
-- ✅ Facile à déployer
-- ✅ Performances optimisées :
-  - CSS minifiée (10 KiB de gains)
-  - JavaScript inline minifié (1.7 KiB de gains)
-  - Cache efficace pour les assets statiques
+```bash
+npx playwright install --with-deps
+```
 
-## Injection de données de secours (Déprécié)
-L'ancien script `inject-fallback.js` est maintenant déprécié. Utilisez plutôt la nouvelle architecture SSG décrite ci-dessus.
+### Les liens PDF sont cassés
 
-Pour plus de détails sur l'architecture SSG, consultez [SSG_ARCHITECTURE.md](SSG_ARCHITECTURE.md).
+Les PDFs doivent être committés dans `dist/pdf/` pour que les liens fonctionnent sur GitHub Pages.
+
+```bash
+git add dist/pdf/
+git commit -m "Update PDFs"
+git push
+```
+
+## 📚 Documentation technique
+
+Pour plus de détails sur l'architecture :
+
+- [`plans/build-ci-reconciliation.md`](plans/build-ci-reconciliation.md) - Plan complet de migration
+- [`plans/build-config-spec.md`](plans/build-config-spec.md) - Spécification de la configuration
+- [`plans/implementation-comparison.md`](plans/implementation-comparison.md) - Comparaison ancien/nouveau système
+
+## 🤝 Contribution
+
+1. Fork le projet
+2. Créez une branche feature : `git checkout -b feature/ma-feature`
+3. Commit : `git commit -m 'Add feature'`
+4. Push : `git push origin feature/ma-feature`
+5. Ouvrez une Pull Request
+
+## 📝 License
+
+ISC

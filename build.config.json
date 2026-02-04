@@ -1,0 +1,26 @@
+{
+  "branches": {
+    "main": {
+      "enabled": true,
+      "outputPath": "",
+      "displayName": "Version principale",
+      "description": "Version principale du CV"
+    },
+    "360": {
+      "enabled": true,
+      "outputPath": "360",
+      "displayName": "Vue 360°",
+      "description": "Version alternative avec vue 360°"
+    }
+  },
+  "defaultBranch": "main",
+  "locales": ["fr", "en"],
+  "themes": ["dark", "light"],
+  "build": {
+    "outputDirs": {
+      "web": "dist/web",
+      "pdf": "dist/pdf"
+    },
+    "cleanBeforeBuild": false
+  }
+}

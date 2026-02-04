@@ -32,8 +32,8 @@ const path = require('path');
 // ============================================================================
 
 const CONFIG = {
-  htmlDir: __dirname,
-  outputDir: './exports',
+  htmlDir: process.env.HTML_DIR || './dist/web',
+  outputDir: process.env.OUTPUT_DIR || './dist/pdf',
   
   supportedLocales: ['fr', 'en'],
   supportedThemes: ['dark', 'light'],
@@ -60,11 +60,14 @@ const CONFIG = {
  */
 async function generatePdf(locale, theme, options = {}) {
   const htmlFile = `index-${locale}.html`;
-  const htmlPath = path.join(CONFIG.htmlDir, htmlFile);
+  const htmlPath = path.resolve(CONFIG.htmlDir, htmlFile);
   const outputPath = path.join(CONFIG.outputDir, `cv-${locale}-${theme}.pdf`);
   
   // Vérifier que le fichier HTML existe
   if (!fsSync.existsSync(htmlPath)) {
+    console.error(`❌ HTML file not found: ${htmlPath}`);
+    console.error(`   HTML_DIR: ${CONFIG.htmlDir}`);
+    console.error(`   Looking for: ${htmlFile}`);
     throw new Error(`HTML file not found: ${htmlPath}`);
   }
   
@@ -88,34 +91,40 @@ async function generatePdf(locale, theme, options = {}) {
     deviceScaleFactor: options.raster ? 2 : 1
   });
   
-  // Charger le HTML avec baseURL pour que les CSS relatifs fonctionnent
+  // Charger le HTML
   const htmlContent = await fs.readFile(htmlPath, 'utf-8');
+  
+  // Lire les CSS nécessaires
+  const cssBasePath = path.join(__dirname, 'style.css');
+  const cssPdfPath = path.join(__dirname, 'style-pdf.css');
+  const cssBaseContent = await fs.readFile(cssBasePath, 'utf-8');
+  const cssPdfContent = await fs.readFile(cssPdfPath, 'utf-8');
+  
+  // Naviguer vers la page
   await page.goto(`file://${htmlPath}`, {
     waitUntil: 'networkidle'
   });
 
-  // Forcer le rendu en mode "screen" pour éviter les surprises de print
+  // Forcer le rendu en mode "screen"
   await page.emulateMedia({ media: 'screen' });
   
-  // Appliquer le thème
-  await page.evaluate((selectedTheme) => {
-    document.documentElement.setAttribute('data-theme', selectedTheme);
-    // Activer le mode PDF
-    document.documentElement.classList.add('pdf-mode');
-  }, theme);
-
-  // Retirer le CSS web (décoratif) pour le PDF
+  // Supprimer tous les liens CSS existants et injecter notre CSS directement
   await page.evaluate(() => {
     const links = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
-    links
-      .filter(link => link.getAttribute('href') && link.getAttribute('href').includes('style-web'))
-      .forEach(link => link.remove());
+    links.forEach(link => link.remove());
   });
   
-  // Charger le CSS PDF
-  const cssPdfPath = path.join(CONFIG.htmlDir, 'style-pdf.css');
-  const cssPdfContent = await fs.readFile(cssPdfPath, 'utf-8');
+  // Injecter le CSS de base
+  await page.addStyleTag({ content: cssBaseContent });
+  
+  // Injecter le CSS PDF
   await page.addStyleTag({ content: cssPdfContent });
+  
+  // Appliquer le thème et activer le mode PDF
+  await page.evaluate((selectedTheme) => {
+    document.documentElement.setAttribute('data-theme', selectedTheme);
+    document.documentElement.classList.add('pdf-mode');
+  }, theme);
   
   // Attendre que tout soit rendu
   await page.waitForTimeout(1500);

@@ -1,12 +1,23 @@
+# Dependencies
 node_modules
-exports
-# Generated static locale files
+
+# Build outputs (generated, not committed)
+dist/web/
+.worktree/
 index-*.html
 index.html
 !index-template.html
-
-# Minified files
 *.min.css
 *.min.js
+
+# PDFs (committed for GitHub Pages URLs)
+# Keep dist/pdf/ tracked - DO NOT IGNORE
+
+# Legacy (to be removed after migration)
+exports
+export
+
+# Misc
 .bin/
 .env
+plans/
