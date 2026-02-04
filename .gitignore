@@ -1,17 +1,14 @@
 # Dependencies
 node_modules
 
-# Build outputs (generated, not committed)
-dist/web/
+# Build outputs (ALL generated, not committed)
+dist/
 .worktree/
 index-*.html
 index.html
 !index-template.html
 *.min.css
 *.min.js
-
-# PDFs (committed for GitHub Pages URLs)
-# Keep dist/pdf/ tracked - DO NOT IGNORE
 
 # Legacy (to be removed after migration)
 exports

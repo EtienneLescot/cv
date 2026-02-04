@@ -129,12 +129,23 @@ async function buildBranch(branchName, branchConfig) {
       console.warn(`   ⚠️  Web directory not found: ${worktreeWebDir}`);
     }
 
-    // Copy PDF files
+    // Copy PDF files to dist/pdf/ (for Git tracking)
     if (fs.existsSync(worktreePdfDir)) {
       console.log(`   Copying ${worktreePdfDir} → ${mainPdfDir}`);
       exec(`cp -r ${worktreePdfDir}/* ${mainPdfDir}/`);
     } else {
       console.warn(`   ⚠️  PDF directory not found: ${worktreePdfDir}`);
+    }
+
+    // ALSO copy PDFs to dist/web/pdf/ for GitHub Pages serving
+    const mainWebPdfDir = outputPath
+      ? path.join(__dirname, CONFIG.build.outputDirs.web, outputPath, 'pdf')
+      : path.join(__dirname, CONFIG.build.outputDirs.web, 'pdf');
+    
+    if (fs.existsSync(worktreePdfDir)) {
+      fs.mkdirSync(mainWebPdfDir, { recursive: true });
+      console.log(`   Copying ${worktreePdfDir} → ${mainWebPdfDir} (for GitHub Pages)`);
+      exec(`cp -r ${worktreePdfDir}/* ${mainWebPdfDir}/`);
     }
 
     console.log(`\n✅ Branch ${branchName} built successfully!`);

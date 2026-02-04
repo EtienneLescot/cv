@@ -119,6 +119,12 @@ async function build() {
           BRANCH_NAME: currentBranch
         }
       });
+
+      // Copy PDFs to web directory for GitHub Pages serving
+      const webPdfDir = path.join(webOutputDir, 'pdf');
+      console.log(`\n📋 Copying PDFs to ${webPdfDir} for GitHub Pages...`);
+      fs.mkdirSync(webPdfDir, { recursive: true });
+      execSync(`cp -r ${pdfOutputDir}/* ${webPdfDir}/`, { stdio: 'inherit' });
     }
 
     console.log('\n✅ Build completed successfully!');
