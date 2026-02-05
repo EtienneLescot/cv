@@ -204,7 +204,9 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
   // Inject GitHub and Online CV links under contact section
   const branchName = getBranchName();
   const githubUrl = 'https://github.com/EtienneLescot';
-  const cvUrl = `https://etiennelescot.github.io/cv/${branchName}`;
+  const baseUrl = 'https://etiennelescot.github.io';
+  const cvPath = CONFIG.basePath || '/cv';
+  const cvUrl = `${baseUrl}${cvPath}`;
 
   const githubLabel = localeName === 'en' ? 'GitHub' : 'Github';
   const cvLabel = localeName === 'en' ? 'Online CV' : 'CV en ligne';
