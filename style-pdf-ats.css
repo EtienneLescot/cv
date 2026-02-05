@@ -3,7 +3,7 @@
    ============================================================================ */
 
 :root {
-  --ats-text: #1a1a1c;
+  --ats-text: #000000;
   --ats-muted: #718096;
   --ats-accent: #007bff;
   --ats-bg: #d1d9e1;
@@ -94,6 +94,12 @@ body {
   margin: 16px 0 4px 0;
   font-weight: 700;
   color: var(--ats-text);
+  padding-left: 0;
+}
+
+.ats-section h3:has(+ [data-i18n$="-sector"]),
+.ats-section h3:has(+ [data-i18n$="-sectors"]) {
+  display: inline;
 }
 
 .ats-section h3:first-of-type {
@@ -105,21 +111,66 @@ body {
   margin: 12px 0 4px 0;
   font-weight: 700;
   color: var(--ats-accent);
+  padding-left: 10px;
+}
+
+.ats-section h4:has(+ [data-i18n$="-sector"]),
+.ats-section h4:has(+ [data-i18n$="-sectors"]) {
+  display: inline;
 }
 
 .ats-section h5 {
   font-size: 10.5pt;
   margin: 12px 0 4px 0;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ats-text);
+  padding-left: 20px;
 }
 
-/* Sector and Stack styling */
+.ats-section h5:has(+ [data-i18n$="-sector"]),
+.ats-section h5:has(+ [data-i18n$="-sectors"]) {
+  display: inline;
+}
+
+/* Sector and Stack styling - make them appear inline with titles */
 [data-i18n$="-sector"],
 [data-i18n$="-sectors"] {
   font-style: italic;
   font-size: 9.5pt;
   color: var(--ats-muted);
+  display: inline;
+  margin-left: 8px;
+}
+
+/* Body text paragraphs should have same indentation as their titles */
+.ats-section h3 ~ p:not([data-i18n$="-sector"]):not([data-i18n$="-sectors"]):not([data-i18n$="-stack"]):not([data-i18n$="-tech"]):not([data-i18n$="-title"]):not([data-i18n^="exp-fractional-opensource-stimm"]):not([data-i18n^="exp-fractional-opensource-n8n"]) {
+  padding-left: 0 !important;
+  display: block;
+}
+
+.ats-section h4 ~ p:not([data-i18n$="-sector"]):not([data-i18n$="-sectors"]):not([data-i18n$="-stack"]):not([data-i18n$="-tech"]):not([data-i18n$="-title"]):not([data-i18n^="exp-fractional-opensource-stimm"]):not([data-i18n^="exp-fractional-opensource-n8n"]) {
+  padding-left: 10px !important;
+  display: block;
+}
+
+.ats-section h5 ~ p:not([data-i18n$="-sector"]):not([data-i18n$="-sectors"]):not([data-i18n$="-stack"]):not([data-i18n$="-tech"]):not([data-i18n$="-title"]) {
+  padding-left: 20px !important;
+  display: block;
+}
+
+/* Reset indentation when a higher-level heading appears later in the same section */
+.ats-section h4 ~ h3 ~ p:not([data-i18n$="-sector"]):not([data-i18n$="-sectors"]):not([data-i18n$="-title"]),
+.ats-section h5 ~ h3 ~ p:not([data-i18n$="-sector"]):not([data-i18n$="-sectors"]):not([data-i18n$="-title"]) {
+  padding-left: 0 !important;
+}
+
+.ats-section h5 ~ h4 ~ p:not([data-i18n$="-sector"]):not([data-i18n$="-sectors"]):not([data-i18n$="-title"]) {
+  padding-left: 10px !important;
+}
+
+/* Specific fix for the first paragraph after an inline title+sector */
+h5 + [data-i18n$="-sector"] + p {
+  margin-top: 4px;
 }
 
 [data-i18n$="-stack"],
@@ -134,10 +185,56 @@ body {
   margin-bottom: 8px !important;
 }
 
+/* Open Source projects styling - match h5 (Saraé/Exalgo) */
+[data-i18n$="-opensource-stimm-title"],
+[data-i18n$="-opensource-n8n-title"] {
+  display: inline-block !important;
+  font-size: 10.5pt;
+  font-weight: 700 !important;
+  color: #000000 !important;
+  padding-left: 20px !important;
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+[data-i18n$="-opensource-stimm-stack"],
+[data-i18n$="-opensource-stimm-link"],
+[data-i18n$="-opensource-n8n-stack"],
+[data-i18n$="-opensource-n8n-link"] {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-style: italic;
+  font-size: 9.5pt;
+  color: #718096 !important;
+}
+
+[data-i18n$="-opensource-stimm-stack"]::before,
+[data-i18n$="-opensource-stimm-link"]::before,
+[data-i18n$="-opensource-n8n-stack"]::before,
+[data-i18n$="-opensource-n8n-link"]::before {
+  content: " - ";
+  white-space: pre;
+  font-style: normal;
+}
+
+/* Ensure descriptions start on new line and have same indentation as h5 content */
+[data-i18n="exp-fractional-opensource-stimm"],
+[data-i18n="exp-fractional-opensource-n8n"] {
+  display: block !important;
+  margin-top: 4px !important;
+  padding-left: 20px !important;
+}
+
 .ats-section p {
   margin: 0 0 4px 0;
   font-weight: 400;
-  color: var(--ats-muted);
+  color: #718096; /* Bluish color from web version */
+}
+
+/* Increase font size for experience body text by 1pt */
+.ats-section:has([data-i18n="experiences-title"]) p {
+  font-size: 11.5pt;
 }
 
 /* Make some paragraphs look like list items */
@@ -185,6 +282,12 @@ body {
   border-left-color: var(--ats-accent);
 }
 
+/* Strong tags (titles in skills/projects) should be black */
+.ats-section strong {
+  color: #000000;
+  font-weight: 700;
+}
+
 /* Links */
 a {
   color: var(--ats-accent);
@@ -198,4 +301,23 @@ a {
 
 @page {
   margin: 0;
+}
+
+/* Page break after skills section */
+.ats-section:has([data-i18n="skills-title"]) {
+  break-after: page;
+  page-break-after: always;
+}
+
+/* Page break after CTO - Leni block - apply break before the next experience */
+[data-i18n="exp4-title"]::before {
+  content: "";
+  display: block;
+  break-before: page;
+  page-break-before: always;
+  height: 24px; /* Increased margin above the title on the new page */
+}
+
+[data-i18n="exp4-title"] {
+  display: inline !important;
 }
