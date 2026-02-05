@@ -111,12 +111,91 @@
 }
 
 .experience-item h3 {
+    margin-bottom: 0.2rem;
+}
+
+.experience-item p,
+.experience-item li,
+.skills-section li,
+.interests-section li {
+    margin: 0.1rem 0;
+    font-style: normal;
+    color: var(--muted);
+}
+
+.experience-item strong,
+.skills-section li strong,
+.interests-section li strong {
+    color: var(--text);
+}
+
+/* Sub-experience styling */
+.experience-item h4 {
+    margin-left: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.1rem;
+    font-size: 1.1rem;
+    color: var(--primary);
+}
+
+.sub-experience {
+    margin-left: 1rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.sub-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.1rem;
+}
+
+.sub-experience h5 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.sub-header .sector,
+.sub-header .stack {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.sub-header .sector {
+    font-style: normal;
+}
+
+.sub-header .stack {
+    font-style: italic;
+}
+
+.sub-header .sector::before,
+.sub-header .stack::before,
+.sub-header a::before {
+    content: "-";
+    margin-right: 0.5rem;
+    color: var(--muted);
+    font-style: normal;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.sub-header a {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.sub-experience ul {
+    margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
 
-.experience-item p {
-    margin: 0.3rem 0;
-    font-style: italic;
+.sub-experience li {
+    margin-bottom: 0.2rem;
     color: var(--muted);
 }
 

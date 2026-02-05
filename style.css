@@ -32,6 +32,7 @@
     --contrast-high: #ffffff;
     --contrast-low: #000000;
     --button-border: 1px solid var(--glass-border);
+    --muted: #a0aec0;
 }
 
 /* Light Theme Variables */

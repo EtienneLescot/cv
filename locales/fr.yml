@@ -27,31 +27,55 @@ profile-desc: |
 skills-title: |
   Compétences
 skill-1: |
-  <strong>Vision et Stratégie Produit</strong>: Définition de la vision produit, pilotage de roadmap, gestion du cycle de vie (conception, déploiement, optimisation), alignement stratégique produit/technique
+  <strong>Vision et Stratégie Produit</strong> :<br>Définition de la vision produit, pilotage de roadmap, gestion du cycle de vie (conception, déploiement, optimisation), alignement stratégique produit/technique
 skill-2: |
-  <strong>Expérience Utilisateur et Design</strong>: Direction UX/UI, conception de parcours clients, interfaces multi-supports (mobile, web, bornes physiques)
+  <strong>Expérience Utilisateur et Design</strong> :<br>Direction UX/UI, conception de parcours clients, interfaces multi-supports (mobile, web, bornes physiques)
 skill-3: |
-  <strong>Solutions IoT et Géolocalisation Indoor</strong>: Technologies de localisation, cartographie interactive, notifications contextuelles intelligentes
+  <strong>Solutions IoT et Géolocalisation Indoor</strong> :<br>Technologies de localisation, cartographie interactive, notifications contextuelles intelligentes
 skill-4: |
-  <strong>Architecture et Direction Technique</strong>: Architecture cloud SaaS (AWS, Kubernetes, Scaleway), scalabilité, multi-instances, infrastructure as code, monitoring
+  <strong>Architecture et Direction Technique</strong> :<br>Architecture cloud SaaS (AWS, Kubernetes, Scaleway), scalabilité, multi-instances, infrastructure as code, monitoring
 skill-5: |
-  <strong>Intelligence Artificielle et Automation</strong>: IA conversationnelle (LLM, AWS Bedrock, Langchain), RAG (Retrieval-Augmented Generation), automatisation de parcours clients, analyse de contexte
+  <strong>Intelligence Artificielle et Automation</strong> :<br>IA conversationnelle (LLM, AWS Bedrock, Langchain), RAG (Retrieval-Augmented Generation), automatisation de parcours clients, analyse de contexte
 skill-6: |
-  <strong>Management et Pilotage</strong>: Leadership d'équipes pluridisciplinaires (dev, UX, produit), méthode agile, CI/CD, DevOps, optimisation de la rentabilité R&D
+  <strong>Management et Pilotage</strong> :<br>Leadership d'équipes pluridisciplinaires (dev, UX, produit), méthode agile, CI/CD, DevOps, optimisation de la rentabilité R&D
 experiences-title: |
   Expériences Professionnelles
+exp-fractional-title: |
+  CTO Fractional & Cofondateur (2022-2025)
+exp-fractional-subtitle: |
+  Accompagnement technique et produit de startups early-stage + Projets Open Source
+exp-fractional-opensource-heading: |
+  Projets Open Source Maintenus
+exp-fractional-opensource-stimm-title: |
+  Stimm Platform
+exp-fractional-opensource-stimm: |
+  Plateforme open source pour agents vocaux IA. Orchestration de pipelines IA ultra-low latency pour conversations temps réel sur WebRTC.
+exp-fractional-opensource-stimm-stack: |
+  Stack : Voice AI, WebRTC, real-time processing
+exp-fractional-opensource-stimm-link: |
+  github.com/stimm-ai/stimm
+exp-fractional-opensource-n8n-title: |
+  n8n-as-code
+exp-fractional-opensource-n8n: |
+  Synchronisation bidirectionnelle n8n - VS Code. Génération de workflows via IA et GitOps. Stop clicking, start coding.
+exp-fractional-opensource-n8n-stack: |
+  Stack : n8n, VS Code extension, AI workflow generation
+exp-fractional-opensource-n8n-link: |
+  github.com/EtienneLescot/n8n-as-code
+exp-fractional-missions-heading: |
+  Missions CTO & Cofondations
 exp1-title: |
-  CTO - Saraé (2024-2025)
+  Saraé (2024-2025) - Cofondateur & CTO
 exp1-sector: |
-  Secteur: Architecture et Services
+  Secteur : Architecture & Services
 exp1-point1: |
   Stratégie cloud (AWS), intégration IA conversationnelle, automatisation des processus métiers
 exp1-project-sarae: |
-  <strong>Projet SARAE - Plateforme Client et IA Conversationnelle</strong>: Définition de la roadmap produit, intégration IA (RAG, LLM) pour l'analyse d'appels et l'automatisation des parcours clients, architecture cloud-native AWS, CI/CD multi-instances, réduction des coûts d'infrastructure et amélioration continue des performances
+  <strong>Projet SARAE - Plateforme Client et IA Conversationnelle</strong> : Définition de la roadmap produit, intégration IA (RAG, LLM) pour l'analyse d'appels et l'automatisation des parcours clients, architecture cloud-native AWS, CI/CD multi-instances, réduction des coûts d'infrastructure et amélioration continue des performances
 exp2-title: |
-  CTO - Exalgo (2022-2023)
+  Exalgo (2022-2023) - Cofondateur & CTO
 exp2-sector: |
-  Secteur: IA et Développement logiciel
+  Secteur : IA & Développement logiciel
 exp2-point1: |
   Direction de la R&D et définition de la vision technologique et produit de la plateforme SaaS
 exp2-point2: |
@@ -59,11 +83,11 @@ exp2-point2: |
 exp2-point3: |
   Pilotage de la performance technique et de la sécurité des services
 exp2-project-exalbot: |
-  <strong>Projet Exalbot - Chatbot IA Cloud-Native (SaaS)</strong>: Développement du moteur de chatbot conversationnel (Python, Langchain, LLM), architecture RAG pour l'enrichissement contextuel des réponses, définition de la roadmap et de la stratégie d'intégration IA, infrastructure cloud (Kubernetes, ArgoCD, Scaleway), déploiement multi-environnements, optimisation des performances
+  <strong>Projet Exalbot - Chatbot IA Cloud-Native (SaaS)</strong> : Développement du moteur de chatbot conversationnel (Python, Langchain, LLM), architecture RAG pour l'enrichissement contextuel des réponses, définition de la roadmap et de la stratégie d'intégration IA, infrastructure cloud (Kubernetes, ArgoCD, Scaleway), déploiement multi-environnements, optimisation des performances
 exp3-title: |
   CTO - Leni (2019-2022)
-exp3-sector: |
-  Secteur: Technologies pour l'événementiel et Solutions IoT
+exp3-sector : |
+  Secteur : Technologies pour l'événementiel et Solutions IoT
 exp3-point1: |
   Direction d'un pôle R&D (10 personnes), gestion des recrutements
 exp3-point2: |
@@ -71,19 +95,19 @@ exp3-point2: |
 exp3-point3: |
   Supervision de l'architecture cloud globale, de la stratégie DevOps (CI/CD) et de la qualité technique
 exp3-project-appkiosk: |
-  <strong>Projet <a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/" target="_blank">AppKiosk</a> - Plateforme SaaS IoT</strong>: Transformation produit (passage d'un modèle projet sur-mesure à une plateforme no-code industrialisée), ROI et Scalabilité (réduction drastique des coûts de production -90%, capacité de déploiement sur 100+ salons, 50 000 utilisateurs par événement), Pilotage 360° (roadmap produit, architecture cloud, direction UX/UI, monitoring multi-clients). Module IoT et cartographie Mobigéo incluant déploiement emblématique Printemps Haussmann (Paris) avec bornes interactives physiques et application mobile en collaboration avec JCDecaux (hardware), fonctionnalités: géolocalisation indoor, itinéraires dans le magasin, notifications intelligentes contextuelles, intégration technique du SDK Polestar (Bluetooth LE) pour la localisation indoor et les services contextuels.<span class="pdf-page-break-after"></span> Autres déploiements: salons professionnels (Bourget), campus d'entreprise (Crédit Agricole)
+  <strong>Projet <a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/" target="_blank">AppKiosk</a> - Plateforme SaaS IoT</strong> : Transformation produit (passage d'un modèle projet sur-mesure à une plateforme no-code industrialisée), ROI et Scalabilité (réduction drastique des coûts de production -90%, capacité de déploiement sur 100+ salons, 50 000 utilisateurs par événement), Pilotage 360° (roadmap produit, architecture cloud, direction UX/UI, monitoring multi-clients). Module IoT et cartographie Mobigéo incluant déploiement emblématique Printemps Haussmann (Paris) avec bornes interactives physiques et application mobile en collaboration avec JCDecaux (hardware), fonctionnalités : géolocalisation indoor, itinéraires dans le magasin, notifications intelligentes contextuelles, intégration technique du SDK Polestar (Bluetooth LE) pour la localisation indoor et les services contextuels.<span class="pdf-page-break-after"></span> Autres déploiements : salons professionnels (Bourget), campus d'entreprise (Crédit Agricole)
 exp4-title: |
-  Lead Dev et Directeur de Projet - Freelance (2007-2019)
+  Fondateur - Studio de Développement (2007-2019)
 exp4-sectors: |
-  Secteurs: Santé, Luxe, Événementiel, Services
+  Secteurs : Santé, Luxe, Événementiel, Services
 exp4-tech: |
-  <strong>Technologies</strong>: React, Angular, Node.js, JavaScript, SQL, MongoDB, AWS, Docker, CI/CD, PHP, REST API, développement mobile (iOS, Android), Unity 3D
+  <strong>Technologies</strong> : React, Angular, Node.js, JavaScript, SQL, MongoDB, AWS, Docker, CI/CD, PHP, REST API, développement mobile (iOS, Android), Unity 3D
 exp4-project-digitec: |
-  <strong>Projet <a href="https://digitecpharma.fr/landing-page-site-et-appli/" target="_blank">DigitecPharma</a> (2017-2019) - Plateforme SaaS Santé B2B2C</strong>: Co-conception du produit avec le métier (vision, UX/UI, fonctionnalités) pour un écosystème complexe (1000 pharmacies, 30+ groupements, 300K patients), direction technique et UX/UI, pilotage de l'architecture SaaS et des applications mobiles (iOS, Android), management de l'équipe design
+  <strong>Projet <a href="https://digitecpharma.fr/landing-page-site-et-appli/" target="_blank">DigitecPharma</a> (2017-2019) - Plateforme SaaS Santé B2B2C</strong> : Co-conception du produit avec le métier (vision, UX/UI, fonctionnalités) pour un écosystème complexe (1000 pharmacies, 30+ groupements, 300K patients), direction technique et UX/UI, pilotage de l'architecture SaaS et des applications mobiles (iOS, Android), management de l'équipe design
 exp4-project-serious: |
-  <strong>Serious Game Unity 3D</strong>: Conception et développement d'une campagne de prévention routière interactive pour organisme public (client anonymisé)
+  <strong>Serious Game Unity 3D</strong> : Conception et développement d'une campagne de prévention routière interactive pour organisme public (client anonymisé)
 exp4-project-luxury: |
-  <strong>Campagnes digitales innovantes</strong>: Réalisation de plateformes web et mobiles pour campagnes publicitaires de grandes marques de luxe internationales (clients anonymisés)
+  <strong>Campagnes digitales innovantes</strong> : Réalisation de plateformes web et mobiles pour campagnes publicitaires de grandes marques de luxe internationales (clients anonymisés)
 exp4-point1: |
   Pilotage de A à Z de projets web et mobiles en tant que consultant externe pour des clients grands comptes et ETI
 exp4-point2: |
@@ -95,7 +119,7 @@ formation-title: |
 formation-bts: |
   BTS Logistique, ESPL, Angers, 2005
 formation-autodidacte: |
-  Autodidacte et Veille Technologique (2007 - Aujourd'hui): Apprentissage continu des technologies cloud, IA, architecture SaaS, participation à des conférences techniques, veille active sur les évolutions du secteur
+  Autodidacte et Veille Technologique (2007 - Aujourd'hui) : Apprentissage continu des technologies cloud, IA, architecture SaaS, participation à des conférences techniques, veille active sur les évolutions du secteur
 languages-title: |
   Langues
 lang-fr: |
@@ -105,8 +129,8 @@ lang-en: |
 interests-title: |
   Centres d'intérêt
 interest-1: |
-  Boxe: Discipline et dépassement de soi
+  <strong>Boxe</strong> : Discipline et dépassement de soi
 interest-2: |
-  Domotique et IoT: Home Assistant, Zigbee, Assistant IA avec contexte étendu aux capteurs de la maison, veille technologique active
+  <strong>Domotique et IoT</strong> : Home Assistant, Zigbee, Assistant IA avec contexte étendu aux capteurs de la maison, veille technologique active
 interest-3: |
-  Rénovation immobilière: Gestion de contraintes techniques et créativité
+  <strong>Rénovation immobilière</strong> : Gestion de contraintes techniques et créativité

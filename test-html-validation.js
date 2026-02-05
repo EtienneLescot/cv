@@ -20,7 +20,7 @@ const SELF_CLOSING_TAGS = ['BR', 'IMG', 'INPUT', 'HR', 'META', 'LINK'];
 // ATS-safe validation rules
 const ATS_RULES = {
   // Forbidden symbols in visible text  (• should be -, HTML entities like &nbsp; are OK)
-  forbiddenSymbols: /[•]/g,
+  forbiddenSymbols: /[•↔→]/g,
   
   // Date format: YYYY-YYYY or YYYY - Present/Aujourd'hui
   datePattern: /\d{4}-\d{4}|\d{4}\s*-\s*(Present|Aujourd'hui)/gi,
@@ -92,7 +92,7 @@ function validateHtmlFile(filePath) {
       errors.push(`Found forbidden symbols: ${forbiddenMatches.join(', ')}`);
       console.error(`✗ Found forbidden symbols: ${forbiddenMatches.join(', ')}`);
     } else {
-      console.log('✓ No forbidden symbols (&, •) in text content');
+      console.log('✓ No forbidden symbols (•, ↔, →) in text content');
     }
 
     // Test 4: Verify no "Projects" section exists (must be integrated in experiences)
