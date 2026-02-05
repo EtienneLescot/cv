@@ -35,6 +35,10 @@ const CONFIG = {
     {
       input: path.join(__dirname, 'style-web.css'),
       output: getOutputPath('style-web.min.css')
+    },
+    {
+      input: path.join(__dirname, 'style-pdf-ats.css'),
+      output: getOutputPath('style-pdf-ats.min.css')
     }
   ],
   jsFiles: [

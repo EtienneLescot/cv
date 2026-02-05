@@ -1,0 +1,202 @@
+/* ============================================================================
+   ATS PDF - Minimal, linear, selectable order
+   ============================================================================ */
+
+:root {
+  --ats-text: #1a1a1c;
+  --ats-muted: #718096;
+  --ats-accent: #007bff;
+  --ats-bg: #d1d9e1;
+  --ats-section-bg: #ffffff;
+  --ats-border: rgba(255, 255, 255, 0.5);
+  --ats-grid-color: rgba(255, 255, 255, 0.45);
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  background-color: var(--ats-bg);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--ats-bg);
+  background-image: radial-gradient(var(--ats-grid-color) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ats-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.5;
+  min-height: 100%;
+}
+
+.ats-container {
+  padding: 12mm 24px;
+}
+
+.ats-header h1 {
+  font-size: 24pt;
+  margin: 0 0 2px 0;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ats-text);
+}
+
+.ats-tagline {
+  margin: 0 0 20px 0;
+  font-size: 10pt;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ats-muted);
+}
+
+.ats-section {
+  margin-bottom: 20px;
+  padding: 20px;
+  background: var(--ats-section-bg);
+  border: 1px solid var(--ats-border);
+  border-radius: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.ats-section h2 {
+  font-size: 11pt;
+  margin: 0 0 16px 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ats-accent);
+}
+
+/* Special styling for contact section to match web */
+.ats-section:first-of-type {
+  background: var(--ats-accent);
+  color: #ffffff;
+  border: none;
+}
+
+.ats-section:first-of-type h2 {
+  color: #ffffff;
+  width: 100%;
+}
+
+.ats-section:first-of-type p {
+  color: #ffffff;
+  margin: 0 0 4px 0;
+  font-size: 9.5pt;
+}
+
+.ats-section h3 {
+  font-size: 11pt;
+  margin: 16px 0 4px 0;
+  font-weight: 700;
+  color: var(--ats-text);
+}
+
+.ats-section h3:first-of-type {
+  margin-top: 0;
+}
+
+.ats-section h4 {
+  font-size: 10.5pt;
+  margin: 12px 0 4px 0;
+  font-weight: 700;
+  color: var(--ats-accent);
+}
+
+.ats-section h5 {
+  font-size: 10.5pt;
+  margin: 12px 0 4px 0;
+  font-weight: 600;
+  color: var(--ats-text);
+}
+
+/* Sector and Stack styling */
+[data-i18n$="-sector"],
+[data-i18n$="-sectors"] {
+  font-style: italic;
+  font-size: 9.5pt;
+  color: var(--ats-muted);
+}
+
+[data-i18n$="-stack"],
+[data-i18n$="-tech"] {
+  font-family: var(--font-mono);
+  font-size: 9pt;
+  color: var(--ats-muted);
+  background: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 8px !important;
+}
+
+.ats-section p {
+  margin: 0 0 4px 0;
+  font-weight: 400;
+  color: var(--ats-muted);
+}
+
+/* Make some paragraphs look like list items */
+[data-i18n^="exp1-point"],
+[data-i18n^="exp2-point"],
+[data-i18n^="exp3-point"],
+[data-i18n^="exp4-point"],
+[data-i18n^="skill-"],
+[data-i18n^="interest-"] {
+  position: relative;
+  padding-left: 12px;
+  margin-bottom: 6px;
+}
+
+/* Use a subtle border-left for ACS friendliness instead of ::before bullets */
+[data-i18n^="exp1-point"],
+[data-i18n^="exp2-point"],
+[data-i18n^="exp3-point"],
+[data-i18n^="exp4-point"],
+[data-i18n^="skill-"],
+[data-i18n^="interest-"] {
+  padding-left: 0;
+  margin-left: 0;
+  margin-bottom: 4px;
+}
+
+/* Experience section "fond perdu" styling */
+.ats-section:has([data-i18n="experiences-title"]) {
+  margin-left: -24px;
+  margin-right: -24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  background: var(--ats-section-bg);
+}
+
+[data-i18n^="exp1-point"]:hover,
+[data-i18n^="exp2-point"]:hover,
+[data-i18n^="exp3-point"]:hover,
+[data-i18n^="exp4-point"]:hover,
+[data-i18n^="skill-"]:hover,
+[data-i18n^="interest-"]:hover {
+  border-left-color: var(--ats-accent);
+}
+
+/* Links */
+a {
+  color: var(--ats-accent);
+  text-decoration: none;
+}
+
+.ats-section:first-of-type a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+@page {
+  margin: 0;
+}

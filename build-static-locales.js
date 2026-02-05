@@ -17,8 +17,10 @@ const { execSync } = require('child_process');
 // Configuration
 const CONFIG = {
   templatePath: path.join(__dirname, 'index-template.html'),
+  templatePdfPath: path.join(__dirname, 'index-template-pdf.html'),
   localesPath: path.join(__dirname, 'locales'),
   outputPattern: 'index-{locale}.html',
+  outputPdfPattern: 'index-{locale}-pdf.html',
   defaultLocale: 'fr',
   supportedLocales: ['fr', 'en'],
   // Base path for resources (empty for root, '/360' for subfolder)
@@ -103,7 +105,7 @@ function loadLocales() {
 /**
  * Generate static HTML for a specific locale
  */
-function generateStaticHtml(templateHtml, localeData, localeName) {
+function generateStaticHtml(templateHtml, localeData, localeName, isPdf = false) {
   const dom = new JSDOM(templateHtml);
   const { document } = dom.window;
 
@@ -111,21 +113,22 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
   document.documentElement.lang = localeName;
   document.documentElement.setAttribute('data-base-path', CONFIG.basePath);
   
-  // NE PAS activer le mode PDF pour la version web !
-  // La version web utilise style-web.css au lieu de style-pdf.css
-  // document.documentElement.classList.add('pdf-mode');  // <-- SUPPRIMÉ
-
-  // Update CSS: charger style.css ET style-web.css pour la version web
+  // Update CSS
   const cssLink = document.querySelector('link[rel="stylesheet"]');
   if (cssLink) {
-    // Remplacer le lien unique par deux liens: style.min.css + style-web.min.css
-    cssLink.href = CONFIG.basePath ? `${CONFIG.basePath}/style.min.css` : 'style.min.css';
-    
-    // Ajouter style-web.css après style.css
-    const webCssLink = document.createElement('link');
-    webCssLink.rel = 'stylesheet';
-    webCssLink.href = CONFIG.basePath ? `${CONFIG.basePath}/style-web.min.css` : 'style-web.min.css';
-    cssLink.parentNode.insertBefore(webCssLink, cssLink.nextSibling);
+    if (isPdf) {
+      // For PDF, ensure we use style-pdf-ats.min.css
+      cssLink.href = CONFIG.basePath ? `${CONFIG.basePath}/style-pdf-ats.min.css` : 'style-pdf-ats.min.css';
+    } else {
+      // For Web, use style.min.css + style-web.min.css
+      cssLink.href = CONFIG.basePath ? `${CONFIG.basePath}/style.min.css` : 'style.min.css';
+      
+      // Add style-web.css after style.css
+      const webCssLink = document.createElement('link');
+      webCssLink.rel = 'stylesheet';
+      webCssLink.href = CONFIG.basePath ? `${CONFIG.basePath}/style-web.min.css` : 'style-web.min.css';
+      cssLink.parentNode.insertBefore(webCssLink, cssLink.nextSibling);
+    }
   }
 
   // Update title
@@ -367,6 +370,25 @@ async function buildStaticLocales() {
       // Generate locale-specific file
       if (saveOutputFile(outputHtml, localeName)) {
         successCount++;
+      }
+
+      // Generate PDF-specific HTML (ATS-friendly)
+      try {
+        const pdfTemplateHtml = fs.readFileSync(CONFIG.templatePdfPath, 'utf8');
+        let pdfHtml = generateStaticHtml(pdfTemplateHtml, locales[localeName], localeName, true);
+        pdfHtml = await minifyInlineScripts(pdfHtml);
+
+        let pdfOutputPath = CONFIG.outputPdfPattern.replace('{locale}', localeName);
+        if (CONFIG.outputDir) {
+          pdfOutputPath = path.join(CONFIG.outputDir, pdfOutputPath);
+        } else {
+          pdfOutputPath = path.join(__dirname, pdfOutputPath);
+        }
+        fs.writeFileSync(pdfOutputPath, pdfHtml, 'utf8');
+        console.log(`✓ Generated: ${pdfOutputPath}`);
+        successCount++;
+      } catch (error) {
+        console.warn(`⚠ Failed to generate PDF template for locale ${localeName}:`, error.message);
       }
     } else {
       console.warn(`⚠ Locale ${localeName} not found in locale files`);
