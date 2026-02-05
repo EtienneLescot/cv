@@ -27,16 +27,80 @@ html.pdf-mode body {
   min-height: 0 !important;
   overflow: visible !important;
   background-image: none !important;
+  /* Avoid applying backgrounds on html/body — use @page for PDF page backgrounds */
+  background-color: transparent !important;
+  background: transparent !important;
 }
 
-html.pdf-mode[data-theme="dark"],
-html.pdf-mode[data-theme="dark"] body {
-  background-color: #121620 !important;
+/* PDF page background: use @page to avoid stacking/selection issues caused
+   by backgrounds on html/body. Default to the light theme color here. */
+/* Page background driven by a CSS variable so we can support light/dark PDFs.
+   `html.pdf-mode[data-theme=light]` and `html.pdf-mode[data-theme=dark]`
+   set `--pdf-page-bg` below. */
+@page {
+  size: A4;
+  margin: 10mm;
+  background: var(--pdf-page-bg, #e3ebf4);
 }
 
-html.pdf-mode[data-theme="light"],
-html.pdf-mode[data-theme="light"] body {
-  background-color: #e3ebf4 !important;
+/* Default PDF theme variables */
+html.pdf-mode[data-theme="light"] {
+  --pdf-page-bg: #e3ebf4;
+}
+
+html.pdf-mode[data-theme="dark"] {
+  --pdf-page-bg: #121620;
+}
+
+/* If your PDF generation pipeline can't propagate CSS variables into @page
+   for the dark variant, consider generating the dark PDF using a different
+   HTML class (e.g. `pdf-dark`) or a separate stylesheet. */
+
+/* Neutralize backgrounds only for full-bleed sections that cause selection overlays
+   (experiences-section uses negative margins to extend to page edges). Keep
+   regular `.section`/`.neonbox` backgrounds so contact and other boxes remain. */
+html.pdf-mode .experiences-section .neonbox,
+html.pdf-mode .experiences-section .section {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Restore contact box background for PDF but simplify to a solid color to
+   avoid selection artifacts from semi-transparent layered backgrounds. */
+html.pdf-mode .contact-section .neonbox {
+  background: var(--contact-bg, #007bff) !important;
+  color: var(--contrast-high, #fff) !important;
+}
+
+/* Restore a safe full-bleed background for experiences using a pseudo-element.
+   This places the background visually edge-to-edge while keeping it behind
+   text (z-index) and non-interactive (pointer-events:none) so selection
+   remains contiguous. */
+html.pdf-mode .experiences-section .neonbox {
+  position: relative !important;
+  overflow: visible !important;
+  border-radius: 0 !important;
+}
+
+html.pdf-mode .experiences-section .neonbox::before {
+  content: "" !important;
+  position: absolute !important;
+  /* Extend beyond the container and page margin (@page margin: 10mm) to
+     ensure a true full-bleed visual within the PDF. */
+  left: -10mm !important;
+  right: -10mm !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  background: var(--glass-bg, #ffffff) !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Ensure content sits above the pseudo-element so selection highlights text
+   rather than the background element. */
+html.pdf-mode .experiences-section .neonbox > * {
+  position: relative !important;
+  z-index: 1 !important;
 }
 
 html.pdf-mode .container {
@@ -57,6 +121,18 @@ html.pdf-mode * {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   transition: none !important;
+}
+
+/* Ensure text is selectable in exported PDFs and small remains inline */
+html.pdf-mode,
+html.pdf-mode * {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+html.pdf-mode small {
+  display: inline !important;
+  font-size: 0.95em !important;
 }
 
 html.pdf-mode .section,
@@ -163,8 +239,8 @@ html.pdf-mode .section li::before {
   content: "- " !important;
   margin-left: -1.2rem !important;
   padding-right: 0.5rem !important;
-  display: inline-block !important;
-  width: 1.2rem !important;
+  /* Keep marker inline to preserve natural text selection order */
+  display: inline !important;
 }
 
 /* ============================================================================

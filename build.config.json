@@ -6,7 +6,7 @@
       "displayName": "Version principale",
       "description": "Version principale du CV"
     },
-    "short": {
+    "fix-pdf2": {
       "enabled": true,
       "outputPath": "short",
       "displayName": "Short version",
