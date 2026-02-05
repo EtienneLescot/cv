@@ -8,22 +8,21 @@
   --ats-accent: #007bff;
   --ats-bg: #d1d9e1;
   --ats-section-bg: #ffffff;
-  --ats-border: rgba(255, 255, 255, 0.5);
-  --ats-grid-color: rgba(255, 255, 255, 0.45);
+  --ats-border: #e2e8f0;
 }
-
+@page {
+  background-color: #d1d9e1;
+}
 html {
   margin: 0;
   padding: 0;
-  background-color: var(--ats-bg);
+
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--ats-bg);
-  background-image: radial-gradient(var(--ats-grid-color) 1px, transparent 1px);
-  background-size: 24px 24px;
+
   color: var(--ats-text);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 10.5pt;
