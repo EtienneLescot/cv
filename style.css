@@ -165,12 +165,18 @@ h2 {
     padding: 8px 16px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     border-radius: 8px;
     font-family: var(--font-primary);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-transform: uppercase;
     letter-spacing: 1px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    box-sizing: border-box;
 }
 
 #toggle:hover,
@@ -185,20 +191,7 @@ h2 {
 [data-theme="light"] #toggle,
 [data-theme="light"] .lang-button,
 [data-theme="light"] #print-btn {
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: var(--text);
-    border: var(--button-border);
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-family: var(--font-primary);
-    font-weight: 600;
-    font-size: 0.85rem;
-    height: auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
 [data-theme="light"] #toggle:hover,
@@ -213,6 +206,7 @@ h2 {
     display: flex;
     gap: 12px;
     justify-content: flex-end;
+    align-items: center;
     margin-bottom: 2rem;
 }
 
@@ -480,6 +474,7 @@ th {
 
     .top-right-buttons {
         justify-content: center;
+        align-items: center;
         margin: 1rem 0 1.5rem 0;
         gap: 10px;
     }
