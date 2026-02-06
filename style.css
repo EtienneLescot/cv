@@ -384,14 +384,7 @@ ul li {
     padding-left: 1rem;
 }
 
-ul li::before {
-    content: '>';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-weight: 900;
-    font-family: var(--font-mono);
-}
+
 
 [data-theme="light"] .contact-section ul li::before {
     color: var(--accent);
