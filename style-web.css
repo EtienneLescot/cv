@@ -49,10 +49,6 @@ body {
     display: none;
 }
 
-/* Ensure symbols visible in light theme */
-[data-theme="light"] h2::before {
-    display: inline-block;
-}
 
 /* =================================================================
    DECORATIVE SYMBOLS - Added via CSS for web display only
@@ -63,6 +59,12 @@ body {
     content: "## ";
     color: var(--accent);
     font-family: var(--font-mono);
+}
+
+/* In light theme the contact section uses a blue background, ensure
+   the decorative symbol is white for sufficient contrast */
+[data-theme="light"] .contact-section h2::before {
+    color: var(--contrast-high);
 }
 
 /* Profile: >> */
@@ -185,16 +187,7 @@ body {
     font-style: italic;
 }
 
-.sub-header .sector::before,
-.sub-header .stack::before,
-.sub-header a::before {
-    content: "-";
-    margin-right: 0.5rem;
-    color: var(--muted);
-    font-style: normal;
-    text-decoration: none;
-    display: inline-block;
-}
+
 
 .sub-header a {
     font-size: 0.85rem;
@@ -204,8 +197,14 @@ body {
 .sub-experience ul {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+    padding-left: 0;
 }
-
+.experience-item ul{
+    padding-left: 0;
+}
+.formation-section ul, .languages-section ul, .interests-section ul{
+    padding-left: 0;
+}
 .sub-experience li {
     margin-bottom: 0.2rem;
     color: var(--muted);

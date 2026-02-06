@@ -121,20 +121,20 @@ exp4-point3: |
 formation-title: |
   Formation
 formation-bts: |
-  BTS Logistique, ESPL, Angers, 2005
+  - BTS Logistique, ESPL, Angers, 2005
 formation-autodidacte: |
-  Autodidacte et Veille Technologique (2007 - Aujourd'hui) : Apprentissage continu des technologies cloud, IA, architecture SaaS, participation à des conférences techniques, veille active sur les évolutions du secteur
+  - Autodidacte et Veille Technologique (2007 - Aujourd'hui) : Apprentissage continu des technologies cloud, IA, architecture SaaS, participation à des conférences techniques, veille active sur les évolutions du secteur
 languages-title: |
   Langues
 lang-fr: |
-  Français - Natif
+  - Français - Natif
 lang-en: |
-  Anglais - B2 Niveau avancé
+  - Anglais - B2 Niveau avancé
 interests-title: |
   Centres d'intérêt
 interest-1: |
-  <strong>Boxe</strong> : Discipline et dépassement de soi
+  - <strong>Boxe</strong> : Discipline et dépassement de soi
 interest-2: |
-  <strong>Domotique et IoT</strong> : Home Assistant, Zigbee, Assistant IA avec contexte étendu aux capteurs de la maison, veille technologique active
+  - <strong>Domotique et IoT</strong> : Home Assistant, Zigbee, Assistant IA avec contexte étendu aux capteurs de la maison, veille technologique active
 interest-3: |
-  <strong>Rénovation immobilière</strong> : Gestion de contraintes techniques et créativité
+  - <strong>Rénovation immobilière</strong> : Gestion de contraintes techniques et créativité

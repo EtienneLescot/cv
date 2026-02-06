@@ -335,9 +335,7 @@ h2 {
     padding-left: 0;
 }
 
-[data-theme="light"] .contact-section h2::before {
-    display: none;
-}
+
 
 .contact-section h2 .symbol {
     color: inherit;
@@ -348,9 +346,7 @@ h2 {
     color: #ffffff;
 }
 
-[data-theme="light"] .contact-section .neonbox ul li::before {
-    color: #ffffff;
-}
+
 
 .contact-section a {
     font-weight: 500;
@@ -365,9 +361,7 @@ h2 {
     font-size: 1.2rem;
 }
 
-[data-theme="light"] h2::before {
-    display: none;
-}
+
 
 /* =================================================================
    LISTS
@@ -386,19 +380,14 @@ ul li {
 
 
 
-[data-theme="light"] .contact-section ul li::before {
-    color: var(--accent);
-}
+
 
 ul ul {
     margin-top: 0.5rem;
     padding-left: 1rem;
 }
 
-ul ul li::before {
-    content: '•';
-    color: var(--muted);
-}
+
 
 /* =================================================================
    LINKS
