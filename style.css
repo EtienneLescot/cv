@@ -60,9 +60,6 @@
 html,
 body {
     margin: 0;
-    background-color: var(--bg);
-    background-image: radial-gradient(var(--grid-color) 1px, transparent 1px);
-    background-size: 24px 24px;
     color: var(--text);
     font-family: var(--font-primary);
     line-height: 1.6;
