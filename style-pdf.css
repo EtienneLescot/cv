@@ -20,8 +20,7 @@
   OPTIMISATIONS GLOBALES - Espacements uniquement
   ============================================================================ */
 
-html.pdf-mode,
-html.pdf-mode body {
+body {
   line-height: 1.5 !important;
   height: auto !important;
   min-height: 0 !important;
@@ -35,7 +34,7 @@ html.pdf-mode body {
 /* PDF page background: use @page to avoid stacking/selection issues caused
    by backgrounds on html/body. Default to the light theme color here. */
 /* Page background driven by a CSS variable so we can support light/dark PDFs.
-   `html.pdf-mode[data-theme=light]` and `html.pdf-mode[data-theme=dark]`
+   `html[data-theme=light]` and `html[data-theme=dark]`
    set `--pdf-page-bg` below. */
 @page {
   size: A4;
@@ -46,14 +45,37 @@ html.pdf-mode body {
 }
 
 /* Default PDF theme variables */
-html.pdf-mode[data-theme="light"] {
-  --pdf-page-bg: #ffffff; /* inner page background (content card) */
-  --pdf-page-margin-color: #e3ebf4; /* outer page color */
+[data-theme="light"] {
+  --pdf-page-bg: #ffffff;
+  /* inner page background (content card) */
+  --pdf-page-margin-color: #e3ebf4;
+  /* outer page color */
 }
 
-html.pdf-mode[data-theme="dark"] {
+[data-theme="dark"] {
   --pdf-page-bg: #121620;
   --pdf-page-margin-color: #121620;
+}
+
+/* Spacing tokens used across PDF stylesheet for compact layout */
+:root{
+  --s1:2px;
+  --s2:4px;
+  --s3:6px;
+  --s4:8px;
+  --s5:12px;
+  --s6:16px;
+  --s7:20px;
+  --s8:24px;
+  --s9:32px;
+  --s10:40px;
+  --s11:48px;
+  --s12:64px;
+  --s13:80px;
+  --s14:96px;
+  --s15:128px;
+  --s16:160px;
+  --s17:192px;
 }
 
 /* If your PDF generation pipeline can't propagate CSS variables into @page
@@ -63,15 +85,15 @@ html.pdf-mode[data-theme="dark"] {
 /* Neutralize backgrounds only for full-bleed sections that cause selection overlays
    (experiences-section uses negative margins to extend to page edges). Keep
    regular `.section`/`.neonbox` backgrounds so contact and other boxes remain. */
-html.pdf-mode .experiences-section .neonbox,
-html.pdf-mode .experiences-section .section {
+.experiences-section .neonbox,
+.experiences-section.section {
   background: transparent !important;
   border: none !important;
 }
 
 /* Restore contact box background for PDF but simplify to a solid color to
    avoid selection artifacts from semi-transparent layered backgrounds. */
-html.pdf-mode .contact-section .neonbox {
+.contact-section .neonbox {
   background: var(--contact-bg, #007bff) !important;
   color: var(--contrast-high, #fff) !important;
 }
@@ -83,13 +105,13 @@ html.pdf-mode .contact-section .neonbox {
    remains visible. */
 /* Simulate printable margins using body padding; draw the inner card inset
    using a container-scoped pseudo-element to avoid global white artefacts. */
-html.pdf-mode body {
+body {
   padding: 10mm !important;
 }
 
 /* Draw the white 'card' inset only behind the centered `.container`, so it
    doesn't overlay other full-bleed elements. */
-html.pdf-mode .container {
+.container {
   position: relative !important;
   z-index: 1 !important;
 }
@@ -97,7 +119,7 @@ html.pdf-mode .container {
 /* removed container::before (caused unwanted white card overlay) */
 
 /* Ensure main content renders above the inset margin background */
-html.pdf-mode .container {
+html .container {
   position: relative !important;
   z-index: 1 !important;
 }
@@ -105,26 +127,26 @@ html.pdf-mode .container {
 /* Reintroduce a safe full-bleed background for the experiences section by
    placing a pseudo-element that extends beyond the inset. It will sit above
    the `body::before` inset so it reaches the page edges. */
-html.pdf-mode .experiences-section .neonbox {
+.experiences-section .neonbox {
   position: relative !important;
   z-index: 2 !important;
   overflow: visible !important;
 }
 
-html.pdf-mode .experiences-section .neonbox::before {
+
+
+
+
+
+.experiences-section .neonbox::before {
   content: "" !important;
   position: absolute !important;
-  left: calc(-10mm - 1rem) !important;
-  right: calc(-10mm - 1rem) !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  background: var(--pdf-page-bg, #ffffff) !important;
-  z-index: 1 !important;
+  display: none !important;
   pointer-events: none !important;
 }
 
 /* Ensure content sits above that pseudo-element */
-html.pdf-mode .experiences-section .neonbox > * {
+.experiences-section .neonbox>* {
   position: relative !important;
   z-index: 3 !important;
 }
@@ -137,7 +159,7 @@ html.pdf-mode .experiences-section .neonbox > * {
    background (and the colored inset is drawn by body::before). Remove the
    previous pseudo-element to avoid layering issues. */
 
-html.pdf-mode .container {
+.container {
   display: block !important;
   gap: 0 !important;
   padding: 1rem !important;
@@ -148,7 +170,7 @@ html.pdf-mode .container {
    SIMPLIFICATION VISUELLE - Pas d'effets complexes
    ============================================================================ */
 
-html.pdf-mode * {
+* {
   box-shadow: none !important;
   text-shadow: none !important;
   filter: none !important;
@@ -158,34 +180,34 @@ html.pdf-mode * {
 }
 
 /* Ensure text is selectable in exported PDFs and small remains inline */
-html.pdf-mode,
-html.pdf-mode * {
+,
+* {
   -webkit-user-select: text !important;
   user-select: text !important;
 }
 
-html.pdf-mode small {
+small {
   display: inline !important;
   font-size: 0.95em !important;
 }
 
-html.pdf-mode .section,
-html.pdf-mode .neonbox {
+.section,
+.neonbox {
   box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
 /* Supprimer les layouts flex pour le PDF */
-html.pdf-mode .header-content,
-html.pdf-mode .top-right-buttons,
-html.pdf-mode .contact-section ul,
-html.pdf-mode .profile-section,
-html.pdf-mode .skills-section,
-html.pdf-mode .experiences-section,
-html.pdf-mode .formation-section,
-html.pdf-mode .languages-section,
-html.pdf-mode .interests-section {
+.header-content,
+.top-right-buttons,
+.contact-section ul,
+.profile-section,
+.skills-section,
+.experiences-section,
+.formation-section,
+.languages-section,
+.interests-section {
   display: block !important;
 }
 
@@ -193,16 +215,16 @@ html.pdf-mode .interests-section {
    HEADER - Espacements réduits
    ============================================================================ */
 
-html.pdf-mode .header-section {
+.header-section {
   margin-bottom: 2.5rem !important;
 }
 
-html.pdf-mode .header-section h1 {
+.header-section h1 {
   font-size: 2rem !important;
   margin-bottom: 0.5rem !important;
 }
 
-html.pdf-mode .tagline {
+.tagline {
   font-size: 0.9rem !important;
   margin-top: 0.3rem !important;
 }
@@ -211,14 +233,14 @@ html.pdf-mode .tagline {
    SECTIONS - Espacements compacts
    ============================================================================ */
 
-html.pdf-mode .section {
+.section {
   padding: 0.8rem !important;
   margin-bottom: 0.5rem !important;
 }
 
 /* Experiences section with full-bleed background (edge to edge) */
-html.pdf-mode .experiences-section .section,
-html.pdf-mode .experiences-section .neonbox {
+.experiences-section .section,
+.experiences-section .neonbox {
   border-radius: 0 !important;
   /* Extend background to page edges with negative margins */
   margin-left: -1rem !important;
@@ -233,12 +255,12 @@ html.pdf-mode .experiences-section .neonbox {
 /* full-bleed wrapper background: separate element so selection isn't broken
    by a background layer. The background extends beyond the body inset to
    reach the page edges. */
-html.pdf-mode .full-bleed-wrap {
+.full-bleed-wrap {
   position: relative !important;
   z-index: 2 !important;
 }
 
-html.pdf-mode .full-bleed-wrap .full-bleed-bg {
+.full-bleed-wrap .full-bleed-bg {
   content: "" !important;
   position: absolute !important;
   /* Make the element span the viewport width regardless of container/padding
@@ -255,48 +277,87 @@ html.pdf-mode .full-bleed-wrap .full-bleed-bg {
 }
 
 /* ensure inner content sits above the background */
-html.pdf-mode .full-bleed-wrap .experiences-section,
-html.pdf-mode .full-bleed-wrap .experiences-section * {
+.full-bleed-wrap .experiences-section,
+.full-bleed-wrap .experiences-section * {
   position: relative !important;
   z-index: 3 !important;
 }
 
-html.pdf-mode .section h2 {
+.section h2 {
   font-size: 1.1rem !important;
   margin-bottom: 0.6rem !important;
 }
 
 /* Profil - espacement titre/contenu harmonisé */
-html.pdf-mode .profile-section h2 {
+.profile-section h2 {
   margin-bottom: 0.6rem !important;
 }
 
-html.pdf-mode .profile-section p {
+.profile-section p {
   margin-top: 0 !important;
+  font-size: 0.95rem !important;
 }
 
-html.pdf-mode .section h3 {
+/* --- Indentation hiérarchique harmonisée pour PDF --- */
+/* Indent pour sous-sections (ex: Stimm Platform sous Projets Open Source) */
+
+/* Indent global pour chaque bloc de sous-section (expériences, open source, etc.)
+   Décale tout le contenu (sous-header, paragraphes, listes) sauf le titre principal. */
+.experiences-section article>*,
+.open-source-section>ul,
+.open-source-section>.sub-header,
+.open-source-section>p {
+  margin-left: 1.1rem !important;
+}
+
+.experiences-section article>h3 {
+  margin-left: 0 !important;
+}
+
+.open-source-section>h2 {
+  margin-left: 0 !important;
+}
+
+/* Indent minimal pour les titres principaux (pas d'indent) */
+.experiences-section .section>h2,
+.open-source-section>h2 {
+  margin-left: 0 !important;
+}
+
+/* Indent pour les items de contact (pour voir le tiret) */
+.contact-section .section ul {
+  padding-left: 0.8rem !important;
+}
+
+.contact-section .section ul li {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+
+
+.section h3 {
   font-size: 1rem !important;
   margin-bottom: 0.4rem !important;
 }
 
-html.pdf-mode .section p {
+.section p {
   line-height: 1.5 !important;
   margin-bottom: 0.5rem !important;
 }
 
-html.pdf-mode .section ul {
+.section ul {
   margin: 0.5rem 0 !important;
   padding-left: 1.2rem !important;
   list-style-type: none !important;
 }
 
-html.pdf-mode .section li {
+.section li {
   margin-bottom: 0.4rem !important;
   line-height: 1.5 !important;
 }
 
-html.pdf-mode .section li:last-child {
+.section li:last-child {
   margin-bottom: 0 !important;
 }
 
@@ -307,12 +368,12 @@ html.pdf-mode .section li:last-child {
   still be present in `style.css`. Some rules use `ul li::before` or
   `.sub-header::before` to draw arrows/chevrons — disable them in PDF mode
   to avoid visual artifacts and broken selection order. */
-html.pdf-mode ul li::before,
-html.pdf-mode ul ul li::before,
-html.pdf-mode .contact-section ul li::before,
-html.pdf-mode .sub-header::before,
-html.pdf-mode h2::before,
-html.pdf-mode .section h2::before {
+ul li::before,
+ul ul li::before,
+.contact-section ul li::before,
+.sub-header::before,
+h2::before,
+.section h2::before {
   content: none !important;
   display: none !important;
   width: 0 !important;
@@ -325,93 +386,98 @@ html.pdf-mode .section h2::before {
    EXPERIENCE ITEMS - Compact spacing
    ============================================================================ */
 
-html.pdf-mode .experience-item {
+.experience-item {
   margin-bottom: 1rem !important;
   padding-bottom: 0.8rem !important;
 }
 
-html.pdf-mode .experience-item:last-child {
+.experience-item:last-child {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
 }
 
-html.pdf-mode .experience-item h3 {
+.experience-item h3 {
   margin-bottom: 0.1rem !important;
 }
 
-html.pdf-mode .experience-item p,
-html.pdf-mode .experience-item li {
+.experience-item p,
+.experience-item li {
   margin: 0.05rem 0 !important;
   font-size: 0.95rem !important;
   font-style: normal !important;
   color: var(--muted) !important;
 }
 
-html.pdf-mode .skills-section li,
-html.pdf-mode .interests-section li {
+.skills-section li,
+.interests-section li {
   color: var(--muted) !important;
 }
 
-html.pdf-mode .experience-item strong,
-html.pdf-mode .skills-section li strong,
-html.pdf-mode .interests-section li strong {
+.experience-item strong,
+.skills-section li strong,
+.interests-section li strong {
   color: var(--text) !important;
 }
 
-html.pdf-mode .experience-item ul {
+.experience-item ul {
   margin-top: 0.1rem !important;
   margin-bottom: 0.1rem !important;
 }
 
-html.pdf-mode .experience-item li {
+.experience-item li {
   margin-bottom: 0.1rem !important;
   font-size: 0.95rem !important;
   color: var(--muted) !important;
 }
 
 /* Sub-experience styling for PDF */
-html.pdf-mode .experience-item h4 {
-  margin-left: 0.4rem !important;
+.experience-item h4 {
+  margin-left: var(--s4) !important;
   margin-top: 0.6rem !important;
   margin-bottom: 0.05rem !important;
   font-size: 0.95rem !important;
 }
 
-html.pdf-mode .sub-experience {
+.sub-experience {
   margin-left: 0.8rem !important;
   margin-top: 0.1rem !important;
   margin-bottom: 0.1rem !important;
 }
 
-html.pdf-mode .sub-header {
+.sub-header {
   display: block !important;
   margin-bottom: 0.05rem !important;
+  margin-left: var(--s6)!important;
 }
 
-html.pdf-mode .sub-header h3,
-html.pdf-mode .sub-header h5,
-html.pdf-mode .sub-header .sector,
-html.pdf-mode .sub-header .stack,
-html.pdf-mode .sub-header a {
+.sub-experience>p {
+  margin-left: var(--s6) !important;
+}
+
+.sub-header h3,
+.sub-header h5,
+.sub-header .sector,
+.sub-header .stack,
+.sub-header a {
   display: inline !important;
 }
 
 /* Removed inline pseudo separators for sub-header; inject separators via
    locale strings when needed to keep selection order predictable. */
 
-html.pdf-mode .sub-header a {
+.sub-header a {
   font-size: 0.8rem !important;
 }
 
-html.pdf-mode .sub-experience h5 {
+.sub-experience h5 {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   font-size: 0.95rem !important;
   font-weight: 600 !important;
 }
 
-html.pdf-mode .sub-header .sector,
-html.pdf-mode .sub-header .stack {
+.sub-header .sector,
+.sub-header .stack {
   font-size: 0.85rem !important;
   color: var(--muted) !important;
 }
@@ -420,21 +486,40 @@ html.pdf-mode .sub-header .stack {
    Use an inline ::before (not absolutely positioned) so it participates
    in the inline flow and doesn't break selection order. These are
    purely visual—locale strings may still include explicit dashes. */
-html.pdf-mode .section ul li::before {
-  content: "- " !important;
-  display: inline !important;
-  position: static !important;
-  margin-right: 0.25rem !important;
-  color: var(--muted) !important;
-  font-weight: 600 !important;
-  font-family: var(--font-primary) !important;
+
+
+
+
+/* Reduce left indenting (tab width) for Contact and Skills lists in PDF */
+.contact-section .section ul,
+.skills-section .section ul {
+  padding-left: var(--s4) !important;
 }
 
-html.pdf-mode .sub-header .sector {
+.contact-section .section ul li,
+.skills-section .section ul li {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Reduce indenting for experience lists to align list items closer to headings */
+.experiences-section .sub-experience {
+  margin-left: 0.4rem !important;
+}
+
+.experiences-section .sub-experience ul {
+  padding-left: 0.8rem !important;
+}
+
+.experiences-section .section ul li {
+  padding-left: 0 !important;
+}
+
+.sub-header .sector {
   font-style: normal !important;
 }
 
-html.pdf-mode .sub-header .stack {
+.sub-header .stack {
   font-style: italic !important;
 }
 
@@ -442,11 +527,11 @@ html.pdf-mode .sub-header .stack {
    UI ELEMENTS - Masquer pour PDF
    ============================================================================ */
 
-html.pdf-mode .top-right-buttons,
-html.pdf-mode #toggle,
-html.pdf-mode #lang-button,
-html.pdf-mode #print-btn,
-html.pdf-mode .lang-dropdown {
+.top-right-buttons,
+#toggle,
+#lang-button,
+#print-btn,
+.lang-dropdown {
   display: none !important;
 }
 
@@ -455,7 +540,7 @@ html.pdf-mode .lang-dropdown {
    ============================================================================ */
 
 /* Afficher le lien CV en ligne dans le PDF */
-html.pdf-mode [data-contact-cv] {
+[data-contact-cv] {
   display: list-item !important;
 }
 
@@ -463,33 +548,33 @@ html.pdf-mode [data-contact-cv] {
    PAGE BREAKS - Contrôle pagination
    ============================================================================ */
 
-html.pdf-mode .section {
+.section {
   page-break-inside: auto !important;
   break-inside: auto !important;
 }
 
-html.pdf-mode li {
+li {
   page-break-inside: auto !important;
   break-inside: auto !important;
 }
 
-html.pdf-mode .neonbox {
+.neonbox {
   page-break-inside: auto !important;
   break-inside: auto !important;
   overflow: visible !important;
 }
 
-html.pdf-mode h1,
-html.pdf-mode h2,
-html.pdf-mode h3,
-html.pdf-mode h4,
-html.pdf-mode h5,
-html.pdf-mode h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   break-after: auto !important;
   page-break-after: auto !important;
 }
 
-html.pdf-mode .experiences-section {
+.experiences-section {
   page-break-before: auto !important;
 }
 
@@ -497,27 +582,19 @@ html.pdf-mode .experiences-section {
    PRINT COLOR ADJUSTMENT - Forcer l'impression des couleurs
    ============================================================================ */
 
-html.pdf-mode * {
+* {
   -webkit-print-color-adjust: exact !important;
   print-color-adjust: exact !important;
   color-adjust: exact !important;
 }
 
-/* ============================================================================
-   DECORATIVE SYMBOLS (PDF) - Désactivés pour ATS-safe
-   ============================================================================ */
-
-html.pdf-mode h2::before {
-  content: "" !important;
-  display: none !important;
-}
 
 /* ============================================================================
   PAGE BREAK UTILITIES
   ============================================================================ */
 
 /* Forcer un saut de page (PDF uniquement) */
-html.pdf-mode .pdf-page-break {
+.pdf-page-break {
   break-before: page !important;
   page-break-before: always !important;
   height: 0 !important;
@@ -527,30 +604,30 @@ html.pdf-mode .pdf-page-break {
 }
 
 /* Espace minimum en haut des pages après un saut */
-html.pdf-mode .pdf-page-break + section .section {
+.pdf-page-break+section .section {
   margin-top: 3rem !important;
 }
 
 /* Optionnel: séparateur visuel si besoin en HTML (masqué en PDF) */
-html.pdf-mode .pdf-page-separator {
+.pdf-page-separator {
   display: none !important;
 }
 
 /* ============================================================================
   FORMATION SECTION - Add top margin
   ============================================================================ */
-html.pdf-mode .formation-section {
+.formation-section {
   margin-top: 2rem !important;
 }
 
-html.pdf-mode .formation-section .section {
+.formation-section .section {
   margin-top: 0 !important;
 }
 
 /* ============================================================================
   MANUAL PAGE BREAK - For specific content breaks
   ============================================================================ */
-html.pdf-mode .pdf-page-break-after {
+.pdf-page-break-after {
   display: inline !important;
   page-break-after: always !important;
   break-after: page !important;
@@ -564,8 +641,24 @@ html.pdf-mode .pdf-page-break-after {
 /* ============================================================================
   FORCED PAGE BREAK BEFORE FREELANCE EXPERIENCE
   ============================================================================ */
-html.pdf-mode .experience-page-break {
+.experience-page-break {
   page-break-before: always !important;
   break-before: page !important;
   margin-top: 3rem !important;
+}
+
+/* all before display none important  
+since the background is now provided by the page background, remove the previous
+   pseudo-element to avoid layering issues and selection artifacts. */
+/* Suppression globale des pseudo-éléments avant et après */
+*, *::before, *::after {
+    content: none !important; /* C'est l'élément clé qui fait disparaître le rendu */
+    
+    /* Optionnel : on remet à zéro les autres propriétés pour éviter les effets de bord */
+    position: static !important; 
+    padding: 0 !important;
+    margin: 0 !important;
+    content: none !important; /* Supprime les ::before et ::after */
+    list-style: none !important; /* Supprime les puces/tirets natifs des <ul> et <li> */
+    list-style-type: none !important;
 }

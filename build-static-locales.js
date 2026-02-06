@@ -208,18 +208,27 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
   const cvPath = CONFIG.basePath || '/cv';
   const cvUrl = `${baseUrl}${cvPath}`;
 
-  const githubLabel = localeName === 'en' ? 'GitHub' : 'Github';
-  const cvLabel = localeName === 'en' ? 'Online CV' : 'CV en ligne';
   const cvUrlFinal = localeName === 'en' ? `${cvUrl}/index-en.html` : cvUrl;
 
   const githubEl = document.querySelector('[data-contact-github]');
   if (githubEl) {
-    githubEl.innerHTML = `${githubLabel} : <a href="${githubUrl}" target="_blank">${githubUrl}</a>`;
+    // Use localized full HTML if provided in locale files, else fall back to default
+    if (localeData['contact-github']) {
+      githubEl.innerHTML = localeData['contact-github'];
+    } else {
+      const githubLabel = localeName === 'en' ? 'GitHub' : 'Github';
+      githubEl.innerHTML = `${githubLabel} : <a href="${githubUrl}" target="_blank">${githubUrl}</a>`;
+    }
   }
 
   const cvEl = document.querySelector('[data-contact-cv]');
   if (cvEl) {
-    cvEl.innerHTML = `${cvLabel} : <a href="${cvUrlFinal}" target="_blank">${cvUrlFinal}</a>`;
+    if (localeData['contact-cv']) {
+      cvEl.innerHTML = localeData['contact-cv'];
+    } else {
+      const cvLabel = localeName === 'en' ? 'Online CV' : 'CV en ligne';
+      cvEl.innerHTML = `${cvLabel} : <a href="${cvUrlFinal}" target="_blank">${cvUrlFinal}</a>`;
+    }
   }
 
   // Add language selection dropdown
@@ -367,6 +376,47 @@ async function buildStaticLocales() {
       // Generate locale-specific file
       if (saveOutputFile(outputHtml, localeName)) {
         successCount++;
+        // Also generate a PDF-debug HTML variant (index-<locale>-pdf.html)
+        try {
+          const pdfDom = new JSDOM(outputHtml);
+          const { document: pdfDoc } = pdfDom.window;
+
+          // Mark page as pdf-mode for debug and remove web-only stylesheet
+          pdfDoc.documentElement.classList.add('pdf-mode');
+
+          // Fix CSS links: ensure main.css exists and add pdf-ats.css, remove web css
+          const cssLink = pdfDoc.querySelector('link[rel="stylesheet"]');
+          if (cssLink) {
+            cssLink.href = CONFIG.basePath ? `${CONFIG.basePath}/style.min.css` : 'style.min.css';
+
+            // Remove any existing web CSS link
+            const webCss = pdfDoc.querySelector('link[href*="style-web"], link#web-css');
+            if (webCss && webCss.parentNode) webCss.parentNode.removeChild(webCss);
+
+            // Add PDF ATS CSS after main css
+            const pdfCssLink = pdfDoc.createElement('link');
+            pdfCssLink.rel = 'stylesheet';
+            pdfCssLink.id = 'pdf-ats-css';
+            pdfCssLink.href = CONFIG.basePath ? `${CONFIG.basePath}/style-pdf.min.css` : 'style-pdf.min.css';
+            cssLink.parentNode.insertBefore(pdfCssLink, cssLink.nextSibling);
+          }
+
+          const pdfDebugHtml = pdfDom.serialize();
+
+          // Determine output path for pdf-debug html
+          let pdfOutputPath = `index-${localeName}-pdf.html`;
+          if (localeName === CONFIG.defaultLocale) pdfOutputPath = 'index-pdf.html';
+          if (CONFIG.outputDir) {
+            pdfOutputPath = path.join(CONFIG.outputDir, pdfOutputPath);
+          } else {
+            pdfOutputPath = path.join(__dirname, pdfOutputPath);
+          }
+
+          fs.writeFileSync(pdfOutputPath, pdfDebugHtml, 'utf8');
+          console.log(`✓ Generated PDF debug HTML: ${pdfOutputPath}`);
+        } catch (err) {
+          console.warn(`⚠ Failed to generate PDF debug HTML for ${localeName}:`, err.message);
+        }
       }
     } else {
       console.warn(`⚠ Locale ${localeName} not found in locale files`);

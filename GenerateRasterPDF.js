@@ -236,7 +236,7 @@ async function preparePage(page, usePdfMode = true) {
   // Activer le mode PDF si demandé
   if (usePdfMode) {
     await page.evaluate(() => {
-      document.documentElement.classList.add('pdf-mode');
+      // pdf-mode injection removed: PDF debug class should be added explicitly when needed
     });
     console.log('✓ Mode PDF activé (style-pdf.css appliqué)');
   }

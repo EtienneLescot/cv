@@ -1029,8 +1029,7 @@ async function rehydratePdf(options = {}) {
     
     // Prepare page like in generateCvPdf.js: add pdf-mode class and hide UI buttons
     await page.evaluate(() => {
-      // Add pdf-mode class
-      document.documentElement.classList.add('pdf-mode');
+      // pdf-mode injection removed: PDF debug class should be added explicitly when needed
       
       // Hide UI buttons
       const buttonsToHide = document.querySelectorAll(

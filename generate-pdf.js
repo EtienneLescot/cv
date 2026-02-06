@@ -123,7 +123,7 @@ async function generatePdf(locale, theme, options = {}) {
   // Appliquer le thème et activer le mode PDF
   await page.evaluate((selectedTheme) => {
     document.documentElement.setAttribute('data-theme', selectedTheme);
-    document.documentElement.classList.add('pdf-mode');
+    // pdf-mode injection removed: PDF debug class should be added explicitly when needed
   }, theme);
   
   // Attendre que tout soit rendu
