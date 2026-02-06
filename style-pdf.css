@@ -106,7 +106,7 @@ body {
 /* Simulate printable margins using body padding; draw the inner card inset
    using a container-scoped pseudo-element to avoid global white artefacts. */
 body {
-  padding: 10mm !important;
+  padding: 3mm !important;
 }
 
 /* Draw the white 'card' inset only behind the centered `.container`, so it
@@ -116,7 +116,6 @@ body {
   z-index: 1 !important;
 }
 
-/* removed container::before (caused unwanted white card overlay) */
 
 /* Ensure main content renders above the inset margin background */
 html .container {
@@ -125,8 +124,7 @@ html .container {
 }
 
 /* Reintroduce a safe full-bleed background for the experiences section by
-   placing a pseudo-element that extends beyond the inset. It will sit above
-   the `body::before` inset so it reaches the page edges. */
+   placing a pseudo-element that extends beyond the inset.*/
 .experiences-section .neonbox {
   position: relative !important;
   z-index: 2 !important;
@@ -138,12 +136,7 @@ html .container {
 
 
 
-.experiences-section .neonbox::before {
-  content: "" !important;
-  position: absolute !important;
-  display: none !important;
-  pointer-events: none !important;
-}
+
 
 /* Ensure content sits above that pseudo-element */
 .experiences-section .neonbox>* {
@@ -156,7 +149,7 @@ html .container {
    text (z-index) and non-interactive (pointer-events:none) so selection
    remains contiguous. */
 /* The experiences full-bleed background is now provided by the page
-   background (and the colored inset is drawn by body::before). Remove the
+   background. Remove the
    previous pseudo-element to avoid layering issues. */
 
 .container {
@@ -282,7 +275,11 @@ small {
   position: relative !important;
   z-index: 3 !important;
 }
-
+.experiences-section{
+  margin-top: 2rem !important;
+  padding-top: 1rem !important;
+  padding-bottom: 2rem !important;
+}
 .section h2 {
   font-size: 1.1rem !important;
   margin-bottom: 0.6rem !important;
@@ -295,7 +292,7 @@ small {
 
 .profile-section p {
   margin-top: 0 !important;
-  font-size: 0.95rem !important;
+  font-size: calc(0.95rem + 0.5pt) !important;
 }
 
 /* --- Indentation hiérarchique harmonisée pour PDF --- */
@@ -348,7 +345,7 @@ small {
 
 .section ul {
   margin: 0.5rem 0 !important;
-  padding-left: 1.2rem !important;
+  padding-left: var(--s4) !important;
   list-style-type: none !important;
 }
 
@@ -364,23 +361,7 @@ small {
 /* Removed pseudo-element list markers in PDF mode to avoid selection order
    issues. List markers are now provided inline from locale strings. */
 
-/* Explicitly neutralise any lingering decorative pseudo-elements that may
-  still be present in `style.css`. Some rules use `ul li::before` or
-  `.sub-header::before` to draw arrows/chevrons — disable them in PDF mode
-  to avoid visual artifacts and broken selection order. */
-ul li::before,
-ul ul li::before,
-.contact-section ul li::before,
-.sub-header::before,
-h2::before,
-.section h2::before {
-  content: none !important;
-  display: none !important;
-  width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  color: transparent !important;
-}
+
 
 /* ============================================================================
    EXPERIENCE ITEMS - Compact spacing
@@ -454,6 +435,10 @@ h2::before,
   margin-left: var(--s6) !important;
 }
 
+.experiences-section article>* {
+  margin-left: var(--s4) !important;
+}
+
 .sub-header h3,
 .sub-header h5,
 .sub-header .sector,
@@ -482,10 +467,7 @@ h2::before,
   color: var(--muted) !important;
 }
 
-/* Reintroduce simple inline dashes for lists in PDF mode.
-   Use an inline ::before (not absolutely positioned) so it participates
-   in the inline flow and doesn't break selection order. These are
-   purely visual—locale strings may still include explicit dashes. */
+
 
 
 
@@ -617,7 +599,7 @@ h6 {
   FORMATION SECTION - Add top margin
   ============================================================================ */
 .formation-section {
-  margin-top: 2rem !important;
+  margin-top: 3rem !important;
 }
 
 .formation-section .section {
