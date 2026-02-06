@@ -508,3 +508,12 @@ th {
         padding: 1rem;
     }
 }
+
+/* Marker inserted into list items for better selection behavior */
+.li-marker {
+  display: inline-block;
+  width: 1rem;
+  margin-right: 0.4rem;
+  color: var(--accent);
+  font-weight: 700;
+}

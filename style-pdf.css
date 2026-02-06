@@ -300,12 +300,25 @@ html.pdf-mode .section li:last-child {
   margin-bottom: 0 !important;
 }
 
-html.pdf-mode .section li::before {
-  content: "- " !important;
-  margin-left: -1.2rem !important;
-  padding-right: 0.5rem !important;
-  /* Keep marker inline to preserve natural text selection order */
-  display: inline !important;
+/* Removed pseudo-element list markers in PDF mode to avoid selection order
+   issues. List markers are now provided inline from locale strings. */
+
+/* Explicitly neutralise any lingering decorative pseudo-elements that may
+  still be present in `style.css`. Some rules use `ul li::before` or
+  `.sub-header::before` to draw arrows/chevrons — disable them in PDF mode
+  to avoid visual artifacts and broken selection order. */
+html.pdf-mode ul li::before,
+html.pdf-mode ul ul li::before,
+html.pdf-mode .contact-section ul li::before,
+html.pdf-mode .sub-header::before,
+html.pdf-mode h2::before,
+html.pdf-mode .section h2::before {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: transparent !important;
 }
 
 /* ============================================================================
@@ -383,13 +396,8 @@ html.pdf-mode .sub-header a {
   display: inline !important;
 }
 
-html.pdf-mode .sub-header .sector::before,
-html.pdf-mode .sub-header .stack::before,
-html.pdf-mode .sub-header a::before {
-  content: " - " !important;
-  color: var(--muted) !important;
-  display: inline !important;
-}
+/* Removed inline pseudo separators for sub-header; inject separators via
+   locale strings when needed to keep selection order predictable. */
 
 html.pdf-mode .sub-header a {
   font-size: 0.8rem !important;
@@ -406,6 +414,20 @@ html.pdf-mode .sub-header .sector,
 html.pdf-mode .sub-header .stack {
   font-size: 0.85rem !important;
   color: var(--muted) !important;
+}
+
+/* Reintroduce simple inline dashes for lists in PDF mode.
+   Use an inline ::before (not absolutely positioned) so it participates
+   in the inline flow and doesn't break selection order. These are
+   purely visual—locale strings may still include explicit dashes. */
+html.pdf-mode .section ul li::before {
+  content: "- " !important;
+  display: inline !important;
+  position: static !important;
+  margin-right: 0.25rem !important;
+  color: var(--muted) !important;
+  font-weight: 600 !important;
+  font-family: var(--font-primary) !important;
 }
 
 html.pdf-mode .sub-header .sector {
