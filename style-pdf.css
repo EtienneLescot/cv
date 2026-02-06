@@ -39,17 +39,21 @@ html.pdf-mode body {
    set `--pdf-page-bg` below. */
 @page {
   size: A4;
-  margin: 10mm;
-  background: var(--pdf-page-bg, #e3ebf4);
+  /* Set page margin to 0 so we can simulate printable margin via body padding
+     reliably and position full-bleed elements relative to viewport widths. */
+  margin: 0;
+  background: var(--pdf-page-margin-color, #e3ebf4);
 }
 
 /* Default PDF theme variables */
 html.pdf-mode[data-theme="light"] {
-  --pdf-page-bg: #e3ebf4;
+  --pdf-page-bg: #ffffff; /* inner page background (content card) */
+  --pdf-page-margin-color: #e3ebf4; /* outer page color */
 }
 
 html.pdf-mode[data-theme="dark"] {
   --pdf-page-bg: #121620;
+  --pdf-page-margin-color: #121620;
 }
 
 /* If your PDF generation pipeline can't propagate CSS variables into @page
@@ -72,36 +76,66 @@ html.pdf-mode .contact-section .neonbox {
   color: var(--contrast-high, #fff) !important;
 }
 
-/* Restore a safe full-bleed background for experiences using a pseudo-element.
-   This places the background visually edge-to-edge while keeping it behind
-   text (z-index) and non-interactive (pointer-events:none) so selection
-   remains contiguous. */
+/* Draw the colored page margin as an inset box so the page background can
+   remain the true full-bleed color for sections that must reach the edges. */
+/* Simulate printable margins using body padding; draw the inner card inset
+   using a fixed pseudo-element so the outer page edge color (from @page)
+   remains visible. */
+/* Simulate printable margins using body padding; draw the inner card inset
+   using a container-scoped pseudo-element to avoid global white artefacts. */
+html.pdf-mode body {
+  padding: 10mm !important;
+}
+
+/* Draw the white 'card' inset only behind the centered `.container`, so it
+   doesn't overlay other full-bleed elements. */
+html.pdf-mode .container {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* removed container::before (caused unwanted white card overlay) */
+
+/* Ensure main content renders above the inset margin background */
+html.pdf-mode .container {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Reintroduce a safe full-bleed background for the experiences section by
+   placing a pseudo-element that extends beyond the inset. It will sit above
+   the `body::before` inset so it reaches the page edges. */
 html.pdf-mode .experiences-section .neonbox {
   position: relative !important;
+  z-index: 2 !important;
   overflow: visible !important;
-  border-radius: 0 !important;
 }
 
 html.pdf-mode .experiences-section .neonbox::before {
   content: "" !important;
   position: absolute !important;
-  /* Extend beyond the container and page margin (@page margin: 10mm) to
-     ensure a true full-bleed visual within the PDF. */
-  left: -10mm !important;
-  right: -10mm !important;
+  left: calc(-10mm - 1rem) !important;
+  right: calc(-10mm - 1rem) !important;
   top: 0 !important;
   bottom: 0 !important;
-  background: var(--glass-bg, #ffffff) !important;
-  z-index: 0 !important;
+  background: var(--pdf-page-bg, #ffffff) !important;
+  z-index: 1 !important;
   pointer-events: none !important;
 }
 
-/* Ensure content sits above the pseudo-element so selection highlights text
-   rather than the background element. */
+/* Ensure content sits above that pseudo-element */
 html.pdf-mode .experiences-section .neonbox > * {
   position: relative !important;
-  z-index: 1 !important;
+  z-index: 3 !important;
 }
+
+/* Restore a safe full-bleed background for experiences using a pseudo-element.
+   This places the background visually edge-to-edge while keeping it behind
+   text (z-index) and non-interactive (pointer-events:none) so selection
+   remains contiguous. */
+/* The experiences full-bleed background is now provided by the page
+   background (and the colored inset is drawn by body::before). Remove the
+   previous pseudo-element to avoid layering issues. */
 
 html.pdf-mode .container {
   display: block !important;
@@ -194,6 +228,37 @@ html.pdf-mode .experiences-section .neonbox {
   padding-right: 1rem !important;
   padding-top: 0.8rem !important;
   padding-bottom: 0.8rem !important;
+}
+
+/* full-bleed wrapper background: separate element so selection isn't broken
+   by a background layer. The background extends beyond the body inset to
+   reach the page edges. */
+html.pdf-mode .full-bleed-wrap {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+html.pdf-mode .full-bleed-wrap .full-bleed-bg {
+  content: "" !important;
+  position: absolute !important;
+  /* Make the element span the viewport width regardless of container/padding
+     so it visually reaches the physical page edges. This avoids relying on
+     rem/px conversions and keeps it page-stable across renderers. */
+  left: calc(50% - 50vw) !important;
+  right: calc(50% - 50vw) !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  background: var(--pdf-page-bg, #ffffff) !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ensure inner content sits above the background */
+html.pdf-mode .full-bleed-wrap .experiences-section,
+html.pdf-mode .full-bleed-wrap .experiences-section * {
+  position: relative !important;
+  z-index: 3 !important;
 }
 
 html.pdf-mode .section h2 {
