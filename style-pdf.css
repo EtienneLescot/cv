@@ -107,7 +107,7 @@ body {
 [data-theme="dark"] .contact-section .neonbox a,
 .contact-section .neonbox a {
   color: var(--contrast-high, #ffffff) !important;
-  text-decoration: underline !important;
+  text-decoration: none !important;
 }
 
 /* Draw the colored page margin as an inset box so the page background can
@@ -279,6 +279,34 @@ small {
   background: var(--pdf-page-bg, #ffffff) !important;
   z-index: 0 !important;
   pointer-events: none !important;
+}
+
+/* In the PDF dark theme, make the experiences full-bleed background use the
+   accent color (like the light version) instead of the dark 'box' color so
+   the section appears as a colored band. Adjust text contrast accordingly. */
+[data-theme="dark"] .full-bleed-wrap .full-bleed-bg {
+  /* Use a solid dark-blue/near-black band color for the experiences section */
+  background: #191d27 !important;
+}
+
+/* Ensure all boxes in the experiences/contact area use the exact same solid
+   background in the Dark PDF (no transparency) so they visually match. */
+[data-theme="dark"] .experiences-section .neonbox,
+[data-theme="dark"] .experiences-section .section,
+[data-theme="dark"] .contact-section .neonbox {
+  background: #191d27 !important;
+  color: var(--contrast-high, #ffffff) !important;
+  border: none !important;
+}
+
+[data-theme="dark"] .experiences-section {
+  color: var(--contrast-high, #ffffff) !important;
+}
+
+/* Make links in the experiences section stand out slightly in Dark PDF */
+[data-theme="dark"] .experiences-section a {
+  color: var(--link, #4da3ff) !important;
+  text-decoration: none !important;
 }
 
 /* ensure inner content sits above the background */
