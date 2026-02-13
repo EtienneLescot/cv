@@ -111,6 +111,13 @@ Le workflow GitHub Actions ([`.github/workflows/build-deploy.yml`](.github/workf
 2. **Commit** les PDFs dans `dist/pdf/` (nécessaire pour les URLs stables)
 3. **Deploy** `dist/web/` vers GitHub Pages
 
+Un second workflow ([`.github/workflows/build-pdf-artifacts.yml`](.github/workflows/build-pdf-artifacts.yml)) :
+
+1. Se lance sur **toutes les branches poussées**
+  - Sauf branches techniques: `dependabot/**` et `renovate/**`
+2. Build les PDFs (`npm run build:pdf`)
+3. Publie `dist/pdf/` en **artefacts téléchargeables** dans GitHub Actions
+
 ### URLs déployées
 
 - **Main** : `https://etiennelescot.github.io/cv/`
