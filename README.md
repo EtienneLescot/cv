@@ -117,7 +117,7 @@ Un second workflow ([`.github/workflows/build-pdf-artifacts.yml`](.github/workfl
   - Sauf branches techniques: `dependabot/**` et `renovate/**`
 2. Build les PDFs (`npm run build:pdf`)
   - Avec suppression du lien **CV en ligne** dans le PDF (flag `HIDE_ONLINE_CV_LINK=true`)
-3. Publie **un artefact par PDF** (ex: `cv-fr-dark`, `cv-en-light`) dans GitHub Actions
+3. Publie `dist/pdf/` en **un artefact téléchargeable unique** dans GitHub Actions
 
 ### URLs déployées
 
