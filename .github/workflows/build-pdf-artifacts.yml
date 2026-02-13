@@ -36,10 +36,40 @@ jobs:
           NODE_ENV: production
           HIDE_ONLINE_CV_LINK: 'true'
 
-      - name: Upload PDF artifacts
+      - name: Compute artifact suffix
+        id: artifact_meta
+        run: |
+          SAFE_REF_NAME="${GITHUB_REF_NAME//\//-}"
+          echo "artifact_suffix=${SAFE_REF_NAME}-${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload artifact cv-fr-dark.pdf
         uses: actions/upload-artifact@v4
         with:
-          name: pdf-${{ github.ref_name }}-${{ github.run_number }}
-          path: dist/pdf/
+          name: cv-fr-dark-${{ steps.artifact_meta.outputs.artifact_suffix }}
+          path: dist/pdf/cv-fr-dark.pdf
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload artifact cv-fr-light.pdf
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-fr-light-${{ steps.artifact_meta.outputs.artifact_suffix }}
+          path: dist/pdf/cv-fr-light.pdf
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload artifact cv-en-dark.pdf
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-en-dark-${{ steps.artifact_meta.outputs.artifact_suffix }}
+          path: dist/pdf/cv-en-dark.pdf
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload artifact cv-en-light.pdf
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-en-light-${{ steps.artifact_meta.outputs.artifact_suffix }}
+          path: dist/pdf/cv-en-light.pdf
           if-no-files-found: error
           retention-days: 30
