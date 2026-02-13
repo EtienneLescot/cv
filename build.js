@@ -45,11 +45,18 @@ async function build() {
   console.log(`📦 Building branch: ${currentBranch}\n`);
 
   // Check if branch is configured
-  const branchConfig = CONFIG.branches[currentBranch];
+  let branchConfig = CONFIG.branches[currentBranch];
   if (!branchConfig) {
-    console.error(`❌ Branch "${currentBranch}" is not configured in build.config.json`);
-    console.log('Available branches:', Object.keys(CONFIG.branches).join(', '));
-    process.exit(1);
+    if (pdfOnly) {
+      const fallbackBranch = CONFIG.defaultBranch || 'main';
+      branchConfig = CONFIG.branches[fallbackBranch] || { outputPath: '', enabled: true };
+      console.warn(`⚠️  Branch "${currentBranch}" is not configured in build.config.json`);
+      console.warn(`⚠️  Using fallback settings from "${fallbackBranch}" for PDF-only build`);
+    } else {
+      console.error(`❌ Branch "${currentBranch}" is not configured in build.config.json`);
+      console.log('Available branches:', Object.keys(CONFIG.branches).join(', '));
+      process.exit(1);
+    }
   }
 
   if (!branchConfig.enabled) {
