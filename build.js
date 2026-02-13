@@ -105,6 +105,21 @@ async function build() {
       });
     }
 
+    // In PDF-only mode, we still need static HTML files as PDF input
+    if (pdfOnly) {
+      console.log('🧩 Preparing static HTML for PDF generation...\n');
+
+      execSync('node build-static-locales.js', {
+        stdio: 'inherit',
+        env: {
+          ...process.env,
+          OUTPUT_DIR: webOutputDir,
+          BASE_PATH: basePath,
+          BRANCH_NAME: currentBranch
+        }
+      });
+    }
+
     // Build PDFs
     if (!webOnly) {
       console.log('\n📄 Building PDFs...\n');
