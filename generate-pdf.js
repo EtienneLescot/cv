@@ -34,6 +34,7 @@ const path = require('path');
 const CONFIG = {
   htmlDir: process.env.HTML_DIR || './dist/web',
   outputDir: process.env.OUTPUT_DIR || './dist/pdf',
+  hideOnlineCvLink: process.env.HIDE_ONLINE_CV_LINK === 'true',
   
   supportedLocales: ['fr', 'en'],
   supportedThemes: ['dark', 'light'],
@@ -125,6 +126,20 @@ async function generatePdf(locale, theme, options = {}) {
     document.documentElement.setAttribute('data-theme', selectedTheme);
     // pdf-mode injection removed: PDF debug class should be added explicitly when needed
   }, theme);
+
+  if (CONFIG.hideOnlineCvLink) {
+    await page.evaluate(() => {
+      const onlineLink = document.getElementById('online-cv-link');
+      if (!onlineLink) return;
+
+      const listItem = onlineLink.closest('li');
+      if (listItem) {
+        listItem.remove();
+      } else {
+        onlineLink.remove();
+      }
+    });
+  }
   
   // Attendre que tout soit rendu
   await page.waitForTimeout(1500);
