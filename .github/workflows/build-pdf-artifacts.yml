@@ -36,10 +36,17 @@ jobs:
           NODE_ENV: production
           HIDE_ONLINE_CV_LINK: 'true'
 
+      - name: Compute safe artifact name
+        id: artifact_meta
+        run: |
+          SAFE_REF_NAME=$(echo "${GITHUB_REF_NAME}" | sed -E 's#["/:<>|*?\\\r\n]#-#g')
+          SAFE_REF_NAME=$(echo "${SAFE_REF_NAME}" | sed -E 's#-+#-#g; s#^-##; s#-$##')
+          echo "artifact_name=pdf-${SAFE_REF_NAME}-${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
+
       - name: Upload PDF artifact bundle
         uses: actions/upload-artifact@v4
         with:
-          name: pdf-${{ github.ref_name }}-${{ github.run_number }}
+          name: ${{ steps.artifact_meta.outputs.artifact_name }}
           path: dist/pdf/
           if-no-files-found: error
           retention-days: 30
