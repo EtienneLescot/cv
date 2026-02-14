@@ -117,6 +117,7 @@ Un second workflow ([`.github/workflows/build-pdf-commit.yml`](.github/workflows
   - Sauf branches techniques: `dependabot/**` et `renovate/**`
 2. Build les PDFs (`npm run build:pdf`)
   - Avec suppression du lien **CV en ligne** dans le PDF (flag `HIDE_ONLINE_CV_LINK=true`)
+  - Mode simplifié: sortie toujours dans `dist/pdf/` (pas de sous-dossier lié à la branche) via `FORCE_FLAT_PDF_OUTPUT=true`
 3. Commit automatiquement `dist/pdf/` sur la branche
 
 ### URLs déployées

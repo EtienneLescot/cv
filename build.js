@@ -39,30 +39,37 @@ async function build() {
   const args = process.argv.slice(2);
   const webOnly = args.includes('--web-only');
   const pdfOnly = args.includes('--pdf-only');
+  const forceFlatPdfOutput = process.env.FORCE_FLAT_PDF_OUTPUT === 'true';
 
   // Get current branch
   const currentBranch = getCurrentBranch();
   console.log(`📦 Building branch: ${currentBranch}\n`);
 
-  // Check if branch is configured
-  let branchConfig = CONFIG.branches[currentBranch];
-  if (!branchConfig) {
-    if (pdfOnly) {
-      const fallbackBranch = CONFIG.defaultBranch || 'main';
-      branchConfig = CONFIG.branches[fallbackBranch] || { outputPath: '', enabled: true };
-      console.warn(`⚠️  Branch "${currentBranch}" is not configured in build.config.json`);
-      console.warn(`⚠️  Using fallback settings from "${fallbackBranch}" for PDF-only build`);
-    } else {
-      console.error(`❌ Branch "${currentBranch}" is not configured in build.config.json`);
-      console.log('Available branches:', Object.keys(CONFIG.branches).join(', '));
-      process.exit(1);
+  let branchConfig;
+  if (pdfOnly && forceFlatPdfOutput) {
+    branchConfig = { outputPath: '', enabled: true };
+    console.log('ℹ️  FORCE_FLAT_PDF_OUTPUT enabled: using flat PDF output path (dist/pdf)');
+  } else {
+    // Check if branch is configured
+    branchConfig = CONFIG.branches[currentBranch];
+    if (!branchConfig) {
+      if (pdfOnly) {
+        const fallbackBranch = CONFIG.defaultBranch || 'main';
+        branchConfig = CONFIG.branches[fallbackBranch] || { outputPath: '', enabled: true };
+        console.warn(`⚠️  Branch "${currentBranch}" is not configured in build.config.json`);
+        console.warn(`⚠️  Using fallback settings from "${fallbackBranch}" for PDF-only build`);
+      } else {
+        console.error(`❌ Branch "${currentBranch}" is not configured in build.config.json`);
+        console.log('Available branches:', Object.keys(CONFIG.branches).join(', '));
+        process.exit(1);
+      }
     }
-  }
 
-  if (!branchConfig.enabled) {
-    console.log(`⚠️  Branch "${currentBranch}" is disabled in config`);
-    console.log('To enable it, set "enabled": true in build.config.json');
-    process.exit(0);
+    if (!branchConfig.enabled) {
+      console.log(`⚠️  Branch "${currentBranch}" is disabled in config`);
+      console.log('To enable it, set "enabled": true in build.config.json');
+      process.exit(0);
+    }
   }
 
   // Calculate output paths

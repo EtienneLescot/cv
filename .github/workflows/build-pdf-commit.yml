@@ -38,6 +38,7 @@ jobs:
         env:
           NODE_ENV: production
           HIDE_ONLINE_CV_LINK: 'true'
+          FORCE_FLAT_PDF_OUTPUT: 'true'
 
       - name: Commit generated PDFs
         run: |
