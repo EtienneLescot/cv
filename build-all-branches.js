@@ -65,6 +65,14 @@ async function buildBranch(branchName, branchConfig) {
     // In CI, use origin/branchName, locally use branchName
     const ref = isCI() ? `origin/${branchName}` : branchName;
     
+    // Check if ref exists
+    try {
+      execSync(`git rev-parse --verify ${ref}`, { stdio: 'pipe' });
+    } catch (error) {
+      console.warn(`⚠️  Branch ${ref} does not exist, skipping...`);
+      return 'skipped'; // Skip this branch
+    }
+    
     // Create worktree
     console.log(`📁 Creating worktree for ${ref}...`);
     exec(`git worktree add --force ${worktreePath} ${ref}`);
@@ -191,11 +199,16 @@ async function buildAll() {
   // Build each branch
   let successCount = 0;
   let failCount = 0;
+  let skipCount = 0;
 
   for (const branch of enabledBranches) {
     try {
-      await buildBranch(branch.name, branch);
-      successCount++;
+      const result = await buildBranch(branch.name, branch);
+      if (result === 'skipped') {
+        skipCount++;
+      } else {
+        successCount++;
+      }
     } catch (error) {
       console.error(`\n❌ Failed to build ${branch.name}`);
       failCount++;
@@ -212,6 +225,9 @@ async function buildAll() {
   console.log('📊 Build Summary');
   console.log(`${'='.repeat(80)}`);
   console.log(`✅ Success: ${successCount}`);
+  if (skipCount > 0) {
+    console.log(`⏭️  Skipped: ${skipCount}`);
+  }
   console.log(`❌ Failed: ${failCount}`);
   console.log(`📁 Output directory: ${CONFIG.build.outputDirs.web}/`);
   console.log(`📄 PDFs directory: ${CONFIG.build.outputDirs.pdf}/`);
