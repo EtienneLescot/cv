@@ -1,8 +1,10 @@
 # Dependencies
 node_modules
 
-# Build outputs (ALL generated, not committed)
-dist/
+# Build outputs
+dist/*
+!dist/pdf/
+!dist/pdf/**
 .worktree/
 index-*.html
 index.html
