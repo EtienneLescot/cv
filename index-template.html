@@ -240,6 +240,13 @@
         const onlineLink = document.getElementById('online-cv-link');
         if (!onlineLink) return;
 
+        // If the link already has an absolute URL (starts with http:// or https://),
+        // don't override it (it was set by build-static-locales.js)
+        const currentHref = onlineLink.getAttribute('href');
+        if (currentHref && /^https?:\/\//.test(currentHref)) {
+          return;
+        }
+
         const locale = htmlElement.lang || 'fr';
         const basePath = htmlElement.getAttribute('data-base-path') || '';
         const normalizedBase = basePath ? basePath.replace(/\/$/, '') : '.';

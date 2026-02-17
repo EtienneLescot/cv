@@ -231,6 +231,13 @@ function generateStaticHtml(templateHtml, localeData, localeName) {
     }
   }
 
+  // Update the online CV link (id="online-cv-link")
+  const onlineCvLink = document.getElementById('online-cv-link');
+  if (onlineCvLink) {
+    onlineCvLink.setAttribute('href', cvUrlFinal);
+    onlineCvLink.textContent = cvUrlFinal;
+  }
+
   // Add language selection dropdown
   const langMenu = document.getElementById('lang-menu');
   const langButtonRef = document.getElementById('lang-button');
