@@ -9,7 +9,7 @@ theme-label: |
 download-label: |
   Téléchargez le CV
 tagline: |
-  Directeur Technique et Produit - SaaS, IoT, IA
+  Directeur Technique et Produit - Solutions IoT, Navigation & Flux
 name: |
   Etienne Lescot
 contact-title: |
@@ -27,19 +27,19 @@ contact-cv: |
 profile-title: |
   Profil
 profile-desc: |
-   Directeur Technique et Produit avec plus de 15 ans d'expérience dans la conception de plateformes SaaS. J'interviens à la croisée de la vision produit, de l'architecture cloud et de l'expérience utilisateur, avec une expertise spécifique sur les solutions intégrant de l'IoT.
+   Directeur Technique et Produit avec plus de 15 ans d'expérience dans la conception de plateformes SaaS. J'interviens à la croisée de la vision produit, de l'architecture cloud et de l'expérience utilisateur, avec une expertise spécifique sur les solutions IoT intégrant de la géolocalisation indoor et la gestion de flux.
 skills-title: |
   Compétences
 skill-1: |
   - <strong>Vision et Stratégie Produit</strong> :<br>Définition de la vision produit, pilotage de roadmap, gestion du cycle de vie (conception, déploiement, optimisation), alignement stratégique produit/technique
 skill-2: |
-  - <strong>Expérience Utilisateur et Design</strong> :<br>Direction UX/UI, conception de parcours clients, interfaces multi-supports (mobile, web, bornes physiques)
+  - <strong>Expérience Utilisateur et Design</strong> :<br>Direction UX/UI, conception de parcours clients, interfaces multi-supports (mobile, web, bornes physiques, terminaux interactifs)
 skill-3: |
-  - <strong>Solutions IoT et Géolocalisation Indoor</strong> :<br>Technologies de localisation, cartographie interactive, notifications contextuelles intelligentes
+  - <strong>Solutions IoT et Navigation de Précision</strong> :<br>Technologies de localisation indoor, cartographie interactive, notifications contextuelles intelligentes, gestion de flux en environnements complexes
 skill-4: |
-  - <strong>Architecture et Direction Technique</strong> :<br>Architecture cloud SaaS (AWS, Kubernetes, Scaleway), scalabilité, multi-instances, infrastructure as code, monitoring
+  - <strong>Architecture et Direction Technique</strong> :<br>Architecture cloud SaaS (AWS, Kubernetes, Scaleway), systèmes distribués, scalabilité multi-instances, infrastructure as code, monitoring de flottes
 skill-5: |
-  - <strong>Intelligence Artificielle et Automation</strong> :<br>IA conversationnelle (LLM, AWS Bedrock, Langchain), RAG (Retrieval-Augmented Generation), automatisation de parcours clients, analyse de contexte
+  - <strong>Intelligence Artificielle et Automation</strong> :<br>IA conversationnelle (LLM, AWS Bedrock, Langchain), RAG (Retrieval-Augmented Generation), automatisation de processus métiers, analyse de contexte temps réel
 skill-6: |
   - <strong>Management et Pilotage</strong> :<br>Leadership d'équipes pluridisciplinaires (dev, UX, produit), méthode agile, CI/CD, DevOps, optimisation de la rentabilité R&D
 experiences-title: |
@@ -99,7 +99,7 @@ exp3-point2: |
 exp3-point3: |
   - Supervision de l'architecture cloud globale, de la stratégie DevOps (CI/CD) et de la qualité technique
 exp3-project-appkiosk: |
-  - <strong>Projet <a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/" target="_blank">AppKiosk</a> - Plateforme SaaS IoT</strong> : Transformation produit (passage d'un modèle projet sur-mesure à une plateforme no-code industrialisée), ROI et Scalabilité (réduction drastique des coûts de production -90%, capacité de déploiement sur 100+ salons, 50 000 utilisateurs par événement), Pilotage 360° (roadmap produit, architecture cloud, direction UX/UI, monitoring multi-clients). Module IoT et cartographie Mobigéo incluant déploiement emblématique Printemps Haussmann (Paris) avec bornes interactives physiques et application mobile en collaboration avec JCDecaux (hardware), fonctionnalités : géolocalisation indoor, itinéraires dans le magasin, notifications intelligentes contextuelles, intégration technique du SDK Polestar (Bluetooth LE) pour la localisation indoor et les services contextuels.<span class="pdf-page-break-after"></span> Autres déploiements : salons professionnels (Bourget), campus d'entreprise (Crédit Agricole)
+  - <strong>Projet <a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/" target="_blank">AppKiosk</a> - Plateforme SaaS IoT et Navigation</strong> : Transformation produit (passage d'un modèle projet sur-mesure à une plateforme no-code industrialisée), ROI et Scalabilité (réduction drastique des coûts de production -90%, capacité de déploiement sur 100+ salons, 50 000 utilisateurs par événement), Pilotage 360° (roadmap produit, architecture cloud, direction UX/UI, monitoring multi-clients). Module IoT et cartographie Mobigéo incluant déploiement emblématique Printemps Haussmann (Paris) avec bornes interactives physiques et application mobile en collaboration avec JCDecaux (hardware), fonctionnalités : géolocalisation indoor, itinéraires dans le magasin, notifications intelligentes contextuelles, intégration technique du SDK Polestar (Bluetooth LE) pour la localisation indoor et les services contextuels.<span class="pdf-page-break-after"></span> Autres déploiements : salons professionnels (Bourget), campus (Crédit Agricole)
 exp4-title: |
   Fondateur - Studio de Développement (2007-2019)
 exp4-sectors: |
@@ -123,7 +123,7 @@ formation-title: |
 formation-bts: |
   - BTS Logistique, ESPL, Angers, 2005
 formation-autodidacte: |
-  - Autodidacte et Veille Technologique (2007 - Aujourd'hui) : Apprentissage continu des technologies cloud, IA, architecture SaaS, participation à des conférences techniques, veille active sur les évolutions du secteur
+  - Autodidacte et Veille Technologique (2007 - Aujourd'hui) : Apprentissage continu des technologies cloud, IA, architecture SaaS, IoT, participation à des conférences techniques, veille active sur les évolutions du secteur
 languages-title: |
   Langues
 lang-fr: |
@@ -135,6 +135,6 @@ interests-title: |
 interest-1: |
   - <strong>Boxe</strong> : Discipline et dépassement de soi
 interest-2: |
-  - <strong>Domotique et IoT</strong> : Home Assistant, Zigbee, Assistant IA avec contexte étendu aux capteurs de la maison, veille technologique active
+  - <strong>Domotique et IoT</strong> : Home Assistant, Zigbee, Assistant IA avec contexte étendu aux capteurs, veille technologique active
 interest-3: |
   - <strong>Rénovation immobilière</strong> : Gestion de contraintes techniques et créativité
