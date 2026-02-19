@@ -138,16 +138,29 @@ async function build() {
     if (!webOnly) {
       console.log('\n📄 Building PDFs...\n');
 
-      execSync('node generate-pdf.js --all --vector', {
-        stdio: 'inherit',
-        env: {
-          ...process.env,
-          HTML_DIR: webOutputDir,
-          OUTPUT_DIR: pdfOutputDir,
-          BASE_PATH: basePath,
-          BRANCH_NAME: currentBranch
-        }
-      });
+      // Use Typst pipeline if available, fall back to Puppeteer otherwise
+      const typstBuildScript = path.join(__dirname, 'build-pdf-typst.js');
+      if (fs.existsSync(typstBuildScript)) {
+        execSync(`node ${typstBuildScript}`, {
+          stdio: 'inherit',
+          env: {
+            ...process.env,
+            OUTPUT_DIR: pdfOutputDir,
+          }
+        });
+      } else {
+        // Legacy fallback
+        execSync('node generate-pdf.js --all --vector', {
+          stdio: 'inherit',
+          env: {
+            ...process.env,
+            HTML_DIR: webOutputDir,
+            OUTPUT_DIR: pdfOutputDir,
+            BASE_PATH: basePath,
+            BRANCH_NAME: currentBranch
+          }
+        });
+      }
 
       // Copy PDFs to web directory for GitHub Pages serving
       const webPdfDir = path.join(webOutputDir, 'pdf');

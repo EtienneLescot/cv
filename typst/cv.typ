@@ -95,14 +95,26 @@
   }
 }
 
-// Accent bullet glyph
-#let bullet = text(fill: t.accent, weight: "bold", size: 9pt)[›]
+// Accent bullet — small filled circle (PDF graphic, not in text stream)
+#let bullet = box(
+  width : 7pt,
+  height: 9pt,
+  baseline: 1.5pt,
+  align(center + horizon,
+    circle(radius: 1pt, fill: t.accent)
+  )
+)
 
 // Muted / secondary text
 #let muted(content) = text(fill: t.muted, size: 8.5pt)[#content]
 
+// ── Section heading: uppercase title only (no bar) ───────────────────────────
+#let section-heading(title) = {
+  text(size: 8.5pt, weight: "bold", fill: t.accent, tracking: 1.5pt)[#upper(title)]
+}
+
 // ── Section card (rounded box with stroke) ────────────────────────────────────
-#let section-box(prefix: "", title: "", body) = {
+#let section-box(title: "", body) = {
   block(
     width  : 100%,
     fill   : t.section-fill,
@@ -112,13 +124,7 @@
     below  : 7pt,
     breakable: true,
   )[
-    // H2 — decorative prefix + uppercase title
-    #text(
-      size    : 8.5pt,
-      weight  : "bold",
-      fill    : t.accent,
-      tracking: 1.5pt,
-    )[#upper(prefix + " " + title)]
+    #section-heading(title)
     #v(7pt)
     #body
   ]
@@ -133,12 +139,8 @@
     inset  : (x: 11pt, y: 10pt),
     below  : 7pt,
   )[
-    #text(
-      size    : 8.5pt,
-      weight  : "bold",
-      fill    : t.contact-text,
-      tracking: 1.5pt,
-    )[#upper("## " + d.titles.contact)]
+    // Title (white on blue, no bar)
+    #text(size: 8.5pt, weight: "bold", fill: t.contact-text, tracking: 1.5pt)[#upper(d.titles.contact)]
     #v(7pt)
     #body
   ]
@@ -222,19 +224,19 @@
 ]
 
 // ── PROFILE ───────────────────────────────────────────────────────────────────
-#section-box(prefix: ">>", title: d.titles.profile)[
+#section-box(title: d.titles.profile)[
   #text(size: 10pt)[#d.profile]
 ]
 
-// ── SKILLS ────────────────────────────────────────────────────────────────────
-#section-box(prefix: "[]", title: d.titles.skills)[
+// ── SKILLS ──────────────────────────────────────────────────────────────────────────────────────
+#section-box(title: d.titles.skills)[
   #for skill in d.skills {
     cv-item(parse-rich(skill))
   }
 ]
 
-// ── EXPERIENCES ───────────────────────────────────────────────────────────────
-#section-box(prefix: "//", title: d.titles.experiences)[
+// ── EXPERIENCES ─────────────────────────────────────────────────────────────────────────────────
+#section-box(title: d.titles.experiences)[
 
   // ── Experience 1 : Fractional CTO (special structure) ──────────────────────
   #let exp0 = d.experiences.at(0)
@@ -291,14 +293,14 @@
 ]
 
 // ── FORMATION ─────────────────────────────────────────────────────────────────
-#section-box(prefix: "<>", title: d.titles.formation)[
+#section-box(title: d.titles.formation)[
   #for item in d.formation {
     cv-item(item)
   }
 ]
 
-// ── LANGUAGES ─────────────────────────────────────────────────────────────────
-#section-box(prefix: "||", title: d.titles.languages)[
+// ── LANGUAGES ───────────────────────────────────────────────────────────────────
+#section-box(title: d.titles.languages)[
   #grid(
     columns: (1fr, 1fr),
     column-gutter: 14pt,
@@ -306,8 +308,8 @@
   )
 ]
 
-// ── INTERESTS ─────────────────────────────────────────────────────────────────
-#section-box(prefix: "++", title: d.titles.interests)[
+// ── INTERESTS ───────────────────────────────────────────────────────────────────
+#section-box(title: d.titles.interests)[
   #for item in d.interests {
     cv-item(parse-rich(item))
   }

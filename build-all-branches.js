@@ -86,12 +86,6 @@ async function buildBranch(branchName, branchConfig) {
     console.log(`\n📦 Installing dependencies...`);
     exec('npm ci', { cwd: worktreePath });
 
-    // Install Playwright in CI
-    if (isCI()) {
-      console.log(`\n🎭 Installing Playwright browsers...`);
-      exec('npx playwright install --with-deps', { cwd: worktreePath });
-    }
-
     // Build in worktree
     console.log(`\n🔨 Building...`);
     const outputPath = branchConfig.outputPath;

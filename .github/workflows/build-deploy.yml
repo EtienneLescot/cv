@@ -36,8 +36,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
-      - name: Install Playwright
-        run: npx playwright install --with-deps
+      - name: Install Typst
+        run: |
+          curl -sL https://github.com/typst/typst/releases/download/v0.14.2/typst-x86_64-unknown-linux-musl.tar.xz \
+            | tar -xJ -C "$HOME/.local/bin" --strip-components=1 typst-x86_64-unknown-linux-musl/typst
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
       
       - name: Build all branches
         run: npm run build:all-branches
