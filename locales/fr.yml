@@ -1,7 +1,7 @@
 title: |
   Etienne Lescot – CV
 keywords: |
-  Etienne Lescot, CV, Directeur Technique, Directeur Produit, SaaS, Cloud, IA, IoT, Géolocalisation Indoor, AWS, Kubernetes
+  Etienne Lescot, CV, Architecte IA, GenAI, RAG, LLM, Langchain, Python, Architecture Cloud, DevOps, CI/CD, AWS, Kubernetes
 lang-label: |
   Sélectionner la langue
 theme-label: |
@@ -9,7 +9,7 @@ theme-label: |
 download-label: |
   Téléchargez le CV
 tagline: |
-  Directeur Technique et Produit - SaaS, IoT, IA
+  Architecte IA & Architecture Cloud - GenAI, RAG, LLM
 name: |
   Etienne Lescot
 contact-title: |
@@ -31,17 +31,17 @@ profile-desc: |
 skills-title: |
   Compétences
 skill-1: |
-  - <strong>Vision et Stratégie Produit</strong> :<br>Définition de la vision produit, pilotage de roadmap, gestion du cycle de vie (conception, déploiement, optimisation), alignement stratégique produit/technique
+  - <strong>Intelligence Artificielle et Automation</strong> :<br>IA conversationnelle (LLM, AWS Bedrock, Langchain), RAG (Retrieval-Augmented Generation), automatisation de parcours clients, analyse de contexte — notions expérimentales : TensorFlow, PyTorch, Scikit-learn
 skill-2: |
-  - <strong>Expérience Utilisateur et Design</strong> :<br>Direction UX/UI, conception de parcours clients, interfaces multi-supports (mobile, web, bornes physiques)
-skill-3: |
-  - <strong>Solutions IoT et Géolocalisation Indoor</strong> :<br>Technologies de localisation, cartographie interactive, notifications contextuelles intelligentes
-skill-4: |
   - <strong>Architecture et Direction Technique</strong> :<br>Architecture cloud SaaS (AWS, Kubernetes, Scaleway), scalabilité, multi-instances, infrastructure as code, monitoring
-skill-5: |
-  - <strong>Intelligence Artificielle et Automation</strong> :<br>IA conversationnelle (LLM, AWS Bedrock, Langchain), RAG (Retrieval-Augmented Generation), automatisation de parcours clients, analyse de contexte
-skill-6: |
+skill-3: |
   - <strong>Management et Pilotage</strong> :<br>Leadership d'équipes pluridisciplinaires (dev, UX, produit), méthode agile, CI/CD, DevOps, optimisation de la rentabilité R&D
+skill-4: |
+  - <strong>Vision et Stratégie Produit</strong> :<br>Définition de la vision produit, pilotage de roadmap, gestion du cycle de vie (conception, déploiement, optimisation), alignement stratégique produit/technique
+skill-5: |
+  - <strong>Expérience Utilisateur et Design</strong> :<br>Direction UX/UI, conception de parcours clients, interfaces multi-supports (mobile, web, bornes physiques)
+skill-6: |
+  - <strong>Solutions IoT et Géolocalisation Indoor</strong> :<br>Technologies de localisation, cartographie interactive, notifications contextuelles intelligentes
 experiences-title: |
   Expériences Professionnelles
 exp-fractional-title: |

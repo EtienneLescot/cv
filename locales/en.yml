@@ -1,7 +1,7 @@
 title: |
   Etienne Lescot – CV
 keywords: |
-  Etienne Lescot, CV, Technical Director, Product Director, SaaS, Cloud, AI, IoT, Indoor Geolocation, AWS, Kubernetes
+  Etienne Lescot, CV, AI Architect, GenAI, RAG, LLM, Langchain, Python, Cloud Architecture, DevOps, CI/CD, AWS, Kubernetes
 lang-label: |
   Select language
 theme-label: |
@@ -9,7 +9,7 @@ theme-label: |
 download-label: |
   Download CV
 tagline: |
-  Technical and Product Director - SaaS, IoT, AI
+  AI Architect & Cloud Architecture - GenAI, RAG, LLM
 name: |
   Etienne Lescot
 contact-title: |
@@ -31,17 +31,17 @@ profile-desc: |
 skills-title: |
   Skills
 skill-1: |
-  - <strong>Product Vision and Strategy</strong> :<br>Product vision definition, roadmap management, lifecycle management (design, deployment, optimization), product/technical strategic alignment
+  - <strong>Artificial Intelligence and Automation</strong> :<br>Conversational AI (LLM, AWS Bedrock, Langchain), RAG (Retrieval-Augmented Generation), customer journey automation, context analysis — experimental knowledge: TensorFlow, PyTorch, Scikit-learn
 skill-2: |
-  - <strong>User Experience and Design</strong> :<br>UX/UI direction, customer journey design, multi-device interfaces (mobile, web, physical kiosks)
-skill-3: |
-  - <strong>IoT Solutions and Indoor Geolocation</strong> :<br>Localization technologies, interactive mapping, smart contextual notifications
-skill-4: |
   - <strong>Technical Architecture and Direction</strong> :<br>Cloud SaaS architecture (AWS, Kubernetes, Scaleway), scalability, multi-instance, infrastructure as code, monitoring
-skill-5: |
-  - <strong>Artificial Intelligence and Automation</strong> :<br>Conversational AI (LLM, AWS Bedrock, Langchain), RAG (Retrieval-Augmented Generation), customer journey automation, context analysis
-skill-6: |
+skill-3: |
   - <strong>Management and Leadership</strong> :<br>Leadership of multidisciplinary teams (dev, UX, product), agile methodology, CI/CD, DevOps, R&D profitability optimization
+skill-4: |
+  - <strong>Product Vision and Strategy</strong> :<br>Product vision definition, roadmap management, lifecycle management (design, deployment, optimization), product/technical strategic alignment
+skill-5: |
+  - <strong>User Experience and Design</strong> :<br>UX/UI direction, customer journey design, multi-device interfaces (mobile, web, physical kiosks)
+skill-6: |
+  - <strong>IoT Solutions and Indoor Geolocation</strong> :<br>Localization technologies, interactive mapping, smart contextual notifications
 experiences-title: |
   Professional Experiences
 exp-fractional-title: |
