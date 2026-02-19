@@ -32,7 +32,8 @@ const path = require('path');
 const ROOT      = __dirname;
 const TYPST_DIR = path.join(ROOT, 'typst');
 const FONT_DIR  = path.join(ROOT, 'fonts', 'Inter', 'extras', 'otf');
-const OUT_DIR   = path.join(ROOT, 'dist', 'pdf');
+// OUTPUT_DIR env var allows build.js / CI to redirect output (e.g. dist/pdf/short)
+const OUT_DIR   = process.env.OUTPUT_DIR || path.join(ROOT, 'dist', 'pdf');
 const TEMPLATE  = path.join(TYPST_DIR, 'cv.typ');
 const CV_URL    = 'https://etiennelescot.github.io/cv/';
 
