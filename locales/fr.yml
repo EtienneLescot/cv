@@ -65,7 +65,7 @@ exp-fractional-opensource-n8n: |
 exp-fractional-opensource-n8n-stack: |
   Stack : n8n, VS Code extension, AI workflow generation
 exp-fractional-opensource-n8n-link: |
-  github.com/EtienneLescot/n8n-as-code
+  https://github.com/EtienneLescot/n8n-as-code
 exp-fractional-missions-heading: |
   Missions CTO & Cofondations
 exp1-title: |

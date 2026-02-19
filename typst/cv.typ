@@ -59,7 +59,7 @@
 // =============================================================================
 #set page(
   paper : "a4",
-  margin: (x: 7mm, y: 7mm),
+  margin: (x: 8mm, y: 8mm),
   fill  : t.page-fill,
 )
 
@@ -73,8 +73,8 @@
 
 #set par(
   justify : true,
-  leading : 0.62em,
-  spacing : 0.75em,
+  leading : 0.65em,
+  spacing : 0.82em,
 )
 
 // Disable automatic heading numbering
@@ -121,11 +121,11 @@
     stroke : 0.5pt + t.section-stroke,
     radius : 6pt,
     inset  : (x: 11pt, y: 10pt),
-    below  : 7pt,
+    below  : 8pt,
     breakable: true,
   )[
     #section-heading(title)
-    #v(7pt)
+    #v(8pt)
     #body
   ]
 }
@@ -137,7 +137,7 @@
     fill   : t.contact-fill,
     radius : 6pt,
     inset  : (x: 11pt, y: 10pt),
-    below  : 7pt,
+    below  : 8pt,
   )[
     // Title (white on blue, no bar)
     #text(size: 8.5pt, weight: "bold", fill: t.contact-text, tracking: 1.5pt)[#upper(d.titles.contact)]
@@ -153,7 +153,7 @@
     column-gutter: 4pt,
     align      : (center + top, left + top),
     bullet,
-    block(above: 0pt, below: 3.5pt, content),
+    block(above: 0pt, below: 4pt, content),
   )
 }
 
@@ -166,16 +166,16 @@
 
 // ── Sub-section label (h4 equivalent, muted uppercase) ───────────────────────
 #let sub-label(content) = {
-  v(5pt)
+  v(6pt)
   text(size: 7.5pt, weight: "semibold", fill: t.muted, tracking: 0.8pt)[#upper(content)]
-  v(3pt)
+  v(4pt)
 }
 
 // ── Horizontal rule between experience items ──────────────────────────────────
 #let exp-divider = {
-  v(5pt)
+  v(6pt)
   line(length: 100%, stroke: 0.4pt + t.divider)
-  v(4pt)
+  v(5pt)
 }
 
 // =============================================================================
@@ -183,7 +183,7 @@
 // =============================================================================
 
 // ── HEADER — Name + Tagline ───────────────────────────────────────────────────
-#block(below: 8pt)[
+#block(below: 10pt)[
   #text(
     size    : 25pt,
     weight  : "extrabold",
@@ -205,7 +205,7 @@
   #grid(
     columns     : (1fr, 1fr),
     column-gutter: 14pt,
-    row-gutter  : 4pt,
+    row-gutter  : 5pt,
     ..d.contact.map(item => {
       set text(fill: t.contact-text, size: 8.5pt)
       let val = if "url" in item {
@@ -243,32 +243,27 @@
 
   #exp-title(exp0.title)
   #muted(exp0.subtitle)
-
-  // Open Source projects
+  #v(2pt)
   #sub-label(exp0.opensource.heading)
   #for proj in exp0.opensource.items {
-    grid(
-      columns      : (1fr, auto),
-      column-gutter: 8pt,
-      align        : (left + top, right + top),
-      [#text(weight: "semibold")[#proj.title]#h(6pt)#muted(proj.stack)],
-      muted(proj.link),
-    )
-    block(above: 2pt, below: 5pt)[#muted(proj.desc)]
+    v(3pt)
+    text(weight: "semibold")[#proj.title]
+    linebreak()
+    muted(proj.stack)
+    h(10pt)
+    muted(proj.link)
+    v(2pt)
+    block(above: 2pt, below: 7pt)[#muted(proj.desc)]
   }
 
   // CTO Missions
   #sub-label(exp0.missions.heading)
   #for (i, mission) in exp0.missions.items.enumerate() {
-    if i > 0 { v(4pt) }
-    grid(
-      columns      : (1fr, auto),
-      column-gutter: 8pt,
-      align        : (left + top, right + top),
-      text(weight: "semibold")[#mission.title],
-      muted(mission.sector),
-    )
-    v(2pt)
+    if i > 0 { v(6pt) }
+    text(weight: "semibold")[#mission.title]
+    linebreak()
+    muted(mission.sector)
+    v(3pt)
     for pt in mission.points {
       cv-item(parse-rich(pt))
     }
@@ -278,13 +273,9 @@
   #for exp in d.experiences.slice(1) {
     exp-divider
 
-    grid(
-      columns      : (1fr, auto),
-      column-gutter: 8pt,
-      align        : (left + top, right + top),
-      exp-title(exp.title),
-      block(above: 4pt)[#muted(exp.sector)],
-    )
+    exp-title(exp.title)
+    muted(exp.sector)
+    v(4pt)
 
     for pt in exp.points {
       cv-item(parse-rich(pt))
