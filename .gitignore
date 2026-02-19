@@ -12,6 +12,9 @@ index.html
 *.min.css
 *.min.js
 
+# Typst — preprocessed data (generated from locales/*.yml)
+typst/data-*.json
+
 # Legacy (to be removed after migration)
 exports
 export
