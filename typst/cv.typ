@@ -26,6 +26,7 @@
     page-fill     : rgb("#121620"),
     section-fill  : rgb("#171d2e"),   // glass-bg dark ≈ rgba(255,255,255,0.03) over #121620
     section-stroke: rgb("#252d42"),   // glass-border dark ≈ rgba(255,255,255,0.1)
+    exp-fill      : rgb("#191d27"),   // full-bleed experiences bg (dark) — from style-pdf.css
     text          : rgb("#e0e0e0"),
     heading       : rgb("#ffffff"),
     h1            : rgb("#ffffff"),
@@ -40,6 +41,7 @@
     page-fill     : rgb("#e3ebf4"),   // --pdf-page-margin-color
     section-fill  : rgb("#ffffff"),   // --pdf-page-bg
     section-stroke: rgb("#ccd6e4"),   // glass-border light ≈ rgba(255,255,255,0.4) over #e3ebf4
+    exp-fill      : rgb("#ffffff"),   // full-bleed experiences bg (light) — white band on grey page
     text          : rgb("#1a1a1c"),
     heading       : rgb("#1a1a1c"),
     h1            : rgb("#1a1a1c"),
@@ -58,9 +60,30 @@
 // PAGE & BASE TEXT SETUP
 // =============================================================================
 #set page(
-  paper : "a4",
-  margin: (x: 8mm, y: 8mm),
-  fill  : t.page-fill,
+  paper     : "a4",
+  margin    : (x: 8mm, y: 8mm),
+  fill      : t.page-fill,
+  // Paint exp-fill into the top/bottom margins on pages where the experiences
+  // section appears, so the band is seamless across page breaks.
+  background: context {
+    let pg = here().page()
+    let ss = query(<exp-bleed-start>)
+    let es = query(<exp-bleed-end>)
+    if ss.len() == 0 or es.len() == 0 { return }
+    let s-loc = ss.first().location()
+    let e-loc = es.first().location()
+    let sp = s-loc.page()
+    let ep = e-loc.page()
+    if pg < sp or pg > ep { return }
+    let sy    = s-loc.position().y
+    let ey    = e-loc.position().y
+    let top-y = if pg == sp { sy } else { 0mm }
+    let bot-y = if pg == ep { ey } else { 297mm }
+    if bot-y <= top-y { return }
+    place(left + top, dy: top-y,
+      rect(width: 210mm, height: bot-y - top-y, fill: t.exp-fill)
+    )
+  },
 )
 
 #set text(
@@ -130,6 +153,35 @@
   ]
 }
 
+// ── Full-bleed experiences box (edge-to-edge, no card border) ──────────────────
+// pad(x: -8mm) expands the available width by 2×8mm = full A4 width.
+// block(width: 100%) then fills that full width.
+// inset x = 8mm (compensate the margin expansion) + 11pt (regular content padding).
+#let exp-bleed-box(title: "", body) = {
+  // Metadata markers let the page background context know where this section
+  // starts/ends so it can paint exp-fill into the top/bottom margin areas,
+  // producing a continuous band across the page break.
+  [#metadata("s") <exp-bleed-start>]
+  pad(x: -8mm)[
+    #block(
+      width    : 100%,
+      fill     : t.exp-fill,
+      inset    : (x: 8mm + 11pt, top: 10pt, bottom: 5pt),
+      above    : 6pt,
+      below    : 0pt,
+      breakable: true,
+    )[
+      #section-heading(title)
+      #v(8pt)
+      #body
+    ]
+  ]
+  [#metadata("e") <exp-bleed-end>]
+  // Force a visible non-collapsible gap in page-fill colour before next section.
+  // A block() is immune to Typst's paragraph-spacing collapse, unlike v().
+  block(height: 10pt, width: 100%, above: 0pt, below: 0pt)
+}
+
 // ── Contact card (blue background, no stroke) ─────────────────────────────────
 #let contact-box(body) = {
   block(
@@ -185,7 +237,7 @@
 // ── HEADER — Name + Tagline ───────────────────────────────────────────────────
 #block(below: 10pt)[
   #text(
-    size    : 25pt,
+    size    : 21pt,
     weight  : "extrabold",
     fill    : t.h1,
     tracking: 0.8pt,
@@ -236,7 +288,7 @@
 ]
 
 // ── EXPERIENCES ─────────────────────────────────────────────────────────────────────────────────
-#section-box(title: d.titles.experiences)[
+#exp-bleed-box(title: d.titles.experiences)[
 
   // ── Experience 1 : Fractional CTO (special structure) ──────────────────────
   #let exp0 = d.experiences.at(0)
