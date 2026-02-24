@@ -1,7 +1,7 @@
 title: |
   Etienne Lescot – CV
 keywords: |
-  Etienne Lescot, CV, Directeur Technique, Directeur Produit, SaaS, Cloud, IA, IoT, Géolocalisation Indoor, AWS, Kubernetes
+  Etienne Lescot, CV, Lead AI Architect, Directeur Technique, CTO, Directeur Produit, SaaS, Cloud, IA produit, LLM, RAG, Agents, Voice AI, AWS, Kubernetes, DevEx, GitOps, IoT
 lang-label: |
   Sélectionner la langue
 theme-label: |
@@ -9,7 +9,7 @@ theme-label: |
 download-label: |
   Téléchargez le CV
 tagline: |
-  Directeur Technique et Produit - SaaS, IoT, IA
+  Lead AI Architect / CTO (hands-on) – SaaS & IA produit
 name: |
   Etienne Lescot
 contact-title: |
@@ -27,33 +27,33 @@ contact-cv: |
 profile-title: |
   Profil
 profile-desc: |
-   Directeur Technique et Produit avec plus de 15 ans d'expérience dans la conception de plateformes SaaS. J'interviens à la croisée de la vision produit, de l'architecture cloud et de l'expérience utilisateur, avec une expertise spécifique sur les solutions intégrant de l'IoT.
+  Directeur Technique (ex-CTO / cofondateur) avec 15+ ans d'expérience dans la construction de produits SaaS. Je conçois et j'industrialise des fonctionnalités IA orientées produit (LLM, RAG, agents — chat & voix) avec un focus sur la mise en production rapide : architecture cloud-native, CI/CD, observabilité, performance, sécurité et maîtrise des coûts. À l'aise pour faire le pont entre exécution IA « hands-on » et structuration de la plateforme / DevEx.
 skills-title: |
   Compétences
 skill-1: |
-  - <strong>Vision et Stratégie Produit</strong> :<br>Définition de la vision produit, pilotage de roadmap, gestion du cycle de vie (conception, déploiement, optimisation), alignement stratégique produit/technique
+  - <strong>IA Produit (LLM / RAG / Agents)</strong> :<br>Conception d'architectures RAG, orchestration d'agents, intégration LLM (AWS Bedrock, LangChain), gestion du contexte, évaluation qualité (tests, métriques), guardrails et itération avec le produit
 skill-2: |
-  - <strong>Expérience Utilisateur et Design</strong> :<br>Direction UX/UI, conception de parcours clients, interfaces multi-supports (mobile, web, bornes physiques)
+  - <strong>Architecture SaaS Cloud-Native</strong> :<br>AWS, Kubernetes, multi-tenant / multi-instances, infrastructure as code, CI/CD, observabilité, scalabilité, performance et optimisation des coûts
 skill-3: |
-  - <strong>Solutions IoT et Géolocalisation Indoor</strong> :<br>Technologies de localisation, cartographie interactive, notifications contextuelles intelligentes
+  - <strong>Mise en Production & Fiabilité</strong> :<br>Approche "build → ship → run", instrumentation, monitoring/alerting, gestion d'incidents, durcissement sécurité, qualité de service et amélioration continue
 skill-4: |
-  - <strong>Architecture et Direction Technique</strong> :<br>Architecture cloud SaaS (AWS, Kubernetes, Scaleway), scalabilité, multi-instances, infrastructure as code, monitoring
+  - <strong>Plateforme / DevEx / GitOps</strong> :<br>Standardisation des environnements, pipelines CI/CD, GitOps (ex: ArgoCD), outillage dev, bonnes pratiques d'architecture et accélération de la vélocité
 skill-5: |
-  - <strong>Intelligence Artificielle et Automation</strong> :<br>IA conversationnelle (LLM, AWS Bedrock, Langchain), RAG (Retrieval-Augmented Generation), automatisation de parcours clients, analyse de contexte
+  - <strong>Produit & Expérience Utilisateur</strong> :<br>Vision produit, pilotage de roadmap, discovery/itérations, UX/UI, conception de parcours clients (web, mobile, bornes) et alignement produit/technique
 skill-6: |
-  - <strong>Management et Pilotage</strong> :<br>Leadership d'équipes pluridisciplinaires (dev, UX, produit), méthode agile, CI/CD, DevOps, optimisation de la rentabilité R&D
+  - <strong>Leadership & Exécution</strong> :<br>Structuration d'équipes pluridisciplinaires (dev, produit, UX), recrutement/coaching, priorisation, delivery agile, arbitrages techniques et pilotage de la performance R&D
 experiences-title: |
   Expériences Professionnelles
 exp-fractional-title: |
-  CTO Fractional & Cofondateur (2022-2025)
+  CTO Fractional / Lead AI Architect & Cofondateur (2022-2025)
 exp-fractional-subtitle: |
-  Accompagnement technique et produit de startups early-stage + Projets Open Source
+  Construction de produits IA (LLM/RAG/agents, voix) + accélération plateforme cloud-native / DevEx + Projets Open Source
 exp-fractional-opensource-heading: |
   Projets Open Source Maintenus
 exp-fractional-opensource-stimm-title: |
   Stimm Platform
 exp-fractional-opensource-stimm: |
-  Plateforme open source pour agents vocaux IA. Orchestration de pipelines IA ultra-low latency pour conversations temps réel sur WebRTC.
+  Plateforme open source pour agents vocaux IA. Orchestration de pipelines IA ultra-low latency pour conversations temps réel (WebRTC), du prototype à une exécution production-ready.
 exp-fractional-opensource-stimm-stack: |
   Stack : Voice AI, WebRTC, real-time processing
 exp-fractional-opensource-stimm-link: |
@@ -61,7 +61,7 @@ exp-fractional-opensource-stimm-link: |
 exp-fractional-opensource-n8n-title: |
   n8n-as-code
 exp-fractional-opensource-n8n: |
-  Synchronisation bidirectionnelle n8n - VS Code. Génération de workflows via IA et GitOps. Stop clicking, start coding.
+  Synchronisation bidirectionnelle n8n - VS Code. DevEx/GitOps pour industrialiser les workflows (versioning, review, déploiement) + génération assistée par IA. Stop clicking, start coding.
 exp-fractional-opensource-n8n-stack: |
   Stack : n8n, VS Code extension, AI workflow generation
 exp-fractional-opensource-n8n-link: |
@@ -73,21 +73,21 @@ exp1-title: |
 exp1-sector: |
   Secteur : Architecture & Services
 exp1-point1: |
-  - Stratégie cloud (AWS), intégration IA conversationnelle, automatisation des processus métiers
+  - Architecture cloud (AWS) et mise en production d'IA conversationnelle, automatisation de processus métiers et accélération delivery
 exp1-project-sarae: |
-  - <strong>Projet SARAE - Plateforme Client et IA Conversationnelle</strong> : Définition de la roadmap produit, intégration IA (RAG, LLM) pour l'analyse d'appels et l'automatisation des parcours clients, architecture cloud-native AWS, CI/CD multi-instances, réduction des coûts d'infrastructure et amélioration continue des performances
+  - <strong>Projet SARAE - Plateforme Client et IA Conversationnelle</strong> : Construction produit (roadmap + exécution), intégration IA (RAG, LLM) pour analyse d'appels et automatisation de parcours clients, architecture cloud-native AWS, CI/CD multi-instances, observabilité et optimisation perf/coûts, itérations rapides avec les équipes métiers
 exp2-title: |
   Exalgo (2022-2023) - Cofondateur & CTO
 exp2-sector: |
   Secteur : IA & Développement logiciel
 exp2-point1: |
-  - Direction de la R&D et définition de la vision technologique et produit de la plateforme SaaS
+  - Construction d'un produit SaaS de chatbot IA : cadrage, architecture LLM/RAG, delivery et itérations rapides orientées usage
 exp2-point2: |
-  - Management de la stratégie d'infrastructure cloud-native (Kubernetes, DevOps, CI/CD) et garant de la scalabilité
+  - Infrastructure cloud-native (Kubernetes, GitOps, CI/CD) : scalabilité, environnements, observabilité et fiabilité
 exp2-point3: |
-  - Pilotage de la performance technique et de la sécurité des services
+  - Pilotage performance & sécurité : optimisation, durcissement, monitoring et qualité de service
 exp2-project-exalbot: |
-  - <strong>Projet Exalbot - Chatbot IA Cloud-Native (SaaS)</strong> : Développement du moteur de chatbot conversationnel (Python, Langchain, LLM), architecture RAG pour l'enrichissement contextuel des réponses, définition de la roadmap et de la stratégie d'intégration IA, infrastructure cloud (Kubernetes, ArgoCD, Scaleway), déploiement multi-environnements, optimisation des performances
+  - <strong>Projet Exalbot - Chatbot IA Cloud-Native (SaaS)</strong> : Conception & implémentation du moteur conversationnel (Python, LangChain, LLM), architecture RAG (ingestion, retrieval, contexte), industrialisation (Kubernetes, ArgoCD, Scaleway), déploiements multi-environnements, observabilité/évaluation qualité et optimisation des performances
 exp3-title: |
   CTO - Leni (2019-2022)
 exp3-sector : |
@@ -95,9 +95,9 @@ exp3-sector : |
 exp3-point1: |
   - Direction d'un pôle R&D (10 personnes), gestion des recrutements
 exp3-point2: |
-  - Pilotage du portefeuille de produits SaaS (AppKiosk, Youslide): roadmap, UX/UI, architecture, alignement produit/technique
+  - Pilotage d'un portefeuille de produits SaaS (AppKiosk, Youslide) : roadmap, UX/UI, architecture et itérations orientées time-to-market
 exp3-point3: |
-  - Supervision de l'architecture cloud globale, de la stratégie DevOps (CI/CD) et de la qualité technique
+  - Supervision de l'architecture cloud globale, de la stratégie DevOps (CI/CD) et de la qualité technique (scalabilité, observabilité, sécurité)
 exp3-project-appkiosk: |
   - <strong>Projet <a href="https://www.klipso.com/fonctionnalites/applications-mobiles/application-multi-evenements-kiosk/" target="_blank">AppKiosk</a> - Plateforme SaaS IoT</strong> : Transformation produit (passage d'un modèle projet sur-mesure à une plateforme no-code industrialisée), ROI et Scalabilité (réduction drastique des coûts de production -90%, capacité de déploiement sur 100+ salons, 50 000 utilisateurs par événement), Pilotage 360° (roadmap produit, architecture cloud, direction UX/UI, monitoring multi-clients). Module IoT et cartographie Mobigéo incluant déploiement emblématique Printemps Haussmann (Paris) avec bornes interactives physiques et application mobile en collaboration avec JCDecaux (hardware), fonctionnalités : géolocalisation indoor, itinéraires dans le magasin, notifications intelligentes contextuelles, intégration technique du SDK Polestar (Bluetooth LE) pour la localisation indoor et les services contextuels.<span class="pdf-page-break-after"></span> Autres déploiements : salons professionnels (Bourget), campus d'entreprise (Crédit Agricole)
 exp4-title: |

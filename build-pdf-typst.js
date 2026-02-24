@@ -36,7 +36,9 @@ const FONT_DIR  = path.join(ROOT, 'fonts', 'Inter', 'extras', 'otf');
 // Always resolve to absolute path — Typst runs with cwd=typst/ so relative paths break
 const OUT_DIR   = path.resolve(process.env.OUTPUT_DIR || path.join(ROOT, 'dist', 'pdf'));
 const TEMPLATE  = path.join(TYPST_DIR, 'cv.typ');
-const CV_URL    = 'https://etiennelescot.github.io/cv/';
+// Allows CI/local builds to override or disable the “Online CV” row in the PDF.
+// Set CV_URL to an empty string to hide it (Typst template checks cv-url != "").
+const CV_URL    = process.env.CV_URL ?? 'https://etiennelescot.github.io/cv/';
 
 const LOCALES = ['fr', 'en'];
 const THEMES  = ['dark', 'light'];
