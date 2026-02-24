@@ -27,33 +27,33 @@ contact-cv: |
 profile-title: |
   Profile
 profile-desc: |
-  Technical Director (ex-CTO / co-founder) with 15+ years of experience building SaaS products. I design and industrialize product-facing AI capabilities (LLMs, RAG, agents — chat & voice) with a strong focus on shipping to production fast: cloud-native architecture, CI/CD, observability, performance, security and cost efficiency. Comfortable bridging hands-on AI execution with platform/DevEx acceleration.
+  Technical Director (ex-CTO / co-founder) with 15+ years of experience building SaaS products. I design and ship product-facing AI capabilities (LLMs, RAG, agents — chat & voice) with a focus on industrialization: cloud-native, CI/CD, observability, performance, security and cost efficiency. I bridge hands-on AI execution with platform/DevEx acceleration.
 skills-title: |
   Skills
 skill-1: |
-  - <strong>Product AI (LLMs / RAG / Agents)</strong> :<br>RAG architecture design, agent orchestration, LLM integration (AWS Bedrock, LangChain), context management, quality evaluation (tests, metrics), guardrails and tight product iteration
+  - <strong>Product AI (LLMs / RAG / Agents)</strong> :<br>RAG, agent orchestration, LLM integration (AWS Bedrock, LangChain), context management, evaluation & guardrails
 skill-2: |
-  - <strong>Cloud-Native SaaS Architecture</strong> :<br>AWS, Kubernetes, multi-tenant / multi-instance, infrastructure as code, CI/CD, observability, scalability, performance and cost optimization
+  - <strong>Cloud-Native SaaS Architecture</strong> :<br>AWS, Kubernetes, multi-tenant / multi-instance, IaC, CI/CD, observability, performance & cost
 skill-3: |
-  - <strong>Production & Reliability</strong> :<br>"build → ship → run" mindset, instrumentation, monitoring/alerting, incident response, security hardening, service quality and continuous improvement
+  - <strong>Production & Reliability</strong> :<br>Build → ship → run, instrumentation, monitoring/alerting, incidents, security hardening, service quality
 skill-4: |
-  - <strong>Platform / DevEx / GitOps</strong> :<br>Standardized environments, CI/CD pipelines, GitOps (e.g., ArgoCD), developer tooling, architecture patterns and velocity acceleration
+  - <strong>Platform / DevEx / GitOps</strong> :<br>Environments, CI/CD pipelines, GitOps (e.g., ArgoCD), developer tooling, velocity acceleration
 skill-5: |
-  - <strong>Product & User Experience</strong> :<br>Product vision, roadmap leadership, discovery/iterations, UX/UI, customer journey design (web, mobile, kiosks) and product/engineering alignment
+  - <strong>Product & User Experience</strong> :<br>Vision/roadmap, discovery/iterations, UX/UI, customer journeys, product/engineering alignment
 skill-6: |
-  - <strong>Leadership & Execution</strong> :<br>Building multidisciplinary teams (dev, product, UX), hiring/coaching, prioritization, agile delivery, technical trade-offs and R&D performance management
+  - <strong>Leadership & Execution</strong> :<br>Team building, hiring/coaching, prioritization, delivery, technical trade-offs
 experiences-title: |
   Professional Experiences
 exp-fractional-title: |
   Fractional CTO / Lead AI Architect & Co‑founder (2022‑2025)
 exp-fractional-subtitle: |
-  Building product AI (LLM/RAG/agents, voice) + accelerating cloud-native platform/DevEx + Open Source Projects
+  Product AI (LLM/RAG/agents, voice) + platform/DevEx + Open Source
 exp-fractional-opensource-heading: |
   Maintained Open Source Projects
 exp-fractional-opensource-stimm-title: |
   Stimm Platform
 exp-fractional-opensource-stimm: |
-  Open source platform for AI voice agents. Ultra‑low latency AI pipeline orchestration for real‑time conversations (WebRTC), from prototype to production-ready execution.
+  Open source platform for AI voice agents. Ultra‑low latency pipelines for real‑time conversations (WebRTC).
 exp-fractional-opensource-stimm-stack: |
   Stack: Voice AI, WebRTC, real‑time processing
 exp-fractional-opensource-stimm-link: |
@@ -61,7 +61,7 @@ exp-fractional-opensource-stimm-link: |
 exp-fractional-opensource-n8n-title: |
   n8n‑as‑code
 exp-fractional-opensource-n8n: |
-  Bidirectional n8n - VS Code synchronization. DevEx/GitOps to industrialize workflows (versioning, review, deployment) + AI-assisted generation. Stop clicking, start coding.
+  Bidirectional n8n - VS Code synchronization. DevEx/GitOps to industrialize workflows + AI-assisted generation.
 exp-fractional-opensource-n8n-stack: |
   Stack: n8n, VS Code extension, AI workflow generation
 exp-fractional-opensource-n8n-link: |
@@ -73,21 +73,21 @@ exp1-title: |
 exp1-sector: |
   Sector: Architecture & Services
 exp1-point1: |
-  - AWS cloud architecture and production-grade conversational AI, business process automation and delivery acceleration
+  - AWS + production-grade conversational AI, business process automation
 exp1-project-sarae: |
-  - <strong>SARAE Project - Customer Platform and Conversational AI</strong>: Product building (roadmap + execution), AI integration (RAG, LLM) for call analysis and customer journey automation, cloud-native AWS architecture, multi-instance CI/CD, observability and perf/cost optimization, fast iterations with business teams
+  - <strong>SARAE Project - Customer Platform and Conversational AI</strong>: Roadmap + execution, AI (RAG, LLM) for call analysis and automation, AWS architecture, multi-instance CI/CD, observability and perf/cost optimization
 exp2-title: |
   Exalgo (2022‑2023) - Co‑founder & CTO
 exp2-sector: |
   Sector: AI & Software Development
 exp2-point1: |
-  - Built a SaaS AI chatbot product: framing, LLM/RAG architecture, delivery and rapid user-driven iterations
+  - Built a SaaS AI chatbot product: framing, LLM/RAG architecture, user-driven delivery
 exp2-point2: |
-  - Cloud-native infrastructure (Kubernetes, GitOps, CI/CD): scalability, environments, observability and reliability
+  - Cloud-native (Kubernetes, GitOps, CI/CD): scalability, environments, observability
 exp2-point3: |
-  - Performance & security leadership: optimization, hardening, monitoring and service quality
+  - Performance & security: optimization, hardening, monitoring
 exp2-project-exalbot: |
-  - <strong>Exalbot Project - Cloud-Native AI Chatbot (SaaS)</strong>: Designed & implemented the conversational engine (Python, LangChain, LLM), RAG architecture (ingestion, retrieval, context), industrialization (Kubernetes, ArgoCD, Scaleway), multi-environment deployments, observability/quality evaluation and performance optimization
+  - <strong>Exalbot Project - Cloud-Native AI Chatbot (SaaS)</strong>: Conversational engine (Python, LangChain, LLM), RAG architecture, industrialization (Kubernetes, ArgoCD, Scaleway), multi-environment, observability and optimization
 exp3-title: |
   CTO - Leni (2019-2022)
 exp3-sector: |

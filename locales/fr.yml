@@ -27,33 +27,33 @@ contact-cv: |
 profile-title: |
   Profil
 profile-desc: |
-  Directeur Technique (ex-CTO / cofondateur) avec 15+ ans d'expérience dans la construction de produits SaaS. Je conçois et j'industrialise des fonctionnalités IA orientées produit (LLM, RAG, agents — chat & voix) avec un focus sur la mise en production rapide : architecture cloud-native, CI/CD, observabilité, performance, sécurité et maîtrise des coûts. À l'aise pour faire le pont entre exécution IA « hands-on » et structuration de la plateforme / DevEx.
+  Directeur Technique (ex-CTO / cofondateur) avec 15+ ans d'expérience dans la construction de produits SaaS. Je conçois et mets en production des fonctionnalités IA orientées produit (LLM, RAG, agents — chat & voix) avec un focus sur l'industrialisation : cloud-native, CI/CD, observabilité, performance, sécurité, coûts. Je fais le pont entre exécution IA « hands-on » et structuration plateforme / DevEx.
 skills-title: |
   Compétences
 skill-1: |
-  - <strong>IA Produit (LLM / RAG / Agents)</strong> :<br>Conception d'architectures RAG, orchestration d'agents, intégration LLM (AWS Bedrock, LangChain), gestion du contexte, évaluation qualité (tests, métriques), guardrails et itération avec le produit
+  - <strong>IA Produit (LLM / RAG / Agents)</strong> :<br>RAG, orchestration d'agents, intégration LLM (AWS Bedrock, LangChain), gestion du contexte, évaluation & guardrails
 skill-2: |
-  - <strong>Architecture SaaS Cloud-Native</strong> :<br>AWS, Kubernetes, multi-tenant / multi-instances, infrastructure as code, CI/CD, observabilité, scalabilité, performance et optimisation des coûts
+  - <strong>Architecture SaaS Cloud-Native</strong> :<br>AWS, Kubernetes, multi-tenant / multi-instances, IaC, CI/CD, observabilité, performance & coûts
 skill-3: |
-  - <strong>Mise en Production & Fiabilité</strong> :<br>Approche "build → ship → run", instrumentation, monitoring/alerting, gestion d'incidents, durcissement sécurité, qualité de service et amélioration continue
+  - <strong>Mise en Production & Fiabilité</strong> :<br>Build → ship → run, instrumentation, monitoring/alerting, incidents, sécurité, qualité de service
 skill-4: |
-  - <strong>Plateforme / DevEx / GitOps</strong> :<br>Standardisation des environnements, pipelines CI/CD, GitOps (ex: ArgoCD), outillage dev, bonnes pratiques d'architecture et accélération de la vélocité
+  - <strong>Plateforme / DevEx / GitOps</strong> :<br>Environnements, pipelines CI/CD, GitOps (ex: ArgoCD), outillage dev, accélération vélocité
 skill-5: |
-  - <strong>Produit & Expérience Utilisateur</strong> :<br>Vision produit, pilotage de roadmap, discovery/itérations, UX/UI, conception de parcours clients (web, mobile, bornes) et alignement produit/technique
+  - <strong>Produit & Expérience Utilisateur</strong> :<br>Vision/roadmap, discovery/itérations, UX/UI, parcours clients, alignement produit/technique
 skill-6: |
-  - <strong>Leadership & Exécution</strong> :<br>Structuration d'équipes pluridisciplinaires (dev, produit, UX), recrutement/coaching, priorisation, delivery agile, arbitrages techniques et pilotage de la performance R&D
+  - <strong>Leadership & Exécution</strong> :<br>Structuration d'équipes, recrutement/coaching, priorisation, delivery, arbitrages techniques
 experiences-title: |
   Expériences Professionnelles
 exp-fractional-title: |
   CTO Fractional / Lead AI Architect & Cofondateur (2022-2025)
 exp-fractional-subtitle: |
-  Construction de produits IA (LLM/RAG/agents, voix) + accélération plateforme cloud-native / DevEx + Projets Open Source
+  Produits IA (LLM/RAG/agents, voix) + plateforme/DevEx + Projets Open Source
 exp-fractional-opensource-heading: |
   Projets Open Source Maintenus
 exp-fractional-opensource-stimm-title: |
   Stimm Platform
 exp-fractional-opensource-stimm: |
-  Plateforme open source pour agents vocaux IA. Orchestration de pipelines IA ultra-low latency pour conversations temps réel (WebRTC), du prototype à une exécution production-ready.
+  Plateforme open source pour agents vocaux IA. Pipelines ultra-low latency pour conversations temps réel (WebRTC).
 exp-fractional-opensource-stimm-stack: |
   Stack : Voice AI, WebRTC, real-time processing
 exp-fractional-opensource-stimm-link: |
@@ -61,7 +61,7 @@ exp-fractional-opensource-stimm-link: |
 exp-fractional-opensource-n8n-title: |
   n8n-as-code
 exp-fractional-opensource-n8n: |
-  Synchronisation bidirectionnelle n8n - VS Code. DevEx/GitOps pour industrialiser les workflows (versioning, review, déploiement) + génération assistée par IA. Stop clicking, start coding.
+  Synchronisation bidirectionnelle n8n - VS Code. DevEx/GitOps pour industrialiser les workflows + génération assistée par IA.
 exp-fractional-opensource-n8n-stack: |
   Stack : n8n, VS Code extension, AI workflow generation
 exp-fractional-opensource-n8n-link: |
@@ -73,21 +73,21 @@ exp1-title: |
 exp1-sector: |
   Secteur : Architecture & Services
 exp1-point1: |
-  - Architecture cloud (AWS) et mise en production d'IA conversationnelle, automatisation de processus métiers et accélération delivery
+  - AWS + mise en production d'IA conversationnelle, automatisation de processus métiers
 exp1-project-sarae: |
-  - <strong>Projet SARAE - Plateforme Client et IA Conversationnelle</strong> : Construction produit (roadmap + exécution), intégration IA (RAG, LLM) pour analyse d'appels et automatisation de parcours clients, architecture cloud-native AWS, CI/CD multi-instances, observabilité et optimisation perf/coûts, itérations rapides avec les équipes métiers
+  - <strong>Projet SARAE - Plateforme Client et IA Conversationnelle</strong> : Roadmap + exécution, IA (RAG, LLM) pour analyse d'appels et automatisation, architecture AWS, CI/CD multi-instances, observabilité et optimisation perf/coûts
 exp2-title: |
   Exalgo (2022-2023) - Cofondateur & CTO
 exp2-sector: |
   Secteur : IA & Développement logiciel
 exp2-point1: |
-  - Construction d'un produit SaaS de chatbot IA : cadrage, architecture LLM/RAG, delivery et itérations rapides orientées usage
+  - Produit SaaS de chatbot IA : cadrage, architecture LLM/RAG, delivery orienté usage
 exp2-point2: |
-  - Infrastructure cloud-native (Kubernetes, GitOps, CI/CD) : scalabilité, environnements, observabilité et fiabilité
+  - Cloud-native (Kubernetes, GitOps, CI/CD) : scalabilité, environnements, observabilité
 exp2-point3: |
-  - Pilotage performance & sécurité : optimisation, durcissement, monitoring et qualité de service
+  - Performance & sécurité : optimisation, durcissement, monitoring
 exp2-project-exalbot: |
-  - <strong>Projet Exalbot - Chatbot IA Cloud-Native (SaaS)</strong> : Conception & implémentation du moteur conversationnel (Python, LangChain, LLM), architecture RAG (ingestion, retrieval, contexte), industrialisation (Kubernetes, ArgoCD, Scaleway), déploiements multi-environnements, observabilité/évaluation qualité et optimisation des performances
+  - <strong>Projet Exalbot - Chatbot IA Cloud-Native (SaaS)</strong> : Moteur conversationnel (Python, LangChain, LLM), architecture RAG, industrialisation (Kubernetes, ArgoCD, Scaleway), multi-environnements, observabilité & optimisation
 exp3-title: |
   CTO - Leni (2019-2022)
 exp3-sector : |
