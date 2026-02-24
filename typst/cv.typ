@@ -237,7 +237,7 @@
 // ── HEADER — Name + Tagline ───────────────────────────────────────────────────
 #block(below: 10pt)[
   #text(
-    size    : 21pt,
+    size    : 18pt,
     weight  : "extrabold",
     fill    : t.h1,
     tracking: 0.8pt,
