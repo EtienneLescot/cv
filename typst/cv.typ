@@ -166,15 +166,11 @@
 }
 
 // =============================================================================
-// FORMATION · LANGUAGES · INTERESTS
+// FORMATION · LANGUAGES
+// (Interests section intentionally omitted — low signal on a senior CV.)
 // =============================================================================
 #section(d.titles.formation)
 #bullets(d.formation)
 
 #section(d.titles.languages)
 #bullets(d.languages)
-
-#if d.interests.len() > 0 {
-  section(d.titles.interests)
-  bullets(d.interests.map(parse-rich))
-}
