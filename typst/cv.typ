@@ -1,359 +1,180 @@
 // =============================================================================
 // CV TYPST TEMPLATE — Etienne Lescot
+// Design: "doc-page" maquette (Claude Design) — single column, Inter,
+// thin blue underlined uppercase section headers, A4 12mm margins.
 // =============================================================================
 // Compile example (run from the typst/ directory):
 //   typst compile \
 //     --font-path ../fonts/Inter/extras/otf \
-//     --input locale=fr --input theme=dark \
+//     --input locale=fr --input theme=light \
 //     --input cv-url=https://etiennelescot.github.io/cv/ \
-//     cv.typ ../dist/pdf/cv-fr-dark.pdf
+//     cv.typ ../dist/pdf/cv-fr-light.pdf
 // =============================================================================
 
 // ── Compile-time inputs ───────────────────────────────────────────────────────
 #let locale     = sys.inputs.at("locale",  default: "fr")
-#let theme-name = sys.inputs.at("theme",   default: "dark")
+#let theme-name = sys.inputs.at("theme",   default: "light")
 #let cv-url     = sys.inputs.at("cv-url",  default: "https://etiennelescot.github.io/cv/")
 
 // ── Data (preprocessed JSON from preprocess.js) ───────────────────────────────
 #let d = json("data-" + locale + ".json")
 
 // =============================================================================
-// THEME DEFINITIONS
-// Colors mapped exactly from style.css / style-pdf.css
+// THEME — maquette palette (oklch, mapped from the Claude Design file)
 // =============================================================================
 #let themes = (
-  dark: (
-    page-fill     : rgb("#121620"),
-    section-fill  : rgb("#171d2e"),   // glass-bg dark ≈ rgba(255,255,255,0.03) over #121620
-    section-stroke: rgb("#252d42"),   // glass-border dark ≈ rgba(255,255,255,0.1)
-    exp-fill      : rgb("#191d27"),   // full-bleed experiences bg (dark) — from style-pdf.css
-    text          : rgb("#e0e0e0"),
-    heading       : rgb("#ffffff"),
-    h1            : rgb("#ffffff"),
-    accent        : rgb("#007bff"),
-    muted         : rgb("#a0aec0"),
-    link          : rgb("#4da3ff"),
-    contact-fill  : rgb("#007bff"),
-    contact-text  : rgb("#ffffff"),
-    divider       : rgb("#252d42"),
-  ),
   light: (
-    page-fill     : rgb("#e3ebf4"),   // --pdf-page-margin-color
-    section-fill  : rgb("#ffffff"),   // --pdf-page-bg
-    section-stroke: rgb("#ccd6e4"),   // glass-border light ≈ rgba(255,255,255,0.4) over #e3ebf4
-    exp-fill      : rgb("#ffffff"),   // full-bleed experiences bg (light) — white band on grey page
-    text          : rgb("#1a1a1c"),
-    heading       : rgb("#1a1a1c"),
-    h1            : rgb("#1a1a1c"),
-    accent        : rgb("#007bff"),
-    muted         : rgb("#718096"),
-    link          : rgb("#2b6cb0"),
-    contact-fill  : rgb("#007bff"),
-    contact-text  : rgb("#ffffff"),
-    divider       : rgb("#ccd6e4"),
+    bg     : white,
+    text   : oklch(24%, 0.01, 260deg),
+    name   : oklch(20%, 0.01, 260deg),
+    accent : oklch(42%, 0.09, 255deg),
+    grey40 : oklch(40%, 0.01, 260deg),
+    grey45 : oklch(45%, 0.01, 260deg),
+    rule   : oklch(87%, 0.005, 255deg),
+  ),
+  dark: (
+    bg     : oklch(20%, 0.015, 260deg),
+    text   : oklch(90%, 0.006, 260deg),
+    name   : oklch(98%, 0.002, 260deg),
+    accent : oklch(72%, 0.11, 250deg),
+    grey40 : oklch(68%, 0.01, 260deg),
+    grey45 : oklch(62%, 0.01, 260deg),
+    rule   : oklch(38%, 0.012, 260deg),
   ),
 )
-
-#let t = themes.at(theme-name)
+#let t = themes.at(theme-name, default: themes.light)
 
 // =============================================================================
-// PAGE & BASE TEXT SETUP
+// PAGE & BASE TEXT
 // =============================================================================
-#set page(
-  paper     : "a4",
-  margin    : (x: 8mm, y: 8mm),
-  fill      : t.page-fill,
-  // Paint exp-fill into the top/bottom margins on pages where the experiences
-  // section appears, so the band is seamless across page breaks.
-  background: context {
-    let pg = here().page()
-    let ss = query(<exp-bleed-start>)
-    let es = query(<exp-bleed-end>)
-    if ss.len() == 0 or es.len() == 0 { return }
-    let s-loc = ss.first().location()
-    let e-loc = es.first().location()
-    let sp = s-loc.page()
-    let ep = e-loc.page()
-    if pg < sp or pg > ep { return }
-    let sy    = s-loc.position().y
-    let ey    = e-loc.position().y
-    let top-y = if pg == sp { sy } else { 0mm }
-    let bot-y = if pg == ep { ey } else { 297mm }
-    if bot-y <= top-y { return }
-    place(left + top, dy: top-y,
-      rect(width: 210mm, height: bot-y - top-y, fill: t.exp-fill)
-    )
-  },
-)
+#set page(paper: "a4", margin: 12mm, fill: t.bg)
 
 #set text(
-  font    : "Inter",
-  size    : 9.5pt,
-  fill    : t.text,
-  lang    : d.lang,
-  hyphenate: true,
+  font     : "Inter",
+  size     : 10.5pt,
+  fill     : t.text,
+  lang     : d.lang,
+  hyphenate: false,
 )
-
-#set par(
-  justify : true,
-  leading : 0.65em,
-  spacing : 0.82em,
-)
-
-// Disable automatic heading numbering
+#set par(justify: false, leading: 0.5em, spacing: 0.5em)
 #set heading(numbering: none)
 
-// No default list markers — we'll draw our own
-#set list(marker: none, indent: 0pt, body-indent: 0pt)
+// Bullet lists — small disc, hanging indent (mirrors ul padding-left:20px)
+#set list(marker: text(fill: t.grey45)[•], indent: 1.5mm, body-indent: 2.4mm, spacing: 4pt)
 
 // =============================================================================
-// COMPONENT LIBRARY
+// HELPERS
 // =============================================================================
-
-// Parse **bold** markers embedded by preprocess.js
 #let parse-rich(s) = {
   let parts = s.split("**")
   for (i, part) in parts.enumerate() {
     if calc.rem(i, 2) == 1 { strong(part) } else { part }
   }
 }
+#let strip-proto(u) = u.replace("https://", "").replace("http://", "")
 
-// Accent bullet — small filled circle (PDF graphic, not in text stream)
-#let bullet = box(
-  width : 7pt,
-  height: 9pt,
-  baseline: 1.5pt,
-  align(center + horizon,
-    circle(radius: 1pt, fill: t.accent)
-  )
-)
-
-// Muted / secondary text
-#let muted(content) = text(fill: t.muted, size: 8.5pt)[#content]
-
-// ── Section heading: uppercase title only (no bar) ───────────────────────────
-#let section-heading(title) = {
-  text(size: 8.5pt, weight: "bold", fill: t.accent, tracking: 1.5pt)[#upper(title)]
-}
-
-// ── Section card (rounded box with stroke) ────────────────────────────────────
-#let section-box(title: "", body) = {
-  block(
-    width  : 100%,
-    fill   : t.section-fill,
-    stroke : 0.5pt + t.section-stroke,
-    radius : 6pt,
-    inset  : (x: 11pt, y: 10pt),
-    below  : 8pt,
-    breakable: true,
-  )[
-    #section-heading(title)
-    #v(8pt)
-    #body
+// Section header — uppercase blue, thin bottom rule
+#let section(title, first: false) = {
+  if not first { v(13pt) }
+  block(breakable: false, above: 0pt, below: 6pt)[
+    #text(size: 9.75pt, weight: "bold", fill: t.accent, tracking: 0.7pt)[#upper(title)]
+    #v(3.5pt)
+    #line(length: 100%, stroke: 0.6pt + t.rule)
   ]
 }
 
-// ── Full-bleed experiences box (edge-to-edge, no card border) ──────────────────
-// pad(x: -8mm) expands the available width by 2×8mm = full A4 width.
-// block(width: 100%) then fills that full width.
-// inset x = 8mm (compensate the margin expansion) + 11pt (regular content padding).
-#let exp-bleed-box(title: "", body) = {
-  // Metadata markers let the page background context know where this section
-  // starts/ends so it can paint exp-fill into the top/bottom margin areas,
-  // producing a continuous band across the page break.
-  [#metadata("s") <exp-bleed-start>]
-  pad(x: -8mm)[
-    #block(
-      width    : 100%,
-      fill     : t.exp-fill,
-      inset    : (x: 8mm + 11pt, top: 10pt, bottom: 5pt),
-      above    : 6pt,
-      below    : 0pt,
-      breakable: true,
-    )[
-      #section-heading(title)
-      #v(8pt)
-      #body
-    ]
-  ]
-  [#metadata("e") <exp-bleed-end>]
-  // Force a visible non-collapsible gap in page-fill colour before next section.
-  // A block() is immune to Typst's paragraph-spacing collapse, unlike v().
-  block(height: 10pt, width: 100%, above: 0pt, below: 0pt)
+// Job title (h3) + optional italic sector line
+#let job(title, sector: none, big: false) = {
+  text(size: if big { 11pt } else { 10pt }, weight: "bold", fill: t.name)[#title]
+  if sector != none and sector != "" {
+    v(1.5pt)
+    text(size: 8.25pt, style: "italic", fill: t.grey45)[#sector]
+  }
+  v(2.5pt)
 }
 
-// ── Contact card (blue background, no stroke) ─────────────────────────────────
-#let contact-box(body) = {
-  block(
-    width  : 100%,
-    fill   : t.contact-fill,
-    radius : 6pt,
-    inset  : (x: 11pt, y: 10pt),
-    below  : 8pt,
-  )[
-    // Title (white on blue, no bar)
-    #text(size: 8.5pt, weight: "bold", fill: t.contact-text, tracking: 1.5pt)[#upper(d.titles.contact)]
-    #v(7pt)
-    #body
-  ]
-}
-
-// ── Standard list item (accent bullet + content) ──────────────────────────────
-#let cv-item(content) = {
-  grid(
-    columns    : (8pt, 1fr),
-    column-gutter: 4pt,
-    align      : (center + top, left + top),
-    bullet,
-    block(above: 0pt, below: 4pt, content),
-  )
-}
-
-// ── Experience title (h3 equivalent) ─────────────────────────────────────────
-#let exp-title(content) = {
-  v(2pt)
-  text(size: 9.5pt, weight: "bold", fill: t.heading)[#content]
-  v(1pt)
-}
-
-// ── Sub-section label (h4 equivalent, muted uppercase) ───────────────────────
-#let sub-label(content) = {
-  v(6pt)
-  text(size: 7.5pt, weight: "semibold", fill: t.muted, tracking: 0.8pt)[#upper(content)]
+// Sub-label (h4) — italic bold grey
+#let sublabel(s) = {
   v(4pt)
+  text(size: 9pt, weight: "bold", style: "italic", fill: t.grey40)[#s]
+  v(2pt)
 }
 
-// ── Horizontal rule between experience items ──────────────────────────────────
-#let exp-divider = {
+#let bullets(items) = list(..items)
+
+// =============================================================================
+// HEADER — Name · Tagline · Contact
+// =============================================================================
+#text(size: 19.5pt, weight: "bold", fill: t.name, tracking: -0.2pt)[#d.name]
+#v(3pt)
+#text(size: 9.75pt, weight: "semibold", fill: t.accent)[#d.tagline]
+#v(6pt)
+#{
+  set text(size: 7.9pt, fill: t.grey40)
+  let items = d.contact.map(item => {
+    let val = if "url" in item { link(item.url)[#item.text] } else { item.text }
+    [#item.label : #val]
+  })
+  items.join([ #text(fill: t.grey45)[·] ])
+}
+#v(10pt)
+
+// =============================================================================
+// PROFILE
+// =============================================================================
+#section(d.titles.profile, first: true)
+#d.profile
+
+// =============================================================================
+// SKILLS
+// =============================================================================
+#section(d.titles.skills)
+#bullets(d.skills.map(parse-rich))
+
+// =============================================================================
+// EXPERIENCES
+// =============================================================================
+#section(d.titles.experiences)
+
+#let exp0 = d.experiences.at(0)
+#job(exp0.title, big: true)
+#exp0.subtitle
+
+#sublabel(exp0.opensource.heading)
+#for proj in exp0.opensource.items {
+  v(3pt)
+  text(size: 10pt, weight: "bold", fill: t.name)[#proj.title]
+  v(1pt)
+  text(size: 7.9pt, fill: t.grey45)[#strip-proto(proj.link)]
+  v(1pt)
+  proj.stack
+  v(1.5pt)
+  proj.desc
+}
+
+#sublabel(exp0.missions.heading)
+#for (i, m) in exp0.missions.items.enumerate() {
+  if i > 0 { v(4pt) }
+  job(m.title, sector: m.sector)
+  bullets(m.points.map(parse-rich))
+}
+
+#for exp in d.experiences.slice(1) {
   v(6pt)
-  line(length: 100%, stroke: 0.4pt + t.divider)
-  v(5pt)
+  job(exp.title, sector: exp.sector)
+  bullets(exp.points.map(parse-rich))
 }
 
 // =============================================================================
-// DOCUMENT CONTENT
+// FORMATION · LANGUAGES · INTERESTS
 // =============================================================================
+#section(d.titles.formation)
+#bullets(d.formation)
 
-// ── HEADER — Name + Tagline ───────────────────────────────────────────────────
-#block(below: 10pt)[
-  #text(
-    size    : 18pt,
-    weight  : "extrabold",
-    fill    : t.h1,
-    tracking: 0.8pt,
-  )[#upper(d.name)]
-  #linebreak()
-  #v(1pt)
-  #text(
-    size    : 7.5pt,
-    weight  : "medium",
-    fill    : t.muted,
-    tracking: 2pt,
-  )[#upper(d.tagline)]
-]
+#section(d.titles.languages)
+#bullets(d.languages)
 
-// ── CONTACT ───────────────────────────────────────────────────────────────────
-#contact-box[
-  #grid(
-    columns     : (1fr, 1fr),
-    column-gutter: 14pt,
-    row-gutter  : 5pt,
-    ..d.contact.map(item => {
-      set text(fill: t.contact-text, size: 8.5pt)
-      let val = if "url" in item {
-        link(item.url)[#text(fill: t.contact-text)[#item.text]]
-      } else {
-        text(fill: t.contact-text)[#item.text]
-      }
-      [#text(weight: "bold")[#item.label:] #val]
-    }),
-    // CV en ligne row
-    if cv-url != "" {
-      set text(fill: t.contact-text, size: 8.5pt)
-      [#text(weight: "bold")[#d.cv_label] #link(cv-url)[#text(fill: t.contact-text)[#cv-url]]]
-    },
-  )
-]
-
-// ── PROFILE ───────────────────────────────────────────────────────────────────
-#section-box(title: d.titles.profile)[
-  #text(size: 10pt)[#d.profile]
-]
-
-// ── SKILLS ──────────────────────────────────────────────────────────────────────────────────────
-#section-box(title: d.titles.skills)[
-  #for skill in d.skills {
-    cv-item(parse-rich(skill))
-  }
-]
-
-// ── EXPERIENCES ─────────────────────────────────────────────────────────────────────────────────
-#exp-bleed-box(title: d.titles.experiences)[
-
-  // ── Experience 1 : Fractional CTO (special structure) ──────────────────────
-  #let exp0 = d.experiences.at(0)
-
-  #exp-title(exp0.title)
-  #muted(exp0.subtitle)
-  #v(2pt)
-  #sub-label(exp0.opensource.heading)
-  #for proj in exp0.opensource.items {
-    v(3pt)
-    text(weight: "semibold")[#proj.title]
-    linebreak()
-    muted(proj.stack)
-    h(10pt)
-    muted(proj.link)
-    v(2pt)
-    block(above: 2pt, below: 7pt)[#muted(proj.desc)]
-  }
-
-  // CTO Missions
-  #sub-label(exp0.missions.heading)
-  #for (i, mission) in exp0.missions.items.enumerate() {
-    if i > 0 { v(6pt) }
-    text(weight: "semibold")[#mission.title]
-    linebreak()
-    muted(mission.sector)
-    v(3pt)
-    for pt in mission.points {
-      cv-item(parse-rich(pt))
-    }
-  }
-
-  // ── Experiences 2 & 3 : simple structure ────────────────────────────────────
-  #for exp in d.experiences.slice(1) {
-    exp-divider
-
-    exp-title(exp.title)
-    muted(exp.sector)
-    v(4pt)
-
-    for pt in exp.points {
-      cv-item(parse-rich(pt))
-    }
-  }
-]
-
-// ── FORMATION ─────────────────────────────────────────────────────────────────
-#section-box(title: d.titles.formation)[
-  #for item in d.formation {
-    cv-item(item)
-  }
-]
-
-// ── LANGUAGES ───────────────────────────────────────────────────────────────────
-#section-box(title: d.titles.languages)[
-  #grid(
-    columns: (1fr, 1fr),
-    column-gutter: 14pt,
-    ..d.languages.map(item => cv-item(item)),
-  )
-]
-
-// ── INTERESTS ───────────────────────────────────────────────────────────────────
-#section-box(title: d.titles.interests)[
-  #for item in d.interests {
-    cv-item(parse-rich(item))
-  }
-]
+#if d.interests.len() > 0 {
+  section(d.titles.interests)
+  bullets(d.interests.map(parse-rich))
+}
