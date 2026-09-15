@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Lettre de motivation d'Etienne Lescot pour le poste de [Poste]." />
+    <title>Etienne Lescot — [Poste] — Lettre</title>
+    <style>
+      :root {
+        --ink: #172033;
+        --muted: #566174;
+        --line: #d9dee7;
+        --soft: #f5f7fa;
+        --accent: #e85d4a;
+        --accent-dark: #a93628;
+      }
+
+      * { box-sizing: border-box; }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #e8ebf0;
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10.5pt;
+        line-height: 1.55;
+      }
+
+      .page {
+        position: relative;
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+        padding: 17mm 19mm 18mm;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 8px 30px rgba(23, 32, 51, 0.12);
+      }
+
+      .page::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto;
+        height: 3.5mm;
+        background: linear-gradient(90deg, var(--accent), #ff9d77 58%, #f7c1a9);
+      }
+
+      header {
+        padding-bottom: 5mm;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .eyebrow {
+        margin: 0 0 1mm;
+        color: var(--accent-dark);
+        font-size: 8pt;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        color: #101827;
+        font-size: 25pt;
+        line-height: 1.08;
+        letter-spacing: -.04em;
+      }
+
+      .contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1mm 3.5mm;
+        margin-top: 2.5mm;
+        color: var(--muted);
+        font-size: 8pt;
+      }
+
+      .contact span:not(:last-child)::after {
+        content: "·";
+        margin-left: 3.5mm;
+        color: #a4acb8;
+      }
+
+      .meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 12mm;
+        margin-top: 12mm;
+        color: var(--muted);
+        font-size: 9pt;
+      }
+
+      .meta p { margin: 0; }
+      .meta .date { text-align: right; }
+
+      .subject {
+        margin: 10mm 0 8mm;
+        padding: 3.5mm 4mm;
+        border-left: 2px solid var(--accent);
+        background: var(--soft);
+        font-size: 10pt;
+      }
+
+      .letter p {
+        margin: 0 0 5mm;
+      }
+
+      .closing {
+        margin-top: 8mm;
+      }
+
+      .signature {
+        margin-top: 8mm;
+        font-size: 11pt;
+        font-weight: 700;
+      }
+
+      @page { size: A4; margin: 0; }
+
+      @media print {
+        html, body { background: #fff; }
+        .page { box-shadow: none; }
+        * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <p class="eyebrow">[Poste]</p>
+        <h1>Etienne Lescot</h1>
+        <div class="contact">
+          <span>etiennelescot@gmail.com</span>
+          <span>+33 6 80 51 21 20</span>
+          <span>github.com/EtienneLescot</span>
+          <span>linkedin.com/in/etienne-lescot-69402019</span>
+        </div>
+      </header>
+
+      <div class="meta">
+        <div>
+          <p><strong>[Destinataire]</strong></p>
+          <p>[Entreprise]</p>
+        </div>
+        <p class="date">[Date]</p>
+      </div>
+
+      <p class="subject"><strong>Objet&nbsp;:</strong> candidature au poste de [Poste]</p>
+
+      <section class="letter">
+        <p>Bonjour,</p>
+
+        <p>[Paragraphe]</p>
+
+        <div class="closing">
+          <p>Bien à vous,</p>
+          <p class="signature">Etienne Lescot</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
