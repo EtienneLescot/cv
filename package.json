@@ -1,46 +1,10 @@
 {
-  "name": "repos",
-  "version": "1.0.2",
-  "description": "Personal CV website and PDF generator",
-  "main": "index.js",
+  "name": "cv",
+  "private": true,
   "scripts": {
-    "test": "node test-html-validation.js",
-    "dev": "node server.js",
-    "start": "node server.js",
-    "build": "node build.js",
-    "build:web": "node build.js --web-only",
-    "build:pdf": "node build.js --pdf-only",
-    "build:all-branches": "node build-all-branches.js",
-    "build:pdf:typst": "node build-pdf-typst.js",
-    "build:pdf:typst:fr": "node build-pdf-typst.js --locale fr",
-    "build:pdf:typst:en": "node build-pdf-typst.js --locale en",
-    "clean": "node scripts/clean.js",
-    "clean:web": "node scripts/clean.js --web",
-    "clean:pdf": "node scripts/clean.js --pdf",
-    "legacy:build:assets": "node build-minify.js",
-    "legacy:build:html": "node build-static-locales.js",
-    "legacy:pdf:all": "node generate-pdf.js --all --vector"
+    "build": "node build.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github-etienne:EtienneLescot/cv.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "@pdf-lib/fontkit": "^1.1.1",
-    "@playwright/test": "^1.58.0",
-    "cssnano": "^7.0.0",
-    "glob": "^11.0.0",
-    "jsdom": "^25.0.1",
-    "pdf-lib": "^1.17.1",
-    "postcss": "^8.4.47",
-    "prettier": "^3.3.3",
-    "puppeteer": "^24.10.0",
-    "sharp": "^0.34.5",
-    "terser": "^5.31.3",
-    "yaml": "^2.8.1"
+  "devDependencies": {
+    "@playwright/test": "^1.58.0"
   }
 }
